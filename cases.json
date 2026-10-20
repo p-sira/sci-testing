@@ -1,0 +1,2659 @@
+[
+  {
+    "id": "complex.exp/000",
+    "api": "complex.exp",
+    "group": "small",
+    "args": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "id": "complex.exp/001",
+    "api": "complex.exp",
+    "group": "small",
+    "args": {
+      "x": 0.1,
+      "y": 0.2
+    }
+  },
+  {
+    "id": "complex.exp/002",
+    "api": "complex.exp",
+    "group": "small",
+    "args": {
+      "x": -0.1,
+      "y": 0.5
+    }
+  },
+  {
+    "id": "complex.exp/003",
+    "api": "complex.exp",
+    "group": "ordinary",
+    "args": {
+      "x": 1.0,
+      "y": 2.0
+    }
+  },
+  {
+    "id": "complex.exp/004",
+    "api": "complex.exp",
+    "group": "ordinary",
+    "args": {
+      "x": -3.0,
+      "y": 4.0
+    }
+  },
+  {
+    "id": "complex.exp/005",
+    "api": "complex.exp",
+    "group": "ordinary",
+    "args": {
+      "x": 10.0,
+      "y": -2.0
+    }
+  },
+  {
+    "id": "complex.exp/006",
+    "api": "complex.exp",
+    "group": "near branch cut",
+    "args": {
+      "x": -2.0,
+      "y": 1e-12
+    }
+  },
+  {
+    "id": "complex.exp/007",
+    "api": "complex.exp",
+    "group": "near branch cut",
+    "args": {
+      "x": -2.0,
+      "y": -1e-12
+    }
+  },
+  {
+    "id": "complex.sqrt/008",
+    "api": "complex.sqrt",
+    "group": "small",
+    "args": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "id": "complex.sqrt/009",
+    "api": "complex.sqrt",
+    "group": "small",
+    "args": {
+      "x": 0.1,
+      "y": 0.2
+    }
+  },
+  {
+    "id": "complex.sqrt/010",
+    "api": "complex.sqrt",
+    "group": "small",
+    "args": {
+      "x": -0.1,
+      "y": 0.5
+    }
+  },
+  {
+    "id": "complex.sqrt/011",
+    "api": "complex.sqrt",
+    "group": "ordinary",
+    "args": {
+      "x": 1.0,
+      "y": 2.0
+    }
+  },
+  {
+    "id": "complex.sqrt/012",
+    "api": "complex.sqrt",
+    "group": "ordinary",
+    "args": {
+      "x": -3.0,
+      "y": 4.0
+    }
+  },
+  {
+    "id": "complex.sqrt/013",
+    "api": "complex.sqrt",
+    "group": "ordinary",
+    "args": {
+      "x": 10.0,
+      "y": -2.0
+    }
+  },
+  {
+    "id": "complex.sqrt/014",
+    "api": "complex.sqrt",
+    "group": "near branch cut",
+    "args": {
+      "x": -2.0,
+      "y": 1e-12
+    }
+  },
+  {
+    "id": "complex.sqrt/015",
+    "api": "complex.sqrt",
+    "group": "near branch cut",
+    "args": {
+      "x": -2.0,
+      "y": -1e-12
+    }
+  },
+  {
+    "id": "constants.lambda2nu/016",
+    "api": "constants.lambda2nu",
+    "group": "ordinary",
+    "args": {
+      "x": 0.1
+    }
+  },
+  {
+    "id": "constants.lambda2nu/017",
+    "api": "constants.lambda2nu",
+    "group": "ordinary",
+    "args": {
+      "x": 1.0
+    }
+  },
+  {
+    "id": "constants.lambda2nu/018",
+    "api": "constants.lambda2nu",
+    "group": "ordinary",
+    "args": {
+      "x": 299792458.0
+    }
+  },
+  {
+    "id": "constants.lambda2nu/019",
+    "api": "constants.lambda2nu",
+    "group": "ordinary",
+    "args": {
+      "x": 100000000000000.0
+    }
+  },
+  {
+    "id": "constants.lambda2nu/020",
+    "api": "constants.lambda2nu",
+    "group": "extreme finite",
+    "args": {
+      "x": 1e-200
+    }
+  },
+  {
+    "id": "constants.lambda2nu/021",
+    "api": "constants.lambda2nu",
+    "group": "extreme finite",
+    "args": {
+      "x": 1e+200
+    }
+  },
+  {
+    "id": "constants.nu2lambda/022",
+    "api": "constants.nu2lambda",
+    "group": "ordinary",
+    "args": {
+      "x": 0.1
+    }
+  },
+  {
+    "id": "constants.nu2lambda/023",
+    "api": "constants.nu2lambda",
+    "group": "ordinary",
+    "args": {
+      "x": 1.0
+    }
+  },
+  {
+    "id": "constants.nu2lambda/024",
+    "api": "constants.nu2lambda",
+    "group": "ordinary",
+    "args": {
+      "x": 299792458.0
+    }
+  },
+  {
+    "id": "constants.nu2lambda/025",
+    "api": "constants.nu2lambda",
+    "group": "ordinary",
+    "args": {
+      "x": 100000000000000.0
+    }
+  },
+  {
+    "id": "constants.nu2lambda/026",
+    "api": "constants.nu2lambda",
+    "group": "extreme finite",
+    "args": {
+      "x": 1e-200
+    }
+  },
+  {
+    "id": "constants.nu2lambda/027",
+    "api": "constants.nu2lambda",
+    "group": "extreme finite",
+    "args": {
+      "x": 1e+200
+    }
+  },
+  {
+    "id": "differentiate.derivative/028",
+    "api": "differentiate.derivative",
+    "group": "sin, h = 1e-5",
+    "args": {
+      "x": -3.0,
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.derivative/029",
+    "api": "differentiate.derivative",
+    "group": "sin, h = 1e-5",
+    "args": {
+      "x": -0.1,
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.derivative/030",
+    "api": "differentiate.derivative",
+    "group": "sin, h = 1e-5",
+    "args": {
+      "x": 0.0,
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.derivative/031",
+    "api": "differentiate.derivative",
+    "group": "sin, h = 1e-5",
+    "args": {
+      "x": 0.1,
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.derivative/032",
+    "api": "differentiate.derivative",
+    "group": "sin, h = 1e-5",
+    "args": {
+      "x": 1.0,
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.derivative/033",
+    "api": "differentiate.derivative",
+    "group": "sin, h = 1e-5",
+    "args": {
+      "x": 3.0,
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.gradient/034",
+    "api": "differentiate.gradient",
+    "group": "quadratic, h = 1e-5",
+    "args": {
+      "point": [
+        0.0,
+        0.0
+      ],
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.gradient/035",
+    "api": "differentiate.gradient",
+    "group": "quadratic, h = 1e-5",
+    "args": {
+      "point": [
+        0.1,
+        0.2
+      ],
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.gradient/036",
+    "api": "differentiate.gradient",
+    "group": "quadratic, h = 1e-5",
+    "args": {
+      "point": [
+        -1.2,
+        1.0
+      ],
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "differentiate.gradient/037",
+    "api": "differentiate.gradient",
+    "group": "quadratic, h = 1e-5",
+    "args": {
+      "point": [
+        10.0,
+        -3.0
+      ],
+      "step": 1e-05
+    }
+  },
+  {
+    "id": "fft.fft/038",
+    "api": "fft.fft",
+    "group": "N = 4",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ]
+      ]
+    }
+  },
+  {
+    "id": "fft.fft/039",
+    "api": "fft.fft",
+    "group": "N = 7",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ],
+        [
+          1.375,
+          0.3125
+        ],
+        [
+          0.625,
+          -0.0625
+        ],
+        [
+          -0.125,
+          -0.4375
+        ]
+      ]
+    }
+  },
+  {
+    "id": "fft.fft/040",
+    "api": "fft.fft",
+    "group": "N = 16",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ],
+        [
+          1.375,
+          0.3125
+        ],
+        [
+          0.625,
+          -0.0625
+        ],
+        [
+          -0.125,
+          -0.4375
+        ],
+        [
+          -0.875,
+          0.375
+        ],
+        [
+          1.25,
+          0.0
+        ],
+        [
+          0.5,
+          -0.375
+        ],
+        [
+          -0.25,
+          0.4375
+        ],
+        [
+          -1.0,
+          0.0625
+        ],
+        [
+          1.125,
+          -0.3125
+        ],
+        [
+          0.375,
+          0.5
+        ],
+        [
+          -0.375,
+          0.125
+        ],
+        [
+          -1.125,
+          -0.25
+        ]
+      ]
+    }
+  },
+  {
+    "id": "fft.fft/041",
+    "api": "fft.fft",
+    "group": "N = 31",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ],
+        [
+          1.375,
+          0.3125
+        ],
+        [
+          0.625,
+          -0.0625
+        ],
+        [
+          -0.125,
+          -0.4375
+        ],
+        [
+          -0.875,
+          0.375
+        ],
+        [
+          1.25,
+          0.0
+        ],
+        [
+          0.5,
+          -0.375
+        ],
+        [
+          -0.25,
+          0.4375
+        ],
+        [
+          -1.0,
+          0.0625
+        ],
+        [
+          1.125,
+          -0.3125
+        ],
+        [
+          0.375,
+          0.5
+        ],
+        [
+          -0.375,
+          0.125
+        ],
+        [
+          -1.125,
+          -0.25
+        ],
+        [
+          1.0,
+          0.5625
+        ],
+        [
+          0.25,
+          0.1875
+        ],
+        [
+          -0.5,
+          -0.1875
+        ],
+        [
+          -1.25,
+          -0.5625
+        ],
+        [
+          0.875,
+          0.25
+        ],
+        [
+          0.125,
+          -0.125
+        ],
+        [
+          -0.625,
+          -0.5
+        ],
+        [
+          -1.375,
+          0.3125
+        ],
+        [
+          0.75,
+          -0.0625
+        ],
+        [
+          0.0,
+          -0.4375
+        ],
+        [
+          -0.75,
+          0.375
+        ],
+        [
+          1.375,
+          0.0
+        ],
+        [
+          0.625,
+          -0.375
+        ],
+        [
+          -0.125,
+          0.4375
+        ],
+        [
+          -0.875,
+          0.0625
+        ]
+      ]
+    }
+  },
+  {
+    "id": "fft.ifft/042",
+    "api": "fft.ifft",
+    "group": "N = 4",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ]
+      ]
+    }
+  },
+  {
+    "id": "fft.ifft/043",
+    "api": "fft.ifft",
+    "group": "N = 7",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ],
+        [
+          1.375,
+          0.3125
+        ],
+        [
+          0.625,
+          -0.0625
+        ],
+        [
+          -0.125,
+          -0.4375
+        ]
+      ]
+    }
+  },
+  {
+    "id": "fft.ifft/044",
+    "api": "fft.ifft",
+    "group": "N = 16",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ],
+        [
+          1.375,
+          0.3125
+        ],
+        [
+          0.625,
+          -0.0625
+        ],
+        [
+          -0.125,
+          -0.4375
+        ],
+        [
+          -0.875,
+          0.375
+        ],
+        [
+          1.25,
+          0.0
+        ],
+        [
+          0.5,
+          -0.375
+        ],
+        [
+          -0.25,
+          0.4375
+        ],
+        [
+          -1.0,
+          0.0625
+        ],
+        [
+          1.125,
+          -0.3125
+        ],
+        [
+          0.375,
+          0.5
+        ],
+        [
+          -0.375,
+          0.125
+        ],
+        [
+          -1.125,
+          -0.25
+        ]
+      ]
+    }
+  },
+  {
+    "id": "fft.ifft/045",
+    "api": "fft.ifft",
+    "group": "N = 31",
+    "args": {
+      "z": [
+        [
+          -1.375,
+          -0.5625
+        ],
+        [
+          0.75,
+          0.25
+        ],
+        [
+          0.0,
+          -0.125
+        ],
+        [
+          -0.75,
+          -0.5
+        ],
+        [
+          1.375,
+          0.3125
+        ],
+        [
+          0.625,
+          -0.0625
+        ],
+        [
+          -0.125,
+          -0.4375
+        ],
+        [
+          -0.875,
+          0.375
+        ],
+        [
+          1.25,
+          0.0
+        ],
+        [
+          0.5,
+          -0.375
+        ],
+        [
+          -0.25,
+          0.4375
+        ],
+        [
+          -1.0,
+          0.0625
+        ],
+        [
+          1.125,
+          -0.3125
+        ],
+        [
+          0.375,
+          0.5
+        ],
+        [
+          -0.375,
+          0.125
+        ],
+        [
+          -1.125,
+          -0.25
+        ],
+        [
+          1.0,
+          0.5625
+        ],
+        [
+          0.25,
+          0.1875
+        ],
+        [
+          -0.5,
+          -0.1875
+        ],
+        [
+          -1.25,
+          -0.5625
+        ],
+        [
+          0.875,
+          0.25
+        ],
+        [
+          0.125,
+          -0.125
+        ],
+        [
+          -0.625,
+          -0.5
+        ],
+        [
+          -1.375,
+          0.3125
+        ],
+        [
+          0.75,
+          -0.0625
+        ],
+        [
+          0.0,
+          -0.4375
+        ],
+        [
+          -0.75,
+          0.375
+        ],
+        [
+          1.375,
+          0.0
+        ],
+        [
+          0.625,
+          -0.375
+        ],
+        [
+          -0.125,
+          0.4375
+        ],
+        [
+          -0.875,
+          0.0625
+        ]
+      ]
+    }
+  },
+  {
+    "id": "filter.kalman_predict/046",
+    "api": "filter.kalman_predict",
+    "group": "correlated 2D, three scales",
+    "args": {
+      "mean": [
+        1.2,
+        -0.3
+      ],
+      "covariance": [
+        [
+          0.002,
+          0.00025
+        ],
+        [
+          0.00025,
+          0.001
+        ]
+      ],
+      "f": [
+        [
+          1.0,
+          0.1
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "q": [
+        [
+          0.0001,
+          0.0
+        ],
+        [
+          0.0,
+          0.0002
+        ]
+      ]
+    }
+  },
+  {
+    "id": "filter.kalman_update/047",
+    "api": "filter.kalman_update",
+    "group": "position observation, three scales",
+    "args": {
+      "mean": [
+        1.2,
+        -0.3
+      ],
+      "covariance": [
+        [
+          0.002,
+          0.00025
+        ],
+        [
+          0.00025,
+          0.001
+        ]
+      ],
+      "z": [
+        0.9
+      ],
+      "h": [
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "r": [
+        [
+          0.0005
+        ]
+      ]
+    }
+  },
+  {
+    "id": "filter.kalman_predict/048",
+    "api": "filter.kalman_predict",
+    "group": "correlated 2D, three scales",
+    "args": {
+      "mean": [
+        1.2,
+        -0.3
+      ],
+      "covariance": [
+        [
+          2.0,
+          0.25
+        ],
+        [
+          0.25,
+          1.0
+        ]
+      ],
+      "f": [
+        [
+          1.0,
+          0.1
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "q": [
+        [
+          0.1,
+          0.0
+        ],
+        [
+          0.0,
+          0.2
+        ]
+      ]
+    }
+  },
+  {
+    "id": "filter.kalman_update/049",
+    "api": "filter.kalman_update",
+    "group": "position observation, three scales",
+    "args": {
+      "mean": [
+        1.2,
+        -0.3
+      ],
+      "covariance": [
+        [
+          2.0,
+          0.25
+        ],
+        [
+          0.25,
+          1.0
+        ]
+      ],
+      "z": [
+        0.9
+      ],
+      "h": [
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "r": [
+        [
+          0.5
+        ]
+      ]
+    }
+  },
+  {
+    "id": "filter.kalman_predict/050",
+    "api": "filter.kalman_predict",
+    "group": "correlated 2D, three scales",
+    "args": {
+      "mean": [
+        1.2,
+        -0.3
+      ],
+      "covariance": [
+        [
+          2000.0,
+          250.0
+        ],
+        [
+          250.0,
+          1000.0
+        ]
+      ],
+      "f": [
+        [
+          1.0,
+          0.1
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "q": [
+        [
+          100.0,
+          0.0
+        ],
+        [
+          0.0,
+          200.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": "filter.kalman_update/051",
+    "api": "filter.kalman_update",
+    "group": "position observation, three scales",
+    "args": {
+      "mean": [
+        1.2,
+        -0.3
+      ],
+      "covariance": [
+        [
+          2000.0,
+          250.0
+        ],
+        [
+          250.0,
+          1000.0
+        ]
+      ],
+      "z": [
+        0.9
+      ],
+      "h": [
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "r": [
+        [
+          500.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": "integrate.trapezoid/052",
+    "api": "integrate.trapezoid",
+    "group": "discrete rule, not continuous integral",
+    "args": {
+      "coordinates": [
+        0.0,
+        0.5,
+        1.0
+      ],
+      "y": [
+        1.0,
+        1.25,
+        2.0
+      ]
+    }
+  },
+  {
+    "id": "integrate.trapezoid/053",
+    "api": "integrate.trapezoid",
+    "group": "discrete rule, not continuous integral",
+    "args": {
+      "coordinates": [
+        0.0,
+        0.125,
+        0.25,
+        0.375,
+        0.5,
+        0.625,
+        0.75,
+        0.875,
+        1.0
+      ],
+      "y": [
+        1.0,
+        1.015625,
+        1.0625,
+        1.140625,
+        1.25,
+        1.390625,
+        1.5625,
+        1.765625,
+        2.0
+      ]
+    }
+  },
+  {
+    "id": "integrate.trapezoid/054",
+    "api": "integrate.trapezoid",
+    "group": "discrete rule, not continuous integral",
+    "args": {
+      "coordinates": [
+        0.0,
+        0.03125,
+        0.0625,
+        0.09375,
+        0.125,
+        0.15625,
+        0.1875,
+        0.21875,
+        0.25,
+        0.28125,
+        0.3125,
+        0.34375,
+        0.375,
+        0.40625,
+        0.4375,
+        0.46875,
+        0.5,
+        0.53125,
+        0.5625,
+        0.59375,
+        0.625,
+        0.65625,
+        0.6875,
+        0.71875,
+        0.75,
+        0.78125,
+        0.8125,
+        0.84375,
+        0.875,
+        0.90625,
+        0.9375,
+        0.96875,
+        1.0
+      ],
+      "y": [
+        1.0,
+        1.0009765625,
+        1.00390625,
+        1.0087890625,
+        1.015625,
+        1.0244140625,
+        1.03515625,
+        1.0478515625,
+        1.0625,
+        1.0791015625,
+        1.09765625,
+        1.1181640625,
+        1.140625,
+        1.1650390625,
+        1.19140625,
+        1.2197265625,
+        1.25,
+        1.2822265625,
+        1.31640625,
+        1.3525390625,
+        1.390625,
+        1.4306640625,
+        1.47265625,
+        1.5166015625,
+        1.5625,
+        1.6103515625,
+        1.66015625,
+        1.7119140625,
+        1.765625,
+        1.8212890625,
+        1.87890625,
+        1.9384765625,
+        2.0
+      ]
+    }
+  },
+  {
+    "id": "integrate.fixed_quad/055",
+    "api": "integrate.fixed_quad",
+    "group": "exp, order 16",
+    "args": {
+      "a": 0.0,
+      "b": 1.0
+    }
+  },
+  {
+    "id": "integrate.fixed_quad/056",
+    "api": "integrate.fixed_quad",
+    "group": "exp, order 16",
+    "args": {
+      "a": -1.0,
+      "b": 2.0
+    }
+  },
+  {
+    "id": "integrate.fixed_quad/057",
+    "api": "integrate.fixed_quad",
+    "group": "exp, order 16",
+    "args": {
+      "a": 2.0,
+      "b": -1.0
+    }
+  },
+  {
+    "id": "integrate.fixed_quad/058",
+    "api": "integrate.fixed_quad",
+    "group": "exp, order 16",
+    "args": {
+      "a": 1.0,
+      "b": 1.0
+    }
+  },
+  {
+    "id": "interpolate.barycentric_interpolate/059",
+    "api": "interpolate.barycentric_interpolate",
+    "group": "quartic; nodes, interior, extrapolation",
+    "args": {
+      "nodes": [
+        -2.0,
+        -1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "values": [
+        23.0,
+        6.0,
+        3.0,
+        2.0,
+        15.0
+      ],
+      "query": [
+        -2.5,
+        -1.0,
+        -0.3,
+        0.0,
+        0.7,
+        2.0,
+        2.5
+      ]
+    }
+  },
+  {
+    "id": "interpolate.barycentric_interpolate/060",
+    "api": "interpolate.barycentric_interpolate",
+    "group": "quartic; nodes, interior, extrapolation",
+    "args": {
+      "nodes": [
+        -1.0,
+        -0.125,
+        0.0,
+        0.25,
+        2.0
+      ],
+      "values": [
+        6.0,
+        3.250244140625,
+        3.0,
+        2.50390625,
+        15.0
+      ],
+      "query": [
+        -2.5,
+        -1.0,
+        -0.3,
+        0.0,
+        0.7,
+        2.0,
+        2.5
+      ]
+    }
+  },
+  {
+    "id": "interpolate.krogh_interpolate/061",
+    "api": "interpolate.krogh_interpolate",
+    "group": "quartic; nodes, interior, extrapolation",
+    "args": {
+      "nodes": [
+        -2.0,
+        -1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "values": [
+        23.0,
+        6.0,
+        3.0,
+        2.0,
+        15.0
+      ],
+      "query": [
+        -2.5,
+        -1.0,
+        -0.3,
+        0.0,
+        0.7,
+        2.0,
+        2.5
+      ]
+    }
+  },
+  {
+    "id": "interpolate.krogh_interpolate/062",
+    "api": "interpolate.krogh_interpolate",
+    "group": "quartic; nodes, interior, extrapolation",
+    "args": {
+      "nodes": [
+        -1.0,
+        -0.125,
+        0.0,
+        0.25,
+        2.0
+      ],
+      "values": [
+        6.0,
+        3.250244140625,
+        3.0,
+        2.50390625,
+        15.0
+      ],
+      "query": [
+        -2.5,
+        -1.0,
+        -0.3,
+        0.0,
+        0.7,
+        2.0,
+        2.5
+      ]
+    }
+  },
+  {
+    "id": "linalg.solve/063",
+    "api": "linalg.solve",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          4.0,
+          0.1875
+        ],
+        [
+          0.4375,
+          4.625
+        ]
+      ],
+      "b": [
+        0.3333333333333333,
+        0.6666666666666666
+      ]
+    }
+  },
+  {
+    "id": "linalg.det/064",
+    "api": "linalg.det",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          4.0,
+          0.1875
+        ],
+        [
+          0.4375,
+          4.625
+        ]
+      ]
+    }
+  },
+  {
+    "id": "linalg.solve/065",
+    "api": "linalg.solve",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          6.0,
+          0.1875,
+          0.375
+        ],
+        [
+          0.4375,
+          6.625,
+          0.125
+        ],
+        [
+          0.1875,
+          0.375,
+          6.5625
+        ]
+      ],
+      "b": [
+        0.3333333333333333,
+        0.6666666666666666,
+        1.0
+      ]
+    }
+  },
+  {
+    "id": "linalg.det/066",
+    "api": "linalg.det",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          6.0,
+          0.1875,
+          0.375
+        ],
+        [
+          0.4375,
+          6.625,
+          0.125
+        ],
+        [
+          0.1875,
+          0.375,
+          6.5625
+        ]
+      ]
+    }
+  },
+  {
+    "id": "linalg.solve/067",
+    "api": "linalg.solve",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          10.0,
+          0.1875,
+          0.375,
+          0.5625,
+          0.0625
+        ],
+        [
+          0.4375,
+          10.625,
+          0.125,
+          0.3125,
+          0.5
+        ],
+        [
+          0.1875,
+          0.375,
+          10.5625,
+          0.0625,
+          0.25
+        ],
+        [
+          0.625,
+          0.125,
+          0.3125,
+          10.5,
+          0.0
+        ],
+        [
+          0.375,
+          0.5625,
+          0.0625,
+          0.25,
+          10.4375
+        ]
+      ],
+      "b": [
+        0.3333333333333333,
+        0.6666666666666666,
+        1.0,
+        1.3333333333333333,
+        1.6666666666666667
+      ]
+    }
+  },
+  {
+    "id": "linalg.det/068",
+    "api": "linalg.det",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          10.0,
+          0.1875,
+          0.375,
+          0.5625,
+          0.0625
+        ],
+        [
+          0.4375,
+          10.625,
+          0.125,
+          0.3125,
+          0.5
+        ],
+        [
+          0.1875,
+          0.375,
+          10.5625,
+          0.0625,
+          0.25
+        ],
+        [
+          0.625,
+          0.125,
+          0.3125,
+          10.5,
+          0.0
+        ],
+        [
+          0.375,
+          0.5625,
+          0.0625,
+          0.25,
+          10.4375
+        ]
+      ]
+    }
+  },
+  {
+    "id": "linalg.solve/069",
+    "api": "linalg.solve",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          16.0,
+          0.1875,
+          0.375,
+          0.5625,
+          0.0625,
+          0.25,
+          0.4375,
+          0.625
+        ],
+        [
+          0.4375,
+          16.625,
+          0.125,
+          0.3125,
+          0.5,
+          0.0,
+          0.1875,
+          0.375
+        ],
+        [
+          0.1875,
+          0.375,
+          16.5625,
+          0.0625,
+          0.25,
+          0.4375,
+          0.625,
+          0.125
+        ],
+        [
+          0.625,
+          0.125,
+          0.3125,
+          16.5,
+          0.0,
+          0.1875,
+          0.375,
+          0.5625
+        ],
+        [
+          0.375,
+          0.5625,
+          0.0625,
+          0.25,
+          16.4375,
+          0.625,
+          0.125,
+          0.3125
+        ],
+        [
+          0.125,
+          0.3125,
+          0.5,
+          0.0,
+          0.1875,
+          16.375,
+          0.5625,
+          0.0625
+        ],
+        [
+          0.5625,
+          0.0625,
+          0.25,
+          0.4375,
+          0.625,
+          0.125,
+          16.3125,
+          0.5
+        ],
+        [
+          0.3125,
+          0.5,
+          0.0,
+          0.1875,
+          0.375,
+          0.5625,
+          0.0625,
+          16.25
+        ]
+      ],
+      "b": [
+        0.3333333333333333,
+        0.6666666666666666,
+        1.0,
+        1.3333333333333333,
+        1.6666666666666667,
+        2.0,
+        2.3333333333333335,
+        2.6666666666666665
+      ]
+    }
+  },
+  {
+    "id": "linalg.det/070",
+    "api": "linalg.det",
+    "group": "diagonally dominant",
+    "args": {
+      "a": [
+        [
+          16.0,
+          0.1875,
+          0.375,
+          0.5625,
+          0.0625,
+          0.25,
+          0.4375,
+          0.625
+        ],
+        [
+          0.4375,
+          16.625,
+          0.125,
+          0.3125,
+          0.5,
+          0.0,
+          0.1875,
+          0.375
+        ],
+        [
+          0.1875,
+          0.375,
+          16.5625,
+          0.0625,
+          0.25,
+          0.4375,
+          0.625,
+          0.125
+        ],
+        [
+          0.625,
+          0.125,
+          0.3125,
+          16.5,
+          0.0,
+          0.1875,
+          0.375,
+          0.5625
+        ],
+        [
+          0.375,
+          0.5625,
+          0.0625,
+          0.25,
+          16.4375,
+          0.625,
+          0.125,
+          0.3125
+        ],
+        [
+          0.125,
+          0.3125,
+          0.5,
+          0.0,
+          0.1875,
+          16.375,
+          0.5625,
+          0.0625
+        ],
+        [
+          0.5625,
+          0.0625,
+          0.25,
+          0.4375,
+          0.625,
+          0.125,
+          16.3125,
+          0.5
+        ],
+        [
+          0.3125,
+          0.5,
+          0.0,
+          0.1875,
+          0.375,
+          0.5625,
+          0.0625,
+          16.25
+        ]
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen/071",
+    "api": "optimize.rosen",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen/072",
+    "api": "optimize.rosen",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        -1.2,
+        1.0
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen/073",
+    "api": "optimize.rosen",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        0.1,
+        0.2,
+        0.3
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen/074",
+    "api": "optimize.rosen",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        1.0000001,
+        1.0,
+        0.9999999
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen/075",
+    "api": "optimize.rosen",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        -3.0,
+        2.0,
+        -1.0,
+        4.0
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen_der/076",
+    "api": "optimize.rosen_der",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen_der/077",
+    "api": "optimize.rosen_der",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        -1.2,
+        1.0
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen_der/078",
+    "api": "optimize.rosen_der",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        0.1,
+        0.2,
+        0.3
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen_der/079",
+    "api": "optimize.rosen_der",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        1.0000001,
+        1.0,
+        0.9999999
+      ]
+    }
+  },
+  {
+    "id": "optimize.rosen_der/080",
+    "api": "optimize.rosen_der",
+    "group": "Rosenbrock objective and analytic gradient",
+    "args": {
+      "point": [
+        -3.0,
+        2.0,
+        -1.0,
+        4.0
+      ]
+    }
+  },
+  {
+    "id": "signal.convolve/081",
+    "api": "signal.convolve",
+    "group": "full mode, real sequences",
+    "args": {
+      "x": [
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143
+      ],
+      "h": [
+        0.1,
+        -0.2,
+        0.3,
+        0.4
+      ]
+    }
+  },
+  {
+    "id": "signal.convolve/082",
+    "api": "signal.convolve",
+    "group": "full mode, real sequences",
+    "args": {
+      "x": [
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714,
+        0.42857142857142855,
+        -0.42857142857142855,
+        0.5714285714285714
+      ],
+      "h": [
+        0.1,
+        -0.2,
+        0.3,
+        0.4
+      ]
+    }
+  },
+  {
+    "id": "signal.convolve/083",
+    "api": "signal.convolve",
+    "group": "full mode, real sequences",
+    "args": {
+      "x": [
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714,
+        0.42857142857142855,
+        -0.42857142857142855,
+        0.5714285714285714,
+        -0.2857142857142857,
+        0.7142857142857143,
+        -0.14285714285714285,
+        0.8571428571428571,
+        0.0,
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714,
+        0.42857142857142855,
+        -0.42857142857142855,
+        0.5714285714285714,
+        -0.2857142857142857,
+        0.7142857142857143,
+        -0.14285714285714285,
+        0.8571428571428571,
+        0.0,
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714
+      ],
+      "h": [
+        0.1,
+        -0.2,
+        0.3,
+        0.4
+      ]
+    }
+  },
+  {
+    "id": "signal.correlate/084",
+    "api": "signal.correlate",
+    "group": "full mode, real sequences",
+    "args": {
+      "x": [
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143
+      ],
+      "h": [
+        0.1,
+        -0.2,
+        0.3,
+        0.4
+      ]
+    }
+  },
+  {
+    "id": "signal.correlate/085",
+    "api": "signal.correlate",
+    "group": "full mode, real sequences",
+    "args": {
+      "x": [
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714,
+        0.42857142857142855,
+        -0.42857142857142855,
+        0.5714285714285714
+      ],
+      "h": [
+        0.1,
+        -0.2,
+        0.3,
+        0.4
+      ]
+    }
+  },
+  {
+    "id": "signal.correlate/086",
+    "api": "signal.correlate",
+    "group": "full mode, real sequences",
+    "args": {
+      "x": [
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714,
+        0.42857142857142855,
+        -0.42857142857142855,
+        0.5714285714285714,
+        -0.2857142857142857,
+        0.7142857142857143,
+        -0.14285714285714285,
+        0.8571428571428571,
+        0.0,
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714,
+        0.42857142857142855,
+        -0.42857142857142855,
+        0.5714285714285714,
+        -0.2857142857142857,
+        0.7142857142857143,
+        -0.14285714285714285,
+        0.8571428571428571,
+        0.0,
+        -0.8571428571428571,
+        0.14285714285714285,
+        -0.7142857142857143,
+        0.2857142857142857,
+        -0.5714285714285714
+      ],
+      "h": [
+        0.1,
+        -0.2,
+        0.3,
+        0.4
+      ]
+    }
+  },
+  {
+    "id": "spatial.euclidean/087",
+    "api": "spatial.euclidean",
+    "group": "ordinary",
+    "args": {
+      "u": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "v": [
+        -2.0,
+        1.0,
+        0.5
+      ]
+    }
+  },
+  {
+    "id": "spatial.euclidean/088",
+    "api": "spatial.euclidean",
+    "group": "equal",
+    "args": {
+      "u": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "v": [
+        1.0,
+        2.0,
+        3.0
+      ]
+    }
+  },
+  {
+    "id": "spatial.euclidean/089",
+    "api": "spatial.euclidean",
+    "group": "nearly equal",
+    "args": {
+      "u": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "v": [
+        1.000001,
+        2.0,
+        3.0
+      ]
+    }
+  },
+  {
+    "id": "spatial.euclidean/090",
+    "api": "spatial.euclidean",
+    "group": "large",
+    "args": {
+      "u": [
+        1e+100,
+        2e+100,
+        -3e+100
+      ],
+      "v": [
+        -1e+100,
+        1e+100,
+        2e+100
+      ]
+    }
+  },
+  {
+    "id": "spatial.cosine/091",
+    "api": "spatial.cosine",
+    "group": "ordinary",
+    "args": {
+      "u": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "v": [
+        -2.0,
+        1.0,
+        0.5
+      ]
+    }
+  },
+  {
+    "id": "spatial.cosine/092",
+    "api": "spatial.cosine",
+    "group": "equal",
+    "args": {
+      "u": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "v": [
+        1.0,
+        2.0,
+        3.0
+      ]
+    }
+  },
+  {
+    "id": "spatial.cosine/093",
+    "api": "spatial.cosine",
+    "group": "nearly equal",
+    "args": {
+      "u": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "v": [
+        1.000001,
+        2.0,
+        3.0
+      ]
+    }
+  },
+  {
+    "id": "spatial.cosine/094",
+    "api": "spatial.cosine",
+    "group": "large",
+    "args": {
+      "u": [
+        1e+100,
+        2e+100,
+        -3e+100
+      ],
+      "v": [
+        -1e+100,
+        1e+100,
+        2e+100
+      ]
+    }
+  },
+  {
+    "id": "special.erf/095",
+    "api": "special.erf",
+    "group": "small",
+    "args": {
+      "x": -0.1
+    }
+  },
+  {
+    "id": "special.erf/096",
+    "api": "special.erf",
+    "group": "small",
+    "args": {
+      "x": 0.0
+    }
+  },
+  {
+    "id": "special.erf/097",
+    "api": "special.erf",
+    "group": "small",
+    "args": {
+      "x": 0.1
+    }
+  },
+  {
+    "id": "special.erf/098",
+    "api": "special.erf",
+    "group": "small",
+    "args": {
+      "x": 0.5
+    }
+  },
+  {
+    "id": "special.erf/099",
+    "api": "special.erf",
+    "group": "ordinary",
+    "args": {
+      "x": -3.0
+    }
+  },
+  {
+    "id": "special.erf/100",
+    "api": "special.erf",
+    "group": "ordinary",
+    "args": {
+      "x": -1.0
+    }
+  },
+  {
+    "id": "special.erf/101",
+    "api": "special.erf",
+    "group": "ordinary",
+    "args": {
+      "x": 1.0
+    }
+  },
+  {
+    "id": "special.erf/102",
+    "api": "special.erf",
+    "group": "ordinary",
+    "args": {
+      "x": 3.0
+    }
+  },
+  {
+    "id": "special.erf/103",
+    "api": "special.erf",
+    "group": "saturation",
+    "args": {
+      "x": 6.0
+    }
+  },
+  {
+    "id": "special.erf/104",
+    "api": "special.erf",
+    "group": "saturation",
+    "args": {
+      "x": 10.0
+    }
+  },
+  {
+    "id": "special.gamma/105",
+    "api": "special.gamma",
+    "group": "positive",
+    "args": {
+      "x": 0.1
+    }
+  },
+  {
+    "id": "special.gamma/106",
+    "api": "special.gamma",
+    "group": "positive",
+    "args": {
+      "x": 0.5
+    }
+  },
+  {
+    "id": "special.gamma/107",
+    "api": "special.gamma",
+    "group": "positive",
+    "args": {
+      "x": 1.0
+    }
+  },
+  {
+    "id": "special.gamma/108",
+    "api": "special.gamma",
+    "group": "positive",
+    "args": {
+      "x": 1.5
+    }
+  },
+  {
+    "id": "special.gamma/109",
+    "api": "special.gamma",
+    "group": "positive",
+    "args": {
+      "x": 10.0
+    }
+  },
+  {
+    "id": "special.gamma/110",
+    "api": "special.gamma",
+    "group": "positive",
+    "args": {
+      "x": 50.0
+    }
+  },
+  {
+    "id": "special.gamma/111",
+    "api": "special.gamma",
+    "group": "positive",
+    "args": {
+      "x": 170.0
+    }
+  },
+  {
+    "id": "special.gamma/112",
+    "api": "special.gamma",
+    "group": "negative nonintegers",
+    "args": {
+      "x": -0.5
+    }
+  },
+  {
+    "id": "special.gamma/113",
+    "api": "special.gamma",
+    "group": "negative nonintegers",
+    "args": {
+      "x": -1.5
+    }
+  },
+  {
+    "id": "special.gamma/114",
+    "api": "special.gamma",
+    "group": "negative nonintegers",
+    "args": {
+      "x": -10.25
+    }
+  },
+  {
+    "id": "stats.normal_cdf/115",
+    "api": "stats.normal_cdf",
+    "group": "central",
+    "args": {
+      "x": -2.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/116",
+    "api": "stats.normal_cdf",
+    "group": "central",
+    "args": {
+      "x": -1.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/117",
+    "api": "stats.normal_cdf",
+    "group": "central",
+    "args": {
+      "x": 0.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/118",
+    "api": "stats.normal_cdf",
+    "group": "central",
+    "args": {
+      "x": 1.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/119",
+    "api": "stats.normal_cdf",
+    "group": "central",
+    "args": {
+      "x": 2.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/120",
+    "api": "stats.normal_cdf",
+    "group": "tails",
+    "args": {
+      "x": -20.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/121",
+    "api": "stats.normal_cdf",
+    "group": "tails",
+    "args": {
+      "x": -8.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/122",
+    "api": "stats.normal_cdf",
+    "group": "tails",
+    "args": {
+      "x": -5.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/123",
+    "api": "stats.normal_cdf",
+    "group": "tails",
+    "args": {
+      "x": 5.0
+    }
+  },
+  {
+    "id": "stats.normal_cdf/124",
+    "api": "stats.normal_cdf",
+    "group": "tails",
+    "args": {
+      "x": 8.0
+    }
+  },
+  {
+    "id": "stats.variance/125",
+    "api": "stats.variance",
+    "group": "ordinary",
+    "args": {
+      "values": [
+        0.1,
+        0.2,
+        0.4,
+        1.0,
+        -2.0
+      ]
+    }
+  },
+  {
+    "id": "stats.variance/126",
+    "api": "stats.variance",
+    "group": "constant",
+    "args": {
+      "values": [
+        3.0,
+        3.0,
+        3.0
+      ]
+    }
+  },
+  {
+    "id": "stats.variance/127",
+    "api": "stats.variance",
+    "group": "offset",
+    "args": {
+      "values": [
+        100000000.1,
+        100000000.2,
+        100000000.3
+      ]
+    }
+  },
+  {
+    "id": "stats.variance/128",
+    "api": "stats.variance",
+    "group": "scaled",
+    "args": {
+      "values": [
+        1e-100,
+        2e-100,
+        4e-100
+      ]
+    }
+  },
+  {
+    "id": "cluster.vq/129",
+    "api": "cluster.vq",
+    "group": "fixed codebook, three scales",
+    "args": {
+      "obs": [
+        [
+          0.001,
+          0.002
+        ],
+        [
+          0.012,
+          0.008
+        ],
+        [
+          0.021,
+          0.025
+        ],
+        [
+          0.04,
+          0.03
+        ]
+      ],
+      "codebook": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.03,
+          0.03
+        ]
+      ]
+    }
+  },
+  {
+    "id": "cluster.whiten/130",
+    "api": "cluster.whiten",
+    "group": "population standard deviation, three scales",
+    "args": {
+      "obs": [
+        [
+          0.001,
+          0.002
+        ],
+        [
+          0.012,
+          0.008
+        ],
+        [
+          0.021,
+          0.025
+        ],
+        [
+          0.04,
+          0.03
+        ]
+      ]
+    }
+  },
+  {
+    "id": "cluster.vq/131",
+    "api": "cluster.vq",
+    "group": "fixed codebook, three scales",
+    "args": {
+      "obs": [
+        [
+          0.1,
+          0.2
+        ],
+        [
+          1.2,
+          0.8
+        ],
+        [
+          2.1,
+          2.5
+        ],
+        [
+          4.0,
+          3.0
+        ]
+      ],
+      "codebook": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          3.0,
+          3.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": "cluster.whiten/132",
+    "api": "cluster.whiten",
+    "group": "population standard deviation, three scales",
+    "args": {
+      "obs": [
+        [
+          0.1,
+          0.2
+        ],
+        [
+          1.2,
+          0.8
+        ],
+        [
+          2.1,
+          2.5
+        ],
+        [
+          4.0,
+          3.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": "cluster.vq/133",
+    "api": "cluster.vq",
+    "group": "fixed codebook, three scales",
+    "args": {
+      "obs": [
+        [
+          10.0,
+          20.0
+        ],
+        [
+          120.0,
+          80.0
+        ],
+        [
+          210.0,
+          250.0
+        ],
+        [
+          400.0,
+          300.0
+        ]
+      ],
+      "codebook": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          300.0,
+          300.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": "cluster.whiten/134",
+    "api": "cluster.whiten",
+    "group": "population standard deviation, three scales",
+    "args": {
+      "obs": [
+        [
+          10.0,
+          20.0
+        ],
+        [
+          120.0,
+          80.0
+        ],
+        [
+          210.0,
+          250.0
+        ],
+        [
+          400.0,
+          300.0
+        ]
+      ]
+    }
+  }
+]
