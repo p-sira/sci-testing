@@ -48,7 +48,7 @@ jobs:
         run: cargo test --locked
       - name: Generate all tables and validate generated files
         run: |
-          uv run --frozen python -m sci_testing.report
+          uv run --frozen python -m sci_testing.report --full
           uv run --frozen python -m sci_testing.report --check
       - uses: actions/upload-artifact@v7
         with:

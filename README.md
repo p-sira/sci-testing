@@ -6,9 +6,33 @@ start with the [comparison tables](docs/accuracy/README.md).
 
 ```sh
 uv sync --frozen
-uv run --frozen python -m sci_testing.report
+uv run --frozen python -m sci_testing.report --full
 uv run --frozen python -m sci_testing.report --check
 ```
+
+After the initial full run, refresh only Sci outputs with:
+
+```sh
+uv run --frozen python -m sci_testing.report
+uv run --frozen python -m sci_testing.report --module special
+uv run --frozen python -m sci_testing.report --module sparse.linalg
+uv run --frozen python -m sci_testing.report --module linalg --module interpolate
+```
+
+The default reuses saved independent references and all other library results,
+including their errors and warnings. `--module` selects a module or nested
+namespace and can be repeated; unselected measurements remain unchanged.
+`--sci-only` explicitly selects the default mode. Use `--full` to recompute all
+references and library results, including when inputs change or no snapshot exists.
+`--module` applies only to Sci-only refreshes.
+
+Before measuring an updated Sci checkout, update `sci-revision.txt` to its commit
+and refresh `Cargo.lock` if its dependencies changed. Sci-only runs require the
+same generated inputs and intact saved measurements. They rebuild the Rust runner,
+refresh coverage and reports, and avoid evaluating comparison libraries or
+independent references. Original reference provenance is retained under
+`reference_environment` in `results/environment.json`; partial refreshes also
+record per-function Sci revisions under `sci_measurement_commits`.
 
 The full suite has about 2.26 million cases for 1,109 distinct public functions.
 Each recipe adds 1,000 endpoint-inclusive NumPy linspace cases and 1,000 uniform
@@ -119,7 +143,9 @@ Sci fixture assertions. These samples do not establish whole-domain accuracy.
 `python -m sci_testing.report --check` verifies inputs, source and result digests, the complete
 coverage audit and all generated pages without compiling or writing files.
 Moving or editing harness sources invalidates the recorded source digest; rerun
-the report against the pinned Sci checkout to create a new snapshot.
+the report against the pinned Sci checkout to create a new snapshot. Use `--full`
+when changing reference recipes or comparison adapters; the default preserves
+their saved results.
 Sources, manifests, lockfiles, recipes and generated inputs are hashed; derived
 results and reports are excluded from the source digest. Each run records its
 own platform. Repeated runs on the same platform reproduce the snapshot without

@@ -11,6 +11,7 @@ import math
 import os
 from pathlib import Path
 import platform
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -414,6 +415,10 @@ variants are not counted as independent implementations.
 
 See the [shared metric, provenance and reproduction instructions](README.md).
 '''
+        if 'reference_environment' in meta:
+            text+='\nSci-only refresh: independent references and other library outputs are retained from the saved snapshot. Their original environment is recorded in `results/environment.json` under `reference_environment`.\n'
+        if 'sci_measurement_commits' in meta:
+            text+='\nSci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.\n'
         (output/f'{module}.md').write_text(text)
     from .coverage_audit import inventory
     exports=inventory();canonical=len({row['canonical'] for row in exports})
@@ -503,12 +508,19 @@ cd ../sci-testing
 uv sync --frozen
 uv run --frozen python -m unittest -v
 cargo test --locked
-uv run --frozen python -m sci_testing.report
+uv run --frozen python -m sci_testing.report --full
 uv run --frozen python -m sci_testing.report --check
 ```
 
-`python -m sci_testing.report` rebuilds partitioned CSV inputs, measures each function with bounded
-memory, and writes reports here. `--check` validates source/input/result digests,
+`python -m sci_testing.report` refreshes Sci outputs while retaining saved independent
+references and other library results. Select modules with `--module special` or
+nested namespaces with `--module sparse.linalg`; repeat `--module` to select several.
+Unselected measurements stay fixed. Original reference provenance is retained under
+`reference_environment` in `results/environment.json`; partial refreshes record
+per-function Sci revisions under `sci_measurement_commits`. Update `sci-revision.txt`
+and, if necessary, `Cargo.lock` before measuring a newer Sci commit.
+Use `--full` for the initial snapshot, changed inputs, or refreshing all references
+and comparison libraries. `--check` validates source/input/result digests,
 the complete coverage audit and every generated page without compiling or writing
 files. It validates the recorded platform snapshot; it does not require identical
 floating-point measurements on another platform. Set `CARGO_TARGET_DIR` to reuse
@@ -524,33 +536,45 @@ All reports and data belong to this repository; Sci links to them externally.
 
 """
     index+=f'- Sci commit: `{meta["sci_commit"]}`.\n- Harness source SHA-256: `{meta["testing_sources_sha256"]}`.\n- Input SHA-256: `{meta["cases_sha256"]}`.\n- {len(cases)} cases; {canonical} distinct public functions.\n- Native versions: {meta.get("native_libraries",{})}.\n'
+    if 'reference_environment' in meta:
+        index+='\nSci-only refresh: independent references and other library outputs are retained from the saved snapshot. See `reference_environment` in `results/environment.json` for their original provenance.\n'
+    if 'sci_measurement_commits' in meta:
+        index+='\nPer-function Sci revisions for partial refreshes are recorded under `sci_measurement_commits` in `results/environment.json`.\n'
     (output/'README.md').write_text(index)
 
 
-def check_generated(cases, output, *, root=ROOT):
-    """Check derived inputs and pages against the source-pinned raw snapshot."""
+def load_snapshot(cases, *, root=None):
+    """Require identical inputs and intact measurements before reusing a snapshot."""
+    root=ROOT if root is None else root
     expected_names=set()
     for name,content in iter_case_files(cases):
         path=root/'cases/generated'/name
         expected_names.add(name)
-        if not path.exists() or path.read_text()!=content:raise ValueError('Stale case CSV files; rerun python -m sci_testing.report')
+        if not path.exists() or path.read_text()!=content:raise ValueError('Stale case CSV files; rerun python -m sci_testing.report --full')
     actual_names={p.relative_to(root/'cases/generated').as_posix() for p in (root/'cases/generated').glob('*/*.csv')}
-    if actual_names!=expected_names:raise ValueError('Stale case CSV files; rerun python -m sci_testing.report')
+    if actual_names!=expected_names:raise ValueError('Stale case CSV files; rerun python -m sci_testing.report --full')
     meta=json.loads((root/'results/environment.json').read_text())
-    if meta['testing_sources_sha256'] != digest_sources():
-        raise ValueError('Testing sources changed; rerun python -m sci_testing.report')
     if meta['cases_sha256'] != directory_digest(root/'cases/generated'):
-        raise ValueError('Input digest mismatch; rerun python -m sci_testing.report')
+        raise ValueError('Input digest mismatch; rerun python -m sci_testing.report --full')
     if meta.get('measurements_sha256') != directory_digest(root/'results/measurements'):
-        raise ValueError('Raw measurement digest mismatch; rerun python -m sci_testing.report')
+        raise ValueError('Raw measurement digest mismatch; rerun python -m sci_testing.report --full')
     records=MeasurementStore(root/'results/measurements')
     from itertools import groupby
     for api,iterator in groupby(cases,key=lambda c:c['api']):
         batch=list(iterator)
         records[batch[0]['id']]
-        if set(records.records)!={c['id'] for c in batch}:raise ValueError('Measurement IDs differ from inputs; rerun python -m sci_testing.report')
+        if set(records.records)!={c['id'] for c in batch}:raise ValueError('Measurement IDs differ from inputs; rerun python -m sci_testing.report --full')
     actual_names={p.relative_to(root/'results/measurements').as_posix().removesuffix('.gz') for p in csv_paths(root/'results/measurements')}
     if actual_names!=expected_names:raise ValueError('Measurement file set differs from inputs')
+    return meta, records
+
+
+def check_generated(cases, output, *, root=None):
+    """Check derived inputs and pages against the source-pinned raw snapshot."""
+    root=ROOT if root is None else root
+    meta,records=load_snapshot(cases,root=root)
+    if meta['testing_sources_sha256'] != digest_sources():
+        raise ValueError('Testing sources changed; rerun python -m sci_testing.report')
     if 'coverage_sha256' in meta:
         from .coverage_audit import audit
         content=audit(cases,records)
@@ -584,11 +608,46 @@ def measure_sci(cases, executable):
     return [{**measured[key],'id':case['id']} for key,case in zip(keys,cases)]
 
 
+def validate_result(case, result, reference):
+    """Apply the same output checks to fresh and reused-reference measurements."""
+    if 'values' in result:
+        if len(result['values']) != len(reference):
+            result['error']=f'shape mismatch: expected {len(reference)} scalar outputs, received {len(result["values"])}'
+        elif case['api']=='cluster.vq.vq' and any(mp.mpf(x)!=mp.mpf(r) for x,r in zip(result['values'][:len(case['args']['obs'])],reference)):
+            result['error']='incorrect code assignment'
+
+
+def refresh_sci(cases, records, executable, destination, apis):
+    """Replace only Sci evaluations; retain saved oracles and competitor results."""
+    from itertools import groupby
+    for api,iterator in groupby(cases,key=lambda c:c['api']):
+        if api not in apis:continue
+        batch=list(iterator)
+        print(f'Measuring Sci only: {api}: {len(batch)} cases',flush=True)
+        rust=measure_sci(batch,executable)
+        updated={}
+        for case,result in zip(batch,rust):
+            saved=records[case['id']]
+            if 'Sci' not in saved['libraries']:
+                raise ValueError(f'{case["id"]}: saved Sci measurement missing')
+            result={k:v for k,v in result.items() if k!='id'}
+            if 'values' in result:result['values']=list(map(float,result['values']))
+            with mp.workdps(160):validate_result(case,result,saved['reference'])
+            updated[case['id']]={**saved,'libraries':{**saved['libraries'],'Sci':result}}
+        write_measurements(destination,measurement_files(batch,updated))
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,default=ROOT/'docs/accuracy')
-    parser.add_argument('--check',action='store_true',help='validate inputs, raw results and generated pages without writing files')
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument('--check',action='store_true',help='validate inputs, raw results and generated pages without writing files')
+    mode.add_argument('--full',action='store_true',help='recompute all Sci, reference and comparison-library results')
+    mode.add_argument('--sci-only',action='store_true',help='refresh only Sci outputs (the default)')
+    parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
     args=parser.parse_args()
+    if args.module and (args.full or args.check):
+        parser.error('--module is available only for Sci-only refreshes')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
         raise RuntimeError('Run uv sync --frozen with the pinned library versions')
     if not args.check and any(k.startswith(('RUSTFLAGS','CARGO_ENCODED_RUSTFLAGS','CARGO_PROFILE_')) or k == 'CARGO_BUILD_TARGET' for k in os.environ):
@@ -597,60 +656,87 @@ def main():
     if args.check:
         check_generated(cases,args.output.resolve())
         return
-    write_cases(ROOT/'cases/generated', cases)
+    selected=set(cases.apis)
+    if args.module:
+        selected=set()
+        for module in args.module:
+            matching={api for api in cases.apis if api.startswith(module+'.')}
+            if not matching:parser.error(f'unknown or empty module: {module}')
+            selected.update(matching)
+    if not args.full:
+        previous,records=load_snapshot(cases)
+    else:
+        write_cases(ROOT/'cases/generated', cases)
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
     pinned=(ROOT/'sci-revision.txt').read_text().strip()
     if command('git','rev-parse','HEAD',cwd=ROOT.parent/'sci') != pinned:
         raise RuntimeError('Sci checkout differs from sci-revision.txt; update the pin intentionally before measuring')
-    native=NativeComparisons()
     meta=environment(ROOT.parent/'sci')
-    meta['native_libraries']=native.versions
-    meta['cxx']=command('c++','--version')
-    meta['native_build_flags']='-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas'
+    if not args.full:
+        meta['reference_environment']=previous.get('reference_environment',previous)
+        if args.module:
+            commits=previous.get('sci_measurement_commits',{api:previous['sci_commit'] for api in cases.apis}).copy()
+            commits.update(dict.fromkeys(selected,meta['sci_commit']))
+            meta['sci_measurement_commits']=commits
+        for key in ['native_libraries','cxx','native_build_flags','module_libraries']:
+            meta[key]=previous[key]
+    else:
+        native=NativeComparisons()
+        meta['native_libraries']=native.versions
+        meta['cxx']=command('c++','--version')
+        meta['native_build_flags']='-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas'
     if meta['sci_source_dirty']: raise RuntimeError('Refusing to measure modified Sci numerical sources')
     subprocess.run(['cargo','build','--locked'],cwd=ROOT,check=True)
     target=Path(os.environ.get('CARGO_TARGET_DIR',ROOT/'target')).resolve()
     from itertools import groupby
     results=ROOT/'results'; results.mkdir(exist_ok=True)
-    files={};module_libraries={module:set() for module in MODULES}
-    for api, iterator in groupby(cases, key=lambda c:c['api']):
-        batch=list(iterator)
-        identifiers=[c['id'] for c in batch]
-        if len(identifiers)!=len(set(identifiers)) or any(not identifier.startswith(api+'/') for identifier in identifiers):raise ValueError('invalid or duplicate case ID')
-        print(f'Measuring {api}: {len(batch)} cases', flush=True)
-        rust=measure_sci(batch,target/'debug/sci-testing')
-        for row in rust:
-            if 'values' in row:row['values']=list(map(float,row['values']))
-        if [r['id'] for r in rust] != [c['id'] for c in batch]: raise ValueError('runner lost, duplicated or reordered cases')
-        records={}
-        for case,result in zip(batch,rust):
-            with mp.workdps(100): low=high_precision(case)
-            with mp.workdps(160):
-                high=high_precision(case)
-                if len(low) != len(high): raise ValueError('unstable reference shape')
-                scale=max([TINY]+[abs(v) for v in high])
-                if any(abs(x-y)>mp.mpf('1e-90')*scale for x,y in zip(low,high)):
-                    raise ValueError(f'unstable reference: {case["id"]}')
-                libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native.evaluate(case)}
-                for lib,res in libs.items():
-                    if 'values' in res:
-                        if len(res['values']) != len(high):
-                            res['error']=f'shape mismatch: expected {len(high)} scalar outputs, received {len(res["values"])}'
-                            continue
-                        if case['api']=='cluster.vq.vq' and any(mp.mpf(x)!=r for x,r in zip(res['values'][:len(case['args']['obs'])],high)):
-                            res['error']='incorrect code assignment'
-                records[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],'libraries':libs}
-            module_libraries[api.split('.')[0]].update(libs)
-        output=measurement_files(batch, records)
-        files.update(dict.fromkeys(write_measurements(results/'measurements',output)))
-        from .registered_cases import cached_reference
-        cached_reference.cache_clear()
-        del batch, rust, records, output
-        gc.collect()
-    for path in csv_paths(results/'measurements'):
-        if path.relative_to(results/'measurements').as_posix() not in files: path.unlink()
-    meta['module_libraries']={module:sorted(names) for module,names in module_libraries.items()}
+    if not args.full:
+        from .coverage_audit import audit
+        with tempfile.TemporaryDirectory(dir=results) as directory:
+            staged=Path(directory)
+            shutil.copytree(results/'measurements',staged,dirs_exist_ok=True)
+            refresh_sci(cases,records,target/'debug/sci-testing',staged,selected)
+            audit(cases,MeasurementStore(staged))
+            for path in csv_paths(staged):
+                destination=results/'measurements'/path.relative_to(staged)
+                destination.parent.mkdir(parents=True,exist_ok=True)
+                path.replace(destination)
+                alternate=destination.with_suffix('') if destination.suffix=='.gz' else destination.with_suffix('.csv.gz')
+                alternate.unlink(missing_ok=True)
+    else:
+        files={};module_libraries={module:set() for module in MODULES}
+        for api, iterator in groupby(cases, key=lambda c:c['api']):
+            batch=list(iterator)
+            identifiers=[c['id'] for c in batch]
+            if len(identifiers)!=len(set(identifiers)) or any(not identifier.startswith(api+'/') for identifier in identifiers):raise ValueError('invalid or duplicate case ID')
+            print(f'Measuring {api}: {len(batch)} cases', flush=True)
+            rust=measure_sci(batch,target/'debug/sci-testing')
+            for row in rust:
+                if 'values' in row:row['values']=list(map(float,row['values']))
+            if [r['id'] for r in rust] != [c['id'] for c in batch]: raise ValueError('runner lost, duplicated or reordered cases')
+            records={}
+            for case,result in zip(batch,rust):
+                with mp.workdps(100): low=high_precision(case)
+                with mp.workdps(160):
+                    high=high_precision(case)
+                    if len(low) != len(high): raise ValueError('unstable reference shape')
+                    scale=max([TINY]+[abs(v) for v in high])
+                    if any(abs(x-y)>mp.mpf('1e-90')*scale for x,y in zip(low,high)):
+                        raise ValueError(f'unstable reference: {case["id"]}')
+                    libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native.evaluate(case)}
+                    for res in libs.values():validate_result(case,res,high)
+                    records[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],'libraries':libs}
+                module_libraries[api.split('.')[0]].update(libs)
+            output=measurement_files(batch, records)
+            files.update(dict.fromkeys(write_measurements(results/'measurements',output)))
+            from .registered_cases import cached_reference
+            cached_reference.cache_clear()
+            del batch, rust, records, output
+            gc.collect()
+        for path in csv_paths(results/'measurements'):
+            if path.relative_to(results/'measurements').as_posix() not in files: path.unlink()
+        meta['module_libraries']={module:sorted(names) for module,names in module_libraries.items()}
     meta['measurements_sha256']=directory_digest(results/'measurements')
     records=MeasurementStore(results/'measurements')
     from .coverage_audit import audit
