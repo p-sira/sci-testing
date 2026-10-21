@@ -1,0 +1,4 @@
+id,group,d,g,p,x,y
+stats.probplot/recipe-2227,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-1 0 0.5 1 2,v:0 1
+stats.probplot/recipe-2231,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-3 -2 -1 0 1 2 3,v:0 1
+stats.probplot/recipe-2235,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0 0 0,v:0 1

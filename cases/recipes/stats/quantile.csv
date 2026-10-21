@@ -1,0 +1,21 @@
+id,group,d,g,p,x,y
+stats.quantile/recipe-0008,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 4 8 9,v:
+stats.quantile/recipe-0010,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:1 2 4 8 9,v:
+stats.quantile/recipe-0012,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:1 2 4 8 9,v:
+stats.quantile/recipe-0014,reference recipe; binary64 SciPy reference,t:,v:,v:0.9,v:1 2 4 8 9,v:
+stats.quantile/recipe-0016,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 4 8 9,v:
+stats.quantile/recipe-0086,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-3 0 2 6 12,v:
+stats.quantile/recipe-0088,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:-3 0 2 6 12,v:
+stats.quantile/recipe-0090,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:-3 0 2 6 12,v:
+stats.quantile/recipe-0092,reference recipe; binary64 SciPy reference,t:,v:,v:0.9,v:-3 0 2 6 12,v:
+stats.quantile/recipe-0094,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 0 2 6 12,v:
+stats.quantile/recipe-0164,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:4 4 4 4,v:
+stats.quantile/recipe-0166,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:4 4 4 4,v:
+stats.quantile/recipe-0168,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:4 4 4 4,v:
+stats.quantile/recipe-0170,reference recipe; binary64 SciPy reference,t:,v:,v:0.9,v:4 4 4 4,v:
+stats.quantile/recipe-0172,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:4 4 4 4,v:
+stats.quantile/recipe-0242,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1,v:
+stats.quantile/recipe-0244,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:1,v:
+stats.quantile/recipe-0246,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:1,v:
+stats.quantile/recipe-0248,reference recipe; binary64 SciPy reference,t:,v:,v:0.9,v:1,v:
+stats.quantile/recipe-0250,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1,v:

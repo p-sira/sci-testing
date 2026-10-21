@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.trim1/recipe-1870,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:-3 -1 0 2 4 10,v:
+stats.trim1/recipe-1871,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:-3 -1 0 2 4 10,v:
+stats.trim1/recipe-1872,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0,v:-3 -1 0 2 4 10,v:
+stats.trim1/recipe-1873,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 1,v:-3 -1 0 2 4 10,v:
+stats.trim1/recipe-1874,reference recipe; binary64 SciPy reference,t:,v:,v:0.99 0,v:-3 -1 0 2 4 10,v:
+stats.trim1/recipe-1875,reference recipe; binary64 SciPy reference,t:,v:,v:0.99 1,v:-3 -1 0 2 4 10,v:
+stats.trim1/recipe-1933,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 3 4 5 100,v:
+stats.trim1/recipe-1934,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 3 4 5 100,v:
+stats.trim1/recipe-1935,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0,v:1 2 3 4 5 100,v:
+stats.trim1/recipe-1936,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 1,v:1 2 3 4 5 100,v:
+stats.trim1/recipe-1937,reference recipe; binary64 SciPy reference,t:,v:,v:0.99 0,v:1 2 3 4 5 100,v:
+stats.trim1/recipe-1938,reference recipe; binary64 SciPy reference,t:,v:,v:0.99 1,v:1 2 3 4 5 100,v:

@@ -1,0 +1,7 @@
+id,group,arguments
+signal.detrend/recipe-0366,reference recipe; binary64 SciPy reference,"j:[[1.0],true]"
+signal.detrend/recipe-0367,reference recipe; binary64 SciPy reference,"j:[[1.0],false]"
+signal.detrend/recipe-0368,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,3.0],true]"
+signal.detrend/recipe-0369,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,3.0],false]"
+signal.detrend/recipe-0370,reference recipe; binary64 SciPy reference,"j:[[2.0,-1.0,4.0,3.0],true]"
+signal.detrend/recipe-0371,reference recipe; binary64 SciPy reference,"j:[[2.0,-1.0,4.0,3.0],false]"

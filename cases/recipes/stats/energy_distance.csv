@@ -1,0 +1,6 @@
+id,group,d,g,p,x,y
+stats.energy_distance/recipe-0465,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2 3 4,v:2 1 5 6
+stats.energy_distance/recipe-0492,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2 3 4,v:4 3 2 1
+stats.energy_distance/recipe-0519,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 1 2 3,v:2 3 5 5
+stats.energy_distance/recipe-0546,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2,v:4 6
+stats.energy_distance/recipe-0570,reference recipe; binary64 SciPy reference,t:,v:,v:,v:2 2 2,v:1 2 3

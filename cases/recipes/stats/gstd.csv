@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.gstd/recipe-0306,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 4 8,v:
+stats.gstd/recipe-0308,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 4 8,v:
+stats.gstd/recipe-0328,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.1 0.5 2 7,v:
+stats.gstd/recipe-0330,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0.1 0.5 2 7,v:
+stats.gstd/recipe-0350,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:2 2 2,v:
+stats.gstd/recipe-0352,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:2 2 2,v:

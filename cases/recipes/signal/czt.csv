@@ -1,0 +1,5 @@
+id,group,arguments
+signal.czt/recipe-0513,reference recipe; binary64 SciPy reference,"j:[[[1.0,0.0],[2.0,1.0],[-1.0,0.5]],3,null,[1.1,0.1]]"
+signal.czt/recipe-0515,reference recipe; binary64 SciPy reference,"j:[[[1.0,0.0],[2.0,1.0],[-1.0,0.5]],3,[0.9,-0.1],[1.1,0.1]]"
+signal.czt/recipe-0517,reference recipe; binary64 SciPy reference,"j:[[[1.0,0.0],[2.0,1.0],[-1.0,0.5]],5,null,[1.1,0.1]]"
+signal.czt/recipe-0519,reference recipe; binary64 SciPy reference,"j:[[[1.0,0.0],[2.0,1.0],[-1.0,0.5]],5,[0.9,-0.1],[1.1,0.1]]"

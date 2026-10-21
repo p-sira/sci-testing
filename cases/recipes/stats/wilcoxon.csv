@@ -1,0 +1,115 @@
+id,group,d,g,p,x,y
+stats.wilcoxon/recipe-3093,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3094,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3095,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3096,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3097,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3098,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3099,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3100,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3101,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3102,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3103,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3104,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3105,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3106,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3107,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3108,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3109,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 0,v:1 2 3,v:
+stats.wilcoxon/recipe-3110,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 1,v:1 2 3,v:
+stats.wilcoxon/recipe-3111,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3112,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3113,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3114,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3115,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3116,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3117,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3118,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3119,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3120,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3121,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3122,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3123,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3124,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3125,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3126,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3127,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 0,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3128,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 1,v:-1 -2 -3,v:
+stats.wilcoxon/recipe-3129,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3130,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3131,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3132,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3133,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3134,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3135,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3136,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3137,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3138,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3139,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3140,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3141,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3142,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3143,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3144,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3145,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 0,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3146,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 1,v:0 1 -1 2 -2 2,v:
+stats.wilcoxon/recipe-3159,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 0,v:0 0 0,v:
+stats.wilcoxon/recipe-3160,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 1,v:0 0 0,v:
+stats.wilcoxon/recipe-3161,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 0,v:0 0 0,v:
+stats.wilcoxon/recipe-3162,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 1,v:0 0 0,v:
+stats.wilcoxon/recipe-3163,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 0,v:0 0 0,v:
+stats.wilcoxon/recipe-3164,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 1,v:0 0 0,v:
+stats.wilcoxon/recipe-3165,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3166,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3167,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3168,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3169,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3170,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3171,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3172,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3173,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3174,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3175,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3176,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3177,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3178,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3179,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3180,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3181,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 0,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3182,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 1,v:0 0 2 4 5,v:
+stats.wilcoxon/recipe-3183,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3184,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3185,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3186,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3187,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3188,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3189,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3190,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3191,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3192,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3193,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3194,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3195,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3196,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3197,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3198,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3199,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 0,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3200,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 1,v:6 8 14 16 23 24 28 29 41 -48 49 56 60 -67 75,v:
+stats.wilcoxon/recipe-3201,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3202,reference recipe; binary64 SciPy reference,t:,v:,v:0 0 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3203,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3204,reference recipe; binary64 SciPy reference,t:,v:,v:0 1 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3205,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3206,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3207,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3208,reference recipe; binary64 SciPy reference,t:,v:,v:1 0 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3209,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3210,reference recipe; binary64 SciPy reference,t:,v:,v:1 1 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3211,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3212,reference recipe; binary64 SciPy reference,t:,v:,v:1 2 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3213,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3214,reference recipe; binary64 SciPy reference,t:,v:,v:2 0 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3215,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3216,reference recipe; binary64 SciPy reference,t:,v:,v:2 1 1,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3217,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 0,v:-0.025 0.05 0.05 -0.05,v:
+stats.wilcoxon/recipe-3218,reference recipe; binary64 SciPy reference,t:,v:,v:2 2 1,v:-0.025 0.05 0.05 -0.05,v:

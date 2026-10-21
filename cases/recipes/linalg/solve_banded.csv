@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.solve_banded/recipe-0238,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_banded"",""0"",""0"",""2.0;3.0;4.0"",""1.0;2.0;3.0"",""""]","j:{""api"":""solve_banded"",""args"":[0,0,[[2.0,3.0,4.0]],[1.0,2.0,3.0]]}",t:linalg,t:linalg
+linalg.solve_banded/recipe-0239,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_banded"",""1"",""1"",""0.0;1.0;1.0:4.0;5.0;6.0:2.0;2.0;0.0"",""1.0;2.0;3.0"",""""]","j:{""api"":""solve_banded"",""args"":[1,1,[[0.0,1.0,1.0],[4.0,5.0,6.0],[2.0,2.0,0.0]],[1.0,2.0,3.0]]}",t:linalg,t:linalg
+linalg.solve_banded/recipe-0240,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_banded"",""1"",""0"",""1.0;1.0;1.0:4.0;5.0;6.0"",""1.0;2.0;3.0"",""""]","j:{""api"":""solve_banded"",""args"":[1,0,[[1.0,1.0,1.0],[4.0,5.0,6.0]],[1.0,2.0,3.0]]}",t:linalg,t:linalg

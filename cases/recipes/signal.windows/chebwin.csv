@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.chebwin/recipe-0168,reference recipe; binary64 SciPy reference,v:0 80.0 True
+signal.windows.chebwin/recipe-0169,reference recipe; binary64 SciPy reference,v:0 80.0 False
+signal.windows.chebwin/recipe-0170,reference recipe; binary64 SciPy reference,v:1 80.0 True
+signal.windows.chebwin/recipe-0171,reference recipe; binary64 SciPy reference,v:1 80.0 False
+signal.windows.chebwin/recipe-0172,reference recipe; binary64 SciPy reference,v:5 80.0 True
+signal.windows.chebwin/recipe-0173,reference recipe; binary64 SciPy reference,v:5 80.0 False
+signal.windows.chebwin/recipe-0174,reference recipe; binary64 SciPy reference,v:6 80.0 True
+signal.windows.chebwin/recipe-0175,reference recipe; binary64 SciPy reference,v:6 80.0 False

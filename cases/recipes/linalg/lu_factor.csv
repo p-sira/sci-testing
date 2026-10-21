@@ -1,0 +1,8 @@
+id,group,fields,raw,suite,suite_name
+linalg.lu_factor/recipe-0087,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_factor"",""4.0"","""","""","""",""""]","j:{""api"":""lu_factor"",""args"":[[[4.0]]]}",t:linalg,t:linalg
+linalg.lu_factor/recipe-0094,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_factor"",""0.0;2.0;1.0:2.0;1.0;0.0:1.0;0.0;4.0"","""","""","""",""""]","j:{""api"":""lu_factor"",""args"":[[[0.0,2.0,1.0],[2.0,1.0,0.0],[1.0,0.0,4.0]]]}",t:linalg,t:linalg
+linalg.lu_factor/recipe-0101,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_factor"",""1.0;2.0:3.0;5.0"","""","""","""",""""]","j:{""api"":""lu_factor"",""args"":[[[1.0,2.0],[3.0,5.0]]]}",t:linalg,t:linalg
+linalg.lu_factor/recipe-0484,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_factor"",""2.0;0.0;1.0:1.0;0.0;4.0:3.0;0.0;2.0"","""","""","""",""""]","j:{""api"":""lu_factor"",""args"":[[[2.0,0.0,1.0],[1.0,0.0,4.0],[3.0,0.0,2.0]]]}",t:linalg,t:linalg
+linalg.lu_factor/recipe-0494,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_factor"",""0.0;2.0;1.0:0.0;0.0;3.0:0.0;5.0;4.0"","""","""","""",""""]","j:{""api"":""lu_factor"",""args"":[[[0.0,2.0,1.0],[0.0,0.0,3.0],[0.0,5.0,4.0]]]}",t:linalg,t:linalg
+linalg.lu_factor/recipe-0496,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_factor"",""1.0;2.0;3.0:0.0;0.0;4.0:2.0;4.0;1.0"","""","""","""",""""]","j:{""api"":""lu_factor"",""args"":[[[1.0,2.0,3.0],[0.0,0.0,4.0],[2.0,4.0,1.0]]]}",t:linalg,t:linalg
+linalg.lu_factor/recipe-0500,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_factor"",""0.0;0.0;0.0:0.0;0.0;0.0:0.0;0.0;0.0"","""","""","""",""""]","j:{""api"":""lu_factor"",""args"":[[[0.0,0.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0]]]}",t:linalg,t:linalg

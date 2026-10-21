@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.toeplitz/recipe-0000,reference recipe; binary64 SciPy reference,"j:[""0"",""toeplitz"",""1.0;2.0;3.0"",""none"","""","""",""""]","j:{""api"":""toeplitz"",""args"":[[1.0,2.0,3.0],null]}",t:linalg,t:linalg
+linalg.toeplitz/recipe-0001,reference recipe; binary64 SciPy reference,"j:[""0"",""toeplitz"",""2.0;-1.0"",""9.0;4.0;-2.0;1.0"","""","""",""""]","j:{""api"":""toeplitz"",""args"":[[2.0,-1.0],[9.0,4.0,-2.0,1.0]]}",t:linalg,t:linalg
+linalg.toeplitz/recipe-0002,reference recipe; binary64 SciPy reference,"j:[""0"",""toeplitz"","""","""","""","""",""""]","j:{""api"":""toeplitz"",""args"":[[],[]]}",t:linalg,t:linalg

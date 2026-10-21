@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.subspace_angles/recipe-0261,reference recipe; binary64 SciPy reference,"j:[""0"",""subspace_angles"",""1.0:0.0"",""0.0:1.0"","""","""",""""]","j:{""api"":""subspace_angles"",""args"":[[[1.0],[0.0]],[[0.0],[1.0]]]}",t:linalg,t:linalg
+linalg.subspace_angles/recipe-0262,reference recipe; binary64 SciPy reference,"j:[""0"",""subspace_angles"",""1.0:0.0"",""1.0:1e-10"","""","""",""""]","j:{""api"":""subspace_angles"",""args"":[[[1.0],[0.0]],[[1.0],[1e-10]]]}",t:linalg,t:linalg
+linalg.subspace_angles/recipe-0263,reference recipe; binary64 SciPy reference,"j:[""0"",""subspace_angles"",""1.0;0.0:0.0;1.0:0.0;0.0"",""0.0:1.0:1.0"","""","""",""""]","j:{""api"":""subspace_angles"",""args"":[[[1.0,0.0],[0.0,1.0],[0.0,0.0]],[[0.0],[1.0],[1.0]]]}",t:linalg,t:linalg
+linalg.subspace_angles/recipe-0264,reference recipe; binary64 SciPy reference,"j:[""0"",""subspace_angles"",""0.0:0.0"",""1.0:0.0"","""","""",""""]","j:{""api"":""subspace_angles"",""args"":[[[0.0],[0.0]],[[1.0],[0.0]]]}",t:linalg,t:linalg

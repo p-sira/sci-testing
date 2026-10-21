@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.bws_test/recipe-3619,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:3 4
+stats.bws_test/recipe-3623,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:3 4
+stats.bws_test/recipe-3627,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2,v:3 4
+stats.bws_test/recipe-3631,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 2,v:2 4
+stats.bws_test/recipe-3635,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 2,v:2 4
+stats.bws_test/recipe-3639,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 2,v:2 4
+stats.bws_test/recipe-3643,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1,v:1 1
+stats.bws_test/recipe-3647,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1,v:1 1
+stats.bws_test/recipe-3651,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1,v:1 1
+stats.bws_test/recipe-3655,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 5,v:0 3 9 10
+stats.bws_test/recipe-3659,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 5,v:0 3 9 10
+stats.bws_test/recipe-3663,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 5,v:0 3 9 10

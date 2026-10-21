@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.sigmaclip/recipe-1890,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:-3 -1 0 2 4 10,v:
+stats.sigmaclip/recipe-1891,reference recipe; binary64 SciPy reference,t:,v:,v:1.5 2.5,v:-3 -1 0 2 4 10,v:
+stats.sigmaclip/recipe-1892,reference recipe; binary64 SciPy reference,t:,v:,v:4 4,v:-3 -1 0 2 4 10,v:
+stats.sigmaclip/recipe-1953,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2 3 4 5 100,v:
+stats.sigmaclip/recipe-1954,reference recipe; binary64 SciPy reference,t:,v:,v:1.5 2.5,v:1 2 3 4 5 100,v:
+stats.sigmaclip/recipe-1955,reference recipe; binary64 SciPy reference,t:,v:,v:4 4,v:1 2 3 4 5 100,v:

@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.eigvals_banded/recipe-0245,reference recipe; binary64 SciPy reference,"j:[""0"",""eigvals_banded"",""4.0;9.0"",""true"","""","""",""""]","j:{""api"":""eigvals_banded"",""args"":[[[4.0,9.0]],true]}",t:linalg,t:linalg
+linalg.eigvals_banded/recipe-0250,reference recipe; binary64 SciPy reference,"j:[""0"",""eigvals_banded"",""4.0;3.0;2.0:1.0;1.0;0.0"",""true"","""","""",""""]","j:{""api"":""eigvals_banded"",""args"":[[[4.0,3.0,2.0],[1.0,1.0,0.0]],true]}",t:linalg,t:linalg
+linalg.eigvals_banded/recipe-0255,reference recipe; binary64 SciPy reference,"j:[""0"",""eigvals_banded"",""4.0;9.0"",""false"","""","""",""""]","j:{""api"":""eigvals_banded"",""args"":[[[4.0,9.0]],false]}",t:linalg,t:linalg
+linalg.eigvals_banded/recipe-0260,reference recipe; binary64 SciPy reference,"j:[""0"",""eigvals_banded"",""0.0;1.0;1.0:4.0;3.0;2.0"",""false"","""","""",""""]","j:{""api"":""eigvals_banded"",""args"":[[[0.0,1.0,1.0],[4.0,3.0,2.0]],false]}",t:linalg,t:linalg

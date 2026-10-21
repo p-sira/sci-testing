@@ -1,0 +1,9 @@
+id,group,arguments
+signal.istft/recipe-0574,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,1.0,1.0],1,3,4.0]"
+signal.istft/recipe-0576,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,1.0,1.0],1,8,4.0]"
+signal.istft/recipe-0578,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,1.0,1.0],2,3,4.0]"
+signal.istft/recipe-0580,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,1.0,1.0],2,8,4.0]"
+signal.istft/recipe-0582,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[0.0,0.5,1.0,0.5],1,4,4.0]"
+signal.istft/recipe-0584,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[0.0,0.5,1.0,0.5],1,8,4.0]"
+signal.istft/recipe-0586,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[0.0,0.5,1.0,0.5],2,4,4.0]"
+signal.istft/recipe-0588,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[0.0,0.5,1.0,0.5],2,8,4.0]"

@@ -1,0 +1,16 @@
+id,group,d,g,p,x,y
+stats.ranksums/recipe-0442,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:2 1 5 6
+stats.ranksums/recipe-0450,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:2 1 5 6
+stats.ranksums/recipe-0458,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:2 1 5 6
+stats.ranksums/recipe-0469,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:4 3 2 1
+stats.ranksums/recipe-0477,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:4 3 2 1
+stats.ranksums/recipe-0485,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:4 3 2 1
+stats.ranksums/recipe-0496,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1 2 3,v:2 3 5 5
+stats.ranksums/recipe-0504,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1 2 3,v:2 3 5 5
+stats.ranksums/recipe-0512,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1 2 3,v:2 3 5 5
+stats.ranksums/recipe-0523,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:4 6
+stats.ranksums/recipe-0531,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:4 6
+stats.ranksums/recipe-0539,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2,v:4 6
+stats.ranksums/recipe-0550,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:2 2 2,v:1 2 3
+stats.ranksums/recipe-0557,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:2 2 2,v:1 2 3
+stats.ranksums/recipe-0564,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:2 2 2,v:1 2 3

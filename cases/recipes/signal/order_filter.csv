@@ -1,0 +1,10 @@
+id,group,arguments
+signal.order_filter/recipe-0445,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],1,0]"
+signal.order_filter/recipe-0446,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],1,0]"
+signal.order_filter/recipe-0447,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],1,0]"
+signal.order_filter/recipe-0450,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,0]"
+signal.order_filter/recipe-0451,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,1]"
+signal.order_filter/recipe-0452,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,2]"
+signal.order_filter/recipe-0456,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],5,0]"
+signal.order_filter/recipe-0457,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],5,2]"
+signal.order_filter/recipe-0458,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],5,4]"

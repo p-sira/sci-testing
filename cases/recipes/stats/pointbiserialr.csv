@@ -1,0 +1,3 @@
+id,group,d,g,p,x,y
+stats.pointbiserialr/recipe-0571,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0 0 1 1,v:1 2 3 4
+stats.pointbiserialr/recipe-0572,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0 1 0 1,v:1 5 2 8

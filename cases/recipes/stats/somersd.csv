@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.somersd/recipe-3440,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:2 1
+stats.somersd/recipe-3442,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:2 1
+stats.somersd/recipe-3444,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2,v:2 1
+stats.somersd/recipe-3454,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:4 3 2 1
+stats.somersd/recipe-3456,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:4 3 2 1
+stats.somersd/recipe-3458,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:4 3 2 1
+stats.somersd/recipe-3468,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:12 2 1 12 2,v:1 4 7 1 0
+stats.somersd/recipe-3470,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:12 2 1 12 2,v:1 4 7 1 0
+stats.somersd/recipe-3472,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:12 2 1 12 2,v:1 4 7 1 0
+stats.somersd/recipe-3482,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 0 1 1 2,v:1 3 2 2 4
+stats.somersd/recipe-3484,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 0 1 1 2,v:1 3 2 2 4
+stats.somersd/recipe-3486,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 0 1 1 2,v:1 3 2 2 4

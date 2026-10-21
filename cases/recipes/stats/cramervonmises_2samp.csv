@@ -1,0 +1,14 @@
+id,group,d,g,p,x,y
+stats.cramervonmises_2samp/recipe-3606,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:3 4
+stats.cramervonmises_2samp/recipe-3607,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:3 4
+stats.cramervonmises_2samp/recipe-3608,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3,v:4 5 6
+stats.cramervonmises_2samp/recipe-3609,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3,v:4 5 6
+stats.cramervonmises_2samp/recipe-3610,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 2 3,v:2 3 4 4
+stats.cramervonmises_2samp/recipe-3611,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 2 3,v:2 3 4 4
+stats.cramervonmises_2samp/recipe-3612,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1 1,v:1 1 1
+stats.cramervonmises_2samp/recipe-3613,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1 1,v:1 1 1
+stats.cramervonmises_2samp/recipe-3614,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 3 4 5,v:1 2 6
+stats.cramervonmises_2samp/recipe-3615,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 3 4 5,v:1 2 6
+stats.cramervonmises_2samp/recipe-3616,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 2 3 4 5 6 7 8,v:9 10 11 12 13 14 15 16 17 18 19
+stats.cramervonmises_2samp/recipe-3617,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3 4 5 6 7 8,v:9 10 11 12 13 14 15 16 17 18 19
+stats.cramervonmises_2samp/recipe-3618,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29,v:2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34

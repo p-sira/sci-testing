@@ -1,0 +1,37 @@
+id,group,d,g,p,x,y
+stats.permutation_test/recipe-3620,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2,v:3 4
+stats.permutation_test/recipe-3621,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2,v:3 4
+stats.permutation_test/recipe-3622,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1 2,v:3 4
+stats.permutation_test/recipe-3624,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2,v:3 4
+stats.permutation_test/recipe-3625,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2,v:3 4
+stats.permutation_test/recipe-3626,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:1 2,v:3 4
+stats.permutation_test/recipe-3628,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2,v:3 4
+stats.permutation_test/recipe-3629,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2,v:3 4
+stats.permutation_test/recipe-3630,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2,v:3 4
+stats.permutation_test/recipe-3632,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3633,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3634,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3636,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3637,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3638,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3640,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3641,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3642,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2 2,v:2 4
+stats.permutation_test/recipe-3644,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 1,v:1 1
+stats.permutation_test/recipe-3645,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 1,v:1 1
+stats.permutation_test/recipe-3646,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1 1,v:1 1
+stats.permutation_test/recipe-3648,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 1,v:1 1
+stats.permutation_test/recipe-3649,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 1,v:1 1
+stats.permutation_test/recipe-3650,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:1 1,v:1 1
+stats.permutation_test/recipe-3652,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 1,v:1 1
+stats.permutation_test/recipe-3653,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 1,v:1 1
+stats.permutation_test/recipe-3654,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 1,v:1 1
+stats.permutation_test/recipe-3656,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3657,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3658,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3660,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3661,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3662,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3664,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3665,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2 5,v:0 3 9 10
+stats.permutation_test/recipe-3666,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2 5,v:0 3 9 10

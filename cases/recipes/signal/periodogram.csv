@@ -1,0 +1,13 @@
+id,group,arguments
+signal.periodogram/recipe-0522,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],4,4.0,true,""density""]"
+signal.periodogram/recipe-0526,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],4,4.0,false,""density""]"
+signal.periodogram/recipe-0530,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],4,4.0,true,""spectrum""]"
+signal.periodogram/recipe-0534,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],4,4.0,false,""spectrum""]"
+signal.periodogram/recipe-0539,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],5,4.0,true,""density""]"
+signal.periodogram/recipe-0543,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],5,4.0,false,""density""]"
+signal.periodogram/recipe-0547,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],5,4.0,true,""spectrum""]"
+signal.periodogram/recipe-0551,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],5,4.0,false,""spectrum""]"
+signal.periodogram/recipe-0556,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],8,4.0,true,""density""]"
+signal.periodogram/recipe-0560,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],8,4.0,false,""density""]"
+signal.periodogram/recipe-0564,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],8,4.0,true,""spectrum""]"
+signal.periodogram/recipe-0568,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0],[1.0,0.5,0.5,1.0],8,4.0,false,""spectrum""]"

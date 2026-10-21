@@ -1,0 +1,5 @@
+id,group,p0,p1
+complex.subtract/recipe-0000,reference recipe; binary64 reference,v:1.0 2.0,v:3.0 -4.0
+complex.subtract/recipe-0001,reference recipe; binary64 reference,v:-0.5 1.0,v:0.25 0.75
+complex.subtract/recipe-0002,reference recipe; binary64 reference,v:0.0 0.0,v:2.0 3.0
+complex.subtract/recipe-0003,reference recipe; binary64 reference,v:1e+300 1e+300,v:1e+300 -1e+300

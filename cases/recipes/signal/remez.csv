@@ -1,0 +1,7 @@
+id,group,arguments
+signal.remez/recipe-1189,reference recipe; binary64 SciPy reference,"j:[9,[0,0.3,0.5,1],[1,0],[1,1],2]"
+signal.remez/recipe-1190,reference recipe; binary64 SciPy reference,"j:[9,[0,0.3,0.5,1],[0,1],[1,2],2]"
+signal.remez/recipe-1191,reference recipe; binary64 SciPy reference,"j:[20,[0,0.3,0.5,1],[1,0],[1,1],2]"
+signal.remez/recipe-1192,reference recipe; binary64 SciPy reference,"j:[35,[0,0.3,0.5,1],[1,0],[1,1],2]"
+signal.remez/recipe-1193,reference recipe; binary64 SciPy reference,"j:[35,[0,0.3,0.5,1],[0,1],[1,2],2]"
+signal.remez/recipe-1400,reference recipe; binary64 SciPy reference,"j:[9,[0,0.3,0.5,1],[0,0],[1,1],2]"

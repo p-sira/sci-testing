@@ -1,0 +1,14 @@
+id,group,d,g,p,x,y
+stats.chatterjeexi/recipe-3509,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1,v:1 2
+stats.chatterjeexi/recipe-3510,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1,v:1 2
+stats.chatterjeexi/recipe-3511,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 2 3,v:1 2 3 4
+stats.chatterjeexi/recipe-3512,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3,v:1 2 3 4
+stats.chatterjeexi/recipe-3513,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 2 3,v:4 3 2 1
+stats.chatterjeexi/recipe-3514,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3,v:4 3 2 1
+stats.chatterjeexi/recipe-3515,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 2 3 4,v:1 1 2 3 3
+stats.chatterjeexi/recipe-3516,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3 4,v:1 1 2 3 3
+stats.chatterjeexi/recipe-3517,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 2 3 4 5,v:0 1 0 1 0 1
+stats.chatterjeexi/recipe-3518,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3 4 5,v:0 1 0 1 0 1
+stats.chatterjeexi/recipe-3520,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3,v:1 1 1 1
+stats.chatterjeexi/recipe-3521,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 2 3 4 5,v:4 2 1 7 2 8
+stats.chatterjeexi/recipe-3522,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2 3 4 5,v:4 2 1 7 2 8

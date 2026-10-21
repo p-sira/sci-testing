@@ -1,0 +1,12 @@
+id,group,d,g,p,x,y
+stats.combine_pvalues/recipe-2016,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.1 0.05 0.02 0.3,v:
+stats.combine_pvalues/recipe-2017,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0.1 0.05 0.02 0.3,v:
+stats.combine_pvalues/recipe-2018,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0.1 0.05 0.02 0.3,v:
+stats.combine_pvalues/recipe-2019,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:0.1 0.05 0.02 0.3,v:
+stats.combine_pvalues/recipe-2020,reference recipe; binary64 SciPy reference,t:,v:,v:4,v:0.1 0.05 0.02 0.3,v:
+stats.combine_pvalues/recipe-2021,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:0.1 0.05 0.02 0.3,v:1 2 3 4
+stats.combine_pvalues/recipe-2023,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 0.2 0.5,v:
+stats.combine_pvalues/recipe-2024,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 0.2 0.5,v:
+stats.combine_pvalues/recipe-2028,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.01 0.99 1,v:
+stats.combine_pvalues/recipe-2030,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0.01 0.99 1,v:
+stats.combine_pvalues/recipe-2036,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 1,v:

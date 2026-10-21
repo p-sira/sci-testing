@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.kstest/recipe-2237,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3,v:2 3 4
+stats.kstest/recipe-2239,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3,v:2 3 4
+stats.kstest/recipe-2241,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3,v:2 3 4
+stats.kstest/recipe-2243,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 0 1 2,v:0 1 1 3
+stats.kstest/recipe-2245,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 0 1 2,v:0 1 1 3
+stats.kstest/recipe-2247,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 0 1 2,v:0 1 1 3
+stats.kstest/recipe-2249,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:1 2
+stats.kstest/recipe-2251,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:1 2
+stats.kstest/recipe-2253,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2,v:1 2
+stats.kstest/recipe-2255,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1,v:2 2
+stats.kstest/recipe-2257,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1,v:2 2
+stats.kstest/recipe-2259,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1,v:2 2

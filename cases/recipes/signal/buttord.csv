@@ -1,0 +1,5 @@
+id,group,arguments
+signal.buttord/recipe-0855,reference recipe; binary64 SciPy reference,"j:[0.2,0.4,1.0,40.0,null]"
+signal.buttord/recipe-0856,reference recipe; binary64 SciPy reference,v:0.2 0.4 1.0 40.0 2.0
+signal.buttord/recipe-0857,reference recipe; binary64 SciPy reference,"j:[0.4,0.2,1.0,40.0,null]"
+signal.buttord/recipe-0858,reference recipe; binary64 SciPy reference,v:0.4 0.2 1.0 40.0 2.0

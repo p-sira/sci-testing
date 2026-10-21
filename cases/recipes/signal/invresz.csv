@@ -1,0 +1,5 @@
+id,group,arguments
+signal.invresz/recipe-1145,reference recipe; binary64 SciPy reference,"j:[[[1,0]],[[-0.5,0]],[]]"
+signal.invresz/recipe-1146,reference recipe; binary64 SciPy reference,"j:[[[1,0],[2,0]],[[-0.5,0],[-0.5,0]],[2]]"
+signal.invresz/recipe-1147,reference recipe; binary64 SciPy reference,"j:[[[1,1],[1,-1]],[[-1,-1],[-1,1]],[]]"
+signal.invresz/recipe-1148,reference recipe; binary64 SciPy reference,"j:[[[0,0]],[[-1,0]],[]]"

@@ -1,0 +1,7 @@
+id,group,arguments
+signal.get_window/recipe-0194,reference recipe; binary64 SciPy reference,"j:[""hann"",6,true]"
+signal.get_window/recipe-0196,reference recipe; binary64 SciPy reference,"j:[""hann"",6,false]"
+signal.get_window/recipe-0198,reference recipe; binary64 SciPy reference,"j:[""hamming"",6,true]"
+signal.get_window/recipe-0200,reference recipe; binary64 SciPy reference,"j:[""hamming"",6,false]"
+signal.get_window/recipe-0202,reference recipe; binary64 SciPy reference,"j:[""blackman"",6,true]"
+signal.get_window/recipe-0204,reference recipe; binary64 SciPy reference,"j:[""blackman"",6,false]"

@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.multivariate_t_logpdf/recipe-2115,reference recipe; binary64 SciPy reference,t:,m:2 0.3;0.3 1,v:1,v:0 1,v:1 2
+stats.multivariate_t_logpdf/recipe-2117,reference recipe; binary64 SciPy reference,t:,m:2 0.3;0.3 1,v:3.5,v:0 1,v:1 2
+stats.multivariate_t_logpdf/recipe-2119,reference recipe; binary64 SciPy reference,t:,m:2 0.3;0.3 1,v:10,v:0 1,v:1 2
+stats.multivariate_t_logpdf/recipe-2123,reference recipe; binary64 SciPy reference,t:,m:2 0 0;0 1 0;0 0 3,v:1,v:1 -2 3,v:0 0 0
+stats.multivariate_t_logpdf/recipe-2125,reference recipe; binary64 SciPy reference,t:,m:2 0 0;0 1 0;0 0 3,v:3.5,v:1 -2 3,v:0 0 0
+stats.multivariate_t_logpdf/recipe-2127,reference recipe; binary64 SciPy reference,t:,m:2 0 0;0 1 0;0 0 3,v:10,v:1 -2 3,v:0 0 0

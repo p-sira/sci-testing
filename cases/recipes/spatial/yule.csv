@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+spatial.yule/recipe-0051,reference recipe; binary64 SciPy reference,"j:[""51"",""yule"",""1;0;1;0"",""0;1;1;0"","""","""",""""]","j:{""id"":""51"",""api"":""yule"",""u"":""1;0;1;0"",""v"":""0;1;1;0"",""w"":"""",""param"":"""",""extra"":""""}",t:spatial,t:geometry
+spatial.yule/recipe-0052,reference recipe; binary64 SciPy reference,"j:[""52"",""yule"",""1;1;0;0"",""1;0;1;0"",""0.5;1;2;4"","""",""""]","j:{""id"":""52"",""api"":""yule"",""u"":""1;1;0;0"",""v"":""1;0;1;0"",""w"":""0.5;1;2;4"",""param"":"""",""extra"":""""}",t:spatial,t:geometry
+spatial.yule/recipe-0053,reference recipe; binary64 SciPy reference,"j:[""53"",""yule"",""1;1"",""1;1"","""","""",""""]","j:{""id"":""53"",""api"":""yule"",""u"":""1;1"",""v"":""1;1"",""w"":"""",""param"":"""",""extra"":""""}",t:spatial,t:geometry
+spatial.yule/recipe-0064,reference recipe; binary64 SciPy reference,"j:[""64"",""yule"","""","""","""",""2"",""true""]","j:{""id"":""64"",""api"":""yule"",""u"":"""",""v"":"""",""w"":"""",""param"":""2"",""extra"":""true""}",t:spatial,t:geometry

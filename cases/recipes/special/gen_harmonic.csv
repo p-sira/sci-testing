@@ -1,0 +1,11 @@
+id,group,p0,p1
+special.gen_harmonic/recipe-0000,reference recipe; binary64 reference,i:0,s:2.0
+special.gen_harmonic/recipe-0001,reference recipe; binary64 reference,i:1,s:-4.0
+special.gen_harmonic/recipe-0002,reference recipe; binary64 reference,i:2,s:2.0
+special.gen_harmonic/recipe-0003,reference recipe; binary64 reference,i:100,s:1.0
+special.gen_harmonic/recipe-0004,reference recipe; binary64 reference,i:1000,s:0.5
+special.gen_harmonic/recipe-0005,reference recipe; binary64 reference,i:100,s:-2.0
+special.gen_harmonic/recipe-0006,reference recipe; binary64 reference,i:10,s:-1.5
+special.gen_harmonic/recipe-0007,reference recipe; binary64 reference,i:1000000,s:0.0
+special.gen_harmonic/recipe-0008,reference recipe; binary64 reference,i:1000000,s:2.0
+special.gen_harmonic/recipe-0009,reference recipe; binary64 reference,i:5,s:1000.0

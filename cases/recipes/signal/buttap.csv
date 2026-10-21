@@ -1,0 +1,5 @@
+id,group,arguments
+signal.buttap/recipe-0711,reference recipe; binary64 SciPy reference,v:0
+signal.buttap/recipe-0712,reference recipe; binary64 SciPy reference,v:1
+signal.buttap/recipe-0713,reference recipe; binary64 SciPy reference,v:3
+signal.buttap/recipe-0714,reference recipe; binary64 SciPy reference,v:4

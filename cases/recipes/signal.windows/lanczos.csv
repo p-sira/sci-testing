@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.lanczos/recipe-0032,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.lanczos/recipe-0033,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.lanczos/recipe-0034,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.lanczos/recipe-0035,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.lanczos/recipe-0036,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.lanczos/recipe-0037,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.lanczos/recipe-0038,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.lanczos/recipe-0039,reference recipe; binary64 SciPy reference,v:6 False

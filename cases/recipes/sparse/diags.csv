@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+sparse.diags/recipe-sparse-0037,reference recipe; binary64 SciPy reference,"j:[""diags_regular"",""diags"",""3"",""4"","""",""0"",""0"","""",""2.0;3.0;4.0:-1.0;-2.0"",""1;-1""]","j:{""id"":""diags_regular"",""api"":""diags"",""rows"":3,""cols"":4,""a"":[],""x"":[[2.0,3.0,4.0],[-1.0,-2.0]],""k"":[1,-1]}",t:sparse,t:sparse
+sparse.diags/recipe-sparse-0103,reference recipe; binary64 SciPy reference,"j:[""diags_main"",""diags"",""3"",""3"","""",""0"",""0"","""",""1.0;-2.0;3.0"",""0""]","j:{""id"":""diags_main"",""api"":""diags"",""rows"":3,""cols"":3,""a"":[],""x"":[[1.0,-2.0,3.0]],""k"":[0]}",t:sparse,t:sparse

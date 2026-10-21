@@ -1,0 +1,13 @@
+id,group,arguments
+signal.windows.tukey/recipe-0152,reference recipe; binary64 SciPy reference,v:0 0.4 True
+signal.windows.tukey/recipe-0153,reference recipe; binary64 SciPy reference,v:0 0.4 False
+signal.windows.tukey/recipe-0154,reference recipe; binary64 SciPy reference,v:1 0.4 True
+signal.windows.tukey/recipe-0155,reference recipe; binary64 SciPy reference,v:1 0.4 False
+signal.windows.tukey/recipe-0156,reference recipe; binary64 SciPy reference,v:5 0.4 True
+signal.windows.tukey/recipe-0157,reference recipe; binary64 SciPy reference,v:5 0.4 False
+signal.windows.tukey/recipe-0158,reference recipe; binary64 SciPy reference,v:6 0.4 True
+signal.windows.tukey/recipe-0159,reference recipe; binary64 SciPy reference,v:6 0.4 False
+signal.windows.tukey/recipe-0206,reference recipe; binary64 SciPy reference,v:7 -1.0 True
+signal.windows.tukey/recipe-0207,reference recipe; binary64 SciPy reference,v:7 0.0 True
+signal.windows.tukey/recipe-0208,reference recipe; binary64 SciPy reference,v:7 1.0 True
+signal.windows.tukey/recipe-0209,reference recipe; binary64 SciPy reference,v:7 2.0 True

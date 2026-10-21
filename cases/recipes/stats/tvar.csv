@@ -1,0 +1,16 @@
+id,group,d,g,p,x,y
+stats.tvar/recipe-1839,reference recipe; binary64 SciPy reference,t:,v:,v:0 4 1 1 1,v:-3 -1 0 2 4 10,v:
+stats.tvar/recipe-1843,reference recipe; binary64 SciPy reference,t:,v:,v:0 4 1 0 1,v:-3 -1 0 2 4 10,v:
+stats.tvar/recipe-1847,reference recipe; binary64 SciPy reference,t:,v:,v:0 4 0 1 1,v:-3 -1 0 2 4 10,v:
+stats.tvar/recipe-1851,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 0 0 1,v:-3 -1 0 2 4 10,v:
+stats.tvar/recipe-1855,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 1 1 1,v:-3 -1 0 2 4 10,v:
+stats.tvar/recipe-1859,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 1 0 1,v:-3 -1 0 2 4 10,v:
+stats.tvar/recipe-1863,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 0 1 1,v:-3 -1 0 2 4 10,v:
+stats.tvar/recipe-1898,reference recipe; binary64 SciPy reference,t:,v:,v:0 4 0 0 1,v:1 2 3 4 5 100,v:
+stats.tvar/recipe-1902,reference recipe; binary64 SciPy reference,t:,v:,v:0 4 1 1 1,v:1 2 3 4 5 100,v:
+stats.tvar/recipe-1906,reference recipe; binary64 SciPy reference,t:,v:,v:0 4 1 0 1,v:1 2 3 4 5 100,v:
+stats.tvar/recipe-1910,reference recipe; binary64 SciPy reference,t:,v:,v:0 4 0 1 1,v:1 2 3 4 5 100,v:
+stats.tvar/recipe-1914,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 0 0 1,v:1 2 3 4 5 100,v:
+stats.tvar/recipe-1918,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 1 1 1,v:1 2 3 4 5 100,v:
+stats.tvar/recipe-1922,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 1 0 1,v:1 2 3 4 5 100,v:
+stats.tvar/recipe-1926,reference recipe; binary64 SciPy reference,t:,v:,v:1 5 0 1 1,v:1 2 3 4 5 100,v:

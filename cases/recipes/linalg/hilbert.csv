@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.hilbert/recipe-0009,reference recipe; binary64 SciPy reference,"j:[""0"",""hilbert"",""0"","""","""","""",""""]","j:{""api"":""hilbert"",""args"":[0]}",t:linalg,t:linalg
+linalg.hilbert/recipe-0010,reference recipe; binary64 SciPy reference,"j:[""0"",""hilbert"",""1"","""","""","""",""""]","j:{""api"":""hilbert"",""args"":[1]}",t:linalg,t:linalg
+linalg.hilbert/recipe-0011,reference recipe; binary64 SciPy reference,"j:[""0"",""hilbert"",""5"","""","""","""",""""]","j:{""api"":""hilbert"",""args"":[5]}",t:linalg,t:linalg
+linalg.hilbert/recipe-0012,reference recipe; binary64 SciPy reference,"j:[""0"",""hilbert"",""10"","""","""","""",""""]","j:{""api"":""hilbert"",""args"":[10]}",t:linalg,t:linalg

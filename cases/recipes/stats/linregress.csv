@@ -1,0 +1,10 @@
+id,group,d,g,p,x,y
+stats.linregress/recipe-0443,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:2 1 5 6
+stats.linregress/recipe-0451,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:2 1 5 6
+stats.linregress/recipe-0459,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:2 1 5 6
+stats.linregress/recipe-0470,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:4 3 2 1
+stats.linregress/recipe-0478,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:4 3 2 1
+stats.linregress/recipe-0486,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:4 3 2 1
+stats.linregress/recipe-0497,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1 2 3,v:2 3 5 5
+stats.linregress/recipe-0505,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1 2 3,v:2 3 5 5
+stats.linregress/recipe-0513,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1 2 3,v:2 3 5 5

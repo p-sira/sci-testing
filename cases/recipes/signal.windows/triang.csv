@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.triang/recipe-0016,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.triang/recipe-0017,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.triang/recipe-0018,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.triang/recipe-0019,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.triang/recipe-0020,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.triang/recipe-0021,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.triang/recipe-0022,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.triang/recipe-0023,reference recipe; binary64 SciPy reference,v:6 False

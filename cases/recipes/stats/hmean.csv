@@ -1,0 +1,4 @@
+id,group,d,g,p,x,y
+stats.hmean/recipe-0305,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2 4 8,v:
+stats.hmean/recipe-0327,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0.1 0.5 2 7,v:
+stats.hmean/recipe-0349,reference recipe; binary64 SciPy reference,t:,v:,v:,v:2 2 2,v:

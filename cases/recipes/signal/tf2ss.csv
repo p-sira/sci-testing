@@ -1,0 +1,4 @@
+id,group,arguments
+signal.tf2ss/recipe-1078,reference recipe; binary64 SciPy reference,m:1 0;1 8 25
+signal.tf2ss/recipe-1080,reference recipe; binary64 SciPy reference,m:1;1 1
+signal.tf2ss/recipe-1082,reference recipe; binary64 SciPy reference,m:1;1

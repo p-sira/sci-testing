@@ -1,0 +1,8 @@
+id,group,fields,raw,suite,suite_name
+linalg.signm/recipe-0360,reference recipe; binary64 SciPy reference,"j:[""0"",""signm"",""1.0;2.0:0.0;4.0"","""","""","""",""""]","j:{""api"":""signm"",""args"":[[[1.0,2.0],[0.0,4.0]]]}",t:linalg,t:linalg
+linalg.signm/recipe-0361,reference recipe; binary64 SciPy reference,"j:[""0"",""signm"",""4.0;1.0:1.0;3.0"","""","""","""",""""]","j:{""api"":""signm"",""args"":[[[4.0,1.0],[1.0,3.0]]]}",t:linalg,t:linalg
+linalg.signm/recipe-0362,reference recipe; binary64 SciPy reference,"j:[""0"",""signm"",""-2.0;1.0:0.0;3.0"","""","""","""",""""]","j:{""api"":""signm"",""args"":[[[-2.0,1.0],[0.0,3.0]]]}",t:linalg,t:linalg
+linalg.signm/recipe-0363,reference recipe; binary64 SciPy reference,"j:[""0"",""signm"",""1.0;1.0:0.0;1.0"","""","""","""",""""]","j:{""api"":""signm"",""args"":[[[1.0,1.0],[0.0,1.0]]]}",t:linalg,t:linalg
+linalg.signm/recipe-0542,reference recipe; binary64 SciPy reference,"j:[""0"",""signm"",""4.0;1.0;2.0:0.0;9.0;3.0:0.0;0.0;16.0"","""","""","""",""""]","j:{""api"":""signm"",""args"":[[[4.0,1.0,2.0],[0.0,9.0,3.0],[0.0,0.0,16.0]]]}",t:linalg,t:linalg
+linalg.signm/recipe-0550,reference recipe; binary64 SciPy reference,"j:[""0"",""signm"",""-4.0;1.0;0.0:0.0;-9.0;2.0:0.0;0.0;16.0"","""","""","""",""""]","j:{""api"":""signm"",""args"":[[[-4.0,1.0,0.0],[0.0,-9.0,2.0],[0.0,0.0,16.0]]]}",t:linalg,t:linalg
+linalg.signm/recipe-0558,reference recipe; binary64 SciPy reference,"j:[""0"",""signm"",""2.0;0.0;0.0:0.0;2.0;0.0:0.0;0.0;3.0"","""","""","""",""""]","j:{""api"":""signm"",""args"":[[[2.0,0.0,0.0],[0.0,2.0,0.0],[0.0,0.0,3.0]]]}",t:linalg,t:linalg

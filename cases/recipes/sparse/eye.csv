@@ -1,0 +1,6 @@
+id,group,fields,raw,suite,suite_name
+sparse.eye/recipe-sparse-0024,reference recipe; binary64 SciPy reference,"j:[""eye_-3"",""eye"",""3"",""5"","""",""0"",""0"","""","""",""-3""]","j:{""id"":""eye_-3"",""api"":""eye"",""rows"":3,""cols"":5,""a"":[],""k"":-3}",t:sparse,t:sparse
+sparse.eye/recipe-sparse-0025,reference recipe; binary64 SciPy reference,"j:[""eye_-1"",""eye"",""3"",""5"","""",""0"",""0"","""","""",""-1""]","j:{""id"":""eye_-1"",""api"":""eye"",""rows"":3,""cols"":5,""a"":[],""k"":-1}",t:sparse,t:sparse
+sparse.eye/recipe-sparse-0026,reference recipe; binary64 SciPy reference,"j:[""eye_0"",""eye"",""3"",""5"","""",""0"",""0"","""","""",""0""]","j:{""id"":""eye_0"",""api"":""eye"",""rows"":3,""cols"":5,""a"":[],""k"":0}",t:sparse,t:sparse
+sparse.eye/recipe-sparse-0027,reference recipe; binary64 SciPy reference,"j:[""eye_1"",""eye"",""3"",""5"","""",""0"",""0"","""","""",""1""]","j:{""id"":""eye_1"",""api"":""eye"",""rows"":3,""cols"":5,""a"":[],""k"":1}",t:sparse,t:sparse
+sparse.eye/recipe-sparse-0028,reference recipe; binary64 SciPy reference,"j:[""eye_4"",""eye"",""3"",""5"","""",""0"",""0"","""","""",""4""]","j:{""id"":""eye_4"",""api"":""eye"",""rows"":3,""cols"":5,""a"":[],""k"":4}",t:sparse,t:sparse

@@ -1,0 +1,9 @@
+id,group,arguments
+signal.residue/recipe-1125,reference recipe; binary64 SciPy reference,"j:[[1],[1,-0.5],0.001]"
+signal.residue/recipe-1127,reference recipe; binary64 SciPy reference,"j:[[1,2],[1,-0.5,0.06],0.001]"
+signal.residue/recipe-1129,reference recipe; binary64 SciPy reference,"j:[[1,2,3],[1,-1,0.25],0.001]"
+signal.residue/recipe-1131,reference recipe; binary64 SciPy reference,"j:[[1,0,1],[1,0,1],0.001]"
+signal.residue/recipe-1133,reference recipe; binary64 SciPy reference,"j:[[1,2,3,4],[1,1,1],0.001]"
+signal.residue/recipe-1135,reference recipe; binary64 SciPy reference,"j:[[0],[1,-0.5],0.001]"
+signal.residue/recipe-1137,reference recipe; binary64 SciPy reference,"j:[[2],[1],0.001]"
+signal.residue/recipe-1139,reference recipe; binary64 SciPy reference,"j:[[1],[1,-1.5,0.75,-0.125],0.001]"

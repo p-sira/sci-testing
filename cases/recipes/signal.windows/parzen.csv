@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.parzen/recipe-0056,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.parzen/recipe-0057,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.parzen/recipe-0058,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.parzen/recipe-0059,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.parzen/recipe-0060,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.parzen/recipe-0061,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.parzen/recipe-0062,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.parzen/recipe-0063,reference recipe; binary64 SciPy reference,v:6 False

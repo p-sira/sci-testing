@@ -1,0 +1,5 @@
+id,group,d,g,p,x,y
+stats.median/recipe-0001,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2 4 8 9,v:
+stats.median/recipe-0079,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-3 0 2 6 12,v:
+stats.median/recipe-0157,reference recipe; binary64 SciPy reference,t:,v:,v:,v:4 4 4 4,v:
+stats.median/recipe-0235,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1,v:

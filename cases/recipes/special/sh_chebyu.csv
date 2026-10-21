@@ -1,0 +1,4 @@
+id,group,p0,p1
+special.sh_chebyu/recipe-0000,reference recipe; binary64 reference,i:3,b:0
+special.sh_chebyu/recipe-0001,reference recipe; binary64 reference,i:0,b:0
+special.sh_chebyu/recipe-0002,reference recipe; binary64 reference,i:0,b:1

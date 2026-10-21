@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.hadamard/recipe-0035,reference recipe; binary64 SciPy reference,"j:[""0"",""hadamard"",""1"","""","""","""",""""]","j:{""api"":""hadamard"",""args"":[1]}",t:linalg,t:linalg
+linalg.hadamard/recipe-0036,reference recipe; binary64 SciPy reference,"j:[""0"",""hadamard"",""2"","""","""","""",""""]","j:{""api"":""hadamard"",""args"":[2]}",t:linalg,t:linalg
+linalg.hadamard/recipe-0037,reference recipe; binary64 SciPy reference,"j:[""0"",""hadamard"",""8"","""","""","""",""""]","j:{""api"":""hadamard"",""args"":[8]}",t:linalg,t:linalg

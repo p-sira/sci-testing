@@ -1,0 +1,4 @@
+id,group,arguments
+signal.hilbert/recipe-0489,reference recipe; binary64 SciPy reference,m:2.0
+signal.hilbert/recipe-0496,reference recipe; binary64 SciPy reference,m:1.0 -2.0 0.0 3.0
+signal.hilbert/recipe-0503,reference recipe; binary64 SciPy reference,m:1.0 2.0 -1.0 0.0 3.0

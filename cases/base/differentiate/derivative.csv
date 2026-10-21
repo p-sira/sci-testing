@@ -1,0 +1,7 @@
+id,group,step,x
+differentiate.derivative/028,"sin, h = 1e-5",s:1e-05,s:-3.0
+differentiate.derivative/029,"sin, h = 1e-5",s:1e-05,s:-0.1
+differentiate.derivative/030,"sin, h = 1e-5",s:1e-05,s:0.0
+differentiate.derivative/031,"sin, h = 1e-5",s:1e-05,s:0.1
+differentiate.derivative/032,"sin, h = 1e-5",s:1e-05,s:1.0
+differentiate.derivative/033,"sin, h = 1e-5",s:1e-05,s:3.0

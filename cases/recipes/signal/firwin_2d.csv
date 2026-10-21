@@ -1,0 +1,3 @@
+id,group,arguments
+signal.firwin_2d/recipe-1175,reference recipe; binary64 SciPy reference,"j:[[3,5],[0.3],true,""hamming"",""hann"",true,2]"
+signal.firwin_2d/recipe-1176,reference recipe; binary64 SciPy reference,"j:[[6,8],[0.3],true,""hamming"",""hann"",true,2]"

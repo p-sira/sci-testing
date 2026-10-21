@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.exponential/recipe-0144,reference recipe; binary64 SciPy reference,"j:[0,null,2.0,true]"
+signal.windows.exponential/recipe-0145,reference recipe; binary64 SciPy reference,"j:[0,null,2.0,false]"
+signal.windows.exponential/recipe-0146,reference recipe; binary64 SciPy reference,"j:[1,null,2.0,true]"
+signal.windows.exponential/recipe-0147,reference recipe; binary64 SciPy reference,"j:[1,null,2.0,false]"
+signal.windows.exponential/recipe-0148,reference recipe; binary64 SciPy reference,"j:[5,null,2.0,true]"
+signal.windows.exponential/recipe-0149,reference recipe; binary64 SciPy reference,"j:[5,null,2.0,false]"
+signal.windows.exponential/recipe-0150,reference recipe; binary64 SciPy reference,"j:[6,null,2.0,true]"
+signal.windows.exponential/recipe-0151,reference recipe; binary64 SciPy reference,"j:[6,null,2.0,false]"

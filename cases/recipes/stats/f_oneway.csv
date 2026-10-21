@@ -1,0 +1,4 @@
+id,group,d,g,p,x,y
+stats.f_oneway/recipe-0573,reference recipe; binary64 SciPy reference,t:,m:1 2 4;2 3 7;5 6 8,v:,v:,v:
+stats.f_oneway/recipe-0574,reference recipe; binary64 SciPy reference,t:,m:1 1 2 2;2 3 4;5 5 6,v:,v:,v:
+stats.f_oneway/recipe-0575,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:,v:,v:

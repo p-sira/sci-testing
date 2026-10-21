@@ -1,0 +1,3 @@
+id,group,d,dispatch_api,g,p,x,y
+stats.contingency.crosstab/recipe-0683,reference recipe; binary64 SciPy reference,t:,t:crosstab,v:,v:,v:1 2 1 3,v:2 2 3 2
+stats.contingency.crosstab/recipe-0684,reference recipe; binary64 SciPy reference,t:,t:crosstab,v:,v:,v:-1 0 1 0,v:1 0 1 0

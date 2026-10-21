@@ -1,0 +1,5 @@
+id,group,arguments
+signal.cheb1ord/recipe-0859,reference recipe; binary64 SciPy reference,"j:[0.2,0.4,1.0,40.0,null]"
+signal.cheb1ord/recipe-0860,reference recipe; binary64 SciPy reference,v:0.2 0.4 1.0 40.0 2.0
+signal.cheb1ord/recipe-0861,reference recipe; binary64 SciPy reference,"j:[0.4,0.2,1.0,40.0,null]"
+signal.cheb1ord/recipe-0862,reference recipe; binary64 SciPy reference,v:0.4 0.2 1.0 40.0 2.0

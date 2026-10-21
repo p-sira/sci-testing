@@ -1,0 +1,3 @@
+id,group,arguments
+signal.bilinear/recipe-0944,reference recipe; binary64 SciPy reference,"j:[[1.0],[1.0,1.0],10.0]"
+signal.bilinear/recipe-0949,reference recipe; binary64 SciPy reference,"j:[[2.0,1.0],[1.0,2.0,2.0,1.0],10.0]"

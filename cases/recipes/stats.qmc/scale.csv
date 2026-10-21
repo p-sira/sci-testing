@@ -1,0 +1,7 @@
+id,group,d,dispatch_api,g,p,x,y
+stats.qmc.scale/recipe-2084,reference recipe; binary64 SciPy reference,t:,t:scale,m:0.1;0.3;0.7;0.9,v:0,v:-2,v:3
+stats.qmc.scale/recipe-2085,reference recipe; binary64 SciPy reference,t:,t:scale,m:-1.5;-0.5;1.5;2.5,v:1,v:-2,v:3
+stats.qmc.scale/recipe-2097,reference recipe; binary64 SciPy reference,t:,t:scale,m:0.1 0.2;0.3 0.8;0.7 0.5,v:0,v:-2 -2,v:3 3
+stats.qmc.scale/recipe-2098,reference recipe; binary64 SciPy reference,t:,t:scale,m:-1.5 -1.0;-0.5 2.0;1.5 0.5,v:1,v:-2 -2,v:3 3
+stats.qmc.scale/recipe-2110,reference recipe; binary64 SciPy reference,t:,t:scale,m:0 1;1 0,v:0,v:-2 -2,v:3 3
+stats.qmc.scale/recipe-2111,reference recipe; binary64 SciPy reference,t:,t:scale,m:-2 3;3 -2,v:1,v:-2 -2,v:3 3

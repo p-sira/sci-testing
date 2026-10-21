@@ -1,0 +1,3 @@
+id,group,arguments
+signal.lp2lp/recipe-0940,reference recipe; binary64 SciPy reference,"j:[[1.0],[1.0,1.0],2.0]"
+signal.lp2lp/recipe-0945,reference recipe; binary64 SciPy reference,"j:[[2.0,1.0],[1.0,2.0,2.0,1.0],2.0]"

@@ -1,0 +1,3 @@
+id,group,d,g,p,x,y
+stats.jarque_bera/recipe-0004,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2 4 8 9,v:
+stats.jarque_bera/recipe-0082,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-3 0 2 6 12,v:

@@ -1,0 +1,7 @@
+id,group,arguments
+signal.iirfilter/recipe-0867,reference recipe; binary64 SciPy reference,"j:[3,[0.3],""lowpass"",2.0,""butter""]"
+signal.iirfilter/recipe-0868,reference recipe; binary64 SciPy reference,"j:[3,[0.2,0.5],""bandpass"",2.0,""butter""]"
+signal.iirfilter/recipe-0869,reference recipe; binary64 SciPy reference,"j:[3,[0.3],""lowpass"",2.0,""cheby1""]"
+signal.iirfilter/recipe-0870,reference recipe; binary64 SciPy reference,"j:[3,[0.2,0.5],""bandpass"",2.0,""cheby1""]"
+signal.iirfilter/recipe-0871,reference recipe; binary64 SciPy reference,"j:[3,[0.3],""lowpass"",2.0,""cheby2""]"
+signal.iirfilter/recipe-0872,reference recipe; binary64 SciPy reference,"j:[3,[0.2,0.5],""bandpass"",2.0,""cheby2""]"

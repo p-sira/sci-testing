@@ -1,0 +1,5 @@
+id,group,p0
+complex.reciprocal/recipe-0000,reference recipe; binary64 reference,v:0.5 0.25
+complex.reciprocal/recipe-0001,reference recipe; binary64 reference,v:-1.25 0.75
+complex.reciprocal/recipe-0002,reference recipe; binary64 reference,v:-0.5 -0.25
+complex.reciprocal/recipe-0003,reference recipe; binary64 reference,v:2.0 -0.75

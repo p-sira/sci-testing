@@ -1,0 +1,25 @@
+id,group,arguments
+signal.sawtooth/recipe-0269,reference recipe; binary64 SciPy reference,v:-7.0 0.0
+signal.sawtooth/recipe-0271,reference recipe; binary64 SciPy reference,v:-7.0 0.3
+signal.sawtooth/recipe-0273,reference recipe; binary64 SciPy reference,v:-7.0 0.5
+signal.sawtooth/recipe-0275,reference recipe; binary64 SciPy reference,v:-7.0 1.0
+signal.sawtooth/recipe-0277,reference recipe; binary64 SciPy reference,v:-3.141592653589793 0.0
+signal.sawtooth/recipe-0279,reference recipe; binary64 SciPy reference,v:-3.141592653589793 0.3
+signal.sawtooth/recipe-0281,reference recipe; binary64 SciPy reference,v:-3.141592653589793 0.5
+signal.sawtooth/recipe-0283,reference recipe; binary64 SciPy reference,v:-3.141592653589793 1.0
+signal.sawtooth/recipe-0285,reference recipe; binary64 SciPy reference,v:0.0 0.0
+signal.sawtooth/recipe-0287,reference recipe; binary64 SciPy reference,v:0.0 0.3
+signal.sawtooth/recipe-0289,reference recipe; binary64 SciPy reference,v:0.0 0.5
+signal.sawtooth/recipe-0291,reference recipe; binary64 SciPy reference,v:0.0 1.0
+signal.sawtooth/recipe-0293,reference recipe; binary64 SciPy reference,v:3.141592653589793 0.0
+signal.sawtooth/recipe-0295,reference recipe; binary64 SciPy reference,v:3.141592653589793 0.3
+signal.sawtooth/recipe-0297,reference recipe; binary64 SciPy reference,v:3.141592653589793 0.5
+signal.sawtooth/recipe-0299,reference recipe; binary64 SciPy reference,v:3.141592653589793 1.0
+signal.sawtooth/recipe-0301,reference recipe; binary64 SciPy reference,v:6.283185307179586 0.0
+signal.sawtooth/recipe-0303,reference recipe; binary64 SciPy reference,v:6.283185307179586 0.3
+signal.sawtooth/recipe-0305,reference recipe; binary64 SciPy reference,v:6.283185307179586 0.5
+signal.sawtooth/recipe-0307,reference recipe; binary64 SciPy reference,v:6.283185307179586 1.0
+signal.sawtooth/recipe-0309,reference recipe; binary64 SciPy reference,v:7.0 0.0
+signal.sawtooth/recipe-0311,reference recipe; binary64 SciPy reference,v:7.0 0.3
+signal.sawtooth/recipe-0313,reference recipe; binary64 SciPy reference,v:7.0 0.5
+signal.sawtooth/recipe-0315,reference recipe; binary64 SciPy reference,v:7.0 1.0

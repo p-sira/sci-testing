@@ -1,0 +1,9 @@
+id,group,d,g,p,x,y
+stats.median_abs_deviation/recipe-0050,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 4 8 9,v:
+stats.median_abs_deviation/recipe-0051,reference recipe; binary64 SciPy reference,t:,v:,v:0.6744897501960817,v:1 2 4 8 9,v:
+stats.median_abs_deviation/recipe-0128,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 0 2 6 12,v:
+stats.median_abs_deviation/recipe-0129,reference recipe; binary64 SciPy reference,t:,v:,v:0.6744897501960817,v:-3 0 2 6 12,v:
+stats.median_abs_deviation/recipe-0206,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:4 4 4 4,v:
+stats.median_abs_deviation/recipe-0207,reference recipe; binary64 SciPy reference,t:,v:,v:0.6744897501960817,v:4 4 4 4,v:
+stats.median_abs_deviation/recipe-0276,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1,v:
+stats.median_abs_deviation/recipe-0277,reference recipe; binary64 SciPy reference,t:,v:,v:0.6744897501960817,v:1,v:

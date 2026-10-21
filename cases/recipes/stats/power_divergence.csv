@@ -1,0 +1,35 @@
+id,group,d,g,p,x,y
+stats.power_divergence/recipe-0605,reference recipe; binary64 SciPy reference,t:,v:,v:0 -1,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0606,reference recipe; binary64 SciPy reference,t:,v:,v:0 -0.5,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0607,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0608,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0609,reference recipe; binary64 SciPy reference,t:,v:,v:0 0.6666666666666666,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0610,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0612,reference recipe; binary64 SciPy reference,t:,v:,v:1 -1,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0613,reference recipe; binary64 SciPy reference,t:,v:,v:1 -0.5,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0614,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0615,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0616,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.6666666666666666,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0617,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:10 20 30,v:20 20 20
+stats.power_divergence/recipe-0620,reference recipe; binary64 SciPy reference,t:,v:,v:0 -0.5,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0621,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0622,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0623,reference recipe; binary64 SciPy reference,t:,v:,v:0 0.6666666666666666,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0624,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0627,reference recipe; binary64 SciPy reference,t:,v:,v:1 -0.5,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0628,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0629,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0630,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.6666666666666666,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0631,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:0 10 20,v:10 10 10
+stats.power_divergence/recipe-0633,reference recipe; binary64 SciPy reference,t:,v:,v:0 -1,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0634,reference recipe; binary64 SciPy reference,t:,v:,v:0 -0.5,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0635,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0636,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0637,reference recipe; binary64 SciPy reference,t:,v:,v:0 0.6666666666666666,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0638,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0640,reference recipe; binary64 SciPy reference,t:,v:,v:1 -1,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0641,reference recipe; binary64 SciPy reference,t:,v:,v:1 -0.5,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0642,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0643,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0644,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.6666666666666666,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.power_divergence/recipe-0645,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:2 3 4 5,v:3.5 3.5 3.5 3.5

@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.abs/recipe-2047,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-1,v:
+stats.abs/recipe-2048,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-0.0,v:
+stats.abs/recipe-2049,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0.0,v:
+stats.abs/recipe-2050,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0.1,v:
+stats.abs/recipe-2051,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1,v:
+stats.abs/recipe-2052,reference recipe; binary64 SciPy reference,t:,v:,v:,v:5,v:

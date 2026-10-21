@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.fiedler/recipe-0044,reference recipe; binary64 SciPy reference,"j:[""0"",""fiedler"","""","""","""","""",""""]","j:{""api"":""fiedler"",""args"":[[]]}",t:linalg,t:linalg
+linalg.fiedler/recipe-0045,reference recipe; binary64 SciPy reference,"j:[""0"",""fiedler"",""2.0"","""","""","""",""""]","j:{""api"":""fiedler"",""args"":[[2.0]]}",t:linalg,t:linalg
+linalg.fiedler/recipe-0046,reference recipe; binary64 SciPy reference,"j:[""0"",""fiedler"",""1.0;-2.0;5.0;-2.0"","""","""","""",""""]","j:{""api"":""fiedler"",""args"":[[1.0,-2.0,5.0,-2.0]]}",t:linalg,t:linalg

@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+linalg.eigh_tridiagonal/recipe-0201,reference recipe; binary64 SciPy reference,"j:[""0"",""eigh_tridiagonal"",""2.0"","""","""","""",""""]","j:{""api"":""eigh_tridiagonal"",""args"":[[2.0],[]]}",t:linalg,t:linalg
+linalg.eigh_tridiagonal/recipe-0203,reference recipe; binary64 SciPy reference,"j:[""0"",""eigh_tridiagonal"",""2.0;3.0;4.0"",""1.0;-1.0"","""","""",""""]","j:{""api"":""eigh_tridiagonal"",""args"":[[2.0,3.0,4.0],[1.0,-1.0]]}",t:linalg,t:linalg

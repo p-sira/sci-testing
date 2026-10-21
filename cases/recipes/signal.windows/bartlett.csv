@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.bartlett/recipe-0008,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.bartlett/recipe-0009,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.bartlett/recipe-0010,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.bartlett/recipe-0011,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.bartlett/recipe-0012,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.bartlett/recipe-0013,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.bartlett/recipe-0014,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.bartlett/recipe-0015,reference recipe; binary64 SciPy reference,v:6 False

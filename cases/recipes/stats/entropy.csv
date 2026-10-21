@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.entropy/recipe-0652,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3,v:
+stats.entropy/recipe-0653,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3,v:
+stats.entropy/recipe-0654,reference recipe; binary64 SciPy reference,t:,v:,v:10,v:1 2 3,v:
+stats.entropy/recipe-0655,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3,v:3 2 1
+stats.entropy/recipe-0656,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3,v:3 2 1
+stats.entropy/recipe-0657,reference recipe; binary64 SciPy reference,t:,v:,v:10,v:1 2 3,v:3 2 1

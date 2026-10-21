@@ -1,0 +1,5 @@
+id,group,d,g,p,x,y
+stats.kstatvar/recipe-1888,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 -1 0 2 4 10,v:
+stats.kstatvar/recipe-1889,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-3 -1 0 2 4 10,v:
+stats.kstatvar/recipe-1951,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4 5 100,v:
+stats.kstatvar/recipe-1952,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4 5 100,v:

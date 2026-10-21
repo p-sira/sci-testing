@@ -1,0 +1,7 @@
+id,group,fields,raw,suite,suite_name
+linalg.helmert/recipe-0038,reference recipe; binary64 SciPy reference,"j:[""0"",""helmert"",""1"",""true"","""","""",""""]","j:{""api"":""helmert"",""args"":[1,true]}",t:linalg,t:linalg
+linalg.helmert/recipe-0039,reference recipe; binary64 SciPy reference,"j:[""0"",""helmert"",""1"",""false"","""","""",""""]","j:{""api"":""helmert"",""args"":[1,false]}",t:linalg,t:linalg
+linalg.helmert/recipe-0040,reference recipe; binary64 SciPy reference,"j:[""0"",""helmert"",""2"",""true"","""","""",""""]","j:{""api"":""helmert"",""args"":[2,true]}",t:linalg,t:linalg
+linalg.helmert/recipe-0041,reference recipe; binary64 SciPy reference,"j:[""0"",""helmert"",""2"",""false"","""","""",""""]","j:{""api"":""helmert"",""args"":[2,false]}",t:linalg,t:linalg
+linalg.helmert/recipe-0042,reference recipe; binary64 SciPy reference,"j:[""0"",""helmert"",""7"",""true"","""","""",""""]","j:{""api"":""helmert"",""args"":[7,true]}",t:linalg,t:linalg
+linalg.helmert/recipe-0043,reference recipe; binary64 SciPy reference,"j:[""0"",""helmert"",""7"",""false"","""","""",""""]","j:{""api"":""helmert"",""args"":[7,false]}",t:linalg,t:linalg

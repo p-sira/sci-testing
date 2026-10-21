@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+spatial.braycurtis/recipe-0015,reference recipe; binary64 SciPy reference,"j:[""15"",""braycurtis"",""1;2;3"",""2;4;1"","""",""2"",""true""]","j:{""id"":""15"",""api"":""braycurtis"",""u"":""1;2;3"",""v"":""2;4;1"",""w"":"""",""param"":""2"",""extra"":""true""}",t:spatial,t:geometry
+spatial.braycurtis/recipe-0016,reference recipe; binary64 SciPy reference,"j:[""16"",""braycurtis"",""0;0;0"",""1;0;2"",""1;0;3"",""1.5"",""true""]","j:{""id"":""16"",""api"":""braycurtis"",""u"":""0;0;0"",""v"":""1;0;2"",""w"":""1;0;3"",""param"":""1.5"",""extra"":""true""}",t:spatial,t:geometry
+spatial.braycurtis/recipe-0017,reference recipe; binary64 SciPy reference,"j:[""17"",""braycurtis"",""-2;1;4"",""1;-3;2"",""0.5;2;1"",""inf"",""true""]","j:{""id"":""17"",""api"":""braycurtis"",""u"":""-2;1;4"",""v"":""1;-3;2"",""w"":""0.5;2;1"",""param"":""inf"",""extra"":""true""}",t:spatial,t:geometry

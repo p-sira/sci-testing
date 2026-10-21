@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.ishermitian/recipe-0281,reference recipe; binary64 SciPy reference,"j:[""0"",""ishermitian"","""",""none"",""none"","""",""""]","j:{""api"":""ishermitian"",""args"":[[],null,null]}",t:linalg,t:linalg
+linalg.ishermitian/recipe-0282,reference recipe; binary64 SciPy reference,"j:[""0"",""ishermitian"",""1.0;2.0:2.0;3.0"",""none"",""none"","""",""""]","j:{""api"":""ishermitian"",""args"":[[[1.0,2.0],[2.0,3.0]],null,null]}",t:linalg,t:linalg
+linalg.ishermitian/recipe-0283,reference recipe; binary64 SciPy reference,"j:[""0"",""ishermitian"",""1.0;2.0:3.0;4.0"",""none"",""none"","""",""""]","j:{""api"":""ishermitian"",""args"":[[[1.0,2.0],[3.0,4.0]],null,null]}",t:linalg,t:linalg
+linalg.ishermitian/recipe-0284,reference recipe; binary64 SciPy reference,"j:[""0"",""ishermitian"",""1.0;2.0:2.00001;3.0"",""0.0001"",""0.0"","""",""""]","j:{""api"":""ishermitian"",""args"":[[[1.0,2.0],[2.00001,3.0]],0.0001,0.0]}",t:linalg,t:linalg

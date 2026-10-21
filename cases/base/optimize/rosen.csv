@@ -1,0 +1,6 @@
+id,group,point
+optimize.rosen/071,Rosenbrock objective and analytic gradient,v:1.0 1.0
+optimize.rosen/072,Rosenbrock objective and analytic gradient,v:-1.2 1.0
+optimize.rosen/073,Rosenbrock objective and analytic gradient,v:0.1 0.2 0.3
+optimize.rosen/074,Rosenbrock objective and analytic gradient,v:1.0000001 1.0 0.9999999
+optimize.rosen/075,Rosenbrock objective and analytic gradient,v:-3.0 2.0 -1.0 4.0

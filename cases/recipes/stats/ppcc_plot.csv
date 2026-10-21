@@ -1,0 +1,16 @@
+id,group,d,g,p,x,y
+stats.ppcc_plot/recipe-3409,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 0,v:1 2 3 5 9,v:
+stats.ppcc_plot/recipe-3411,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 0,v:-3 -1 0 2 5,v:
+stats.ppcc_plot/recipe-3413,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 0,v:0.1 0.3 0.5 1 2,v:
+stats.ppcc_plot/recipe-3415,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 1,v:1 2 3 5 9,v:
+stats.ppcc_plot/recipe-3417,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 1,v:-3 -1 0 2 5,v:
+stats.ppcc_plot/recipe-3419,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 1,v:0.1 0.3 0.5 1 2,v:
+stats.ppcc_plot/recipe-3421,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 2,v:1 2 3 5 9,v:
+stats.ppcc_plot/recipe-3423,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 2,v:-3 -1 0 2 5,v:
+stats.ppcc_plot/recipe-3425,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 2,v:0.1 0.3 0.5 1 2,v:
+stats.ppcc_plot/recipe-3427,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 3,v:1 2 3 5 9,v:
+stats.ppcc_plot/recipe-3429,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 3,v:-3 -1 0 2 5,v:
+stats.ppcc_plot/recipe-3431,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 3,v:0.1 0.3 0.5 1 2,v:
+stats.ppcc_plot/recipe-3433,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 4,v:1 2 3 5 9,v:
+stats.ppcc_plot/recipe-3435,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 4,v:-3 -1 0 2 5,v:
+stats.ppcc_plot/recipe-3437,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 8 5 4,v:0.1 0.3 0.5 1 2,v:

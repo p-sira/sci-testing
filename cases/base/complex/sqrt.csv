@@ -1,0 +1,9 @@
+id,group,x,y
+complex.sqrt/008,small,s:0.0,s:0.0
+complex.sqrt/009,small,s:0.1,s:0.2
+complex.sqrt/010,small,s:-0.1,s:0.5
+complex.sqrt/011,ordinary,s:1.0,s:2.0
+complex.sqrt/012,ordinary,s:-3.0,s:4.0
+complex.sqrt/013,ordinary,s:10.0,s:-2.0
+complex.sqrt/014,near branch cut,s:-2.0,s:1e-12
+complex.sqrt/015,near branch cut,s:-2.0,s:-1e-12

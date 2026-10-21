@@ -1,0 +1,4 @@
+id,group,d,g,p,x,y
+stats.circvar/recipe-0428,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586,v:0 0,v:
+stats.circvar/recipe-0432,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586,v:0.1 0.2 0.4,v:
+stats.circvar/recipe-0436,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586,v:0 1 3 5,v:

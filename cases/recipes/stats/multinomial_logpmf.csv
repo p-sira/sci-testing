@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.multinomial_logpmf/recipe-2135,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2,v:0.5 0.5
+stats.multinomial_logpmf/recipe-2137,reference recipe; binary64 SciPy reference,t:,v:,v:,v:2 3 5,v:0.2 0.3 0.5
+stats.multinomial_logpmf/recipe-2139,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0 0,v:0.5 0.5
+stats.multinomial_logpmf/recipe-2141,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0 3,v:0 1
+stats.multinomial_logpmf/recipe-2742,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1000 2000,v:0.3 0.7
+stats.multinomial_logpmf/recipe-2744,reference recipe; binary64 SciPy reference,t:,v:,v:,v:500000 500000,v:0.5 0.5

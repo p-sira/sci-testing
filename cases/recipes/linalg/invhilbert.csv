@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.invhilbert/recipe-0013,reference recipe; binary64 SciPy reference,"j:[""0"",""invhilbert"",""0"","""","""","""",""""]","j:{""api"":""invhilbert"",""args"":[0]}",t:linalg,t:linalg
+linalg.invhilbert/recipe-0014,reference recipe; binary64 SciPy reference,"j:[""0"",""invhilbert"",""1"","""","""","""",""""]","j:{""api"":""invhilbert"",""args"":[1]}",t:linalg,t:linalg
+linalg.invhilbert/recipe-0015,reference recipe; binary64 SciPy reference,"j:[""0"",""invhilbert"",""5"","""","""","""",""""]","j:{""api"":""invhilbert"",""args"":[5]}",t:linalg,t:linalg
+linalg.invhilbert/recipe-0016,reference recipe; binary64 SciPy reference,"j:[""0"",""invhilbert"",""10"","""","""","""",""""]","j:{""api"":""invhilbert"",""args"":[10]}",t:linalg,t:linalg

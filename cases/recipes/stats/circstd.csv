@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.circstd/recipe-0429,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586 0,v:0 0,v:
+stats.circstd/recipe-0430,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586 1,v:0 0,v:
+stats.circstd/recipe-0433,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586 0,v:0.1 0.2 0.4,v:
+stats.circstd/recipe-0434,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586 1,v:0.1 0.2 0.4,v:
+stats.circstd/recipe-0437,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586 0,v:0 1 3 5,v:
+stats.circstd/recipe-0438,reference recipe; binary64 SciPy reference,t:,v:,v:0 6.283185307179586 1,v:0 1 3 5,v:

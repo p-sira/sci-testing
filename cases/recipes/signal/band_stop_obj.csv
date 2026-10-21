@@ -1,0 +1,9 @@
+id,group,arguments
+signal.band_stop_obj/recipe-1053,reference recipe; binary64 SciPy reference,"j:[1,0,[0.8,4],[2,3],1,40,""butter""]"
+signal.band_stop_obj/recipe-1054,reference recipe; binary64 SciPy reference,"j:[4.5,1,[0.8,4],[2,3],1,40,""butter""]"
+signal.band_stop_obj/recipe-1055,reference recipe; binary64 SciPy reference,"j:[1,0,[0.8,4],[2,3],1,40,""cheby1""]"
+signal.band_stop_obj/recipe-1056,reference recipe; binary64 SciPy reference,"j:[4.5,1,[0.8,4],[2,3],1,40,""cheby1""]"
+signal.band_stop_obj/recipe-1057,reference recipe; binary64 SciPy reference,"j:[1,0,[0.8,4],[2,3],1,40,""cheby2""]"
+signal.band_stop_obj/recipe-1058,reference recipe; binary64 SciPy reference,"j:[4.5,1,[0.8,4],[2,3],1,40,""cheby2""]"
+signal.band_stop_obj/recipe-1059,reference recipe; binary64 SciPy reference,"j:[1,0,[0.8,4],[2,3],1,40,""ellip""]"
+signal.band_stop_obj/recipe-1060,reference recipe; binary64 SciPy reference,"j:[4.5,1,[0.8,4],[2,3],1,40,""ellip""]"

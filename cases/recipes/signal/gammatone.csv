@@ -1,0 +1,9 @@
+id,group,arguments
+signal.gammatone/recipe-1069,reference recipe; binary64 SciPy reference,v:440 True 1 16 16000
+signal.gammatone/recipe-1070,reference recipe; binary64 SciPy reference,v:440 True 4 16 16000
+signal.gammatone/recipe-1071,reference recipe; binary64 SciPy reference,v:440 True 8 16 16000
+signal.gammatone/recipe-1072,reference recipe; binary64 SciPy reference,v:440 False 4 0 16000
+signal.gammatone/recipe-1073,reference recipe; binary64 SciPy reference,v:100 True 1 16 1000
+signal.gammatone/recipe-1074,reference recipe; binary64 SciPy reference,v:100 True 4 16 1000
+signal.gammatone/recipe-1075,reference recipe; binary64 SciPy reference,v:100 True 8 16 1000
+signal.gammatone/recipe-1076,reference recipe; binary64 SciPy reference,v:100 False 4 0 1000

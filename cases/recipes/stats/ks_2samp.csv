@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.ks_2samp/recipe-2236,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3,v:2 3 4
+stats.ks_2samp/recipe-2238,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3,v:2 3 4
+stats.ks_2samp/recipe-2240,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3,v:2 3 4
+stats.ks_2samp/recipe-2242,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 0 1 2,v:0 1 1 3
+stats.ks_2samp/recipe-2244,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 0 1 2,v:0 1 1 3
+stats.ks_2samp/recipe-2246,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 0 1 2,v:0 1 1 3
+stats.ks_2samp/recipe-2248,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:1 2
+stats.ks_2samp/recipe-2250,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:1 2
+stats.ks_2samp/recipe-2252,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2,v:1 2
+stats.ks_2samp/recipe-2254,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1,v:2 2
+stats.ks_2samp/recipe-2256,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1,v:2 2
+stats.ks_2samp/recipe-2258,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1,v:2 2

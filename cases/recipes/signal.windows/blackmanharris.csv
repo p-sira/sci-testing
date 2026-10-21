@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.blackmanharris/recipe-0088,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.blackmanharris/recipe-0089,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.blackmanharris/recipe-0090,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.blackmanharris/recipe-0091,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.blackmanharris/recipe-0092,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.blackmanharris/recipe-0093,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.blackmanharris/recipe-0094,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.blackmanharris/recipe-0095,reference recipe; binary64 SciPy reference,v:6 False

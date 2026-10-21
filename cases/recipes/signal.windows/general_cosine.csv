@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.general_cosine/recipe-0112,reference recipe; binary64 SciPy reference,"j:[0,[0.4,0.5,0.1],true]"
+signal.windows.general_cosine/recipe-0113,reference recipe; binary64 SciPy reference,"j:[0,[0.4,0.5,0.1],false]"
+signal.windows.general_cosine/recipe-0114,reference recipe; binary64 SciPy reference,"j:[1,[0.4,0.5,0.1],true]"
+signal.windows.general_cosine/recipe-0115,reference recipe; binary64 SciPy reference,"j:[1,[0.4,0.5,0.1],false]"
+signal.windows.general_cosine/recipe-0116,reference recipe; binary64 SciPy reference,"j:[5,[0.4,0.5,0.1],true]"
+signal.windows.general_cosine/recipe-0117,reference recipe; binary64 SciPy reference,"j:[5,[0.4,0.5,0.1],false]"
+signal.windows.general_cosine/recipe-0118,reference recipe; binary64 SciPy reference,"j:[6,[0.4,0.5,0.1],true]"
+signal.windows.general_cosine/recipe-0119,reference recipe; binary64 SciPy reference,"j:[6,[0.4,0.5,0.1],false]"

@@ -1,0 +1,7 @@
+id,group,d,dispatch_api,g,p,x,y
+stats.contingency.association/recipe-0665,reference recipe; binary64 SciPy reference,t:,t:association,v:,v:2 2 0 0,v:6 2 1 4,v:
+stats.contingency.association/recipe-0666,reference recipe; binary64 SciPy reference,t:,t:association,v:,v:2 2 1 0,v:6 2 1 4,v:
+stats.contingency.association/recipe-0667,reference recipe; binary64 SciPy reference,t:,t:association,v:,v:2 2 2 0,v:6 2 1 4,v:
+stats.contingency.association/recipe-0672,reference recipe; binary64 SciPy reference,t:,t:association,v:,v:2 3 0 0,v:10 10 20 20 20 20,v:
+stats.contingency.association/recipe-0673,reference recipe; binary64 SciPy reference,t:,t:association,v:,v:2 3 1 0,v:10 10 20 20 20 20,v:
+stats.contingency.association/recipe-0674,reference recipe; binary64 SciPy reference,t:,t:association,v:,v:2 3 2 0,v:10 10 20 20 20 20,v:

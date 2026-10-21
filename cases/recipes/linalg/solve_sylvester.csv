@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.solve_sylvester/recipe-0265,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_sylvester"",""2.0"",""3.0"",""10.0"","""",""""]","j:{""api"":""solve_sylvester"",""args"":[[[2.0]],[[3.0]],[[10.0]]]}",t:linalg,t:linalg
+linalg.solve_sylvester/recipe-0266,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_sylvester"",""2.0;1.0:0.0;3.0"",""-1.0;2.0:0.0;4.0"",""1.0;2.0:3.0;4.0"","""",""""]","j:{""api"":""solve_sylvester"",""args"":[[[2.0,1.0],[0.0,3.0]],[[-1.0,2.0],[0.0,4.0]],[[1.0,2.0],[3.0,4.0]]]}",t:linalg,t:linalg
+linalg.solve_sylvester/recipe-0267,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_sylvester"",""2.0"",""1.0;2.0:0.0;3.0"",""4.0;5.0"","""",""""]","j:{""api"":""solve_sylvester"",""args"":[[[2.0]],[[1.0,2.0],[0.0,3.0]],[[4.0,5.0]]]}",t:linalg,t:linalg

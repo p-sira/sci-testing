@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.taylor/recipe-0176,reference recipe; binary64 SciPy reference,v:0 4 40.0 True True
+signal.windows.taylor/recipe-0177,reference recipe; binary64 SciPy reference,v:0 4 40.0 True False
+signal.windows.taylor/recipe-0178,reference recipe; binary64 SciPy reference,v:1 4 40.0 True True
+signal.windows.taylor/recipe-0179,reference recipe; binary64 SciPy reference,v:1 4 40.0 True False
+signal.windows.taylor/recipe-0180,reference recipe; binary64 SciPy reference,v:5 4 40.0 True True
+signal.windows.taylor/recipe-0181,reference recipe; binary64 SciPy reference,v:5 4 40.0 True False
+signal.windows.taylor/recipe-0182,reference recipe; binary64 SciPy reference,v:6 4 40.0 True True
+signal.windows.taylor/recipe-0183,reference recipe; binary64 SciPy reference,v:6 4 40.0 True False

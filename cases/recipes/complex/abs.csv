@@ -1,0 +1,8 @@
+id,group,p0
+complex.abs/recipe-0000,reference recipe; binary64 reference,v:0.5 0.25
+complex.abs/recipe-0001,reference recipe; binary64 reference,v:-1.25 0.75
+complex.abs/recipe-0002,reference recipe; binary64 reference,v:-0.5 -0.25
+complex.abs/recipe-0003,reference recipe; binary64 reference,v:2.0 -0.75
+complex.abs/recipe-0004,reference recipe; binary64 reference,v:0.0 0.0
+complex.abs/recipe-0005,reference recipe; binary64 reference,v:0.0 -0.0
+complex.abs/recipe-0007,reference recipe; binary64 reference,v:5e-324 5e-324

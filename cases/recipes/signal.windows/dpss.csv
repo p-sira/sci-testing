@@ -1,0 +1,7 @@
+id,group,arguments
+signal.windows.dpss/recipe-0188,reference recipe; binary64 SciPy reference,v:5 1.5 3 True
+signal.windows.dpss/recipe-0189,reference recipe; binary64 SciPy reference,v:5 1.5 3 False
+signal.windows.dpss/recipe-0190,reference recipe; binary64 SciPy reference,v:6 1.5 3 True
+signal.windows.dpss/recipe-0191,reference recipe; binary64 SciPy reference,v:6 1.5 3 False
+signal.windows.dpss/recipe-0192,reference recipe; binary64 SciPy reference,v:12 1.5 3 True
+signal.windows.dpss/recipe-0193,reference recipe; binary64 SciPy reference,v:12 1.5 3 False

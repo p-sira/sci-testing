@@ -1,0 +1,5 @@
+id,group,point,step
+differentiate.gradient/034,"quadratic, h = 1e-5",v:0.0 0.0,s:1e-05
+differentiate.gradient/035,"quadratic, h = 1e-5",v:0.1 0.2,s:1e-05
+differentiate.gradient/036,"quadratic, h = 1e-5",v:-1.2 1.0,s:1e-05
+differentiate.gradient/037,"quadratic, h = 1e-5",v:10.0 -3.0,s:1e-05

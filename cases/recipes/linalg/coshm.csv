@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.coshm/recipe-0305,reference recipe; binary64 SciPy reference,"j:[""0"",""coshm"",""0.0"","""","""","""",""""]","j:{""api"":""coshm"",""args"":[[[0.0]]]}",t:linalg,t:linalg
+linalg.coshm/recipe-0306,reference recipe; binary64 SciPy reference,"j:[""0"",""coshm"",""0.2;0.3:0.0;-0.4"","""","""","""",""""]","j:{""api"":""coshm"",""args"":[[[0.2,0.3],[0.0,-0.4]]]}",t:linalg,t:linalg
+linalg.coshm/recipe-0307,reference recipe; binary64 SciPy reference,"j:[""0"",""coshm"",""0.0;-1.0:1.0;0.0"","""","""","""",""""]","j:{""api"":""coshm"",""args"":[[[0.0,-1.0],[1.0,0.0]]]}",t:linalg,t:linalg
+linalg.coshm/recipe-0308,reference recipe; binary64 SciPy reference,"j:[""0"",""coshm"",""0.001;0.0:0.0;-0.001"","""","""","""",""""]","j:{""api"":""coshm"",""args"":[[[0.001,0.0],[0.0,-0.001]]]}",t:linalg,t:linalg

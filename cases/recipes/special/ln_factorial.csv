@@ -1,0 +1,8 @@
+id,group,p0
+special.ln_factorial/recipe-0000,reference recipe; binary64 reference,i:0
+special.ln_factorial/recipe-0001,reference recipe; binary64 reference,i:1
+special.ln_factorial/recipe-0002,reference recipe; binary64 reference,i:2
+special.ln_factorial/recipe-0003,reference recipe; binary64 reference,i:5
+special.ln_factorial/recipe-0004,reference recipe; binary64 reference,i:170
+special.ln_factorial/recipe-0005,reference recipe; binary64 reference,i:1000
+special.ln_factorial/recipe-0006,reference recipe; binary64 reference,i:1000000

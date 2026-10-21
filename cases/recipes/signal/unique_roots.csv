@@ -1,0 +1,10 @@
+id,group,arguments
+signal.unique_roots/recipe-1116,reference recipe; binary64 SciPy reference,"j:[[[1,0],[1.0001,0],[2,1],[2,1.0002]],0.06,""avg""]"
+signal.unique_roots/recipe-1117,reference recipe; binary64 SciPy reference,"j:[[[0,0],[1,0],[2,0]],0.06,""avg""]"
+signal.unique_roots/recipe-1118,reference recipe; binary64 SciPy reference,"j:[[[0,0],[0.05,0],[0.1,0]],0.06,""avg""]"
+signal.unique_roots/recipe-1119,reference recipe; binary64 SciPy reference,"j:[[[1,0],[1.0001,0],[2,1],[2,1.0002]],0.06,""min""]"
+signal.unique_roots/recipe-1120,reference recipe; binary64 SciPy reference,"j:[[[0,0],[1,0],[2,0]],0.06,""min""]"
+signal.unique_roots/recipe-1121,reference recipe; binary64 SciPy reference,"j:[[[0,0],[0.05,0],[0.1,0]],0.06,""min""]"
+signal.unique_roots/recipe-1122,reference recipe; binary64 SciPy reference,"j:[[[1,0],[1.0001,0],[2,1],[2,1.0002]],0.06,""max""]"
+signal.unique_roots/recipe-1123,reference recipe; binary64 SciPy reference,"j:[[[0,0],[1,0],[2,0]],0.06,""max""]"
+signal.unique_roots/recipe-1124,reference recipe; binary64 SciPy reference,"j:[[[0,0],[0.05,0],[0.1,0]],0.06,""max""]"

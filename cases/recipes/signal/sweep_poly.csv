@@ -1,0 +1,4 @@
+id,group,arguments
+signal.sweep_poly/recipe-0338,reference recipe; binary64 SciPy reference,"j:[-0.1,[1.0,-2.0,3.0],45.0]"
+signal.sweep_poly/recipe-0340,reference recipe; binary64 SciPy reference,"j:[0.0,[1.0,-2.0,3.0],45.0]"
+signal.sweep_poly/recipe-0342,reference recipe; binary64 SciPy reference,"j:[0.3,[1.0,-2.0,3.0],45.0]"

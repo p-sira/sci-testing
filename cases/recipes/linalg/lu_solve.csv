@@ -1,0 +1,7 @@
+id,group,fields,raw,suite,suite_name
+linalg.lu_solve/recipe-0088,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_solve"",""4.0"",""8.0"",""false"","""",""""]","j:{""api"":""lu_solve"",""args"":[[[4.0]],[8.0],false]}",t:linalg,t:linalg
+linalg.lu_solve/recipe-0089,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_solve"",""4.0"",""8.0"",""true"","""",""""]","j:{""api"":""lu_solve"",""args"":[[[4.0]],[8.0],true]}",t:linalg,t:linalg
+linalg.lu_solve/recipe-0095,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_solve"",""0.0;2.0;1.0:2.0;1.0;0.0:1.0;0.0;4.0"",""1.0;2.0;-3.0"",""false"","""",""""]","j:{""api"":""lu_solve"",""args"":[[[0.0,2.0,1.0],[2.0,1.0,0.0],[1.0,0.0,4.0]],[1.0,2.0,-3.0],false]}",t:linalg,t:linalg
+linalg.lu_solve/recipe-0096,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_solve"",""0.0;2.0;1.0:2.0;1.0;0.0:1.0;0.0;4.0"",""1.0;2.0;-3.0"",""true"","""",""""]","j:{""api"":""lu_solve"",""args"":[[[0.0,2.0,1.0],[2.0,1.0,0.0],[1.0,0.0,4.0]],[1.0,2.0,-3.0],true]}",t:linalg,t:linalg
+linalg.lu_solve/recipe-0102,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_solve"",""1.0;2.0:3.0;5.0"",""3.0;-2.0"",""false"","""",""""]","j:{""api"":""lu_solve"",""args"":[[[1.0,2.0],[3.0,5.0]],[3.0,-2.0],false]}",t:linalg,t:linalg
+linalg.lu_solve/recipe-0103,reference recipe; binary64 SciPy reference,"j:[""0"",""lu_solve"",""1.0;2.0:3.0;5.0"",""3.0;-2.0"",""true"","""",""""]","j:{""api"":""lu_solve"",""args"":[[[1.0,2.0],[3.0,5.0]],[3.0,-2.0],true]}",t:linalg,t:linalg

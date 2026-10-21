@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+cluster.hierarchy.is_isomorphic/recipe-0082,reference recipe; binary64 SciPy reference,"j:[""is_isomorphic_0"",""is_isomorphic"","""","""",""2"",""3"","""","""",""0;0;1"",""9;9;4"","""","""","""",""""]","j:{""api"":""is_isomorphic"",""a"":[0,0,1],""b"":[9,9,4],""id"":""is_isomorphic_0""}",t:cluster,t:cluster
+cluster.hierarchy.is_isomorphic/recipe-0083,reference recipe; binary64 SciPy reference,"j:[""is_isomorphic_1"",""is_isomorphic"","""","""",""2"",""3"","""","""",""0;0;1"",""9;4;4"","""","""","""",""""]","j:{""api"":""is_isomorphic"",""a"":[0,0,1],""b"":[9,4,4],""id"":""is_isomorphic_1""}",t:cluster,t:cluster
+cluster.hierarchy.is_isomorphic/recipe-0084,reference recipe; binary64 SciPy reference,"j:[""is_isomorphic_2"",""is_isomorphic"","""","""",""2"",""3"","""","""","""","""","""","""","""",""""]","j:{""api"":""is_isomorphic"",""a"":[],""b"":[],""id"":""is_isomorphic_2""}",t:cluster,t:cluster

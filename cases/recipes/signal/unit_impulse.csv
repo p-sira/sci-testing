@@ -1,0 +1,5 @@
+id,group,arguments
+signal.unit_impulse/recipe-0359,reference recipe; binary64 SciPy reference,v:1 0
+signal.unit_impulse/recipe-0360,reference recipe; binary64 SciPy reference,v:5 0
+signal.unit_impulse/recipe-0361,reference recipe; binary64 SciPy reference,v:5 2
+signal.unit_impulse/recipe-0362,reference recipe; binary64 SciPy reference,v:5 4

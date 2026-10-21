@@ -1,0 +1,31 @@
+id,group,d,g,p,x,y
+stats.brunnermunzel/recipe-2874,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 3 4,v:2 3 4 5
+stats.brunnermunzel/recipe-2876,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 3 4,v:2 3 4 5
+stats.brunnermunzel/recipe-2879,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 3 4,v:2 3 4 5
+stats.brunnermunzel/recipe-2881,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 3 4,v:2 3 4 5
+stats.brunnermunzel/recipe-2884,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 3 4,v:2 3 4 5
+stats.brunnermunzel/recipe-2886,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2 3 4,v:2 3 4 5
+stats.brunnermunzel/recipe-2904,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 1 2 4 4,v:1 2 3
+stats.brunnermunzel/recipe-2906,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 1 2 4 4,v:1 2 3
+stats.brunnermunzel/recipe-2909,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 1 2 4 4,v:1 2 3
+stats.brunnermunzel/recipe-2911,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 1 2 4 4,v:1 2 3
+stats.brunnermunzel/recipe-2914,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 1 2 4 4,v:1 2 3
+stats.brunnermunzel/recipe-2916,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 1 2 4 4,v:1 2 3
+stats.brunnermunzel/recipe-2934,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 1 1 1 1 1 1 1 1 2 4 1 1,v:3 3 4 3 1 2 3 1 1 5 4
+stats.brunnermunzel/recipe-2936,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 1 1 1 1 1 1 1 1 2 4 1 1,v:3 3 4 3 1 2 3 1 1 5 4
+stats.brunnermunzel/recipe-2939,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 1 1 1 1 1 1 1 1 2 4 1 1,v:3 3 4 3 1 2 3 1 1 5 4
+stats.brunnermunzel/recipe-2941,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 1 1 1 1 1 1 1 1 2 4 1 1,v:3 3 4 3 1 2 3 1 1 5 4
+stats.brunnermunzel/recipe-2944,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 1 1 1 1 1 1 1 1 2 4 1 1,v:3 3 4 3 1 2 3 1 1 5 4
+stats.brunnermunzel/recipe-2946,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2 1 1 1 1 1 1 1 1 2 4 1 1,v:3 3 4 3 1 2 3 1 1 5 4
+stats.brunnermunzel/recipe-2949,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:-1 0 1,v:-8 0 8
+stats.brunnermunzel/recipe-2951,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:-1 0 1,v:-8 0 8
+stats.brunnermunzel/recipe-2954,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:-1 0 1,v:-8 0 8
+stats.brunnermunzel/recipe-2956,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:-1 0 1,v:-8 0 8
+stats.brunnermunzel/recipe-2959,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:-1 0 1,v:-8 0 8
+stats.brunnermunzel/recipe-2961,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:-1 0 1,v:-8 0 8
+stats.brunnermunzel/recipe-2964,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:0 1 2,v:0 1 2
+stats.brunnermunzel/recipe-2966,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:0 1 2,v:0 1 2
+stats.brunnermunzel/recipe-2969,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:0 1 2,v:0 1 2
+stats.brunnermunzel/recipe-2971,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:0 1 2,v:0 1 2
+stats.brunnermunzel/recipe-2974,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:0 1 2,v:0 1 2
+stats.brunnermunzel/recipe-2976,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:0 1 2,v:0 1 2

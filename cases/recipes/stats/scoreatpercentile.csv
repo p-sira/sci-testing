@@ -1,0 +1,21 @@
+id,group,d,g,p,x,y
+stats.scoreatpercentile/recipe-0009,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 4 8 9,v:
+stats.scoreatpercentile/recipe-0011,reference recipe; binary64 SciPy reference,t:,v:,v:10.0,v:1 2 4 8 9,v:
+stats.scoreatpercentile/recipe-0013,reference recipe; binary64 SciPy reference,t:,v:,v:50.0,v:1 2 4 8 9,v:
+stats.scoreatpercentile/recipe-0015,reference recipe; binary64 SciPy reference,t:,v:,v:90.0,v:1 2 4 8 9,v:
+stats.scoreatpercentile/recipe-0017,reference recipe; binary64 SciPy reference,t:,v:,v:100,v:1 2 4 8 9,v:
+stats.scoreatpercentile/recipe-0087,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-3 0 2 6 12,v:
+stats.scoreatpercentile/recipe-0089,reference recipe; binary64 SciPy reference,t:,v:,v:10.0,v:-3 0 2 6 12,v:
+stats.scoreatpercentile/recipe-0091,reference recipe; binary64 SciPy reference,t:,v:,v:50.0,v:-3 0 2 6 12,v:
+stats.scoreatpercentile/recipe-0093,reference recipe; binary64 SciPy reference,t:,v:,v:90.0,v:-3 0 2 6 12,v:
+stats.scoreatpercentile/recipe-0095,reference recipe; binary64 SciPy reference,t:,v:,v:100,v:-3 0 2 6 12,v:
+stats.scoreatpercentile/recipe-0165,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:4 4 4 4,v:
+stats.scoreatpercentile/recipe-0167,reference recipe; binary64 SciPy reference,t:,v:,v:10.0,v:4 4 4 4,v:
+stats.scoreatpercentile/recipe-0169,reference recipe; binary64 SciPy reference,t:,v:,v:50.0,v:4 4 4 4,v:
+stats.scoreatpercentile/recipe-0171,reference recipe; binary64 SciPy reference,t:,v:,v:90.0,v:4 4 4 4,v:
+stats.scoreatpercentile/recipe-0173,reference recipe; binary64 SciPy reference,t:,v:,v:100,v:4 4 4 4,v:
+stats.scoreatpercentile/recipe-0243,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1,v:
+stats.scoreatpercentile/recipe-0245,reference recipe; binary64 SciPy reference,t:,v:,v:10.0,v:1,v:
+stats.scoreatpercentile/recipe-0247,reference recipe; binary64 SciPy reference,t:,v:,v:50.0,v:1,v:
+stats.scoreatpercentile/recipe-0249,reference recipe; binary64 SciPy reference,t:,v:,v:90.0,v:1,v:
+stats.scoreatpercentile/recipe-0251,reference recipe; binary64 SciPy reference,t:,v:,v:100,v:1,v:

@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.cholesky/recipe-0127,reference recipe; binary64 SciPy reference,"j:[""0"",""cholesky"",""4.0"",""true"","""","""",""""]","j:{""api"":""cholesky"",""args"":[[[4.0]],true]}",t:linalg,t:linalg
+linalg.cholesky/recipe-0130,reference recipe; binary64 SciPy reference,"j:[""0"",""cholesky"",""4.0"",""false"","""","""",""""]","j:{""api"":""cholesky"",""args"":[[[4.0]],false]}",t:linalg,t:linalg
+linalg.cholesky/recipe-0133,reference recipe; binary64 SciPy reference,"j:[""0"",""cholesky"",""4.0;1.0;0.0:1.0;3.0;1.0:0.0;1.0;2.0"",""true"","""","""",""""]","j:{""api"":""cholesky"",""args"":[[[4.0,1.0,0.0],[1.0,3.0,1.0],[0.0,1.0,2.0]],true]}",t:linalg,t:linalg
+linalg.cholesky/recipe-0136,reference recipe; binary64 SciPy reference,"j:[""0"",""cholesky"",""4.0;1.0;0.0:1.0;3.0;1.0:0.0;1.0;2.0"",""false"","""","""",""""]","j:{""api"":""cholesky"",""args"":[[[4.0,1.0,0.0],[1.0,3.0,1.0],[0.0,1.0,2.0]],false]}",t:linalg,t:linalg

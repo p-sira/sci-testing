@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.spearmanrho/recipe-3439,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:2 1
+stats.spearmanrho/recipe-3441,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:2 1
+stats.spearmanrho/recipe-3443,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2,v:2 1
+stats.spearmanrho/recipe-3453,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:4 3 2 1
+stats.spearmanrho/recipe-3455,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:4 3 2 1
+stats.spearmanrho/recipe-3457,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:4 3 2 1
+stats.spearmanrho/recipe-3467,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:12 2 1 12 2,v:1 4 7 1 0
+stats.spearmanrho/recipe-3469,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:12 2 1 12 2,v:1 4 7 1 0
+stats.spearmanrho/recipe-3471,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:12 2 1 12 2,v:1 4 7 1 0
+stats.spearmanrho/recipe-3481,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 0 1 1 2,v:1 3 2 2 4
+stats.spearmanrho/recipe-3483,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 0 1 1 2,v:1 3 2 2 4
+stats.spearmanrho/recipe-3485,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 0 1 1 2,v:1 3 2 2 4

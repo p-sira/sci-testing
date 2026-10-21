@@ -1,0 +1,4 @@
+id,group,d,g,p,x,y
+stats.bartlett/recipe-0576,reference recipe; binary64 SciPy reference,t:,m:1 2 4;2 3 7;5 6 8,v:,v:,v:
+stats.bartlett/recipe-0577,reference recipe; binary64 SciPy reference,t:,m:1 1 2 2;2 3 4;5 5 6,v:,v:,v:
+stats.bartlett/recipe-0578,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:,v:,v:

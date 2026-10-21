@@ -1,0 +1,21 @@
+id,group,d,g,p,x,y
+stats.lmoment/recipe-1877,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1878,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1880,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1881,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1883,reference recipe; binary64 SciPy reference,t:,v:,v:3 1,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1884,reference recipe; binary64 SciPy reference,t:,v:,v:3 0,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1886,reference recipe; binary64 SciPy reference,t:,v:,v:4 1,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1887,reference recipe; binary64 SciPy reference,t:,v:,v:4 0,v:-3 -1 0 2 4 10,v:
+stats.lmoment/recipe-1940,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1941,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1943,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1944,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1946,reference recipe; binary64 SciPy reference,t:,v:,v:3 1,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1947,reference recipe; binary64 SciPy reference,t:,v:,v:3 0,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1949,reference recipe; binary64 SciPy reference,t:,v:,v:4 1,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1950,reference recipe; binary64 SciPy reference,t:,v:,v:4 0,v:1 2 3 4 5 100,v:
+stats.lmoment/recipe-1960,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 1 1 1,v:
+stats.lmoment/recipe-1961,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 1 1 1,v:
+stats.lmoment/recipe-1964,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:0 0 0 0,v:
+stats.lmoment/recipe-1965,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:0 0 0 0,v:

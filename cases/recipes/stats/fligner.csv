@@ -1,0 +1,9 @@
+id,group,d,g,p,x,y
+stats.fligner/recipe-2992,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:0,v:,v:
+stats.fligner/recipe-2993,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:1,v:,v:
+stats.fligner/recipe-3000,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:0,v:,v:
+stats.fligner/recipe-3001,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:1,v:,v:
+stats.fligner/recipe-3008,reference recipe; binary64 SciPy reference,t:,m:2 2 2;1 2 4 8 16,v:0,v:,v:
+stats.fligner/recipe-3009,reference recipe; binary64 SciPy reference,t:,m:2 2 2;1 2 4 8 16,v:1,v:,v:
+stats.fligner/recipe-3014,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:0,v:,v:
+stats.fligner/recipe-3015,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:1,v:,v:

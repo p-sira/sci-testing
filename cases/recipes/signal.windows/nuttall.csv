@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.nuttall/recipe-0096,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.nuttall/recipe-0097,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.nuttall/recipe-0098,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.nuttall/recipe-0099,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.nuttall/recipe-0100,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.nuttall/recipe-0101,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.nuttall/recipe-0102,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.nuttall/recipe-0103,reference recipe; binary64 SciPy reference,v:6 False

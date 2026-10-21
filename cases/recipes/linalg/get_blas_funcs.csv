@@ -1,0 +1,6 @@
+id,group,fields,raw,suite,suite_name
+linalg.get_blas_funcs/recipe-0430,reference recipe; binary64 SciPy reference,"j:[""0"",""get_blas_funcs"",""dot"",""1.0;2.0"",""3.0;4.0"","""",""""]","j:{""api"":""get_blas_funcs"",""args"":[""dot"",[1.0,2.0],[3.0,4.0]]}",t:linalg,t:linalg
+linalg.get_blas_funcs/recipe-0431,reference recipe; binary64 SciPy reference,"j:[""0"",""get_blas_funcs"",""ddot"",""2.0;-1.0"",""4.0;2.0"","""",""""]","j:{""api"":""get_blas_funcs"",""args"":[""ddot"",[2.0,-1.0],[4.0,2.0]]}",t:linalg,t:linalg
+linalg.get_blas_funcs/recipe-0432,reference recipe; binary64 SciPy reference,"j:[""0"",""get_blas_funcs"",""nrm2"",""3.0;4.0"","""","""",""""]","j:{""api"":""get_blas_funcs"",""args"":[""nrm2"",[3.0,4.0]]}",t:linalg,t:linalg
+linalg.get_blas_funcs/recipe-0433,reference recipe; binary64 SciPy reference,"j:[""0"",""get_blas_funcs"",""gemv"",""2.0;1.0:0.0;3.0"",""1.0;2.0"","""",""""]","j:{""api"":""get_blas_funcs"",""args"":[""gemv"",[[2.0,1.0],[0.0,3.0]],[1.0,2.0]]}",t:linalg,t:linalg
+linalg.get_blas_funcs/recipe-0434,reference recipe; binary64 SciPy reference,"j:[""0"",""get_blas_funcs"",""gemm"",""2.0;1.0:0.0;3.0"",""0.0;-1.0:1.0;0.0"","""",""""]","j:{""api"":""get_blas_funcs"",""args"":[""gemm"",[[2.0,1.0],[0.0,3.0]],[[0.0,-1.0],[1.0,0.0]]]}",t:linalg,t:linalg

@@ -1,0 +1,6 @@
+id,group,p0
+special.digamma/recipe-0000,reference recipe; binary64 reference,s:2.5
+special.digamma/recipe-0001,reference recipe; binary64 reference,s:-2.3
+special.digamma/recipe-0002,reference recipe; binary64 reference,s:-0.5
+special.digamma/recipe-0003,reference recipe; binary64 reference,s:1e-08
+special.digamma/recipe-0004,reference recipe; binary64 reference,s:50.0

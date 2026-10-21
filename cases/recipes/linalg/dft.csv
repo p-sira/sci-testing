@@ -1,0 +1,10 @@
+id,group,fields,raw,suite,suite_name
+linalg.dft/recipe-0071,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""1"",""none"","""","""",""""]","j:{""api"":""dft"",""args"":[1,""none""]}",t:linalg,t:linalg
+linalg.dft/recipe-0072,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""1"",""sqrtn"","""","""",""""]","j:{""api"":""dft"",""args"":[1,""sqrtn""]}",t:linalg,t:linalg
+linalg.dft/recipe-0073,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""1"",""n"","""","""",""""]","j:{""api"":""dft"",""args"":[1,""n""]}",t:linalg,t:linalg
+linalg.dft/recipe-0074,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""3"",""none"","""","""",""""]","j:{""api"":""dft"",""args"":[3,""none""]}",t:linalg,t:linalg
+linalg.dft/recipe-0075,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""3"",""sqrtn"","""","""",""""]","j:{""api"":""dft"",""args"":[3,""sqrtn""]}",t:linalg,t:linalg
+linalg.dft/recipe-0076,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""3"",""n"","""","""",""""]","j:{""api"":""dft"",""args"":[3,""n""]}",t:linalg,t:linalg
+linalg.dft/recipe-0077,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""8"",""none"","""","""",""""]","j:{""api"":""dft"",""args"":[8,""none""]}",t:linalg,t:linalg
+linalg.dft/recipe-0078,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""8"",""sqrtn"","""","""",""""]","j:{""api"":""dft"",""args"":[8,""sqrtn""]}",t:linalg,t:linalg
+linalg.dft/recipe-0079,reference recipe; binary64 SciPy reference,"j:[""0"",""dft"",""8"",""n"","""","""",""""]","j:{""api"":""dft"",""args"":[8,""n""]}",t:linalg,t:linalg

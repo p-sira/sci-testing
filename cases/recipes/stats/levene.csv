@@ -1,0 +1,3 @@
+id,group,d,g,p,x,y
+stats.levene/recipe-0582,reference recipe; binary64 SciPy reference,t:,m:1 2 3 6;2 3 4 9;4 5 7 8,v:0,v:,v:
+stats.levene/recipe-0583,reference recipe; binary64 SciPy reference,t:,m:1 2 3 6;2 3 4 9;4 5 7 8,v:1,v:,v:

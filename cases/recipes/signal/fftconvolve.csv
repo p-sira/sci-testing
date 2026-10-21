@@ -1,0 +1,13 @@
+id,group,arguments
+signal.fftconvolve/recipe-0215,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0,3.0],[0.5,1.0],""full""]"
+signal.fftconvolve/recipe-0219,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0,3.0],[0.5,1.0],""same""]"
+signal.fftconvolve/recipe-0223,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0,3.0],[0.5,1.0],""valid""]"
+signal.fftconvolve/recipe-0227,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0],[0.5,1.0,1.5],""full""]"
+signal.fftconvolve/recipe-0231,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0],[0.5,1.0,1.5],""same""]"
+signal.fftconvolve/recipe-0235,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0],[0.5,1.0,1.5],""valid""]"
+signal.fftconvolve/recipe-0239,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0,3.0,-4.0],[0.5,1.0],""full""]"
+signal.fftconvolve/recipe-0243,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0,3.0,-4.0],[0.5,1.0],""same""]"
+signal.fftconvolve/recipe-0247,reference recipe; binary64 SciPy reference,"j:[[1.0,-2.0,3.0,-4.0],[0.5,1.0],""valid""]"
+signal.fftconvolve/recipe-0251,reference recipe; binary64 SciPy reference,"j:[[1.0],[0.5],""full""]"
+signal.fftconvolve/recipe-0255,reference recipe; binary64 SciPy reference,"j:[[1.0],[0.5],""same""]"
+signal.fftconvolve/recipe-0259,reference recipe; binary64 SciPy reference,"j:[[1.0],[0.5],""valid""]"

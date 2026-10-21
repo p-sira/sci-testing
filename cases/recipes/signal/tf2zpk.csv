@@ -1,0 +1,4 @@
+id,group,arguments
+signal.tf2zpk/recipe-0740,reference recipe; binary64 SciPy reference,m:1.0;1.0 1.0
+signal.tf2zpk/recipe-0746,reference recipe; binary64 SciPy reference,m:1.0 0.0 0.0;1.0 2.0 2.0 1.0
+signal.tf2zpk/recipe-0752,reference recipe; binary64 SciPy reference,m:0.0 2.0 1.0;0.0 2.0 4.0 3.0

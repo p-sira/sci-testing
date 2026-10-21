@@ -1,0 +1,3 @@
+id,group,arguments
+signal.zpk2ss/recipe-1083,reference recipe; binary64 SciPy reference,"j:[[[],[[-1,0],[-2,0]],2]]"
+signal.zpk2ss/recipe-1084,reference recipe; binary64 SciPy reference,"j:[[[[0,0]],[[-1,0]],1]]"

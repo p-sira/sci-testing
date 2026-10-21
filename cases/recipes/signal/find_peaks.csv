@@ -1,0 +1,5 @@
+id,group,arguments
+signal.find_peaks/recipe-0629,reference recipe; binary64 SciPy reference,m:
+signal.find_peaks/recipe-0642,reference recipe; binary64 SciPy reference,m:1.0
+signal.find_peaks/recipe-0655,reference recipe; binary64 SciPy reference,m:1.0 2.0 2.0 1.0 3.0 1.0 2.0 1.0
+signal.find_peaks/recipe-0668,reference recipe; binary64 SciPy reference,m:0.0 2.0 0.0 1.0 0.0 3.0 0.0

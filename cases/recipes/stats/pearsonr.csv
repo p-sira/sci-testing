@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.pearsonr/recipe-0439,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:2 1 5 6
+stats.pearsonr/recipe-0447,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:2 1 5 6
+stats.pearsonr/recipe-0455,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:2 1 5 6
+stats.pearsonr/recipe-0466,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3 4,v:4 3 2 1
+stats.pearsonr/recipe-0474,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4,v:4 3 2 1
+stats.pearsonr/recipe-0482,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4,v:4 3 2 1
+stats.pearsonr/recipe-0493,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1 2 3,v:2 3 5 5
+stats.pearsonr/recipe-0501,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1 2 3,v:2 3 5 5
+stats.pearsonr/recipe-0509,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1 2 3,v:2 3 5 5
+stats.pearsonr/recipe-0520,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2,v:4 6
+stats.pearsonr/recipe-0528,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2,v:4 6
+stats.pearsonr/recipe-0536,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2,v:4 6

@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+sparse.linalg.eigsh/recipe-sparse_parity-0087,reference recipe; binary64 SciPy reference,"j:[""eigsh_0"",""eigsh"",""3"",""3"",""0.0;0.0;2.0:0.0;1.0;1.0:1.0;0.0;1.0:1.0;1.0;3.0:1.0;2.0;1.0:2.0;1.0;1.0:2.0;2.0;4.0"",""1"",""1.0;2.0;-1.0"",""0""]","j:{""id"":""eigsh_0"",""api"":""eigsh"",""a"":[[2.0,1.0,0.0],[1.0,3.0,1.0],[0.0,1.0,4.0]],""p"":[1],""x"":[1.0,2.0,-1.0]}",t:sparse_parity,t:sparse_parity
+sparse.linalg.eigsh/recipe-sparse_parity-0088,reference recipe; binary64 SciPy reference,"j:[""eigsh_1"",""eigsh"",""2"",""2"",""0.0;0.0;1.0:1.0;1.0;3.0"",""1"",""2.0;-1.0"",""0""]","j:{""id"":""eigsh_1"",""api"":""eigsh"",""a"":[[1.0,0.0],[0.0,3.0]],""p"":[1],""x"":[2.0,-1.0]}",t:sparse_parity,t:sparse_parity

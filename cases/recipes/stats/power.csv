@@ -1,0 +1,21 @@
+id,group,d,g,p,x,y
+stats.power/recipe-4114,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0 0,v:,v:
+stats.power/recipe-4115,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0 1,v:,v:
+stats.power/recipe-4116,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0.01 0,v:,v:
+stats.power/recipe-4117,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0.01 1,v:,v:
+stats.power/recipe-4118,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0.05 0,v:,v:
+stats.power/recipe-4119,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0.05 1,v:,v:
+stats.power/recipe-4120,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0.5 0,v:,v:
+stats.power/recipe-4121,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:0.5 1,v:,v:
+stats.power/recipe-4122,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:1 0,v:,v:
+stats.power/recipe-4123,reference recipe; binary64 SciPy reference,t:,m:-1 0 1;1 2 3;3 4 5,v:1 1,v:,v:
+stats.power/recipe-4124,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0 0,v:,v:
+stats.power/recipe-4125,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0 1,v:,v:
+stats.power/recipe-4126,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0.01 0,v:,v:
+stats.power/recipe-4127,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0.01 1,v:,v:
+stats.power/recipe-4128,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0.05 0,v:,v:
+stats.power/recipe-4129,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0.05 1,v:,v:
+stats.power/recipe-4130,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0.5 0,v:,v:
+stats.power/recipe-4131,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:0.5 1,v:,v:
+stats.power/recipe-4132,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:1 0,v:,v:
+stats.power/recipe-4133,reference recipe; binary64 SciPy reference,t:,m:-0.5 0.5;0 1;2 3;4 5,v:1 1,v:,v:

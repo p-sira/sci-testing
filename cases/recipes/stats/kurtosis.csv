@@ -1,0 +1,11 @@
+id,group,d,g,p,x,y
+stats.kurtosis/recipe-0007,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 4 8 9,v:
+stats.kurtosis/recipe-0045,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 4 8 9,v:
+stats.kurtosis/recipe-0046,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 4 8 9,v:
+stats.kurtosis/recipe-0048,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 4 8 9,v:
+stats.kurtosis/recipe-0049,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 4 8 9,v:
+stats.kurtosis/recipe-0085,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:-3 0 2 6 12,v:
+stats.kurtosis/recipe-0123,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:-3 0 2 6 12,v:
+stats.kurtosis/recipe-0124,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:-3 0 2 6 12,v:
+stats.kurtosis/recipe-0126,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:-3 0 2 6 12,v:
+stats.kurtosis/recipe-0127,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:-3 0 2 6 12,v:

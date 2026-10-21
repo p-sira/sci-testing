@@ -1,0 +1,13 @@
+id,group,arguments
+signal.savgol_filter/recipe-0462,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,1,0,0.5]"
+signal.savgol_filter/recipe-0464,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,1,1,0.5]"
+signal.savgol_filter/recipe-0466,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,1,2,0.5]"
+signal.savgol_filter/recipe-0468,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,1,2,0.5]"
+signal.savgol_filter/recipe-0470,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],5,2,0,0.5]"
+signal.savgol_filter/recipe-0472,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],5,2,1,0.5]"
+signal.savgol_filter/recipe-0474,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],5,2,2,0.5]"
+signal.savgol_filter/recipe-0476,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],5,2,3,0.5]"
+signal.savgol_filter/recipe-0482,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],7,3,0,0.5]"
+signal.savgol_filter/recipe-0484,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],7,3,1,0.5]"
+signal.savgol_filter/recipe-0486,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],7,3,2,0.5]"
+signal.savgol_filter/recipe-0488,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],7,3,4,0.5]"

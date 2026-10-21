@@ -1,0 +1,380 @@
+id,group,d,g,p,x,y
+stats.cdf/recipe-0687,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,"j:[""-inf""]",v:
+stats.cdf/recipe-0691,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:-3,v:
+stats.cdf/recipe-0695,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:-1,v:
+stats.cdf/recipe-0699,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:0,v:
+stats.cdf/recipe-0703,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:0.5,v:
+stats.cdf/recipe-0707,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:1,v:
+stats.cdf/recipe-0711,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:2,v:
+stats.cdf/recipe-0715,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:4,v:
+stats.cdf/recipe-0719,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,v:10,v:
+stats.cdf/recipe-0723,reference recipe; binary64 SciPy reference,t:Normal,v:,v:1.5 2.25,"j:[""inf""]",v:
+stats.cdf/recipe-0735,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,"j:[""-inf""]",v:
+stats.cdf/recipe-0739,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:-3,v:
+stats.cdf/recipe-0743,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:-1,v:
+stats.cdf/recipe-0747,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:0,v:
+stats.cdf/recipe-0751,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:0.5,v:
+stats.cdf/recipe-0755,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:1,v:
+stats.cdf/recipe-0759,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:2,v:
+stats.cdf/recipe-0763,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:4,v:
+stats.cdf/recipe-0767,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,v:10,v:
+stats.cdf/recipe-0771,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2.5 3.5,"j:[""inf""]",v:
+stats.cdf/recipe-0783,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,"j:[""-inf""]",v:
+stats.cdf/recipe-0787,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:-3,v:
+stats.cdf/recipe-0791,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:-1,v:
+stats.cdf/recipe-0795,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:0,v:
+stats.cdf/recipe-0799,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:0.5,v:
+stats.cdf/recipe-0803,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:1,v:
+stats.cdf/recipe-0807,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:2,v:
+stats.cdf/recipe-0811,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:4,v:
+stats.cdf/recipe-0815,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,v:10,v:
+stats.cdf/recipe-0819,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:2.5 1.5,"j:[""inf""]",v:
+stats.cdf/recipe-0831,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,"j:[""-inf""]",v:
+stats.cdf/recipe-0835,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:-3,v:
+stats.cdf/recipe-0839,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:-1,v:
+stats.cdf/recipe-0843,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:0,v:
+stats.cdf/recipe-0847,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:0.5,v:
+stats.cdf/recipe-0851,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:1,v:
+stats.cdf/recipe-0855,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:2,v:
+stats.cdf/recipe-0859,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:4,v:
+stats.cdf/recipe-0863,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,v:10,v:
+stats.cdf/recipe-0867,reference recipe; binary64 SciPy reference,t:ChiSquared,v:,v:3.5,"j:[""inf""]",v:
+stats.cdf/recipe-0879,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,"j:[""-inf""]",v:
+stats.cdf/recipe-0883,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:-3,v:
+stats.cdf/recipe-0887,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:-1,v:
+stats.cdf/recipe-0891,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:0,v:
+stats.cdf/recipe-0895,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:0.5,v:
+stats.cdf/recipe-0899,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:1,v:
+stats.cdf/recipe-0903,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:2,v:
+stats.cdf/recipe-0907,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:4,v:
+stats.cdf/recipe-0911,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,v:10,v:
+stats.cdf/recipe-0915,reference recipe; binary64 SciPy reference,t:Chi,v:,v:3,"j:[""inf""]",v:
+stats.cdf/recipe-0927,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,"j:[""-inf""]",v:
+stats.cdf/recipe-0931,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:-3,v:
+stats.cdf/recipe-0935,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:-1,v:
+stats.cdf/recipe-0939,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:0,v:
+stats.cdf/recipe-0943,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:0.5,v:
+stats.cdf/recipe-0947,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:1,v:
+stats.cdf/recipe-0951,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:2,v:
+stats.cdf/recipe-0955,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:4,v:
+stats.cdf/recipe-0959,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,v:10,v:
+stats.cdf/recipe-0963,reference recipe; binary64 SciPy reference,t:StudentT,v:,v:4.5,"j:[""inf""]",v:
+stats.cdf/recipe-0975,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,"j:[""-inf""]",v:
+stats.cdf/recipe-0979,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:-3,v:
+stats.cdf/recipe-0983,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:-1,v:
+stats.cdf/recipe-0987,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:0,v:
+stats.cdf/recipe-0991,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:0.5,v:
+stats.cdf/recipe-0995,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:1,v:
+stats.cdf/recipe-0999,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:2,v:
+stats.cdf/recipe-1003,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:4,v:
+stats.cdf/recipe-1007,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,v:10,v:
+stats.cdf/recipe-1011,reference recipe; binary64 SciPy reference,t:F,v:,v:3 7,"j:[""inf""]",v:
+stats.cdf/recipe-1023,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,"j:[""-inf""]",v:
+stats.cdf/recipe-1027,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:-3,v:
+stats.cdf/recipe-1031,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:-1,v:
+stats.cdf/recipe-1035,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:0,v:
+stats.cdf/recipe-1039,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:0.5,v:
+stats.cdf/recipe-1043,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:1,v:
+stats.cdf/recipe-1047,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:2,v:
+stats.cdf/recipe-1051,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:4,v:
+stats.cdf/recipe-1055,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,v:10,v:
+stats.cdf/recipe-1059,reference recipe; binary64 SciPy reference,t:Exponential,v:,v:2,"j:[""inf""]",v:
+stats.cdf/recipe-1071,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,"j:[""-inf""]",v:
+stats.cdf/recipe-1075,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:-3,v:
+stats.cdf/recipe-1079,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:-1,v:
+stats.cdf/recipe-1083,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:0,v:
+stats.cdf/recipe-1087,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:0.5,v:
+stats.cdf/recipe-1091,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:1,v:
+stats.cdf/recipe-1095,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:2,v:
+stats.cdf/recipe-1099,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:4,v:
+stats.cdf/recipe-1103,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,v:10,v:
+stats.cdf/recipe-1107,reference recipe; binary64 SciPy reference,t:Cauchy,v:,v:1 2,"j:[""inf""]",v:
+stats.cdf/recipe-1119,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,"j:[""-inf""]",v:
+stats.cdf/recipe-1123,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:-3,v:
+stats.cdf/recipe-1127,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:-1,v:
+stats.cdf/recipe-1131,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:0,v:
+stats.cdf/recipe-1135,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:0.5,v:
+stats.cdf/recipe-1139,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:1,v:
+stats.cdf/recipe-1143,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:2,v:
+stats.cdf/recipe-1147,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:4,v:
+stats.cdf/recipe-1151,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,v:10,v:
+stats.cdf/recipe-1155,reference recipe; binary64 SciPy reference,t:Laplace,v:,v:1 2,"j:[""inf""]",v:
+stats.cdf/recipe-1167,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,"j:[""-inf""]",v:
+stats.cdf/recipe-1171,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:-3,v:
+stats.cdf/recipe-1175,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:-1,v:
+stats.cdf/recipe-1179,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:0,v:
+stats.cdf/recipe-1183,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:0.5,v:
+stats.cdf/recipe-1187,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:1,v:
+stats.cdf/recipe-1191,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:2,v:
+stats.cdf/recipe-1195,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:4,v:
+stats.cdf/recipe-1199,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,v:10,v:
+stats.cdf/recipe-1203,reference recipe; binary64 SciPy reference,t:LogNormal,v:,v:0.3 0.7,"j:[""inf""]",v:
+stats.cdf/recipe-1215,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,"j:[""-inf""]",v:
+stats.cdf/recipe-1219,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:-3,v:
+stats.cdf/recipe-1223,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:-1,v:
+stats.cdf/recipe-1227,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:0,v:
+stats.cdf/recipe-1231,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:0.5,v:
+stats.cdf/recipe-1235,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:1,v:
+stats.cdf/recipe-1239,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:2,v:
+stats.cdf/recipe-1243,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:4,v:
+stats.cdf/recipe-1247,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,v:10,v:
+stats.cdf/recipe-1251,reference recipe; binary64 SciPy reference,t:Uniform,v:,v:-2 3,"j:[""inf""]",v:
+stats.cdf/recipe-1263,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,"j:[""-inf""]",v:
+stats.cdf/recipe-1267,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:-3,v:
+stats.cdf/recipe-1271,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:-1,v:
+stats.cdf/recipe-1275,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:0,v:
+stats.cdf/recipe-1279,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:0.5,v:
+stats.cdf/recipe-1283,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:1,v:
+stats.cdf/recipe-1287,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:2,v:
+stats.cdf/recipe-1291,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:4,v:
+stats.cdf/recipe-1295,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,v:10,v:
+stats.cdf/recipe-1299,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1.5 2,"j:[""inf""]",v:
+stats.cdf/recipe-1311,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,"j:[""-inf""]",v:
+stats.cdf/recipe-1315,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:-3,v:
+stats.cdf/recipe-1319,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:-1,v:
+stats.cdf/recipe-1323,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:0,v:
+stats.cdf/recipe-1327,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:0.5,v:
+stats.cdf/recipe-1331,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:1,v:
+stats.cdf/recipe-1335,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:2,v:
+stats.cdf/recipe-1339,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:4,v:
+stats.cdf/recipe-1343,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,v:10,v:
+stats.cdf/recipe-1347,reference recipe; binary64 SciPy reference,t:Pareto,v:,v:1 3,"j:[""inf""]",v:
+stats.cdf/recipe-1359,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,"j:[""-inf""]",v:
+stats.cdf/recipe-1363,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:-3,v:
+stats.cdf/recipe-1367,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:-1,v:
+stats.cdf/recipe-1371,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:0,v:
+stats.cdf/recipe-1375,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:0.5,v:
+stats.cdf/recipe-1379,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:1,v:
+stats.cdf/recipe-1383,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:2,v:
+stats.cdf/recipe-1387,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:4,v:
+stats.cdf/recipe-1391,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,v:10,v:
+stats.cdf/recipe-1395,reference recipe; binary64 SciPy reference,t:InverseGamma,v:,v:3 2,"j:[""inf""]",v:
+stats.cdf/recipe-1407,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,"j:[""-inf""]",v:
+stats.cdf/recipe-1411,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:-3,v:
+stats.cdf/recipe-1415,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:-1,v:
+stats.cdf/recipe-1419,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:0,v:
+stats.cdf/recipe-1423,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:0.5,v:
+stats.cdf/recipe-1427,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:1,v:
+stats.cdf/recipe-1431,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:2,v:
+stats.cdf/recipe-1435,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:4,v:
+stats.cdf/recipe-1439,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,v:10,v:
+stats.cdf/recipe-1443,reference recipe; binary64 SciPy reference,t:Gumbel,v:,v:1 2,"j:[""inf""]",v:
+stats.cdf/recipe-1455,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,"j:[""-inf""]",v:
+stats.cdf/recipe-1459,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:-3,v:
+stats.cdf/recipe-1463,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:-1,v:
+stats.cdf/recipe-1467,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:0,v:
+stats.cdf/recipe-1471,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:0.5,v:
+stats.cdf/recipe-1475,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:1,v:
+stats.cdf/recipe-1479,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:2,v:
+stats.cdf/recipe-1483,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:4,v:
+stats.cdf/recipe-1487,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,v:10,v:
+stats.cdf/recipe-1491,reference recipe; binary64 SciPy reference,t:Triangular,v:,v:-2 3 1,"j:[""inf""]",v:
+stats.cdf/recipe-1503,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,"j:[""-inf""]",v:
+stats.cdf/recipe-1507,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:-3,v:
+stats.cdf/recipe-1511,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:-1,v:
+stats.cdf/recipe-1515,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:0,v:
+stats.cdf/recipe-1519,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:0.5,v:
+stats.cdf/recipe-1523,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:1,v:
+stats.cdf/recipe-1527,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:2,v:
+stats.cdf/recipe-1531,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:4,v:
+stats.cdf/recipe-1535,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,v:10,v:
+stats.cdf/recipe-1539,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0.3,"j:[""inf""]",v:
+stats.cdf/recipe-1551,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,"j:[""-inf""]",v:
+stats.cdf/recipe-1555,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:-3,v:
+stats.cdf/recipe-1559,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:-1,v:
+stats.cdf/recipe-1563,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:0,v:
+stats.cdf/recipe-1567,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:0.5,v:
+stats.cdf/recipe-1571,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:1,v:
+stats.cdf/recipe-1575,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:2,v:
+stats.cdf/recipe-1579,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:4,v:
+stats.cdf/recipe-1583,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,v:10,v:
+stats.cdf/recipe-1587,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0.3,"j:[""inf""]",v:
+stats.cdf/recipe-1599,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,"j:[""-inf""]",v:
+stats.cdf/recipe-1603,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:-3,v:
+stats.cdf/recipe-1607,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:-1,v:
+stats.cdf/recipe-1611,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:0,v:
+stats.cdf/recipe-1615,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:0.5,v:
+stats.cdf/recipe-1619,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:1,v:
+stats.cdf/recipe-1623,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:2,v:
+stats.cdf/recipe-1627,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:4,v:
+stats.cdf/recipe-1631,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,v:10,v:
+stats.cdf/recipe-1635,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:4,"j:[""inf""]",v:
+stats.cdf/recipe-1647,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,"j:[""-inf""]",v:
+stats.cdf/recipe-1651,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:-3,v:
+stats.cdf/recipe-1655,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:-1,v:
+stats.cdf/recipe-1659,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:0,v:
+stats.cdf/recipe-1663,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:0.5,v:
+stats.cdf/recipe-1667,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:1,v:
+stats.cdf/recipe-1671,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:2,v:
+stats.cdf/recipe-1675,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:4,v:
+stats.cdf/recipe-1679,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,v:10,v:
+stats.cdf/recipe-1683,reference recipe; binary64 SciPy reference,t:Poisson,v:,v:0,"j:[""inf""]",v:
+stats.cdf/recipe-1695,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,"j:[""-inf""]",v:
+stats.cdf/recipe-1699,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:-3,v:
+stats.cdf/recipe-1703,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:-1,v:
+stats.cdf/recipe-1707,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:0,v:
+stats.cdf/recipe-1711,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:0.5,v:
+stats.cdf/recipe-1715,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:1,v:
+stats.cdf/recipe-1719,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:2,v:
+stats.cdf/recipe-1723,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:4,v:
+stats.cdf/recipe-1727,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,v:10,v:
+stats.cdf/recipe-1731,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:0.3,"j:[""inf""]",v:
+stats.cdf/recipe-1743,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,"j:[""-inf""]",v:
+stats.cdf/recipe-1747,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:-3,v:
+stats.cdf/recipe-1751,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:-1,v:
+stats.cdf/recipe-1755,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:0,v:
+stats.cdf/recipe-1759,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:0.5,v:
+stats.cdf/recipe-1763,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:1,v:
+stats.cdf/recipe-1767,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:2,v:
+stats.cdf/recipe-1771,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:4,v:
+stats.cdf/recipe-1775,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,v:10,v:
+stats.cdf/recipe-1779,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3.5 0.4,"j:[""inf""]",v:
+stats.cdf/recipe-1791,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,"j:[""-inf""]",v:
+stats.cdf/recipe-1795,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:-3,v:
+stats.cdf/recipe-1799,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:-1,v:
+stats.cdf/recipe-1803,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:0,v:
+stats.cdf/recipe-1807,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:0.5,v:
+stats.cdf/recipe-1811,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:1,v:
+stats.cdf/recipe-1815,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:2,v:
+stats.cdf/recipe-1819,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:4,v:
+stats.cdf/recipe-1823,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,v:10,v:
+stats.cdf/recipe-1827,reference recipe; binary64 SciPy reference,t:Hypergeometric,v:,v:30 10 8,"j:[""inf""]",v:
+stats.cdf/recipe-2276,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,"j:[""-inf""]",v:
+stats.cdf/recipe-2277,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,v:-2,v:
+stats.cdf/recipe-2278,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,v:0,v:
+stats.cdf/recipe-2279,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,v:1,v:
+stats.cdf/recipe-2280,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,v:2,v:
+stats.cdf/recipe-2281,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,v:3,v:
+stats.cdf/recipe-2282,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,v:10,v:
+stats.cdf/recipe-2283,reference recipe; binary64 SciPy reference,t:Erlang,v:,v:3 2,"j:[""inf""]",v:
+stats.cdf/recipe-2313,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,"j:[""-inf""]",v:
+stats.cdf/recipe-2314,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,v:-2,v:
+stats.cdf/recipe-2315,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,v:0,v:
+stats.cdf/recipe-2316,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,v:1,v:
+stats.cdf/recipe-2317,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,v:2,v:
+stats.cdf/recipe-2318,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,v:3,v:
+stats.cdf/recipe-2319,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,v:10,v:
+stats.cdf/recipe-2320,reference recipe; binary64 SciPy reference,t:DiscreteUniform,v:,v:-2 3,"j:[""inf""]",v:
+stats.cdf/recipe-2350,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,"j:[""-inf""]",v:
+stats.cdf/recipe-2351,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,v:-2,v:
+stats.cdf/recipe-2352,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,v:0,v:
+stats.cdf/recipe-2353,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,v:1,v:
+stats.cdf/recipe-2354,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,v:2,v:
+stats.cdf/recipe-2355,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,v:3,v:
+stats.cdf/recipe-2356,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,v:10,v:
+stats.cdf/recipe-2357,reference recipe; binary64 SciPy reference,t:Beta,v:,v:1 3,"j:[""inf""]",v:
+stats.cdf/recipe-2387,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,"j:[""-inf""]",v:
+stats.cdf/recipe-2388,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,v:-2,v:
+stats.cdf/recipe-2389,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,v:0,v:
+stats.cdf/recipe-2390,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,v:1,v:
+stats.cdf/recipe-2391,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,v:2,v:
+stats.cdf/recipe-2392,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,v:3,v:
+stats.cdf/recipe-2393,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,v:10,v:
+stats.cdf/recipe-2394,reference recipe; binary64 SciPy reference,t:Beta,v:,v:2 1,"j:[""inf""]",v:
+stats.cdf/recipe-2424,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,"j:[""-inf""]",v:
+stats.cdf/recipe-2425,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,v:-2,v:
+stats.cdf/recipe-2426,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,v:0,v:
+stats.cdf/recipe-2427,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,v:1,v:
+stats.cdf/recipe-2428,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,v:2,v:
+stats.cdf/recipe-2429,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,v:3,v:
+stats.cdf/recipe-2430,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,v:10,v:
+stats.cdf/recipe-2431,reference recipe; binary64 SciPy reference,t:Beta,v:,v:0.5 0.5,"j:[""inf""]",v:
+stats.cdf/recipe-2461,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,"j:[""-inf""]",v:
+stats.cdf/recipe-2462,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,v:-2,v:
+stats.cdf/recipe-2463,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,v:0,v:
+stats.cdf/recipe-2464,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,v:1,v:
+stats.cdf/recipe-2465,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,v:2,v:
+stats.cdf/recipe-2466,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,v:3,v:
+stats.cdf/recipe-2467,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,v:10,v:
+stats.cdf/recipe-2468,reference recipe; binary64 SciPy reference,t:Gamma,v:,v:1 2,"j:[""inf""]",v:
+stats.cdf/recipe-2498,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,"j:[""-inf""]",v:
+stats.cdf/recipe-2499,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,v:-2,v:
+stats.cdf/recipe-2500,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,v:0,v:
+stats.cdf/recipe-2501,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,v:1,v:
+stats.cdf/recipe-2502,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,v:2,v:
+stats.cdf/recipe-2503,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,v:3,v:
+stats.cdf/recipe-2504,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,v:10,v:
+stats.cdf/recipe-2505,reference recipe; binary64 SciPy reference,t:Weibull,v:,v:1 2,"j:[""inf""]",v:
+stats.cdf/recipe-2535,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,"j:[""-inf""]",v:
+stats.cdf/recipe-2536,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,v:-2,v:
+stats.cdf/recipe-2537,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,v:0,v:
+stats.cdf/recipe-2538,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,v:1,v:
+stats.cdf/recipe-2539,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,v:2,v:
+stats.cdf/recipe-2540,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,v:3,v:
+stats.cdf/recipe-2541,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,v:10,v:
+stats.cdf/recipe-2542,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:0,"j:[""inf""]",v:
+stats.cdf/recipe-2572,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,"j:[""-inf""]",v:
+stats.cdf/recipe-2573,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,v:-2,v:
+stats.cdf/recipe-2574,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,v:0,v:
+stats.cdf/recipe-2575,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,v:1,v:
+stats.cdf/recipe-2576,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,v:2,v:
+stats.cdf/recipe-2577,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,v:3,v:
+stats.cdf/recipe-2578,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,v:10,v:
+stats.cdf/recipe-2579,reference recipe; binary64 SciPy reference,t:Bernoulli,v:,v:1,"j:[""inf""]",v:
+stats.cdf/recipe-2609,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,"j:[""-inf""]",v:
+stats.cdf/recipe-2610,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,v:-2,v:
+stats.cdf/recipe-2611,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,v:0,v:
+stats.cdf/recipe-2612,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,v:1,v:
+stats.cdf/recipe-2613,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,v:2,v:
+stats.cdf/recipe-2614,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,v:3,v:
+stats.cdf/recipe-2615,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,v:10,v:
+stats.cdf/recipe-2616,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 0,"j:[""inf""]",v:
+stats.cdf/recipe-2646,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,"j:[""-inf""]",v:
+stats.cdf/recipe-2647,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,v:-2,v:
+stats.cdf/recipe-2648,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,v:0,v:
+stats.cdf/recipe-2649,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,v:1,v:
+stats.cdf/recipe-2650,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,v:2,v:
+stats.cdf/recipe-2651,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,v:3,v:
+stats.cdf/recipe-2652,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,v:10,v:
+stats.cdf/recipe-2653,reference recipe; binary64 SciPy reference,t:Binomial,v:,v:10 1,"j:[""inf""]",v:
+stats.cdf/recipe-2683,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,"j:[""-inf""]",v:
+stats.cdf/recipe-2684,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,v:-2,v:
+stats.cdf/recipe-2685,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,v:0,v:
+stats.cdf/recipe-2686,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,v:1,v:
+stats.cdf/recipe-2687,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,v:2,v:
+stats.cdf/recipe-2688,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,v:3,v:
+stats.cdf/recipe-2689,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,v:10,v:
+stats.cdf/recipe-2690,reference recipe; binary64 SciPy reference,t:Geometric,v:,v:1,"j:[""inf""]",v:
+stats.cdf/recipe-2720,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,"j:[""-inf""]",v:
+stats.cdf/recipe-2721,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,v:-2,v:
+stats.cdf/recipe-2722,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,v:0,v:
+stats.cdf/recipe-2723,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,v:1,v:
+stats.cdf/recipe-2724,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,v:2,v:
+stats.cdf/recipe-2725,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,v:3,v:
+stats.cdf/recipe-2726,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,v:10,v:
+stats.cdf/recipe-2727,reference recipe; binary64 SciPy reference,t:NegativeBinomial,v:,v:3 1,"j:[""inf""]",v:
+stats.cdf/recipe-4892,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1,"j:[""-inf""]",v:
+stats.cdf/recipe-4896,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1,v:-1,v:
+stats.cdf/recipe-4900,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1,v:0,v:
+stats.cdf/recipe-4904,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1,v:0.1,v:
+stats.cdf/recipe-4908,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1,v:1,v:
+stats.cdf/recipe-4912,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1,v:100,v:
+stats.cdf/recipe-4916,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1,"j:[""inf""]",v:
+stats.cdf/recipe-4927,reference recipe; binary64 SciPy reference,t:Levy,v:,v:-3 2,"j:[""-inf""]",v:
+stats.cdf/recipe-4931,reference recipe; binary64 SciPy reference,t:Levy,v:,v:-3 2,v:-5,v:
+stats.cdf/recipe-4935,reference recipe; binary64 SciPy reference,t:Levy,v:,v:-3 2,v:-3,v:
+stats.cdf/recipe-4939,reference recipe; binary64 SciPy reference,t:Levy,v:,v:-3 2,v:-2.8,v:
+stats.cdf/recipe-4943,reference recipe; binary64 SciPy reference,t:Levy,v:,v:-3 2,v:-1,v:
+stats.cdf/recipe-4947,reference recipe; binary64 SciPy reference,t:Levy,v:,v:-3 2,v:197,v:
+stats.cdf/recipe-4951,reference recipe; binary64 SciPy reference,t:Levy,v:,v:-3 2,"j:[""inf""]",v:
+stats.cdf/recipe-4962,reference recipe; binary64 SciPy reference,t:Levy,v:,v:10 0.01,"j:[""-inf""]",v:
+stats.cdf/recipe-4966,reference recipe; binary64 SciPy reference,t:Levy,v:,v:10 0.01,v:9.99,v:
+stats.cdf/recipe-4970,reference recipe; binary64 SciPy reference,t:Levy,v:,v:10 0.01,v:10,v:
+stats.cdf/recipe-4974,reference recipe; binary64 SciPy reference,t:Levy,v:,v:10 0.01,v:10.001,v:
+stats.cdf/recipe-4978,reference recipe; binary64 SciPy reference,t:Levy,v:,v:10 0.01,v:10.01,v:
+stats.cdf/recipe-4982,reference recipe; binary64 SciPy reference,t:Levy,v:,v:10 0.01,v:11.0,v:
+stats.cdf/recipe-4986,reference recipe; binary64 SciPy reference,t:Levy,v:,v:10 0.01,"j:[""inf""]",v:
+stats.cdf/recipe-4997,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e-200,"j:[""-inf""]",v:
+stats.cdf/recipe-5001,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e-200,v:-1e-200,v:
+stats.cdf/recipe-5005,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e-200,v:0,v:
+stats.cdf/recipe-5009,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e-200,v:1.0000000000000001e-201,v:
+stats.cdf/recipe-5013,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e-200,v:1e-200,v:
+stats.cdf/recipe-5017,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e-200,v:1e-198,v:
+stats.cdf/recipe-5021,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e-200,"j:[""inf""]",v:
+stats.cdf/recipe-5032,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e+200,"j:[""-inf""]",v:
+stats.cdf/recipe-5036,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e+200,v:-1e+200,v:
+stats.cdf/recipe-5040,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e+200,v:0,v:
+stats.cdf/recipe-5044,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e+200,v:1e+199,v:
+stats.cdf/recipe-5048,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e+200,v:1e+200,v:
+stats.cdf/recipe-5052,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e+200,v:1e+202,v:
+stats.cdf/recipe-5056,reference recipe; binary64 SciPy reference,t:Levy,v:,v:0 1e+200,"j:[""inf""]",v:

@@ -1,0 +1,5 @@
+id,group,values
+stats.variance/125,ordinary,v:0.1 0.2 0.4 1.0 -2.0
+stats.variance/126,constant,v:3.0 3.0 3.0
+stats.variance/127,offset,v:100000000.1 100000000.2 100000000.3
+stats.variance/128,scaled,v:1e-100 2e-100 4e-100

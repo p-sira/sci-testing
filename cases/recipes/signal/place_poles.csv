@@ -1,0 +1,3 @@
+id,group,arguments
+signal.place_poles/recipe-1114,reference recipe; binary64 SciPy reference,"j:[[[0,1],[0,0]],[0,1],[[-1,0],[-2,0]]]"
+signal.place_poles/recipe-1115,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-1,-1]],[0,1],[[-2,-1],[-2,1]]]"

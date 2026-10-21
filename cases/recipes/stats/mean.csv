@@ -1,0 +1,5 @@
+id,group,d,g,p,x,y
+stats.mean/recipe-0000,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2 4 8 9,v:
+stats.mean/recipe-0078,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-3 0 2 6 12,v:
+stats.mean/recipe-0156,reference recipe; binary64 SciPy reference,t:,v:,v:,v:4 4 4 4,v:
+stats.mean/recipe-0234,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1,v:

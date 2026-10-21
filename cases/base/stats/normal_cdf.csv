@@ -1,0 +1,11 @@
+id,group,x
+stats.normal_cdf/115,central,s:-2.0
+stats.normal_cdf/116,central,s:-1.0
+stats.normal_cdf/117,central,s:0.0
+stats.normal_cdf/118,central,s:1.0
+stats.normal_cdf/119,central,s:2.0
+stats.normal_cdf/120,tails,s:-20.0
+stats.normal_cdf/121,tails,s:-8.0
+stats.normal_cdf/122,tails,s:-5.0
+stats.normal_cdf/123,tails,s:5.0
+stats.normal_cdf/124,tails,s:8.0

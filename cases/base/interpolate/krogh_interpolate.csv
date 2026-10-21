@@ -1,0 +1,3 @@
+id,group,nodes,query,values
+interpolate.krogh_interpolate/061,"quartic; nodes, interior, extrapolation",v:-2.0 -1.0 0.0 1.0 2.0,v:-2.5 -1.0 -0.3 0.0 0.7 2.0 2.5,v:23.0 6.0 3.0 2.0 15.0
+interpolate.krogh_interpolate/062,"quartic; nodes, interior, extrapolation",v:-1.0 -0.125 0.0 0.25 2.0,v:-2.5 -1.0 -0.3 0.0 0.7 2.0 2.5,v:6.0 3.250244140625 3.0 2.50390625 15.0

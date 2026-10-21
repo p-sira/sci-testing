@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.bandwidth/recipe-0274,reference recipe; binary64 SciPy reference,"j:[""0"",""bandwidth"","""","""","""","""",""""]","j:{""api"":""bandwidth"",""args"":[[]]}",t:linalg,t:linalg
+linalg.bandwidth/recipe-0275,reference recipe; binary64 SciPy reference,"j:[""0"",""bandwidth"",""0.0;0.0;1.0:2.0;0.0;0.0"","""","""","""",""""]","j:{""api"":""bandwidth"",""args"":[[[0.0,0.0,1.0],[2.0,0.0,0.0]]]}",t:linalg,t:linalg
+linalg.bandwidth/recipe-0276,reference recipe; binary64 SciPy reference,"j:[""0"",""bandwidth"",""0.0"","""","""","""",""""]","j:{""api"":""bandwidth"",""args"":[[[0.0]]]}",t:linalg,t:linalg

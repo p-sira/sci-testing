@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+linalg.solve_toeplitz/recipe-0121,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_toeplitz"",""3.0;1.0;0.0"",""none"",""1.0;2.0;3.0"","""",""""]","j:{""api"":""solve_toeplitz"",""args"":[[3.0,1.0,0.0],null,[1.0,2.0,3.0]]}",t:linalg,t:linalg
+linalg.solve_toeplitz/recipe-0123,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_toeplitz"",""2.0;-1.0"",""9.0;1.0"",""2.0;4.0"","""",""""]","j:{""api"":""solve_toeplitz"",""args"":[[2.0,-1.0],[9.0,1.0],[2.0,4.0]]}",t:linalg,t:linalg

@@ -1,0 +1,5 @@
+id,group,arguments
+signal.lfilter/recipe-0372,reference recipe; binary64 SciPy reference,m:0.5 0.5;1.0;1.0 2.0 -1.0 0.0 3.0 2.0 4.0 -2.0 1.0 0.0 2.0 3.0
+signal.lfilter/recipe-0378,reference recipe; binary64 SciPy reference,m:0.2 0.4 0.2;1.0 -0.4 0.1;1.0 2.0 -1.0 0.0 3.0 2.0 4.0 -2.0 1.0 0.0 2.0 3.0
+signal.lfilter/recipe-0384,reference recipe; binary64 SciPy reference,m:1.0;2.0;1.0 2.0 -1.0 0.0 3.0 2.0 4.0 -2.0 1.0 0.0 2.0 3.0
+signal.lfilter/recipe-0390,reference recipe; binary64 SciPy reference,m:1.0;1.0 -0.5;1.0 2.0 -1.0 0.0 3.0 2.0 4.0 -2.0 1.0 0.0 2.0 3.0

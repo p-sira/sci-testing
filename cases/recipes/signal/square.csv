@@ -1,0 +1,25 @@
+id,group,arguments
+signal.square/recipe-0270,reference recipe; binary64 SciPy reference,v:-7.0 0.0
+signal.square/recipe-0272,reference recipe; binary64 SciPy reference,v:-7.0 0.3
+signal.square/recipe-0274,reference recipe; binary64 SciPy reference,v:-7.0 0.5
+signal.square/recipe-0276,reference recipe; binary64 SciPy reference,v:-7.0 1.0
+signal.square/recipe-0278,reference recipe; binary64 SciPy reference,v:-3.141592653589793 0.0
+signal.square/recipe-0280,reference recipe; binary64 SciPy reference,v:-3.141592653589793 0.3
+signal.square/recipe-0282,reference recipe; binary64 SciPy reference,v:-3.141592653589793 0.5
+signal.square/recipe-0284,reference recipe; binary64 SciPy reference,v:-3.141592653589793 1.0
+signal.square/recipe-0286,reference recipe; binary64 SciPy reference,v:0.0 0.0
+signal.square/recipe-0288,reference recipe; binary64 SciPy reference,v:0.0 0.3
+signal.square/recipe-0290,reference recipe; binary64 SciPy reference,v:0.0 0.5
+signal.square/recipe-0292,reference recipe; binary64 SciPy reference,v:0.0 1.0
+signal.square/recipe-0294,reference recipe; binary64 SciPy reference,v:3.141592653589793 0.0
+signal.square/recipe-0296,reference recipe; binary64 SciPy reference,v:3.141592653589793 0.3
+signal.square/recipe-0298,reference recipe; binary64 SciPy reference,v:3.141592653589793 0.5
+signal.square/recipe-0300,reference recipe; binary64 SciPy reference,v:3.141592653589793 1.0
+signal.square/recipe-0302,reference recipe; binary64 SciPy reference,v:6.283185307179586 0.0
+signal.square/recipe-0304,reference recipe; binary64 SciPy reference,v:6.283185307179586 0.3
+signal.square/recipe-0306,reference recipe; binary64 SciPy reference,v:6.283185307179586 0.5
+signal.square/recipe-0308,reference recipe; binary64 SciPy reference,v:6.283185307179586 1.0
+signal.square/recipe-0310,reference recipe; binary64 SciPy reference,v:7.0 0.0
+signal.square/recipe-0312,reference recipe; binary64 SciPy reference,v:7.0 0.3
+signal.square/recipe-0314,reference recipe; binary64 SciPy reference,v:7.0 0.5
+signal.square/recipe-0316,reference recipe; binary64 SciPy reference,v:7.0 1.0

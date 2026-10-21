@@ -1,0 +1,23 @@
+id,group,d,g,p,x,y
+stats.median_test/recipe-2994,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:0 0,v:,v:
+stats.median_test/recipe-2995,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:0 1,v:,v:
+stats.median_test/recipe-2996,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:1 0,v:,v:
+stats.median_test/recipe-2997,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:1 1,v:,v:
+stats.median_test/recipe-2998,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:2 0,v:,v:
+stats.median_test/recipe-2999,reference recipe; binary64 SciPy reference,t:,m:1 2 3;4 5 6,v:2 1,v:,v:
+stats.median_test/recipe-3002,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:0 0,v:,v:
+stats.median_test/recipe-3003,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:0 1,v:,v:
+stats.median_test/recipe-3004,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:1 0,v:,v:
+stats.median_test/recipe-3005,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:1 1,v:,v:
+stats.median_test/recipe-3006,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:2 0,v:,v:
+stats.median_test/recipe-3007,reference recipe; binary64 SciPy reference,t:,m:1 2 5 8;3 4 5,v:2 1,v:,v:
+stats.median_test/recipe-3010,reference recipe; binary64 SciPy reference,t:,m:2 2 2;1 2 4 8 16,v:0 0,v:,v:
+stats.median_test/recipe-3011,reference recipe; binary64 SciPy reference,t:,m:2 2 2;1 2 4 8 16,v:0 1,v:,v:
+stats.median_test/recipe-3012,reference recipe; binary64 SciPy reference,t:,m:2 2 2;1 2 4 8 16,v:1 0,v:,v:
+stats.median_test/recipe-3013,reference recipe; binary64 SciPy reference,t:,m:2 2 2;1 2 4 8 16,v:1 1,v:,v:
+stats.median_test/recipe-3016,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:0 0,v:,v:
+stats.median_test/recipe-3017,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:0 1,v:,v:
+stats.median_test/recipe-3018,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:1 0,v:,v:
+stats.median_test/recipe-3019,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:1 1,v:,v:
+stats.median_test/recipe-3020,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:2 0,v:,v:
+stats.median_test/recipe-3021,reference recipe; binary64 SciPy reference,t:,m:1 2 3 7 7;2 4 5 6;0 1 2 8 9,v:2 1,v:,v:

@@ -1,0 +1,7 @@
+id,group,p0,p1
+special.ln_multinomial/recipe-0000,reference recipe; binary64 reference,i:0,v:
+special.ln_multinomial/recipe-0001,reference recipe; binary64 reference,i:0,v:0 0
+special.ln_multinomial/recipe-0002,reference recipe; binary64 reference,i:4,v:2 1 1
+special.ln_multinomial/recipe-0003,reference recipe; binary64 reference,i:10,v:0 2 3 5
+special.ln_multinomial/recipe-0004,reference recipe; binary64 reference,i:20,v:5 5 5 5
+special.ln_multinomial/recipe-0005,reference recipe; binary64 reference,i:100,v:50 50

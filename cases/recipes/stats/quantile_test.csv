@@ -1,0 +1,109 @@
+id,group,d,g,p,x,y
+stats.quantile_test/recipe-3219,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 0,v:1 2 3,v:
+stats.quantile_test/recipe-3220,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 1,v:1 2 3,v:
+stats.quantile_test/recipe-3221,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 2,v:1 2 3,v:
+stats.quantile_test/recipe-3222,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 0,v:1 2 3,v:
+stats.quantile_test/recipe-3223,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 1,v:1 2 3,v:
+stats.quantile_test/recipe-3224,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 2,v:1 2 3,v:
+stats.quantile_test/recipe-3225,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 0,v:1 2 3,v:
+stats.quantile_test/recipe-3226,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 1,v:1 2 3,v:
+stats.quantile_test/recipe-3227,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 2,v:1 2 3,v:
+stats.quantile_test/recipe-3228,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 0,v:1 2 3,v:
+stats.quantile_test/recipe-3229,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 1,v:1 2 3,v:
+stats.quantile_test/recipe-3230,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 2,v:1 2 3,v:
+stats.quantile_test/recipe-3231,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 0,v:1 2 3,v:
+stats.quantile_test/recipe-3232,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 1,v:1 2 3,v:
+stats.quantile_test/recipe-3233,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 2,v:1 2 3,v:
+stats.quantile_test/recipe-3234,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 0,v:1 2 3,v:
+stats.quantile_test/recipe-3235,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 1,v:1 2 3,v:
+stats.quantile_test/recipe-3236,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 2,v:1 2 3,v:
+stats.quantile_test/recipe-3237,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 0,v:1 2 3,v:
+stats.quantile_test/recipe-3238,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 1,v:1 2 3,v:
+stats.quantile_test/recipe-3239,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 2,v:1 2 3,v:
+stats.quantile_test/recipe-3240,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 0,v:1 2 3,v:
+stats.quantile_test/recipe-3241,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 1,v:1 2 3,v:
+stats.quantile_test/recipe-3242,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 2,v:1 2 3,v:
+stats.quantile_test/recipe-3243,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 0,v:1 2 3,v:
+stats.quantile_test/recipe-3244,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 1,v:1 2 3,v:
+stats.quantile_test/recipe-3245,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 2,v:1 2 3,v:
+stats.quantile_test/recipe-3246,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 0,v:1 2 3,v:
+stats.quantile_test/recipe-3247,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 1,v:1 2 3,v:
+stats.quantile_test/recipe-3248,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 2,v:1 2 3,v:
+stats.quantile_test/recipe-3249,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 0,v:1 2 3,v:
+stats.quantile_test/recipe-3250,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 1,v:1 2 3,v:
+stats.quantile_test/recipe-3251,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 2,v:1 2 3,v:
+stats.quantile_test/recipe-3252,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 0,v:1 2 3,v:
+stats.quantile_test/recipe-3253,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 1,v:1 2 3,v:
+stats.quantile_test/recipe-3254,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 2,v:1 2 3,v:
+stats.quantile_test/recipe-3255,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3256,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3257,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3258,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3259,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3260,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3261,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3262,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3263,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3264,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3265,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3266,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3267,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3268,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3269,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3270,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3271,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3272,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3273,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3274,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3275,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3276,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3277,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3278,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3279,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3280,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3281,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3282,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3283,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3284,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3285,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3286,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3287,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3288,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 0,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3289,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 1,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3290,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 2,v:0 0 1 2 2,v:
+stats.quantile_test/recipe-3291,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3292,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3293,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.1 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3294,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3295,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3296,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.5 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3297,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3298,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3299,reference recipe; binary64 SciPy reference,t:,v:,v:-1 0.9 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3300,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3301,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3302,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.1 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3303,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3304,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3305,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.5 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3306,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3307,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3308,reference recipe; binary64 SciPy reference,t:,v:,v:1 0.9 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3309,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3310,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3311,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.1 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3312,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3313,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3314,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.5 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3315,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3316,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3317,reference recipe; binary64 SciPy reference,t:,v:,v:2 0.9 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3318,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3319,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3320,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.1 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3321,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3322,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3323,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.5 2,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3324,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 0,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3325,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 1,v:4 4 4 4 4,v:
+stats.quantile_test/recipe-3326,reference recipe; binary64 SciPy reference,t:,v:,v:5 0.9 2,v:4 4 4 4 4,v:

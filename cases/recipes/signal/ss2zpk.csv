@@ -1,0 +1,8 @@
+id,group,arguments
+signal.ss2zpk/recipe-1087,reference recipe; binary64 SciPy reference,"j:[[[-1]],[[1]],[[1]],[[0]],0,0]"
+signal.ss2zpk/recipe-1101,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],0,0]"
+signal.ss2zpk/recipe-1102,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],0,1]"
+signal.ss2zpk/recipe-1380,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],0,0]"
+signal.ss2zpk/recipe-1381,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],0,1]"
+signal.ss2zpk/recipe-1386,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],1,0]"
+signal.ss2zpk/recipe-1387,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],1,1]"

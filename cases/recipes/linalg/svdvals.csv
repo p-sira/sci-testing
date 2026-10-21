@@ -1,0 +1,6 @@
+id,group,fields,raw,suite,suite_name
+linalg.svdvals/recipe-0106,reference recipe; binary64 SciPy reference,"j:[""0"",""svdvals"",""2.0;-1.0:3.0;4.0"","""","""","""",""""]","j:{""api"":""svdvals"",""args"":[[[2.0,-1.0],[3.0,4.0]]]}",t:linalg,t:linalg
+linalg.svdvals/recipe-0109,reference recipe; binary64 SciPy reference,"j:[""0"",""svdvals"",""1.0;2.0:2.0;-1.0:0.0;3.0"","""","""","""",""""]","j:{""api"":""svdvals"",""args"":[[[1.0,2.0],[2.0,-1.0],[0.0,3.0]]]}",t:linalg,t:linalg
+linalg.svdvals/recipe-0112,reference recipe; binary64 SciPy reference,"j:[""0"",""svdvals"",""1.0;2.0;0.0:2.0;0.0;3.0"","""","""","""",""""]","j:{""api"":""svdvals"",""args"":[[[1.0,2.0,0.0],[2.0,0.0,3.0]]]}",t:linalg,t:linalg
+linalg.svdvals/recipe-0566,reference recipe; binary64 SciPy reference,"j:[""0"",""svdvals"",""0.0;0.0;0.0:0.0;0.0;0.0"","""","""","""",""""]","j:{""api"":""svdvals"",""args"":[[[0.0,0.0,0.0],[0.0,0.0,0.0]]]}",t:linalg,t:linalg
+linalg.svdvals/recipe-0567,reference recipe; binary64 SciPy reference,"j:[""0"",""svdvals"",""0.0;0.0:0.0;0.0:0.0;0.0"","""","""","""",""""]","j:{""api"":""svdvals"",""args"":[[[0.0,0.0],[0.0,0.0],[0.0,0.0]]]}",t:linalg,t:linalg

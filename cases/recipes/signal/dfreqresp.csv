@@ -1,0 +1,4 @@
+id,group,arguments
+signal.dfreqresp/recipe-0744,reference recipe; binary64 SciPy reference,m:1.0;1.0 1.0;0.0 0.2 0.5 1.0 2.0
+signal.dfreqresp/recipe-0750,reference recipe; binary64 SciPy reference,m:1.0 0.0 0.0;1.0 2.0 2.0 1.0;0.0 0.2 0.5 1.0 2.0
+signal.dfreqresp/recipe-0756,reference recipe; binary64 SciPy reference,m:0.0 2.0 1.0;0.0 2.0 4.0 3.0;0.0 0.2 0.5 1.0 2.0

@@ -1,0 +1,15 @@
+id,group,d,g,p,x,y
+stats.binned_statistic/recipe-2192,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:0,v:-1 0 0.5 1 1.5 2 3,v:1 2 4 7 10 20 30
+stats.binned_statistic/recipe-2193,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:1,v:-1 0 0.5 1 1.5 2 3,v:1 2 4 7 10 20 30
+stats.binned_statistic/recipe-2194,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:2,v:-1 0 0.5 1 1.5 2 3,v:1 2 4 7 10 20 30
+stats.binned_statistic/recipe-2195,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:3,v:-1 0 0.5 1 1.5 2 3,v:1 2 4 7 10 20 30
+stats.binned_statistic/recipe-2196,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:4,v:-1 0 0.5 1 1.5 2 3,v:1 2 4 7 10 20 30
+stats.binned_statistic/recipe-2197,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:5,v:-1 0 0.5 1 1.5 2 3,v:1 2 4 7 10 20 30
+stats.binned_statistic/recipe-2198,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:6,v:-1 0 0.5 1 1.5 2 3,v:1 2 4 7 10 20 30
+stats.binned_statistic/recipe-2199,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:0,v:0 0.5 1 2,v:2 3 5 9
+stats.binned_statistic/recipe-2200,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:1,v:0 0.5 1 2,v:2 3 5 9
+stats.binned_statistic/recipe-2201,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:2,v:0 0.5 1 2,v:2 3 5 9
+stats.binned_statistic/recipe-2202,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:3,v:0 0.5 1 2,v:2 3 5 9
+stats.binned_statistic/recipe-2203,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:4,v:0 0.5 1 2,v:2 3 5 9
+stats.binned_statistic/recipe-2204,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:5,v:0 0.5 1 2,v:2 3 5 9
+stats.binned_statistic/recipe-2205,reference recipe; binary64 SciPy reference,t:,m:0 1 2,v:6,v:0 0.5 1 2,v:2 3 5 9

@@ -1,0 +1,4 @@
+id,group,d,dispatch_api,g,p,x,y
+stats.contingency.odds_ratio/recipe-0589,reference recipe; binary64 SciPy reference,t:,t:odds_ratio,v:,v:,v:6 2 1 4,v:
+stats.contingency.odds_ratio/recipe-0593,reference recipe; binary64 SciPy reference,t:,t:odds_ratio,v:,v:,v:10 5 2 8,v:
+stats.contingency.odds_ratio/recipe-0597,reference recipe; binary64 SciPy reference,t:,t:odds_ratio,v:,v:,v:0 2 4 6,v:

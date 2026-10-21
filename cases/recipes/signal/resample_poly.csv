@@ -1,0 +1,11 @@
+id,group,arguments
+signal.resample_poly/recipe-0873,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],1,1,null]"
+signal.resample_poly/recipe-0874,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],1,1,[0.1,0.3,0.2,0.3,0.1]]"
+signal.resample_poly/recipe-0875,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],2,1,null]"
+signal.resample_poly/recipe-0876,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],2,1,[0.1,0.3,0.2,0.3,0.1]]"
+signal.resample_poly/recipe-0877,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,2,null]"
+signal.resample_poly/recipe-0878,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3,2,[0.1,0.3,0.2,0.3,0.1]]"
+signal.resample_poly/recipe-0879,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],1,3,null]"
+signal.resample_poly/recipe-0880,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],1,3,[0.1,0.3,0.2,0.3,0.1]]"
+signal.resample_poly/recipe-0881,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],2,4,null]"
+signal.resample_poly/recipe-0882,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],2,4,[0.1,0.3,0.2,0.3,0.1]]"

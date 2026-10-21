@@ -1,0 +1,5 @@
+id,group,arguments
+signal.lfiltic/recipe-0374,reference recipe; binary64 SciPy reference,m:0.5 0.5;1.0;2.0 1.0;-1.0 2.0
+signal.lfiltic/recipe-0380,reference recipe; binary64 SciPy reference,m:0.2 0.4 0.2;1.0 -0.4 0.1;2.0 1.0;-1.0 2.0
+signal.lfiltic/recipe-0386,reference recipe; binary64 SciPy reference,m:1.0;2.0;2.0 1.0;-1.0 2.0
+signal.lfiltic/recipe-0392,reference recipe; binary64 SciPy reference,m:1.0;1.0 -0.5;2.0 1.0;-1.0 2.0

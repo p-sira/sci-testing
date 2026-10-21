@@ -1,0 +1,10 @@
+id,group,d,g,p,x,y
+stats.fisher_exact/recipe-0586,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:6 2 1 4,v:
+stats.fisher_exact/recipe-0587,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:6 2 1 4,v:
+stats.fisher_exact/recipe-0588,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:6 2 1 4,v:
+stats.fisher_exact/recipe-0590,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:10 5 2 8,v:
+stats.fisher_exact/recipe-0591,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:10 5 2 8,v:
+stats.fisher_exact/recipe-0592,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:10 5 2 8,v:
+stats.fisher_exact/recipe-0594,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 2 4 6,v:
+stats.fisher_exact/recipe-0595,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 2 4 6,v:
+stats.fisher_exact/recipe-0596,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 2 4 6,v:

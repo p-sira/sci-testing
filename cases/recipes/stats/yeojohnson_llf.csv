@@ -1,0 +1,15 @@
+id,group,d,g,p,x,y
+stats.yeojohnson_llf/recipe-0371,reference recipe; binary64 SciPy reference,t:,v:,v:-2,v:-3 -1 0 1 4,v:
+stats.yeojohnson_llf/recipe-0373,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-3 -1 0 1 4,v:
+stats.yeojohnson_llf/recipe-0375,reference recipe; binary64 SciPy reference,t:,v:,v:1e-08,v:-3 -1 0 1 4,v:
+stats.yeojohnson_llf/recipe-0377,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 -1 0 1 4,v:
+stats.yeojohnson_llf/recipe-0379,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-3 -1 0 1 4,v:
+stats.yeojohnson_llf/recipe-0381,reference recipe; binary64 SciPy reference,t:,v:,v:2.00000001,v:-3 -1 0 1 4,v:
+stats.yeojohnson_llf/recipe-0383,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:-3 -1 0 1 4,v:
+stats.yeojohnson_llf/recipe-0390,reference recipe; binary64 SciPy reference,t:,v:,v:-2,v:-2 0 0 5,v:
+stats.yeojohnson_llf/recipe-0392,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-2 0 0 5,v:
+stats.yeojohnson_llf/recipe-0394,reference recipe; binary64 SciPy reference,t:,v:,v:1e-08,v:-2 0 0 5,v:
+stats.yeojohnson_llf/recipe-0396,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-2 0 0 5,v:
+stats.yeojohnson_llf/recipe-0398,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-2 0 0 5,v:
+stats.yeojohnson_llf/recipe-0400,reference recipe; binary64 SciPy reference,t:,v:,v:2.00000001,v:-2 0 0 5,v:
+stats.yeojohnson_llf/recipe-0402,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:-2 0 0 5,v:

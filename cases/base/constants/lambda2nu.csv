@@ -1,0 +1,7 @@
+id,group,x
+constants.lambda2nu/016,ordinary,s:0.1
+constants.lambda2nu/017,ordinary,s:1.0
+constants.lambda2nu/018,ordinary,s:299792458.0
+constants.lambda2nu/019,ordinary,s:100000000000000.0
+constants.lambda2nu/020,extreme finite,s:1e-200
+constants.lambda2nu/021,extreme finite,s:1e+200

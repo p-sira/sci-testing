@@ -1,0 +1,5 @@
+id,group,u,v
+spatial.cosine/091,ordinary,v:1.0 2.0 3.0,v:-2.0 1.0 0.5
+spatial.cosine/092,equal,v:1.0 2.0 3.0,v:1.0 2.0 3.0
+spatial.cosine/093,nearly equal,v:1.0 2.0 3.0,v:1.000001 2.0 3.0
+spatial.cosine/094,large,v:1e+100 2e+100 -3e+100,v:-1e+100 1e+100 2e+100

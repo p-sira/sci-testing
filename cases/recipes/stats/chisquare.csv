@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.chisquare/recipe-0604,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:10 20 30,v:20 20 20
+stats.chisquare/recipe-0611,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:10 20 30,v:20 20 20
+stats.chisquare/recipe-0618,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 10 20,v:10 10 10
+stats.chisquare/recipe-0625,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 10 20,v:10 10 10
+stats.chisquare/recipe-0632,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:2 3 4 5,v:3.5 3.5 3.5 3.5
+stats.chisquare/recipe-0639,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:2 3 4 5,v:3.5 3.5 3.5 3.5

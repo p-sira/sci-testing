@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.barthann/recipe-0040,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.barthann/recipe-0041,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.barthann/recipe-0042,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.barthann/recipe-0043,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.barthann/recipe-0044,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.barthann/recipe-0045,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.barthann/recipe-0046,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.barthann/recipe-0047,reference recipe; binary64 SciPy reference,v:6 False

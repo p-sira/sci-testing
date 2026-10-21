@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+spatial.mahalanobis/recipe-0073,reference recipe; binary64 SciPy reference,"j:[""73"",""mahalanobis"",""1;2"",""3;4"","""","""",""2;0.5:0.5;1""]","j:{""id"":""73"",""api"":""mahalanobis"",""u"":""1;2"",""v"":""3;4"",""w"":"""",""param"":"""",""extra"":""2;0.5:0.5;1""}",t:spatial,t:geometry
+spatial.mahalanobis/recipe-0074,reference recipe; binary64 SciPy reference,"j:[""74"",""mahalanobis"",""0;0"",""0;0"","""","""",""1;0:0;1""]","j:{""id"":""74"",""api"":""mahalanobis"",""u"":""0;0"",""v"":""0;0"",""w"":"""",""param"":"""",""extra"":""1;0:0;1""}",t:spatial,t:geometry

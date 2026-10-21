@@ -1,0 +1,10 @@
+id,group,d,g,p,x,y
+stats.ks_1samp/recipe-2224,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-1 0 0.5 1 2,v:0 1
+stats.ks_1samp/recipe-2225,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-1 0 0.5 1 2,v:0 1
+stats.ks_1samp/recipe-2226,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-1 0 0.5 1 2,v:0 1
+stats.ks_1samp/recipe-2228,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-3 -2 -1 0 1 2 3,v:0 1
+stats.ks_1samp/recipe-2229,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 -2 -1 0 1 2 3,v:0 1
+stats.ks_1samp/recipe-2230,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-3 -2 -1 0 1 2 3,v:0 1
+stats.ks_1samp/recipe-2232,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 0 0,v:0 1
+stats.ks_1samp/recipe-2233,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 0 0,v:0 1
+stats.ks_1samp/recipe-2234,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 0 0,v:0 1

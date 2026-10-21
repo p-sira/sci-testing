@@ -1,0 +1,3 @@
+id,group,d,g,p,x,y
+stats.cumfreq/recipe-2220,reference recipe; binary64 SciPy reference,t:,v:,v:3 0 2,v:-3 0 0.5 1 1.5 2 4 5,v:
+stats.cumfreq/recipe-2221,reference recipe; binary64 SciPy reference,t:,v:,v:3 -2 4,v:-3 0 0.5 1 1.5 2 4 5,v:

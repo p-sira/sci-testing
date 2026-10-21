@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+linalg.cdf2rdf/recipe-0389,reference recipe; binary64 SciPy reference,"j:[""0"",""cdf2rdf"",""2.0:0.0"",""1.0|0.0"","""","""",""""]","j:{""api"":""cdf2rdf"",""args"":[[[2.0],[0.0]],[[[1.0]],[[0.0]]]]}",t:linalg,t:linalg
+linalg.cdf2rdf/recipe-0390,reference recipe; binary64 SciPy reference,"j:[""0"",""cdf2rdf"",""0.0;0.0:1.0;-1.0"",""1.0;1.0:0.0;0.0|0.0;0.0:-1.0;1.0"","""","""",""""]","j:{""api"":""cdf2rdf"",""args"":[[[0.0,0.0],[1.0,-1.0]],[[[1.0,1.0],[0.0,0.0]],[[0.0,0.0],[-1.0,1.0]]]]}",t:linalg,t:linalg

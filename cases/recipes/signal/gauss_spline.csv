@@ -1,0 +1,10 @@
+id,group,arguments
+signal.gauss_spline/recipe-0344,reference recipe; binary64 SciPy reference,v:-1.0 0
+signal.gauss_spline/recipe-0345,reference recipe; binary64 SciPy reference,v:-1.0 3
+signal.gauss_spline/recipe-0346,reference recipe; binary64 SciPy reference,v:-1.0 5
+signal.gauss_spline/recipe-0347,reference recipe; binary64 SciPy reference,v:0.0 0
+signal.gauss_spline/recipe-0348,reference recipe; binary64 SciPy reference,v:0.0 3
+signal.gauss_spline/recipe-0349,reference recipe; binary64 SciPy reference,v:0.0 5
+signal.gauss_spline/recipe-0350,reference recipe; binary64 SciPy reference,v:1.0 0
+signal.gauss_spline/recipe-0351,reference recipe; binary64 SciPy reference,v:1.0 3
+signal.gauss_spline/recipe-0352,reference recipe; binary64 SciPy reference,v:1.0 5

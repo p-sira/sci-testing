@@ -1,0 +1,10 @@
+id,group,arguments
+signal.firwin2/recipe-1166,reference recipe; binary64 SciPy reference,"j:[9,[0,0.4,0.6,1],[1,1,0,0],33,""hann"",false,2]"
+signal.firwin2/recipe-1167,reference recipe; binary64 SciPy reference,"j:[9,[0,0.4,0.6,1],[1,1,0,0],33,""hamming"",false,2]"
+signal.firwin2/recipe-1168,reference recipe; binary64 SciPy reference,"j:[10,[0,0.4,0.6,1],[1,1,0,0],33,""hann"",false,2]"
+signal.firwin2/recipe-1169,reference recipe; binary64 SciPy reference,"j:[10,[0,0.4,0.6,1],[1,1,0,0],33,""hamming"",false,2]"
+signal.firwin2/recipe-1170,reference recipe; binary64 SciPy reference,"j:[9,[0,0.4,0.6,1],[0,0.5,0.5,0],33,""hann"",true,2]"
+signal.firwin2/recipe-1171,reference recipe; binary64 SciPy reference,"j:[9,[0,0.4,0.6,1],[0,0.5,0.5,0],33,""hamming"",true,2]"
+signal.firwin2/recipe-1172,reference recipe; binary64 SciPy reference,"j:[10,[0,0.4,0.6,1],[0,0.5,0.5,0],33,""hann"",true,2]"
+signal.firwin2/recipe-1173,reference recipe; binary64 SciPy reference,"j:[10,[0,0.4,0.6,1],[0,0.5,0.5,0],33,""hamming"",true,2]"
+signal.firwin2/recipe-1174,reference recipe; binary64 SciPy reference,"j:[11,[0,0.4,0.4,1],[1,1,0,0],33,""hamming"",false,2]"

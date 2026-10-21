@@ -1,0 +1,9 @@
+id,group,d,g,p,x,y
+stats.differential_entropy/recipe-1893,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:-3 -1 0 2 4 10,v:
+stats.differential_entropy/recipe-1894,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:-3 -1 0 2 4 10,v:
+stats.differential_entropy/recipe-1895,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:-3 -1 0 2 4 10,v:
+stats.differential_entropy/recipe-1896,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:-3 -1 0 2 4 10,v:
+stats.differential_entropy/recipe-1956,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 3 4 5 100,v:
+stats.differential_entropy/recipe-1957,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:1 2 3 4 5 100,v:
+stats.differential_entropy/recipe-1958,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 3 4 5 100,v:
+stats.differential_entropy/recipe-1959,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2 3 4 5 100,v:

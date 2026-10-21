@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.sinm/recipe-0289,reference recipe; binary64 SciPy reference,"j:[""0"",""sinm"",""0.0"","""","""","""",""""]","j:{""api"":""sinm"",""args"":[[[0.0]]]}",t:linalg,t:linalg
+linalg.sinm/recipe-0290,reference recipe; binary64 SciPy reference,"j:[""0"",""sinm"",""0.2;0.3:0.0;-0.4"","""","""","""",""""]","j:{""api"":""sinm"",""args"":[[[0.2,0.3],[0.0,-0.4]]]}",t:linalg,t:linalg
+linalg.sinm/recipe-0291,reference recipe; binary64 SciPy reference,"j:[""0"",""sinm"",""0.0;-1.0:1.0;0.0"","""","""","""",""""]","j:{""api"":""sinm"",""args"":[[[0.0,-1.0],[1.0,0.0]]]}",t:linalg,t:linalg
+linalg.sinm/recipe-0292,reference recipe; binary64 SciPy reference,"j:[""0"",""sinm"",""0.001;0.0:0.0;-0.001"","""","""","""",""""]","j:{""api"":""sinm"",""args"":[[[0.001,0.0],[0.0,-0.001]]]}",t:linalg,t:linalg

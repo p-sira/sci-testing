@@ -1,0 +1,49 @@
+id,group,d,g,p,x,y
+stats.theilslopes/recipe-2803,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 0,v:0 1,v:1 3
+stats.theilslopes/recipe-2804,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 0,v:0 1,v:1 3
+stats.theilslopes/recipe-2805,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 0,v:0 1,v:1 3
+stats.theilslopes/recipe-2806,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 0,v:0 1,v:1 3
+stats.theilslopes/recipe-2808,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 1,v:0 1,v:1 3
+stats.theilslopes/recipe-2809,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 1,v:0 1,v:1 3
+stats.theilslopes/recipe-2810,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 1,v:0 1,v:1 3
+stats.theilslopes/recipe-2811,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 1,v:0 1,v:1 3
+stats.theilslopes/recipe-2813,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 0,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2814,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 0,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2815,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 0,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2816,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 0,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2818,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 1,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2819,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 1,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2820,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 1,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2821,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 1,v:0 1 2 3 4,v:1 3 5 7 999
+stats.theilslopes/recipe-2823,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 0,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2824,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 0,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2825,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 0,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2826,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 0,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2828,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 1,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2829,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 1,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2830,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 1,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2831,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 1,v:3 1 1 2 0,v:5 3 4 4 1
+stats.theilslopes/recipe-2833,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 0,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2834,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 0,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2835,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 0,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2836,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 0,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2838,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 1,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2839,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 1,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2840,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 1,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2841,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 1,v:0 1 2 3,v:2 2 2 2
+stats.theilslopes/recipe-2853,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 0,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2854,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 0,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2855,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 0,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2856,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 0,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2858,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 1,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2859,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 1,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2860,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 1,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2861,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 1,v:2 4 6 8 10,v:8 7 5 6 1
+stats.theilslopes/recipe-2863,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 0,v:-2 -1 0 1 2,v:3 5 4 7 9
+stats.theilslopes/recipe-2864,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 0,v:-2 -1 0 1 2,v:3 5 4 7 9
+stats.theilslopes/recipe-2865,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 0,v:-2 -1 0 1 2,v:3 5 4 7 9
+stats.theilslopes/recipe-2866,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 0,v:-2 -1 0 1 2,v:3 5 4 7 9
+stats.theilslopes/recipe-2868,reference recipe; binary64 SciPy reference,t:,v:,v:0.95 1,v:-2 -1 0 1 2,v:3 5 4 7 9
+stats.theilslopes/recipe-2869,reference recipe; binary64 SciPy reference,t:,v:,v:0.9 1,v:-2 -1 0 1 2,v:3 5 4 7 9
+stats.theilslopes/recipe-2870,reference recipe; binary64 SciPy reference,t:,v:,v:0.1 1,v:-2 -1 0 1 2,v:3 5 4 7 9
+stats.theilslopes/recipe-2871,reference recipe; binary64 SciPy reference,t:,v:,v:0.5 1,v:-2 -1 0 1 2,v:3 5 4 7 9

@@ -1,0 +1,5 @@
+id,group,a,b
+integrate.fixed_quad/055,"exp, order 16",s:0.0,s:1.0
+integrate.fixed_quad/056,"exp, order 16",s:-1.0,s:2.0
+integrate.fixed_quad/057,"exp, order 16",s:2.0,s:-1.0
+integrate.fixed_quad/058,"exp, order 16",s:1.0,s:1.0

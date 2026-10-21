@@ -1,0 +1,13 @@
+id,group,arguments
+signal.spectrogram/recipe-0524,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,true,""density""]"
+signal.spectrogram/recipe-0528,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,false,""density""]"
+signal.spectrogram/recipe-0532,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,true,""spectrum""]"
+signal.spectrogram/recipe-0536,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,false,""spectrum""]"
+signal.spectrogram/recipe-0541,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,true,""density""]"
+signal.spectrogram/recipe-0545,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,false,""density""]"
+signal.spectrogram/recipe-0549,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,true,""spectrum""]"
+signal.spectrogram/recipe-0553,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,false,""spectrum""]"
+signal.spectrogram/recipe-0558,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,true,""density""]"
+signal.spectrogram/recipe-0562,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,false,""density""]"
+signal.spectrogram/recipe-0566,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,true,""spectrum""]"
+signal.spectrogram/recipe-0570,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,false,""spectrum""]"

@@ -1,0 +1,9 @@
+id,group,arguments
+signal.lsim/recipe-1092,reference recipe; binary64 SciPy reference,"j:[[[-1]],[[1]],[[1]],[[0]],[[1],[2],[0],[1]],[0,0.1,0.2,0.3],[0],false]"
+signal.lsim/recipe-1093,reference recipe; binary64 SciPy reference,"j:[[[-1]],[[1]],[[1]],[[0]],[[1],[2],[0],[1]],[0,0.1,0.2,0.3],[0],true]"
+signal.lsim/recipe-1107,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],[[1],[2],[0],[1]],[0,0.1,0.2,0.3],[0,0],false]"
+signal.lsim/recipe-1108,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],[[1],[2],[0],[1]],[0,0.1,0.2,0.3],[0,0],true]"
+signal.lsim/recipe-1391,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],[[1,2],[2,0],[0,1],[1,-1]],[0,0.1,0.2,0.3],[0.5,-0.3],false]"
+signal.lsim/recipe-1392,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],[[1,2],[2,0],[0,1],[1,-1]],[0.5,0.6,0.7,0.8],[0.5,-0.3],false]"
+signal.lsim/recipe-1393,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],[[1,2],[2,0],[0,1],[1,-1]],[0,0.1,0.2,0.3],[0.5,-0.3],true]"
+signal.lsim/recipe-1394,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],[[1,2],[2,0],[0,1],[1,-1]],[0.5,0.6,0.7,0.8],[0.5,-0.3],true]"

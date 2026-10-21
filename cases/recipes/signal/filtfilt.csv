@@ -1,0 +1,9 @@
+id,group,arguments
+signal.filtfilt/recipe-0376,reference recipe; binary64 SciPy reference,"j:[[0.5,0.5],[1.0],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],0]"
+signal.filtfilt/recipe-0377,reference recipe; binary64 SciPy reference,"j:[[0.5,0.5],[1.0],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3]"
+signal.filtfilt/recipe-0382,reference recipe; binary64 SciPy reference,"j:[[0.2,0.4,0.2],[1.0,-0.4,0.1],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],0]"
+signal.filtfilt/recipe-0383,reference recipe; binary64 SciPy reference,"j:[[0.2,0.4,0.2],[1.0,-0.4,0.1],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3]"
+signal.filtfilt/recipe-0388,reference recipe; binary64 SciPy reference,"j:[[1.0],[2.0],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],0]"
+signal.filtfilt/recipe-0389,reference recipe; binary64 SciPy reference,"j:[[1.0],[2.0],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3]"
+signal.filtfilt/recipe-0394,reference recipe; binary64 SciPy reference,"j:[[1.0],[1.0,-0.5],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],0]"
+signal.filtfilt/recipe-0395,reference recipe; binary64 SciPy reference,"j:[[1.0],[1.0,-0.5],[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],3]"

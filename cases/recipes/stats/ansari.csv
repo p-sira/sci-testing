@@ -1,0 +1,16 @@
+id,group,d,g,p,x,y
+stats.ansari/recipe-3078,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3,v:4 5 6
+stats.ansari/recipe-3079,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3,v:4 5 6
+stats.ansari/recipe-3080,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3,v:4 5 6
+stats.ansari/recipe-3081,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1 2 4 4,v:1 2 3
+stats.ansari/recipe-3082,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1 2 4 4,v:1 2 3
+stats.ansari/recipe-3083,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1 2 4 4,v:1 2 3
+stats.ansari/recipe-3084,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:2 2,v:2 2
+stats.ansari/recipe-3085,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:2 2,v:2 2
+stats.ansari/recipe-3086,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:2 2,v:2 2
+stats.ansari/recipe-3087,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-1 0 1,v:-8 0 8
+stats.ansari/recipe-3088,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-1 0 1,v:-8 0 8
+stats.ansari/recipe-3089,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-1 0 1,v:-8 0 8
+stats.ansari/recipe-3090,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 2,v:0 1 2
+stats.ansari/recipe-3091,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 2,v:0 1 2
+stats.ansari/recipe-3092,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 1 2,v:0 1 2

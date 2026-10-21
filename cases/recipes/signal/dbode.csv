@@ -1,0 +1,4 @@
+id,group,arguments
+signal.dbode/recipe-0742,reference recipe; binary64 SciPy reference,m:1.0;1.0 1.0;0.0 0.2 0.5 1.0 2.0
+signal.dbode/recipe-0748,reference recipe; binary64 SciPy reference,m:1.0 0.0 0.0;1.0 2.0 2.0 1.0;0.0 0.2 0.5 1.0 2.0
+signal.dbode/recipe-0754,reference recipe; binary64 SciPy reference,m:0.0 2.0 1.0;0.0 2.0 4.0 3.0;0.0 0.2 0.5 1.0 2.0

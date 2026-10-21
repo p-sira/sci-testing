@@ -1,0 +1,9 @@
+id,group,arguments
+signal.iircomb/recipe-1061,reference recipe; binary64 SciPy reference,v:20 30 False 200 False
+signal.iircomb/recipe-1062,reference recipe; binary64 SciPy reference,v:0.25 30 False 2 False
+signal.iircomb/recipe-1063,reference recipe; binary64 SciPy reference,v:20 30 False 200 True
+signal.iircomb/recipe-1064,reference recipe; binary64 SciPy reference,v:0.25 30 False 2 True
+signal.iircomb/recipe-1065,reference recipe; binary64 SciPy reference,v:20 30 True 200 False
+signal.iircomb/recipe-1066,reference recipe; binary64 SciPy reference,v:0.25 30 True 2 False
+signal.iircomb/recipe-1067,reference recipe; binary64 SciPy reference,v:20 30 True 200 True
+signal.iircomb/recipe-1068,reference recipe; binary64 SciPy reference,v:0.25 30 True 2 True

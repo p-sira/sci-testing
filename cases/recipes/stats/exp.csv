@@ -1,0 +1,8 @@
+id,group,d,g,p,x,y
+stats.exp/recipe-2055,reference recipe; binary64 SciPy reference,t:,v:,v:,"j:[""-inf""]",v:
+stats.exp/recipe-2056,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-1,v:
+stats.exp/recipe-2057,reference recipe; binary64 SciPy reference,t:,v:,v:,v:-0.0,v:
+stats.exp/recipe-2058,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0.0,v:
+stats.exp/recipe-2059,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0.1,v:
+stats.exp/recipe-2060,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1,v:
+stats.exp/recipe-2061,reference recipe; binary64 SciPy reference,t:,v:,v:,v:5,v:

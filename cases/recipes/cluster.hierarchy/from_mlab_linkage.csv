@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+cluster.hierarchy.from_mlab_linkage/recipe-0080,reference recipe; binary64 SciPy reference,"j:[""from_mlab_linkage_0"",""from_mlab_linkage"",""1.0;2.0;1.25:3.0;4.0;2.5:5.0;6.0;5.0"","""",""2"",""3"","""","""","""","""","""","""","""",""""]","j:{""api"":""from_mlab_linkage"",""z"":[[1,2,1.25],[3,4,2.5],[5,6,5.0]],""id"":""from_mlab_linkage_0""}",t:cluster,t:cluster
+cluster.hierarchy.from_mlab_linkage/recipe-0081,reference recipe; binary64 SciPy reference,"j:[""from_mlab_linkage_1"",""from_mlab_linkage"",""1.0;2.0;3.0:3.0;4.0;1.0"","""",""2"",""3"","""","""","""","""","""","""","""",""""]","j:{""api"":""from_mlab_linkage"",""z"":[[1,2,3],[3,4,1]],""id"":""from_mlab_linkage_1""}",t:cluster,t:cluster

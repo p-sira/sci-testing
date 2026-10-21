@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+sparse.linalg.minres/recipe-sparse_parity-0074,reference recipe; binary64 SciPy reference,"j:[""minres_0"",""minres"",""3"",""3"",""0.0;0.0;4.0:0.0;1.0;1.0:1.0;0.0;1.0:1.0;1.0;3.0:1.0;2.0;1.0:2.0;1.0;1.0:2.0;2.0;2.0"","""",""1.0;2.0;-1.0"",""0""]","j:{""id"":""minres_0"",""api"":""minres"",""a"":[[4.0,1.0,0.0],[1.0,3.0,1.0],[0.0,1.0,2.0]],""p"":[],""x"":[1.0,2.0,-1.0]}",t:sparse_parity,t:sparse_parity
+sparse.linalg.minres/recipe-sparse_parity-0075,reference recipe; binary64 SciPy reference,"j:[""minres_1"",""minres"",""2"",""2"",""0.0;0.0;1.0:1.0;1.0;2.0"","""",""0.0;0.0"",""0""]","j:{""id"":""minres_1"",""api"":""minres"",""a"":[[1.0,0.0],[0.0,2.0]],""p"":[],""x"":[0.0,0.0]}",t:sparse_parity,t:sparse_parity

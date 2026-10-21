@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.wasserstein_distance_nd/recipe-4854,reference recipe; binary64 SciPy reference,t:,m:0 0;1 1,v:1,v:,v:
+stats.wasserstein_distance_nd/recipe-4855,reference recipe; binary64 SciPy reference,t:,m:0 0;1 0;0 1;1 1,v:2,v:,v:
+stats.wasserstein_distance_nd/recipe-4856,reference recipe; binary64 SciPy reference,t:,m:0;1;1;2;3,v:2,v:,v:
+stats.wasserstein_distance_nd/recipe-4857,reference recipe; binary64 SciPy reference,t:,m:0 0;0 0;1 1;0 1;1 0,v:3,v:,v:
+stats.wasserstein_distance_nd/recipe-4858,reference recipe; binary64 SciPy reference,t:,m:0 1 2;3 4 5;2 1 0;5 4 3,v:2,v:,v:
+stats.wasserstein_distance_nd/recipe-4859,reference recipe; binary64 SciPy reference,t:,m:0;1;2;3;0.5;1.5;2.5;3.5,v:4,v:,v:

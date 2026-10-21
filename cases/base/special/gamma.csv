@@ -1,0 +1,11 @@
+id,group,x
+special.gamma/105,positive,s:0.1
+special.gamma/106,positive,s:0.5
+special.gamma/107,positive,s:1.0
+special.gamma/108,positive,s:1.5
+special.gamma/109,positive,s:10.0
+special.gamma/110,positive,s:50.0
+special.gamma/111,positive,s:170.0
+special.gamma/112,negative nonintegers,s:-0.5
+special.gamma/113,negative nonintegers,s:-1.5
+special.gamma/114,negative nonintegers,s:-10.25

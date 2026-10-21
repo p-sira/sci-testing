@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+sparse.identity/recipe-sparse-0034,reference recipe; binary64 SciPy reference,"j:[""identity_0"",""identity"",""0"",""0"","""",""0"",""0"","""","""",""0""]","j:{""id"":""identity_0"",""api"":""identity"",""rows"":0,""cols"":0,""a"":[]}",t:sparse,t:sparse
+sparse.identity/recipe-sparse-0035,reference recipe; binary64 SciPy reference,"j:[""identity_1"",""identity"",""1"",""1"","""",""0"",""0"","""","""",""0""]","j:{""id"":""identity_1"",""api"":""identity"",""rows"":1,""cols"":1,""a"":[]}",t:sparse,t:sparse
+sparse.identity/recipe-sparse-0036,reference recipe; binary64 SciPy reference,"j:[""identity_4"",""identity"",""4"",""4"","""",""0"",""0"","""","""",""0""]","j:{""id"":""identity_4"",""api"":""identity"",""rows"":4,""cols"":4,""a"":[]}",t:sparse,t:sparse

@@ -1,0 +1,11 @@
+id,group,x
+special.erf/095,small,s:-0.1
+special.erf/096,small,s:0.0
+special.erf/097,small,s:0.1
+special.erf/098,small,s:0.5
+special.erf/099,ordinary,s:-3.0
+special.erf/100,ordinary,s:-1.0
+special.erf/101,ordinary,s:1.0
+special.erf/102,ordinary,s:3.0
+special.erf/103,saturation,s:6.0
+special.erf/104,saturation,s:10.0

@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.general_hamming/recipe-0120,reference recipe; binary64 SciPy reference,v:0 0.6 True
+signal.windows.general_hamming/recipe-0121,reference recipe; binary64 SciPy reference,v:0 0.6 False
+signal.windows.general_hamming/recipe-0122,reference recipe; binary64 SciPy reference,v:1 0.6 True
+signal.windows.general_hamming/recipe-0123,reference recipe; binary64 SciPy reference,v:1 0.6 False
+signal.windows.general_hamming/recipe-0124,reference recipe; binary64 SciPy reference,v:5 0.6 True
+signal.windows.general_hamming/recipe-0125,reference recipe; binary64 SciPy reference,v:5 0.6 False
+signal.windows.general_hamming/recipe-0126,reference recipe; binary64 SciPy reference,v:6 0.6 True
+signal.windows.general_hamming/recipe-0127,reference recipe; binary64 SciPy reference,v:6 0.6 False

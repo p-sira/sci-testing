@@ -1,0 +1,10 @@
+id,group,arguments
+signal.check_cola/recipe-0589,reference recipe; binary64 SciPy reference,"j:[[1.0,1.0,1.0,1.0],0,1e-10]"
+signal.check_cola/recipe-0593,reference recipe; binary64 SciPy reference,"j:[[1.0,1.0,1.0,1.0],1,1e-10]"
+signal.check_cola/recipe-0597,reference recipe; binary64 SciPy reference,"j:[[1.0,1.0,1.0,1.0],2,1e-10]"
+signal.check_cola/recipe-0601,reference recipe; binary64 SciPy reference,"j:[[0.0,0.5,1.0,0.5],0,1e-10]"
+signal.check_cola/recipe-0605,reference recipe; binary64 SciPy reference,"j:[[0.0,0.5,1.0,0.5],1,1e-10]"
+signal.check_cola/recipe-0609,reference recipe; binary64 SciPy reference,"j:[[0.0,0.5,1.0,0.5],2,1e-10]"
+signal.check_cola/recipe-0613,reference recipe; binary64 SciPy reference,"j:[[0.0,1.0,0.0],0,1e-10]"
+signal.check_cola/recipe-0617,reference recipe; binary64 SciPy reference,"j:[[0.0,1.0,0.0],1,1e-10]"
+signal.check_cola/recipe-0621,reference recipe; binary64 SciPy reference,"j:[[0.0,1.0,0.0],2,1e-10]"

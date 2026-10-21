@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.flattop/recipe-0104,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.flattop/recipe-0105,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.flattop/recipe-0106,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.flattop/recipe-0107,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.flattop/recipe-0108,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.flattop/recipe-0109,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.flattop/recipe-0110,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.flattop/recipe-0111,reference recipe; binary64 SciPy reference,v:6 False

@@ -1,0 +1,28 @@
+id,group,d,g,p,x,y
+stats.monte_carlo_test/recipe-3667,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:0 0,v:1 2,v:
+stats.monte_carlo_test/recipe-3668,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:0 1,v:1 2,v:
+stats.monte_carlo_test/recipe-3669,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:0 2,v:1 2,v:
+stats.monte_carlo_test/recipe-3670,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:1 0,v:1 2,v:
+stats.monte_carlo_test/recipe-3671,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:1 1,v:1 2,v:
+stats.monte_carlo_test/recipe-3672,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:1 2,v:1 2,v:
+stats.monte_carlo_test/recipe-3673,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:2 0,v:1 2,v:
+stats.monte_carlo_test/recipe-3674,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:2 1,v:1 2,v:
+stats.monte_carlo_test/recipe-3675,reference recipe; binary64 SciPy reference,t:,m:0 1;1 2;2 3,v:2 2,v:1 2,v:
+stats.monte_carlo_test/recipe-3676,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:0 0,v:1 1,v:
+stats.monte_carlo_test/recipe-3677,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:0 1,v:1 1,v:
+stats.monte_carlo_test/recipe-3678,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:0 2,v:1 1,v:
+stats.monte_carlo_test/recipe-3679,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:1 0,v:1 1,v:
+stats.monte_carlo_test/recipe-3680,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:1 1,v:1 1,v:
+stats.monte_carlo_test/recipe-3681,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:1 2,v:1 1,v:
+stats.monte_carlo_test/recipe-3682,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:2 0,v:1 1,v:
+stats.monte_carlo_test/recipe-3683,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:2 1,v:1 1,v:
+stats.monte_carlo_test/recipe-3684,reference recipe; binary64 SciPy reference,t:,m:1 1;1 1;1 1,v:2 2,v:1 1,v:
+stats.monte_carlo_test/recipe-3685,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:0 0,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3686,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:0 1,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3687,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:0 2,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3688,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:1 0,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3689,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:1 1,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3690,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:1 2,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3691,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:2 0,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3692,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:2 1,v:1 3 4,v:
+stats.monte_carlo_test/recipe-3693,reference recipe; binary64 SciPy reference,t:,m:0 1 2;2 3 4;-1 0 3;3 4 5,v:2 2,v:1 3 4,v:

@@ -1,0 +1,25 @@
+id,group,d,g,p,x,y
+stats.kendalltau/recipe-3045,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 3,v:3 2 1
+stats.kendalltau/recipe-3046,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 2 3,v:3 2 1
+stats.kendalltau/recipe-3047,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 3,v:3 2 1
+stats.kendalltau/recipe-3048,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 2 3,v:3 2 1
+stats.kendalltau/recipe-3049,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1 2 3,v:3 2 1
+stats.kendalltau/recipe-3050,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:1 2 3,v:3 2 1
+stats.kendalltau/recipe-3051,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:12 2 1 12 2,v:1 4 7 1 0
+stats.kendalltau/recipe-3052,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:12 2 1 12 2,v:1 4 7 1 0
+stats.kendalltau/recipe-3053,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:12 2 1 12 2,v:1 4 7 1 0
+stats.kendalltau/recipe-3054,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:12 2 1 12 2,v:1 4 7 1 0
+stats.kendalltau/recipe-3055,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:12 2 1 12 2,v:1 4 7 1 0
+stats.kendalltau/recipe-3056,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:12 2 1 12 2,v:1 4 7 1 0
+stats.kendalltau/recipe-3057,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 1 2 3,v:1 2 2 3
+stats.kendalltau/recipe-3058,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:1 1 2 3,v:1 2 2 3
+stats.kendalltau/recipe-3059,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 1 2 3,v:1 2 2 3
+stats.kendalltau/recipe-3060,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:1 1 2 3,v:1 2 2 3
+stats.kendalltau/recipe-3061,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1 1 2 3,v:1 2 2 3
+stats.kendalltau/recipe-3062,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:1 1 2 3,v:1 2 2 3
+stats.kendalltau/recipe-3069,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:0.0 -0.0 1.0 2.0,v:2.0 1.0 0.0 -0.0
+stats.kendalltau/recipe-3070,reference recipe; binary64 SciPy reference,t:,v:,v:1 0,v:0.0 -0.0 1.0 2.0,v:2.0 1.0 0.0 -0.0
+stats.kendalltau/recipe-3071,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:0.0 -0.0 1.0 2.0,v:2.0 1.0 0.0 -0.0
+stats.kendalltau/recipe-3072,reference recipe; binary64 SciPy reference,t:,v:,v:1 1,v:0.0 -0.0 1.0 2.0,v:2.0 1.0 0.0 -0.0
+stats.kendalltau/recipe-3073,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:0.0 -0.0 1.0 2.0,v:2.0 1.0 0.0 -0.0
+stats.kendalltau/recipe-3074,reference recipe; binary64 SciPy reference,t:,v:,v:1 2,v:0.0 -0.0 1.0 2.0,v:2.0 1.0 0.0 -0.0

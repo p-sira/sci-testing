@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.boxcox_normplot/recipe-3025,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 5,v:1 2 4 8,v:
+stats.boxcox_normplot/recipe-3027,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 3,v:1 2 4 8,v:
+stats.boxcox_normplot/recipe-3029,reference recipe; binary64 SciPy reference,t:,v:,v:1 1.01 2,v:1 2 4 8,v:
+stats.boxcox_normplot/recipe-3031,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 5,v:0.1 0.2 0.4 1 3 5,v:
+stats.boxcox_normplot/recipe-3033,reference recipe; binary64 SciPy reference,t:,v:,v:0 2 3,v:0.1 0.2 0.4 1 3 5,v:
+stats.boxcox_normplot/recipe-3035,reference recipe; binary64 SciPy reference,t:,v:,v:1 1.01 2,v:0.1 0.2 0.4 1 3 5,v:

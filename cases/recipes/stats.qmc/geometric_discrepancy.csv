@@ -1,0 +1,7 @@
+id,group,d,dispatch_api,g,p,x,y
+stats.qmc.geometric_discrepancy/recipe-2081,reference recipe; binary64 SciPy reference,t:,t:geometric_discrepancy,m:0.1;0.3;0.7;0.9,v:0,v:,v:
+stats.qmc.geometric_discrepancy/recipe-2082,reference recipe; binary64 SciPy reference,t:,t:geometric_discrepancy,m:0.1;0.3;0.7;0.9,v:1,v:,v:
+stats.qmc.geometric_discrepancy/recipe-2094,reference recipe; binary64 SciPy reference,t:,t:geometric_discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:0,v:,v:
+stats.qmc.geometric_discrepancy/recipe-2095,reference recipe; binary64 SciPy reference,t:,t:geometric_discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:1,v:,v:
+stats.qmc.geometric_discrepancy/recipe-2107,reference recipe; binary64 SciPy reference,t:,t:geometric_discrepancy,m:0 1;1 0,v:0,v:,v:
+stats.qmc.geometric_discrepancy/recipe-2108,reference recipe; binary64 SciPy reference,t:,t:geometric_discrepancy,m:0 1;1 0,v:1,v:,v:

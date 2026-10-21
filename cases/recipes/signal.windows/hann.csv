@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.hann/recipe-0064,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.hann/recipe-0065,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.hann/recipe-0066,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.hann/recipe-0067,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.hann/recipe-0068,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.hann/recipe-0069,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.hann/recipe-0070,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.hann/recipe-0071,reference recipe; binary64 SciPy reference,v:6 False

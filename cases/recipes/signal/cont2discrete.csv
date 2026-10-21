@@ -1,0 +1,13 @@
+id,group,arguments
+signal.cont2discrete/recipe-1088,reference recipe; binary64 SciPy reference,"j:[[[-1]],[[1]],[[1]],[[0]],0.1,""zoh""]"
+signal.cont2discrete/recipe-1089,reference recipe; binary64 SciPy reference,"j:[[[-1]],[[1]],[[1]],[[0]],0.1,""bilinear""]"
+signal.cont2discrete/recipe-1090,reference recipe; binary64 SciPy reference,"j:[[[-1]],[[1]],[[1]],[[0]],0.1,""euler""]"
+signal.cont2discrete/recipe-1091,reference recipe; binary64 SciPy reference,"j:[[[-1]],[[1]],[[1]],[[0]],0.1,""backward_diff""]"
+signal.cont2discrete/recipe-1103,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],0.1,""zoh""]"
+signal.cont2discrete/recipe-1104,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],0.1,""bilinear""]"
+signal.cont2discrete/recipe-1105,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],0.1,""euler""]"
+signal.cont2discrete/recipe-1106,reference recipe; binary64 SciPy reference,"j:[[[0,1],[-2,-3]],[[0],[1]],[[1,0],[0,1]],[[0],[0]],0.1,""backward_diff""]"
+signal.cont2discrete/recipe-1396,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],0.1,""zoh""]"
+signal.cont2discrete/recipe-1397,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],0.1,""bilinear""]"
+signal.cont2discrete/recipe-1398,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],0.1,""euler""]"
+signal.cont2discrete/recipe-1399,reference recipe; binary64 SciPy reference,"j:[[[-1,0.2],[0,-2]],[[1,2],[0.5,1]],[[1,0],[1,1]],[[0.1,0.2],[0,0.3]],0.1,""backward_diff""]"

@@ -1,0 +1,4 @@
+id,group,arguments
+signal.kaiserord/recipe-0431,reference recipe; binary64 SciPy reference,v:10.0 0.2
+signal.kaiserord/recipe-0432,reference recipe; binary64 SciPy reference,v:60.0 0.1
+signal.kaiserord/recipe-0433,reference recipe; binary64 SciPy reference,v:80.0 0.05

@@ -1,0 +1,4 @@
+id,group,arguments
+signal.kaiser_atten/recipe-0428,reference recipe; binary64 SciPy reference,v:1 0.1
+signal.kaiser_atten/recipe-0429,reference recipe; binary64 SciPy reference,v:11 0.2
+signal.kaiser_atten/recipe-0430,reference recipe; binary64 SciPy reference,v:31 0.1

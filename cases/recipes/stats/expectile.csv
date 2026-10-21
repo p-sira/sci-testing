@@ -1,0 +1,16 @@
+id,group,d,g,p,x,y
+stats.expectile/recipe-0384,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-3 -1 0 1 4,v:
+stats.expectile/recipe-0385,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:-3 -1 0 1 4,v:
+stats.expectile/recipe-0386,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:-3 -1 0 1 4,v:
+stats.expectile/recipe-0387,reference recipe; binary64 SciPy reference,t:,v:,v:0.9,v:-3 -1 0 1 4,v:
+stats.expectile/recipe-0388,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 -1 0 1 4,v:
+stats.expectile/recipe-0403,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-2 0 0 5,v:
+stats.expectile/recipe-0404,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:-2 0 0 5,v:
+stats.expectile/recipe-0405,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:-2 0 0 5,v:
+stats.expectile/recipe-0406,reference recipe; binary64 SciPy reference,t:,v:,v:0.9,v:-2 0 0 5,v:
+stats.expectile/recipe-0407,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-2 0 0 5,v:
+stats.expectile/recipe-0422,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1 1,v:
+stats.expectile/recipe-0423,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:1 1 1,v:
+stats.expectile/recipe-0424,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:1 1 1,v:
+stats.expectile/recipe-0425,reference recipe; binary64 SciPy reference,t:,v:,v:0.9,v:1 1 1,v:
+stats.expectile/recipe-0426,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1 1,v:

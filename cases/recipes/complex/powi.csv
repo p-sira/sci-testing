@@ -1,0 +1,14 @@
+id,group,p0,p1
+complex.powi/recipe-0000,reference recipe; binary64 reference,v:1.0 2.0,i:0
+complex.powi/recipe-0001,reference recipe; binary64 reference,v:1.0 2.0,i:2
+complex.powi/recipe-0002,reference recipe; binary64 reference,v:1.0 2.0,i:-2
+complex.powi/recipe-0003,reference recipe; binary64 reference,v:-2.0 0.0,i:0
+complex.powi/recipe-0004,reference recipe; binary64 reference,v:-2.0 0.0,i:2
+complex.powi/recipe-0005,reference recipe; binary64 reference,v:-2.0 0.0,i:-2
+complex.powi/recipe-0006,reference recipe; binary64 reference,v:-2.0 -0.0,i:0
+complex.powi/recipe-0007,reference recipe; binary64 reference,v:-2.0 -0.0,i:2
+complex.powi/recipe-0008,reference recipe; binary64 reference,v:-2.0 -0.0,i:-2
+complex.powi/recipe-0009,reference recipe; binary64 reference,v:0.0 0.0,i:0
+complex.powi/recipe-0010,reference recipe; binary64 reference,v:0.0 0.0,i:2
+complex.powi/recipe-0012,reference recipe; binary64 reference,v:1.0 0.0,i:-2147483648
+complex.powi/recipe-0013,reference recipe; binary64 reference,v:0.0 1.0,i:2147483647

@@ -1,0 +1,4 @@
+id,group,arguments
+signal.medfilt2d/recipe-0931,reference recipe; binary64 SciPy reference,"j:[[[1.0,2.0,3.0],[-1.0,0.0,2.0],[4.0,2.0,1.0]],[1,1]]"
+signal.medfilt2d/recipe-0932,reference recipe; binary64 SciPy reference,"j:[[[1.0,2.0,3.0],[-1.0,0.0,2.0],[4.0,2.0,1.0]],[3,3]]"
+signal.medfilt2d/recipe-0933,reference recipe; binary64 SciPy reference,"j:[[[1.0,2.0,3.0],[-1.0,0.0,2.0],[4.0,2.0,1.0]],[3,5]]"

@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.bohman/recipe-0048,reference recipe; binary64 SciPy reference,v:0 True
+signal.windows.bohman/recipe-0049,reference recipe; binary64 SciPy reference,v:0 False
+signal.windows.bohman/recipe-0050,reference recipe; binary64 SciPy reference,v:1 True
+signal.windows.bohman/recipe-0051,reference recipe; binary64 SciPy reference,v:1 False
+signal.windows.bohman/recipe-0052,reference recipe; binary64 SciPy reference,v:5 True
+signal.windows.bohman/recipe-0053,reference recipe; binary64 SciPy reference,v:5 False
+signal.windows.bohman/recipe-0054,reference recipe; binary64 SciPy reference,v:6 True
+signal.windows.bohman/recipe-0055,reference recipe; binary64 SciPy reference,v:6 False

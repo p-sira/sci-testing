@@ -1,0 +1,6 @@
+id,group,fields,raw,suite,suite_name
+fft.fftfreq/recipe-0040,reference recipe; binary64 SciPy reference,"j:[""fftfreq_0"",""fftfreq"","""","""","""","""",""1"",""1"","""",""0"","""","""","""","""",""""]","j:{""id"":""fftfreq_0"",""api"":""fftfreq"",""n"":1,""d"":1}",t:fft,t:fft
+fft.fftfreq/recipe-0041,reference recipe; binary64 SciPy reference,"j:[""fftfreq_1"",""fftfreq"","""","""","""","""",""4"",""0.25"","""",""0"","""","""","""","""",""""]","j:{""id"":""fftfreq_1"",""api"":""fftfreq"",""n"":4,""d"":0.25}",t:fft,t:fft
+fft.fftfreq/recipe-0042,reference recipe; binary64 SciPy reference,"j:[""fftfreq_2"",""fftfreq"","""","""","""","""",""5"",""2"","""",""0"","""","""","""","""",""""]","j:{""id"":""fftfreq_2"",""api"":""fftfreq"",""n"":5,""d"":2}",t:fft,t:fft
+fft.fftfreq/recipe-0043,reference recipe; binary64 SciPy reference,"j:[""fftfreq_3"",""fftfreq"","""","""","""","""",""7"",""-0.5"","""",""0"","""","""","""","""",""""]","j:{""id"":""fftfreq_3"",""api"":""fftfreq"",""n"":7,""d"":-0.5}",t:fft,t:fft
+fft.fftfreq/recipe-0044,reference recipe; binary64 SciPy reference,"j:[""fftfreq_4"",""fftfreq"","""","""","""","""",""8"",""1e+200"","""",""0"","""","""","""","""",""""]","j:{""id"":""fftfreq_4"",""api"":""fftfreq"",""n"":8,""d"":1e+200}",t:fft,t:fft

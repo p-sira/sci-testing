@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+spatial.sokalsneath/recipe-0048,reference recipe; binary64 SciPy reference,"j:[""48"",""sokalsneath"",""1;0;1;0"",""0;1;1;0"","""","""",""""]","j:{""id"":""48"",""api"":""sokalsneath"",""u"":""1;0;1;0"",""v"":""0;1;1;0"",""w"":"""",""param"":"""",""extra"":""""}",t:spatial,t:geometry
+spatial.sokalsneath/recipe-0049,reference recipe; binary64 SciPy reference,"j:[""49"",""sokalsneath"",""1;1;0;0"",""1;0;1;0"",""0.5;1;2;4"","""",""""]","j:{""id"":""49"",""api"":""sokalsneath"",""u"":""1;1;0;0"",""v"":""1;0;1;0"",""w"":""0.5;1;2;4"",""param"":"""",""extra"":""""}",t:spatial,t:geometry
+spatial.sokalsneath/recipe-0050,reference recipe; binary64 SciPy reference,"j:[""50"",""sokalsneath"",""1;1"",""1;1"","""","""",""""]","j:{""id"":""50"",""api"":""sokalsneath"",""u"":""1;1"",""v"":""1;1"",""w"":"""",""param"":"""",""extra"":""""}",t:spatial,t:geometry

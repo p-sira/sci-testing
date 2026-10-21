@@ -1,0 +1,17 @@
+id,group,arguments
+signal.savgol_coeffs/recipe-0461,reference recipe; binary64 SciPy reference,v:3 1 0 0.5
+signal.savgol_coeffs/recipe-0463,reference recipe; binary64 SciPy reference,v:3 1 1 0.5
+signal.savgol_coeffs/recipe-0465,reference recipe; binary64 SciPy reference,v:3 1 2 0.5
+signal.savgol_coeffs/recipe-0467,reference recipe; binary64 SciPy reference,v:3 1 2 0.5
+signal.savgol_coeffs/recipe-0469,reference recipe; binary64 SciPy reference,v:5 2 0 0.5
+signal.savgol_coeffs/recipe-0471,reference recipe; binary64 SciPy reference,v:5 2 1 0.5
+signal.savgol_coeffs/recipe-0473,reference recipe; binary64 SciPy reference,v:5 2 2 0.5
+signal.savgol_coeffs/recipe-0475,reference recipe; binary64 SciPy reference,v:5 2 3 0.5
+signal.savgol_coeffs/recipe-0477,reference recipe; binary64 SciPy reference,v:6 2 0 0.5
+signal.savgol_coeffs/recipe-0478,reference recipe; binary64 SciPy reference,v:6 2 1 0.5
+signal.savgol_coeffs/recipe-0479,reference recipe; binary64 SciPy reference,v:6 2 2 0.5
+signal.savgol_coeffs/recipe-0480,reference recipe; binary64 SciPy reference,v:6 2 3 0.5
+signal.savgol_coeffs/recipe-0481,reference recipe; binary64 SciPy reference,v:7 3 0 0.5
+signal.savgol_coeffs/recipe-0483,reference recipe; binary64 SciPy reference,v:7 3 1 0.5
+signal.savgol_coeffs/recipe-0485,reference recipe; binary64 SciPy reference,v:7 3 2 0.5
+signal.savgol_coeffs/recipe-0487,reference recipe; binary64 SciPy reference,v:7 3 4 0.5

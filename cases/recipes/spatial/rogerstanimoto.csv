@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+spatial.rogerstanimoto/recipe-0042,reference recipe; binary64 SciPy reference,"j:[""42"",""rogerstanimoto"",""1;0;1;0"",""0;1;1;0"","""","""",""""]","j:{""id"":""42"",""api"":""rogerstanimoto"",""u"":""1;0;1;0"",""v"":""0;1;1;0"",""w"":"""",""param"":"""",""extra"":""""}",t:spatial,t:geometry
+spatial.rogerstanimoto/recipe-0043,reference recipe; binary64 SciPy reference,"j:[""43"",""rogerstanimoto"",""1;1;0;0"",""1;0;1;0"",""0.5;1;2;4"","""",""""]","j:{""id"":""43"",""api"":""rogerstanimoto"",""u"":""1;1;0;0"",""v"":""1;0;1;0"",""w"":""0.5;1;2;4"",""param"":"""",""extra"":""""}",t:spatial,t:geometry
+spatial.rogerstanimoto/recipe-0044,reference recipe; binary64 SciPy reference,"j:[""44"",""rogerstanimoto"",""1;1"",""1;1"","""","""",""""]","j:{""id"":""44"",""api"":""rogerstanimoto"",""u"":""1;1"",""v"":""1;1"",""w"":"""",""param"":"""",""extra"":""""}",t:spatial,t:geometry

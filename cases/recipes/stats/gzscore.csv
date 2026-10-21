@@ -1,0 +1,5 @@
+id,group,d,g,p,x,y
+stats.gzscore/recipe-0307,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 4 8,v:
+stats.gzscore/recipe-0309,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 4 8,v:
+stats.gzscore/recipe-0329,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.1 0.5 2 7,v:
+stats.gzscore/recipe-0331,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0.1 0.5 2 7,v:

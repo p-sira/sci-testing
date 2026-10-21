@@ -1,0 +1,22 @@
+id,group,d,g,p,x,y
+stats.yeojohnson/recipe-0370,reference recipe; binary64 SciPy reference,t:,v:,v:-2,v:-3 -1 0 1 4,v:
+stats.yeojohnson/recipe-0372,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-3 -1 0 1 4,v:
+stats.yeojohnson/recipe-0374,reference recipe; binary64 SciPy reference,t:,v:,v:1e-08,v:-3 -1 0 1 4,v:
+stats.yeojohnson/recipe-0376,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 -1 0 1 4,v:
+stats.yeojohnson/recipe-0378,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-3 -1 0 1 4,v:
+stats.yeojohnson/recipe-0380,reference recipe; binary64 SciPy reference,t:,v:,v:2.00000001,v:-3 -1 0 1 4,v:
+stats.yeojohnson/recipe-0382,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:-3 -1 0 1 4,v:
+stats.yeojohnson/recipe-0389,reference recipe; binary64 SciPy reference,t:,v:,v:-2,v:-2 0 0 5,v:
+stats.yeojohnson/recipe-0391,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:-2 0 0 5,v:
+stats.yeojohnson/recipe-0393,reference recipe; binary64 SciPy reference,t:,v:,v:1e-08,v:-2 0 0 5,v:
+stats.yeojohnson/recipe-0395,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-2 0 0 5,v:
+stats.yeojohnson/recipe-0397,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-2 0 0 5,v:
+stats.yeojohnson/recipe-0399,reference recipe; binary64 SciPy reference,t:,v:,v:2.00000001,v:-2 0 0 5,v:
+stats.yeojohnson/recipe-0401,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:-2 0 0 5,v:
+stats.yeojohnson/recipe-0408,reference recipe; binary64 SciPy reference,t:,v:,v:-2,v:1 1 1,v:
+stats.yeojohnson/recipe-0410,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 1 1,v:
+stats.yeojohnson/recipe-0412,reference recipe; binary64 SciPy reference,t:,v:,v:1e-08,v:1 1 1,v:
+stats.yeojohnson/recipe-0414,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 1 1,v:
+stats.yeojohnson/recipe-0416,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 1 1,v:
+stats.yeojohnson/recipe-0418,reference recipe; binary64 SciPy reference,t:,v:,v:2.00000001,v:1 1 1,v:
+stats.yeojohnson/recipe-0420,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:1 1 1,v:

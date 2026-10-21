@@ -1,0 +1,5 @@
+id,group,arguments
+signal.windows.kaiser_bessel_derived/recipe-0184,reference recipe; binary64 SciPy reference,v:0 6.0 True
+signal.windows.kaiser_bessel_derived/recipe-0185,reference recipe; binary64 SciPy reference,v:2 6.0 True
+signal.windows.kaiser_bessel_derived/recipe-0186,reference recipe; binary64 SciPy reference,v:6 6.0 True
+signal.windows.kaiser_bessel_derived/recipe-0187,reference recipe; binary64 SciPy reference,v:10 6.0 True

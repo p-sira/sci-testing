@@ -1,0 +1,9 @@
+id,group,arguments
+signal.windows.general_gaussian/recipe-0136,reference recipe; binary64 SciPy reference,v:0 1.5 2.0 True
+signal.windows.general_gaussian/recipe-0137,reference recipe; binary64 SciPy reference,v:0 1.5 2.0 False
+signal.windows.general_gaussian/recipe-0138,reference recipe; binary64 SciPy reference,v:1 1.5 2.0 True
+signal.windows.general_gaussian/recipe-0139,reference recipe; binary64 SciPy reference,v:1 1.5 2.0 False
+signal.windows.general_gaussian/recipe-0140,reference recipe; binary64 SciPy reference,v:5 1.5 2.0 True
+signal.windows.general_gaussian/recipe-0141,reference recipe; binary64 SciPy reference,v:5 1.5 2.0 False
+signal.windows.general_gaussian/recipe-0142,reference recipe; binary64 SciPy reference,v:6 1.5 2.0 True
+signal.windows.general_gaussian/recipe-0143,reference recipe; binary64 SciPy reference,v:6 1.5 2.0 False

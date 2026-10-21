@@ -1,0 +1,25 @@
+id,group,d,dispatch_api,g,p,x,y
+stats.qmc.discrepancy/recipe-2073,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:0 0,v:,v:
+stats.qmc.discrepancy/recipe-2074,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:0 1,v:,v:
+stats.qmc.discrepancy/recipe-2075,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:1 0,v:,v:
+stats.qmc.discrepancy/recipe-2076,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:1 1,v:,v:
+stats.qmc.discrepancy/recipe-2077,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:2 0,v:,v:
+stats.qmc.discrepancy/recipe-2078,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:2 1,v:,v:
+stats.qmc.discrepancy/recipe-2079,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:3 0,v:,v:
+stats.qmc.discrepancy/recipe-2080,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1;0.3;0.7;0.9,v:3 1,v:,v:
+stats.qmc.discrepancy/recipe-2086,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:0 0,v:,v:
+stats.qmc.discrepancy/recipe-2087,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:0 1,v:,v:
+stats.qmc.discrepancy/recipe-2088,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:1 0,v:,v:
+stats.qmc.discrepancy/recipe-2089,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:1 1,v:,v:
+stats.qmc.discrepancy/recipe-2090,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:2 0,v:,v:
+stats.qmc.discrepancy/recipe-2091,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:2 1,v:,v:
+stats.qmc.discrepancy/recipe-2092,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:3 0,v:,v:
+stats.qmc.discrepancy/recipe-2093,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0.1 0.2;0.3 0.8;0.7 0.5,v:3 1,v:,v:
+stats.qmc.discrepancy/recipe-2099,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:0 0,v:,v:
+stats.qmc.discrepancy/recipe-2100,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:0 1,v:,v:
+stats.qmc.discrepancy/recipe-2101,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:1 0,v:,v:
+stats.qmc.discrepancy/recipe-2102,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:1 1,v:,v:
+stats.qmc.discrepancy/recipe-2103,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:2 0,v:,v:
+stats.qmc.discrepancy/recipe-2104,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:2 1,v:,v:
+stats.qmc.discrepancy/recipe-2105,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:3 0,v:,v:
+stats.qmc.discrepancy/recipe-2106,reference recipe; binary64 SciPy reference,t:,t:discrepancy,m:0 1;1 0,v:3 1,v:,v:

@@ -1,0 +1,4 @@
+id,group,arguments
+signal.deconvolve/recipe-0261,reference recipe; binary64 SciPy reference,m:1.0 3.0 2.0;1.0 1.0
+signal.deconvolve/recipe-0262,reference recipe; binary64 SciPy reference,m:1.0 2.0;1.0 2.0 3.0
+signal.deconvolve/recipe-0263,reference recipe; binary64 SciPy reference,m:1.0 0.0 3.0 1.0;2.0 -0.5

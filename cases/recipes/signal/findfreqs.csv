@@ -1,0 +1,4 @@
+id,group,arguments
+signal.findfreqs/recipe-1077,reference recipe; binary64 SciPy reference,"j:[[1,0],[1,8,25],9]"
+signal.findfreqs/recipe-1079,reference recipe; binary64 SciPy reference,"j:[[1],[1,1],9]"
+signal.findfreqs/recipe-1081,reference recipe; binary64 SciPy reference,"j:[[1],[1],9]"

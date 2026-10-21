@@ -1,0 +1,7 @@
+id,group,d,g,p,x,y
+stats.false_discovery_control/recipe-0646,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.001 0.02 0.04 0.5 1,v:
+stats.false_discovery_control/recipe-0647,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0.001 0.02 0.04 0.5 1,v:
+stats.false_discovery_control/recipe-0648,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 0.1 0.1 1,v:
+stats.false_discovery_control/recipe-0649,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 0.1 0.1 1,v:
+stats.false_discovery_control/recipe-0650,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:,v:
+stats.false_discovery_control/recipe-0651,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:,v:

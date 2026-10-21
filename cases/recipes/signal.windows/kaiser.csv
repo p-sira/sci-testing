@@ -1,0 +1,12 @@
+id,group,arguments
+signal.windows.kaiser/recipe-0160,reference recipe; binary64 SciPy reference,v:0 7.0 True
+signal.windows.kaiser/recipe-0161,reference recipe; binary64 SciPy reference,v:0 7.0 False
+signal.windows.kaiser/recipe-0162,reference recipe; binary64 SciPy reference,v:1 7.0 True
+signal.windows.kaiser/recipe-0163,reference recipe; binary64 SciPy reference,v:1 7.0 False
+signal.windows.kaiser/recipe-0164,reference recipe; binary64 SciPy reference,v:5 7.0 True
+signal.windows.kaiser/recipe-0165,reference recipe; binary64 SciPy reference,v:5 7.0 False
+signal.windows.kaiser/recipe-0166,reference recipe; binary64 SciPy reference,v:6 7.0 True
+signal.windows.kaiser/recipe-0167,reference recipe; binary64 SciPy reference,v:6 7.0 False
+signal.windows.kaiser/recipe-0210,reference recipe; binary64 SciPy reference,v:6 0.0 True
+signal.windows.kaiser/recipe-0211,reference recipe; binary64 SciPy reference,v:6 -7.0 True
+signal.windows.kaiser/recipe-0212,reference recipe; binary64 SciPy reference,v:6 700.0 True

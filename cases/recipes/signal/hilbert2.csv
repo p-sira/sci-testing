@@ -1,0 +1,5 @@
+id,group,arguments
+signal.hilbert2/recipe-0936,reference recipe; binary64 SciPy reference,"j:[[[1.0,2.0],[3.0,4.0]]]"
+signal.hilbert2/recipe-0937,reference recipe; binary64 SciPy reference,"j:[[[1.0,2.0,3.0],[-1.0,0.0,2.0],[4.0,2.0,1.0]]]"
+signal.hilbert2/recipe-0938,reference recipe; binary64 SciPy reference,"j:[[[1.0,2.0,3.0,4.0]]]"
+signal.hilbert2/recipe-0939,reference recipe; binary64 SciPy reference,"j:[[[1.0],[2.0],[3.0]]]"

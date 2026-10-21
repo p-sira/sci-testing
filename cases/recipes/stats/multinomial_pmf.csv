@@ -1,0 +1,8 @@
+id,group,d,g,p,x,y
+stats.multinomial_pmf/recipe-2134,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2,v:0.5 0.5
+stats.multinomial_pmf/recipe-2136,reference recipe; binary64 SciPy reference,t:,v:,v:,v:2 3 5,v:0.2 0.3 0.5
+stats.multinomial_pmf/recipe-2138,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0 0,v:0.5 0.5
+stats.multinomial_pmf/recipe-2140,reference recipe; binary64 SciPy reference,t:,v:,v:,v:0 3,v:0 1
+stats.multinomial_pmf/recipe-2142,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1 2,v:0 1
+stats.multinomial_pmf/recipe-2741,reference recipe; binary64 SciPy reference,t:,v:,v:,v:1000 2000,v:0.3 0.7
+stats.multinomial_pmf/recipe-2743,reference recipe; binary64 SciPy reference,t:,v:,v:,v:500000 500000,v:0.5 0.5

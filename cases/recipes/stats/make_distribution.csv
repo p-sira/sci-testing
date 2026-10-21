@@ -1,0 +1,16 @@
+id,group,d,g,p,x,y
+stats.make_distribution/recipe-4175,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.1,v:
+stats.make_distribution/recipe-4176,reference recipe; binary64 SciPy reference,t:,v:,v:0.01,v:0.1,v:
+stats.make_distribution/recipe-4177,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:0.1,v:
+stats.make_distribution/recipe-4178,reference recipe; binary64 SciPy reference,t:,v:,v:0.99,v:0.1,v:
+stats.make_distribution/recipe-4179,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0.1,v:
+stats.make_distribution/recipe-4180,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.5,v:
+stats.make_distribution/recipe-4181,reference recipe; binary64 SciPy reference,t:,v:,v:0.01,v:0.5,v:
+stats.make_distribution/recipe-4182,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:0.5,v:
+stats.make_distribution/recipe-4183,reference recipe; binary64 SciPy reference,t:,v:,v:0.99,v:0.5,v:
+stats.make_distribution/recipe-4184,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0.5,v:
+stats.make_distribution/recipe-4185,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1,v:
+stats.make_distribution/recipe-4186,reference recipe; binary64 SciPy reference,t:,v:,v:0.01,v:1,v:
+stats.make_distribution/recipe-4187,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:1,v:
+stats.make_distribution/recipe-4188,reference recipe; binary64 SciPy reference,t:,v:,v:0.99,v:1,v:
+stats.make_distribution/recipe-4189,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1,v:

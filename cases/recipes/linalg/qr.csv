@@ -1,0 +1,6 @@
+id,group,fields,raw,suite,suite_name
+linalg.qr/recipe-0104,reference recipe; binary64 SciPy reference,"j:[""0"",""qr"",""2.0;-1.0:3.0;4.0"","""","""","""",""""]","j:{""api"":""qr"",""args"":[[[2.0,-1.0],[3.0,4.0]]]}",t:linalg,t:linalg
+linalg.qr/recipe-0107,reference recipe; binary64 SciPy reference,"j:[""0"",""qr"",""1.0;2.0:2.0;-1.0:0.0;3.0"","""","""","""",""""]","j:{""api"":""qr"",""args"":[[[1.0,2.0],[2.0,-1.0],[0.0,3.0]]]}",t:linalg,t:linalg
+linalg.qr/recipe-0110,reference recipe; binary64 SciPy reference,"j:[""0"",""qr"",""1.0;2.0;0.0:2.0;0.0;3.0"","""","""","""",""""]","j:{""api"":""qr"",""args"":[[[1.0,2.0,0.0],[2.0,0.0,3.0]]]}",t:linalg,t:linalg
+linalg.qr/recipe-0568,reference recipe; binary64 SciPy reference,"j:[""0"",""qr"",""0.0;0.0;0.0:0.0;0.0;0.0"","""","""","""",""""]","j:{""api"":""qr"",""args"":[[[0.0,0.0,0.0],[0.0,0.0,0.0]]]}",t:linalg,t:linalg
+linalg.qr/recipe-0569,reference recipe; binary64 SciPy reference,"j:[""0"",""qr"",""0.0;0.0:0.0;0.0:0.0;0.0"","""","""","""",""""]","j:{""api"":""qr"",""args"":[[[0.0,0.0],[0.0,0.0],[0.0,0.0]]]}",t:linalg,t:linalg

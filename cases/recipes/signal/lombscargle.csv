@@ -1,0 +1,5 @@
+id,group,arguments
+signal.lombscargle/recipe-0625,reference recipe; binary64 SciPy reference,"j:[[0.0,0.1,0.7,1.2,1.9],[1.0,0.0,2.0,-1.0,1.0],[0.2,1.0,3.0],true,true]"
+signal.lombscargle/recipe-0626,reference recipe; binary64 SciPy reference,"j:[[0.0,0.1,0.7,1.2,1.9],[1.0,0.0,2.0,-1.0,1.0],[0.2,1.0,3.0],true,false]"
+signal.lombscargle/recipe-0627,reference recipe; binary64 SciPy reference,"j:[[0.0,0.1,0.7,1.2,1.9],[1.0,0.0,2.0,-1.0,1.0],[0.2,1.0,3.0],false,true]"
+signal.lombscargle/recipe-0628,reference recipe; binary64 SciPy reference,"j:[[0.0,0.1,0.7,1.2,1.9],[1.0,0.0,2.0,-1.0,1.0],[0.2,1.0,3.0],false,false]"

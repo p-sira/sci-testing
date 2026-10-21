@@ -1,0 +1,9 @@
+id,group,arguments
+signal.closest_STFT_dual_window/recipe-1271,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],1,[1,1,1,1,1,1,1,1],false]"
+signal.closest_STFT_dual_window/recipe-1272,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],1,[1,1,1,1,1,1,1,1],true]"
+signal.closest_STFT_dual_window/recipe-1273,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],3,[1,1,1,1,1,1,1,1],false]"
+signal.closest_STFT_dual_window/recipe-1274,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],3,[1,1,1,1,1,1,1,1],true]"
+signal.closest_STFT_dual_window/recipe-1275,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],4,[1,1,1,1,1,1,1,1],false]"
+signal.closest_STFT_dual_window/recipe-1276,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],4,[1,1,1,1,1,1,1,1],true]"
+signal.closest_STFT_dual_window/recipe-1277,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],8,[1,1,1,1,1,1,1,1],false]"
+signal.closest_STFT_dual_window/recipe-1278,reference recipe; binary64 SciPy reference,"j:[[0.5,1,0.7,0.3,0.8,1,0.5,0.2],8,[1,1,1,1,1,1,1,1],true]"

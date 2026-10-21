@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+sparse.random/recipe-sparse_parity-0128,reference recipe; binary64 SciPy reference,"j:[""random_0"",""random"",""3"",""5"","""",""0.4;42.0"","""",""0""]","j:{""id"":""random_0"",""api"":""random"",""a"":[[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0]],""p"":[0.4,42],""x"":[]}",t:sparse_parity,t:sparse_parity
+sparse.random/recipe-sparse_parity-0129,reference recipe; binary64 SciPy reference,"j:[""random_1"",""random"",""1"",""2"","""",""0.0;7.0"","""",""0""]","j:{""id"":""random_1"",""api"":""random"",""a"":[[0.0,0.0]],""p"":[0.0,7],""x"":[]}",t:sparse_parity,t:sparse_parity
+sparse.random/recipe-sparse_parity-0130,reference recipe; binary64 SciPy reference,"j:[""random_2"",""random"",""1"",""2"","""",""1.0;7.0"","""",""0""]","j:{""id"":""random_2"",""api"":""random"",""a"":[[0.0,0.0]],""p"":[1.0,7],""x"":[]}",t:sparse_parity,t:sparse_parity

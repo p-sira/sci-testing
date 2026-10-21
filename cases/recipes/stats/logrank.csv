@@ -1,0 +1,25 @@
+id,group,d,g,p,x,y
+stats.logrank/recipe-3523,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:0,v:1 2 3,v:1 2 3
+stats.logrank/recipe-3524,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:1,v:1 2 3,v:1 2 3
+stats.logrank/recipe-3525,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:2,v:1 2 3,v:1 2 3
+stats.logrank/recipe-3526,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:0,v:1 2 3,v:1 2 3
+stats.logrank/recipe-3527,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:1,v:1 2 3,v:1 2 3
+stats.logrank/recipe-3528,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:2,v:1 2 3,v:1 2 3
+stats.logrank/recipe-3532,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:0,v:1 2 3,v:4 5 6
+stats.logrank/recipe-3533,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:1,v:1 2 3,v:4 5 6
+stats.logrank/recipe-3534,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:2,v:1 2 3,v:4 5 6
+stats.logrank/recipe-3535,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:0,v:1 2 3,v:4 5 6
+stats.logrank/recipe-3536,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:1,v:1 2 3,v:4 5 6
+stats.logrank/recipe-3537,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:2,v:1 2 3,v:4 5 6
+stats.logrank/recipe-3541,reference recipe; binary64 SciPy reference,t:,m:1 1 1 1 1;1 1 1,v:0,v:1 2 2 3 5,v:0 2 4
+stats.logrank/recipe-3542,reference recipe; binary64 SciPy reference,t:,m:1 1 1 1 1;1 1 1,v:1,v:1 2 2 3 5,v:0 2 4
+stats.logrank/recipe-3543,reference recipe; binary64 SciPy reference,t:,m:1 1 1 1 1;1 1 1,v:2,v:1 2 2 3 5,v:0 2 4
+stats.logrank/recipe-3544,reference recipe; binary64 SciPy reference,t:,m:0 1 0 1 0;1 1 1,v:0,v:1 2 2 3 5,v:0 2 4
+stats.logrank/recipe-3545,reference recipe; binary64 SciPy reference,t:,m:0 1 0 1 0;1 1 1,v:1,v:1 2 2 3 5,v:0 2 4
+stats.logrank/recipe-3546,reference recipe; binary64 SciPy reference,t:,m:0 1 0 1 0;1 1 1,v:2,v:1 2 2 3 5,v:0 2 4
+stats.logrank/recipe-3550,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:0,v:0 0 1,v:0 1 1
+stats.logrank/recipe-3551,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:1,v:0 0 1,v:0 1 1
+stats.logrank/recipe-3552,reference recipe; binary64 SciPy reference,t:,m:1 1 1;1 1 1,v:2,v:0 0 1,v:0 1 1
+stats.logrank/recipe-3553,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:0,v:0 0 1,v:0 1 1
+stats.logrank/recipe-3554,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:1,v:0 0 1,v:0 1 1
+stats.logrank/recipe-3555,reference recipe; binary64 SciPy reference,t:,m:0 1 0;1 1 1,v:2,v:0 0 1,v:0 1 1

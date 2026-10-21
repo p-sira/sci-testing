@@ -1,0 +1,9 @@
+id,group,d,g,p,x,y
+stats.kstat/recipe-1876,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:-3 -1 0 2 4 10,v:
+stats.kstat/recipe-1879,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:-3 -1 0 2 4 10,v:
+stats.kstat/recipe-1882,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:-3 -1 0 2 4 10,v:
+stats.kstat/recipe-1885,reference recipe; binary64 SciPy reference,t:,v:,v:4,v:-3 -1 0 2 4 10,v:
+stats.kstat/recipe-1939,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3 4 5 100,v:
+stats.kstat/recipe-1942,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3 4 5 100,v:
+stats.kstat/recipe-1945,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:1 2 3 4 5 100,v:
+stats.kstat/recipe-1948,reference recipe; binary64 SciPy reference,t:,v:,v:4,v:1 2 3 4 5 100,v:

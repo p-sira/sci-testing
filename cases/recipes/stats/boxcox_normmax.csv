@@ -1,0 +1,17 @@
+id,group,d,g,p,x,y
+stats.boxcox_normmax/recipe-3385,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 0,v:1 2 4 8,v:
+stats.boxcox_normmax/recipe-3386,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 1,v:1 2 4 8,v:
+stats.boxcox_normmax/recipe-3387,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 0,v:1 2 4 8,v:
+stats.boxcox_normmax/recipe-3388,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 1,v:1 2 4 8,v:
+stats.boxcox_normmax/recipe-3389,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 0,v:1 2 3 5 9 11,v:
+stats.boxcox_normmax/recipe-3390,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 1,v:1 2 3 5 9 11,v:
+stats.boxcox_normmax/recipe-3391,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 0,v:1 2 3 5 9 11,v:
+stats.boxcox_normmax/recipe-3392,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 1,v:1 2 3 5 9 11,v:
+stats.boxcox_normmax/recipe-3393,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 0,v:0.1 0.2 0.3 1 2 10,v:
+stats.boxcox_normmax/recipe-3394,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 1,v:0.1 0.2 0.3 1 2 10,v:
+stats.boxcox_normmax/recipe-3395,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 0,v:0.1 0.2 0.3 1 2 10,v:
+stats.boxcox_normmax/recipe-3396,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 1,v:0.1 0.2 0.3 1 2 10,v:
+stats.boxcox_normmax/recipe-3397,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 0,v:2 3 4 4 8 9,v:
+stats.boxcox_normmax/recipe-3398,reference recipe; binary64 SciPy reference,t:,v:,v:-2 2 1,v:2 3 4 4 8 9,v:
+stats.boxcox_normmax/recipe-3399,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 0,v:2 3 4 4 8 9,v:
+stats.boxcox_normmax/recipe-3400,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5 1,v:2 3 4 4 8 9,v:

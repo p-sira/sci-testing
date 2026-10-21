@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+sparse.linalg.inv/recipe-sparse-0097,reference recipe; binary64 SciPy reference,"j:[""inv_regular"",""inv"",""3"",""3"",""0.0;0.0;4.0:0.0;2.0;1.0:1.0;0.0;2.0:1.0;1.0;5.0:2.0;1.0;-1.0:2.0;2.0;3.0"",""0"",""0"","""","""",""0""]","j:{""id"":""inv_regular"",""api"":""inv"",""rows"":3,""cols"":3,""a"":[[0,0,4.0],[0,2,1.0],[1,0,2.0],[1,1,5.0],[2,1,-1.0],[2,2,3.0]]}",t:sparse,t:sparse
+sparse.linalg.inv/recipe-sparse-0098,reference recipe; binary64 SciPy reference,"j:[""inv_pivot"",""inv"",""2"",""2"",""0.0;1.0;1.0:1.0;0.0;2.0:1.0;1.0;3.0"",""0"",""0"","""","""",""0""]","j:{""id"":""inv_pivot"",""api"":""inv"",""rows"":2,""cols"":2,""a"":[[0,1,1.0],[1,0,2.0],[1,1,3.0]]}",t:sparse,t:sparse

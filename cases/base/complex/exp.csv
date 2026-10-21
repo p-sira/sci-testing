@@ -1,0 +1,9 @@
+id,group,x,y
+complex.exp/000,small,s:0.0,s:0.0
+complex.exp/001,small,s:0.1,s:0.2
+complex.exp/002,small,s:-0.1,s:0.5
+complex.exp/003,ordinary,s:1.0,s:2.0
+complex.exp/004,ordinary,s:-3.0,s:4.0
+complex.exp/005,ordinary,s:10.0,s:-2.0
+complex.exp/006,near branch cut,s:-2.0,s:1e-12
+complex.exp/007,near branch cut,s:-2.0,s:-1e-12

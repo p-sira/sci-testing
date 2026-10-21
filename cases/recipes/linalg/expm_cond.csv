@@ -1,0 +1,5 @@
+id,group,fields,raw,suite,suite_name
+linalg.expm_cond/recipe-0316,reference recipe; binary64 SciPy reference,"j:[""0"",""expm_cond"",""0.0"","""","""","""",""""]","j:{""api"":""expm_cond"",""args"":[[[0.0]]]}",t:linalg,t:linalg
+linalg.expm_cond/recipe-0317,reference recipe; binary64 SciPy reference,"j:[""0"",""expm_cond"",""2.0"","""","""","""",""""]","j:{""api"":""expm_cond"",""args"":[[[2.0]]]}",t:linalg,t:linalg
+linalg.expm_cond/recipe-0318,reference recipe; binary64 SciPy reference,"j:[""0"",""expm_cond"",""0.2;0.3:0.0;-0.4"","""","""","""",""""]","j:{""api"":""expm_cond"",""args"":[[[0.2,0.3],[0.0,-0.4]]]}",t:linalg,t:linalg
+linalg.expm_cond/recipe-0319,reference recipe; binary64 SciPy reference,"j:[""0"",""expm_cond"",""0.0;-1.0:1.0;0.0"","""","""","""",""""]","j:{""api"":""expm_cond"",""args"":[[[0.0,-1.0],[1.0,0.0]]]}",t:linalg,t:linalg

@@ -1,0 +1,25 @@
+id,group,d,g,p,x,y
+stats.categorical_pmf/recipe-2144,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf""]",v:1 2 3,v:
+stats.categorical_pmf/recipe-2146,reference recipe; binary64 SciPy reference,t:,v:,v:-1,v:1 2 3,v:
+stats.categorical_pmf/recipe-2148,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 3,v:
+stats.categorical_pmf/recipe-2150,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:1 2 3,v:
+stats.categorical_pmf/recipe-2152,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 3,v:
+stats.categorical_pmf/recipe-2154,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 3,v:
+stats.categorical_pmf/recipe-2156,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:1 2 3,v:
+stats.categorical_pmf/recipe-2158,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf""]",v:1 2 3,v:
+stats.categorical_pmf/recipe-2160,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf""]",v:0 1 0,v:
+stats.categorical_pmf/recipe-2162,reference recipe; binary64 SciPy reference,t:,v:,v:-1,v:0 1 0,v:
+stats.categorical_pmf/recipe-2164,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0 1 0,v:
+stats.categorical_pmf/recipe-2166,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:0 1 0,v:
+stats.categorical_pmf/recipe-2168,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0 1 0,v:
+stats.categorical_pmf/recipe-2170,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0 1 0,v:
+stats.categorical_pmf/recipe-2172,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:0 1 0,v:
+stats.categorical_pmf/recipe-2174,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf""]",v:0 1 0,v:
+stats.categorical_pmf/recipe-2176,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf""]",v:2 2,v:
+stats.categorical_pmf/recipe-2178,reference recipe; binary64 SciPy reference,t:,v:,v:-1,v:2 2,v:
+stats.categorical_pmf/recipe-2180,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:2 2,v:
+stats.categorical_pmf/recipe-2182,reference recipe; binary64 SciPy reference,t:,v:,v:0.5,v:2 2,v:
+stats.categorical_pmf/recipe-2184,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:2 2,v:
+stats.categorical_pmf/recipe-2186,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:2 2,v:
+stats.categorical_pmf/recipe-2188,reference recipe; binary64 SciPy reference,t:,v:,v:3,v:2 2,v:
+stats.categorical_pmf/recipe-2190,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf""]",v:2 2,v:

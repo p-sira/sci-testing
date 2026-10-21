@@ -1,0 +1,6 @@
+id,group,arguments
+signal.ellipord/recipe-1028,reference recipe; binary64 SciPy reference,"j:[0.2,0.3,1,40,null]"
+signal.ellipord/recipe-1033,reference recipe; binary64 SciPy reference,v:0.2 0.3 1 40 4
+signal.ellipord/recipe-1038,reference recipe; binary64 SciPy reference,"j:[0.5,0.3,1,40,null]"
+signal.ellipord/recipe-1043,reference recipe; binary64 SciPy reference,v:0.5 0.3 1 40 4
+signal.ellipord/recipe-1048,reference recipe; binary64 SciPy reference,"j:[1,2,1,40,null]"

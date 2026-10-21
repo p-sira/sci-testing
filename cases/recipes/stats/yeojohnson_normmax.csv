@@ -1,0 +1,9 @@
+id,group,d,g,p,x,y
+stats.yeojohnson_normmax/recipe-3401,reference recipe; binary64 SciPy reference,t:,v:,v:-1 3,v:-2 -1 0 1 2,v:
+stats.yeojohnson_normmax/recipe-3402,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5,v:-2 -1 0 1 2,v:
+stats.yeojohnson_normmax/recipe-3403,reference recipe; binary64 SciPy reference,t:,v:,v:-1 3,v:-5 -2 0 1 8,v:
+stats.yeojohnson_normmax/recipe-3404,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5,v:-5 -2 0 1 8,v:
+stats.yeojohnson_normmax/recipe-3405,reference recipe; binary64 SciPy reference,t:,v:,v:-1 3,v:-1 -0.5 -0.1 0 0.1,v:
+stats.yeojohnson_normmax/recipe-3406,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5,v:-1 -0.5 -0.1 0 0.1,v:
+stats.yeojohnson_normmax/recipe-3407,reference recipe; binary64 SciPy reference,t:,v:,v:-1 3,v:0 1 2 5 10,v:
+stats.yeojohnson_normmax/recipe-3408,reference recipe; binary64 SciPy reference,t:,v:,v:0.2 0.5,v:0 1 2 5 10,v:

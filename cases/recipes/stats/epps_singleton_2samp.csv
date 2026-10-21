@@ -1,0 +1,21 @@
+id,group,d,g,p,x,y
+stats.epps_singleton_2samp/recipe-3559,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.8,v:1 2 3 4 5,v:1 2 3 4 5
+stats.epps_singleton_2samp/recipe-3560,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:1 2 3 4 5,v:1 2 3 4 5
+stats.epps_singleton_2samp/recipe-3561,reference recipe; binary64 SciPy reference,t:,v:,v:0.3 0.6 1.1,v:1 2 3 4 5,v:1 2 3 4 5
+stats.epps_singleton_2samp/recipe-3562,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.4,v:1 2 3 4 5,v:1 2 3 4 5
+stats.epps_singleton_2samp/recipe-3563,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.8,v:1 2 3 4 5,v:2 3 4 5 6
+stats.epps_singleton_2samp/recipe-3564,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:1 2 3 4 5,v:2 3 4 5 6
+stats.epps_singleton_2samp/recipe-3565,reference recipe; binary64 SciPy reference,t:,v:,v:0.3 0.6 1.1,v:1 2 3 4 5,v:2 3 4 5 6
+stats.epps_singleton_2samp/recipe-3566,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.4,v:1 2 3 4 5,v:2 3 4 5 6
+stats.epps_singleton_2samp/recipe-3567,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.8,v:0 0 1 1 2 3 3,v:0 1 2 3 4 4
+stats.epps_singleton_2samp/recipe-3568,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:0 0 1 1 2 3 3,v:0 1 2 3 4 4
+stats.epps_singleton_2samp/recipe-3569,reference recipe; binary64 SciPy reference,t:,v:,v:0.3 0.6 1.1,v:0 0 1 1 2 3 3,v:0 1 2 3 4 4
+stats.epps_singleton_2samp/recipe-3570,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.4,v:0 0 1 1 2 3 3,v:0 1 2 3 4 4
+stats.epps_singleton_2samp/recipe-3571,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.8,v:0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29,v:2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+stats.epps_singleton_2samp/recipe-3572,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29,v:2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+stats.epps_singleton_2samp/recipe-3573,reference recipe; binary64 SciPy reference,t:,v:,v:0.3 0.6 1.1,v:0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29,v:2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+stats.epps_singleton_2samp/recipe-3574,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.4,v:0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29,v:2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34
+stats.epps_singleton_2samp/recipe-3575,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.8,v:1 2 2 3 3 5,v:0 1 2 4 6 8
+stats.epps_singleton_2samp/recipe-3576,reference recipe; binary64 SciPy reference,t:,v:,v:0.1,v:1 2 2 3 3 5,v:0 1 2 4 6 8
+stats.epps_singleton_2samp/recipe-3577,reference recipe; binary64 SciPy reference,t:,v:,v:0.3 0.6 1.1,v:1 2 2 3 3 5,v:0 1 2 4 6 8
+stats.epps_singleton_2samp/recipe-3578,reference recipe; binary64 SciPy reference,t:,v:,v:0.4 0.4,v:1 2 2 3 3 5,v:0 1 2 4 6 8

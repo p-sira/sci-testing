@@ -1,0 +1,13 @@
+id,group,arguments
+signal.ellipap/recipe-0953,reference recipe; binary64 SciPy reference,v:0 1 40
+signal.ellipap/recipe-0954,reference recipe; binary64 SciPy reference,v:0 0.5 60
+signal.ellipap/recipe-0958,reference recipe; binary64 SciPy reference,v:1 1 40
+signal.ellipap/recipe-0959,reference recipe; binary64 SciPy reference,v:1 0.5 60
+signal.ellipap/recipe-0963,reference recipe; binary64 SciPy reference,v:2 1 40
+signal.ellipap/recipe-0964,reference recipe; binary64 SciPy reference,v:2 0.5 60
+signal.ellipap/recipe-0968,reference recipe; binary64 SciPy reference,v:3 1 40
+signal.ellipap/recipe-0969,reference recipe; binary64 SciPy reference,v:3 0.5 60
+signal.ellipap/recipe-0973,reference recipe; binary64 SciPy reference,v:5 1 40
+signal.ellipap/recipe-0974,reference recipe; binary64 SciPy reference,v:5 0.5 60
+signal.ellipap/recipe-0978,reference recipe; binary64 SciPy reference,v:8 1 40
+signal.ellipap/recipe-0979,reference recipe; binary64 SciPy reference,v:8 0.5 60

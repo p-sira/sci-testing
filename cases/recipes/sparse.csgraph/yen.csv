@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+sparse.csgraph.yen/recipe-sparse_parity-0040,reference recipe; binary64 SciPy reference,"j:[""yen_0"",""yen"",""4"",""4"",""0.0;1.0;2.0:0.0;3.0;10.0:1.0;2.0;3.0:2.0;3.0;4.0"",""0;3;5;1;0"","""",""0""]","j:{""id"":""yen_0"",""api"":""yen"",""a"":[[0.0,2.0,0.0,10.0],[0.0,0.0,3.0,0.0],[0.0,0.0,0.0,4.0],[0.0,0.0,0.0,0.0]],""p"":[0,3,5,1,0],""x"":[]}",t:sparse_parity,t:sparse_parity
+sparse.csgraph.yen/recipe-sparse_parity-0041,reference recipe; binary64 SciPy reference,"j:[""yen_1"",""yen"",""3"",""3"",""0.0;1.0;1.0"",""0;2;3;1;0"","""",""0""]","j:{""id"":""yen_1"",""api"":""yen"",""a"":[[0.0,1.0,0.0],[0.0,0.0,0.0],[0.0,0.0,0.0]],""p"":[0,2,3,1,0],""x"":[]}",t:sparse_parity,t:sparse_parity

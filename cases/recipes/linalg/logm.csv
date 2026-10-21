@@ -1,0 +1,10 @@
+id,group,fields,raw,suite,suite_name
+linalg.logm/recipe-0356,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""1.0;2.0:0.0;4.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[1.0,2.0],[0.0,4.0]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0357,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""4.0;1.0:1.0;3.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[4.0,1.0],[1.0,3.0]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0358,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""-2.0;1.0:0.0;3.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[-2.0,1.0],[0.0,3.0]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0359,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""1.0;1.0:0.0;1.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[1.0,1.0],[0.0,1.0]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0365,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""1e-200;0.0:0.0;2e-200"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[1e-200,0.0],[0.0,2e-200]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0490,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""3.0;2.0;0.0;1.0:1.0;4.0;2.0;0.0:0.0;1.0;5.0;2.0:2.0;0.0;1.0;6.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[3.0,2.0,0.0,1.0],[1.0,4.0,2.0,0.0],[0.0,1.0,5.0,2.0],[2.0,0.0,1.0,6.0]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0541,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""4.0;1.0;2.0:0.0;9.0;3.0:0.0;0.0;16.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[4.0,1.0,2.0],[0.0,9.0,3.0],[0.0,0.0,16.0]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0549,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""-4.0;1.0;0.0:0.0;-9.0;2.0:0.0;0.0;16.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[-4.0,1.0,0.0],[0.0,-9.0,2.0],[0.0,0.0,16.0]]]}",t:linalg,t:linalg
+linalg.logm/recipe-0557,reference recipe; binary64 SciPy reference,"j:[""0"",""logm"",""2.0;0.0;0.0:0.0;2.0;0.0:0.0;0.0;3.0"","""","""","""",""""]","j:{""api"":""logm"",""args"":[[[2.0,0.0,0.0],[0.0,2.0,0.0],[0.0,0.0,3.0]]]}",t:linalg,t:linalg

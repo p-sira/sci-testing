@@ -1,0 +1,15 @@
+id,group,d,g,p,x,y
+stats.anderson_ksamp/recipe-3730,reference recipe; binary64 SciPy reference,t:,m:1 2;3 4,v:0,v:,v:
+stats.anderson_ksamp/recipe-3731,reference recipe; binary64 SciPy reference,t:,m:1 2;3 4,v:1,v:,v:
+stats.anderson_ksamp/recipe-3732,reference recipe; binary64 SciPy reference,t:,m:1 2 2 4;2 3 3 5,v:0,v:,v:
+stats.anderson_ksamp/recipe-3733,reference recipe; binary64 SciPy reference,t:,m:1 2 2 4;2 3 3 5,v:1,v:,v:
+stats.anderson_ksamp/recipe-3734,reference recipe; binary64 SciPy reference,t:,m:1 2 3;2 3 4;0 2 5,v:0,v:,v:
+stats.anderson_ksamp/recipe-3735,reference recipe; binary64 SciPy reference,t:,m:1 2 3;2 3 4;0 2 5,v:1,v:,v:
+stats.anderson_ksamp/recipe-3736,reference recipe; binary64 SciPy reference,t:,m:0 0 0 1;0 1 1 1,v:0,v:,v:
+stats.anderson_ksamp/recipe-3737,reference recipe; binary64 SciPy reference,t:,m:0 0 0 1;0 1 1 1,v:1,v:,v:
+stats.anderson_ksamp/recipe-3738,reference recipe; binary64 SciPy reference,t:,m:0 1 2 3 4 5 6 7 8 9;10 11 12 13 14 15 16 17 18 19,v:0,v:,v:
+stats.anderson_ksamp/recipe-3739,reference recipe; binary64 SciPy reference,t:,m:0 1 2 3 4 5 6 7 8 9;10 11 12 13 14 15 16 17 18 19,v:1,v:,v:
+stats.anderson_ksamp/recipe-3740,reference recipe; binary64 SciPy reference,t:,m:0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19;2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21,v:0,v:,v:
+stats.anderson_ksamp/recipe-3741,reference recipe; binary64 SciPy reference,t:,m:0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19;2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21,v:1,v:,v:
+stats.anderson_ksamp/recipe-3742,reference recipe; binary64 SciPy reference,t:,m:0 2 3 4 6;1 2 4 5 9,v:0,v:,v:
+stats.anderson_ksamp/recipe-3743,reference recipe; binary64 SciPy reference,t:,m:0 2 3 4 6;1 2 4 5 9,v:1,v:,v:

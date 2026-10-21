@@ -1,0 +1,4 @@
+id,group,covariance,h,mean,r,z
+filter.kalman_update/047,"position observation, three scales",m:0.002 0.00025;0.00025 0.001,m:1.0 0.0,v:1.2 -0.3,m:0.0005,v:0.9
+filter.kalman_update/049,"position observation, three scales",m:2.0 0.25;0.25 1.0,m:1.0 0.0,v:1.2 -0.3,m:0.5,v:0.9
+filter.kalman_update/051,"position observation, three scales",m:2000.0 250.0;250.0 1000.0,m:1.0 0.0,v:1.2 -0.3,m:500.0,v:0.9

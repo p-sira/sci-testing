@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.solve_continuous_are/recipe-0403,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_continuous_are"",""1.0"",""1.0"",""1.0"",""1.0"",""""]","j:{""api"":""solve_continuous_are"",""args"":[[[1.0]],[[1.0]],[[1.0]],[[1.0]]]}",t:linalg,t:linalg
+linalg.solve_continuous_are/recipe-0404,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_continuous_are"",""-1.0;1.0:0.0;-2.0"",""1.0:0.5"",""2.0;0.0:0.0;1.0"",""1.0"",""""]","j:{""api"":""solve_continuous_are"",""args"":[[[-1.0,1.0],[0.0,-2.0]],[[1.0],[0.5]],[[2.0,0.0],[0.0,1.0]],[[1.0]]]}",t:linalg,t:linalg
+linalg.solve_continuous_are/recipe-0405,reference recipe; binary64 SciPy reference,"j:[""0"",""solve_continuous_are"",""0.0;1.0:0.0;0.0"",""0.0:1.0"",""1.0;0.0:0.0;1.0"",""2.0"",""""]","j:{""api"":""solve_continuous_are"",""args"":[[[0.0,1.0],[0.0,0.0]],[[0.0],[1.0]],[[1.0,0.0],[0.0,1.0]],[[2.0]]]}",t:linalg,t:linalg

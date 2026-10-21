@@ -1,0 +1,13 @@
+id,group,arguments
+signal.minimum_phase/recipe-1177,reference recipe; binary64 SciPy reference,"j:[[0.25,0.5,0.25],127,false]"
+signal.minimum_phase/recipe-1178,reference recipe; binary64 SciPy reference,"j:[[0.25,0.5,0.25],256,false]"
+signal.minimum_phase/recipe-1179,reference recipe; binary64 SciPy reference,"j:[[0.25,0.5,0.25],127,true]"
+signal.minimum_phase/recipe-1180,reference recipe; binary64 SciPy reference,"j:[[0.25,0.5,0.25],256,true]"
+signal.minimum_phase/recipe-1181,reference recipe; binary64 SciPy reference,"j:[[0.1,0.2,0.4,0.2,0.1],127,false]"
+signal.minimum_phase/recipe-1182,reference recipe; binary64 SciPy reference,"j:[[0.1,0.2,0.4,0.2,0.1],256,false]"
+signal.minimum_phase/recipe-1183,reference recipe; binary64 SciPy reference,"j:[[0.1,0.2,0.4,0.2,0.1],127,true]"
+signal.minimum_phase/recipe-1184,reference recipe; binary64 SciPy reference,"j:[[0.1,0.2,0.4,0.2,0.1],256,true]"
+signal.minimum_phase/recipe-1185,reference recipe; binary64 SciPy reference,"j:[[0.1,0.4,0.4,0.1],127,false]"
+signal.minimum_phase/recipe-1186,reference recipe; binary64 SciPy reference,"j:[[0.1,0.4,0.4,0.1],256,false]"
+signal.minimum_phase/recipe-1187,reference recipe; binary64 SciPy reference,"j:[[0.1,0.4,0.4,0.1],127,true]"
+signal.minimum_phase/recipe-1188,reference recipe; binary64 SciPy reference,"j:[[0.1,0.4,0.4,0.1],256,true]"

@@ -1,0 +1,81 @@
+id,group,d,g,p,x,y
+stats.percentileofscore/recipe-0058,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",0]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0059,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",1]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0060,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",2]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0061,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",3]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0062,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0063,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0064,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0065,reference recipe; binary64 SciPy reference,t:,v:,v:0 3,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0066,reference recipe; binary64 SciPy reference,t:,v:,v:4 0,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0067,reference recipe; binary64 SciPy reference,t:,v:,v:4 1,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0068,reference recipe; binary64 SciPy reference,t:,v:,v:4 2,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0069,reference recipe; binary64 SciPy reference,t:,v:,v:4 3,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0070,reference recipe; binary64 SciPy reference,t:,v:,v:8 0,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0071,reference recipe; binary64 SciPy reference,t:,v:,v:8 1,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0072,reference recipe; binary64 SciPy reference,t:,v:,v:8 2,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0073,reference recipe; binary64 SciPy reference,t:,v:,v:8 3,v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0074,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",0]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0075,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",1]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0076,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",2]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0077,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",3]",v:1 2 4 8 9,v:
+stats.percentileofscore/recipe-0136,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",0]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0137,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",1]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0138,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",2]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0139,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",3]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0140,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0141,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0142,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0143,reference recipe; binary64 SciPy reference,t:,v:,v:0 3,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0144,reference recipe; binary64 SciPy reference,t:,v:,v:4 0,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0145,reference recipe; binary64 SciPy reference,t:,v:,v:4 1,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0146,reference recipe; binary64 SciPy reference,t:,v:,v:4 2,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0147,reference recipe; binary64 SciPy reference,t:,v:,v:4 3,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0148,reference recipe; binary64 SciPy reference,t:,v:,v:8 0,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0149,reference recipe; binary64 SciPy reference,t:,v:,v:8 1,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0150,reference recipe; binary64 SciPy reference,t:,v:,v:8 2,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0151,reference recipe; binary64 SciPy reference,t:,v:,v:8 3,v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0152,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",0]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0153,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",1]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0154,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",2]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0155,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",3]",v:-3 0 2 6 12,v:
+stats.percentileofscore/recipe-0214,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",0]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0215,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",1]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0216,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",2]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0217,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",3]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0218,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0219,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0220,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0221,reference recipe; binary64 SciPy reference,t:,v:,v:0 3,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0222,reference recipe; binary64 SciPy reference,t:,v:,v:4 0,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0223,reference recipe; binary64 SciPy reference,t:,v:,v:4 1,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0224,reference recipe; binary64 SciPy reference,t:,v:,v:4 2,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0225,reference recipe; binary64 SciPy reference,t:,v:,v:4 3,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0226,reference recipe; binary64 SciPy reference,t:,v:,v:8 0,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0227,reference recipe; binary64 SciPy reference,t:,v:,v:8 1,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0228,reference recipe; binary64 SciPy reference,t:,v:,v:8 2,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0229,reference recipe; binary64 SciPy reference,t:,v:,v:8 3,v:4 4 4 4,v:
+stats.percentileofscore/recipe-0230,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",0]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0231,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",1]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0232,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",2]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0233,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",3]",v:4 4 4 4,v:
+stats.percentileofscore/recipe-0284,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",0]",v:1,v:
+stats.percentileofscore/recipe-0285,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",1]",v:1,v:
+stats.percentileofscore/recipe-0286,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",2]",v:1,v:
+stats.percentileofscore/recipe-0287,reference recipe; binary64 SciPy reference,t:,v:,"j:[""-inf"",3]",v:1,v:
+stats.percentileofscore/recipe-0288,reference recipe; binary64 SciPy reference,t:,v:,v:0 0,v:1,v:
+stats.percentileofscore/recipe-0289,reference recipe; binary64 SciPy reference,t:,v:,v:0 1,v:1,v:
+stats.percentileofscore/recipe-0290,reference recipe; binary64 SciPy reference,t:,v:,v:0 2,v:1,v:
+stats.percentileofscore/recipe-0291,reference recipe; binary64 SciPy reference,t:,v:,v:0 3,v:1,v:
+stats.percentileofscore/recipe-0292,reference recipe; binary64 SciPy reference,t:,v:,v:4 0,v:1,v:
+stats.percentileofscore/recipe-0293,reference recipe; binary64 SciPy reference,t:,v:,v:4 1,v:1,v:
+stats.percentileofscore/recipe-0294,reference recipe; binary64 SciPy reference,t:,v:,v:4 2,v:1,v:
+stats.percentileofscore/recipe-0295,reference recipe; binary64 SciPy reference,t:,v:,v:4 3,v:1,v:
+stats.percentileofscore/recipe-0296,reference recipe; binary64 SciPy reference,t:,v:,v:8 0,v:1,v:
+stats.percentileofscore/recipe-0297,reference recipe; binary64 SciPy reference,t:,v:,v:8 1,v:1,v:
+stats.percentileofscore/recipe-0298,reference recipe; binary64 SciPy reference,t:,v:,v:8 2,v:1,v:
+stats.percentileofscore/recipe-0299,reference recipe; binary64 SciPy reference,t:,v:,v:8 3,v:1,v:
+stats.percentileofscore/recipe-0300,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",0]",v:1,v:
+stats.percentileofscore/recipe-0301,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",1]",v:1,v:
+stats.percentileofscore/recipe-0302,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",2]",v:1,v:
+stats.percentileofscore/recipe-0303,reference recipe; binary64 SciPy reference,t:,v:,"j:[""inf"",3]",v:1,v:

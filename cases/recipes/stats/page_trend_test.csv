@@ -1,0 +1,11 @@
+id,group,d,g,p,x,y
+stats.page_trend_test/recipe-3327,reference recipe; binary64 SciPy reference,t:,m:1 2 3;2 3 4,v:,v:,v:1 2 3
+stats.page_trend_test/recipe-3328,reference recipe; binary64 SciPy reference,t:,m:1 2 3;2 3 4,v:,v:,v:3 2 1
+stats.page_trend_test/recipe-3329,reference recipe; binary64 SciPy reference,t:,m:3 2 1;4 3 2,v:,v:,v:1 2 3
+stats.page_trend_test/recipe-3330,reference recipe; binary64 SciPy reference,t:,m:3 2 1;4 3 2,v:,v:,v:3 2 1
+stats.page_trend_test/recipe-3331,reference recipe; binary64 SciPy reference,t:,m:1 1 3;3 2 2;0 0 0,v:,v:,v:1 2 3
+stats.page_trend_test/recipe-3332,reference recipe; binary64 SciPy reference,t:,m:1 1 3;3 2 2;0 0 0,v:,v:,v:3 2 1
+stats.page_trend_test/recipe-3333,reference recipe; binary64 SciPy reference,t:,m:2 2 2 2;1 2 3 4,v:,v:,v:1 2 3 4
+stats.page_trend_test/recipe-3334,reference recipe; binary64 SciPy reference,t:,m:2 2 2 2;1 2 3 4,v:,v:,v:4 3 2 1
+stats.page_trend_test/recipe-3335,reference recipe; binary64 SciPy reference,t:,m:3 4 3;2 2 4;1 1 2;2 4 3;1 2 1;1 2 4;1 2 4;3 4 4;2 4 5;1 3 4,v:,v:,v:1 2 3
+stats.page_trend_test/recipe-3336,reference recipe; binary64 SciPy reference,t:,m:3 4 3;2 2 4;1 1 2;2 4 3;1 2 1;1 2 4;1 2 4;3 4 4;2 4 5;1 3 4,v:,v:,v:3 2 1

@@ -1,0 +1,6 @@
+id,group,p0
+special.keip_zeros/recipe-0000,reference recipe; binary64 reference,i:3
+special.keip_zeros/recipe-0001,reference recipe; binary64 reference,i:1
+special.keip_zeros/recipe-0002,reference recipe; binary64 reference,i:5
+special.keip_zeros/recipe-0003,reference recipe; binary64 reference,i:32
+special.keip_zeros/recipe-0004,reference recipe; binary64 reference,i:257

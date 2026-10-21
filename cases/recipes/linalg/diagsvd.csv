@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.diagsvd/recipe-0080,reference recipe; binary64 SciPy reference,"j:[""0"",""diagsvd"","""",""0"",""0"","""",""""]","j:{""api"":""diagsvd"",""args"":[[],0,0]}",t:linalg,t:linalg
+linalg.diagsvd/recipe-0081,reference recipe; binary64 SciPy reference,"j:[""0"",""diagsvd"",""2.0;1.0"",""2"",""3"","""",""""]","j:{""api"":""diagsvd"",""args"":[[2.0,1.0],2,3]}",t:linalg,t:linalg
+linalg.diagsvd/recipe-0082,reference recipe; binary64 SciPy reference,"j:[""0"",""diagsvd"",""3.0;2.0"",""4"",""2"","""",""""]","j:{""api"":""diagsvd"",""args"":[[3.0,2.0],4,2]}",t:linalg,t:linalg

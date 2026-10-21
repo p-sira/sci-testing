@@ -1,0 +1,10 @@
+id,group,arguments
+signal.check_nola/recipe-0590,reference recipe; binary64 SciPy reference,"j:[[1.0,1.0,1.0,1.0],0,1e-10]"
+signal.check_nola/recipe-0594,reference recipe; binary64 SciPy reference,"j:[[1.0,1.0,1.0,1.0],1,1e-10]"
+signal.check_nola/recipe-0598,reference recipe; binary64 SciPy reference,"j:[[1.0,1.0,1.0,1.0],2,1e-10]"
+signal.check_nola/recipe-0602,reference recipe; binary64 SciPy reference,"j:[[0.0,0.5,1.0,0.5],0,1e-10]"
+signal.check_nola/recipe-0606,reference recipe; binary64 SciPy reference,"j:[[0.0,0.5,1.0,0.5],1,1e-10]"
+signal.check_nola/recipe-0610,reference recipe; binary64 SciPy reference,"j:[[0.0,0.5,1.0,0.5],2,1e-10]"
+signal.check_nola/recipe-0614,reference recipe; binary64 SciPy reference,"j:[[0.0,1.0,0.0],0,1e-10]"
+signal.check_nola/recipe-0618,reference recipe; binary64 SciPy reference,"j:[[0.0,1.0,0.0],1,1e-10]"
+signal.check_nola/recipe-0622,reference recipe; binary64 SciPy reference,"j:[[0.0,1.0,0.0],2,1e-10]"

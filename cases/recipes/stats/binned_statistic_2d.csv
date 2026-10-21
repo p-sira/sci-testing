@@ -1,0 +1,8 @@
+id,group,d,g,p,x,y
+stats.binned_statistic_2d/recipe-2206,reference recipe; binary64 SciPy reference,t:,m:0 1 2;0 1 2;1 3 5 7 9,v:0,v:0 0.5 1.5 2 3,v:0 1 0.5 2 0
+stats.binned_statistic_2d/recipe-2208,reference recipe; binary64 SciPy reference,t:,m:0 1 2;0 1 2;1 3 5 7 9,v:1,v:0 0.5 1.5 2 3,v:0 1 0.5 2 0
+stats.binned_statistic_2d/recipe-2210,reference recipe; binary64 SciPy reference,t:,m:0 1 2;0 1 2;1 3 5 7 9,v:2,v:0 0.5 1.5 2 3,v:0 1 0.5 2 0
+stats.binned_statistic_2d/recipe-2212,reference recipe; binary64 SciPy reference,t:,m:0 1 2;0 1 2;1 3 5 7 9,v:3,v:0 0.5 1.5 2 3,v:0 1 0.5 2 0
+stats.binned_statistic_2d/recipe-2214,reference recipe; binary64 SciPy reference,t:,m:0 1 2;0 1 2;1 3 5 7 9,v:4,v:0 0.5 1.5 2 3,v:0 1 0.5 2 0
+stats.binned_statistic_2d/recipe-2216,reference recipe; binary64 SciPy reference,t:,m:0 1 2;0 1 2;1 3 5 7 9,v:5,v:0 0.5 1.5 2 3,v:0 1 0.5 2 0
+stats.binned_statistic_2d/recipe-2218,reference recipe; binary64 SciPy reference,t:,m:0 1 2;0 1 2;1 3 5 7 9,v:6,v:0 0.5 1.5 2 3,v:0 1 0.5 2 0

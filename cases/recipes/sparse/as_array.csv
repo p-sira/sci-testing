@@ -1,0 +1,3 @@
+id,group,fields,raw,suite,suite_name
+sparse.as_array/recipe-sparse_parity-0111,reference recipe; binary64 SciPy reference,"j:[""as_array_0"",""as_array"",""2"",""3"",""0.0;0.0;1.0:0.0;2.0;2.0:1.0;1.0;3.0"",""1;0"","""",""0""]","j:{""id"":""as_array_0"",""api"":""as_array"",""a"":[[1.0,0.0,2.0],[0.0,3.0,0.0]],""p"":[1,0],""x"":[]}",t:sparse_parity,t:sparse_parity
+sparse.as_array/recipe-sparse_parity-0112,reference recipe; binary64 SciPy reference,"j:[""as_array_1"",""as_array"",""1"",""1"","""",""0;1"","""",""0""]","j:{""id"":""as_array_1"",""api"":""as_array"",""a"":[[0.0]],""p"":[0,1],""x"":[]}",t:sparse_parity,t:sparse_parity

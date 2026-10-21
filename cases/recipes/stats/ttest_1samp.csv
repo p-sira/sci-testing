@@ -1,0 +1,13 @@
+id,group,d,g,p,x,y
+stats.ttest_1samp/recipe-0444,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 3 4,v:
+stats.ttest_1samp/recipe-0452,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2 3 4,v:
+stats.ttest_1samp/recipe-0460,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2 3 4,v:
+stats.ttest_1samp/recipe-0471,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2 3 4,v:
+stats.ttest_1samp/recipe-0479,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2 3 4,v:
+stats.ttest_1samp/recipe-0487,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2 3 4,v:
+stats.ttest_1samp/recipe-0498,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 1 2 3,v:
+stats.ttest_1samp/recipe-0506,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 1 2 3,v:
+stats.ttest_1samp/recipe-0514,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 1 2 3,v:
+stats.ttest_1samp/recipe-0525,reference recipe; binary64 SciPy reference,t:,v:,v:2 0,v:1 2,v:
+stats.ttest_1samp/recipe-0533,reference recipe; binary64 SciPy reference,t:,v:,v:2 1,v:1 2,v:
+stats.ttest_1samp/recipe-0541,reference recipe; binary64 SciPy reference,t:,v:,v:2 2,v:1 2,v:

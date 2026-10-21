@@ -1,0 +1,19 @@
+id,group,d,g,p,x,y
+stats.pmean/recipe-0310,reference recipe; binary64 SciPy reference,t:,v:,v:-3,v:1 2 4 8,v:
+stats.pmean/recipe-0311,reference recipe; binary64 SciPy reference,t:,v:,v:-1,v:1 2 4 8,v:
+stats.pmean/recipe-0312,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:1 2 4 8,v:
+stats.pmean/recipe-0313,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:1 2 4 8,v:
+stats.pmean/recipe-0314,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:1 2 4 8,v:
+stats.pmean/recipe-0315,reference recipe; binary64 SciPy reference,t:,v:,v:8,v:1 2 4 8,v:
+stats.pmean/recipe-0332,reference recipe; binary64 SciPy reference,t:,v:,v:-3,v:0.1 0.5 2 7,v:
+stats.pmean/recipe-0333,reference recipe; binary64 SciPy reference,t:,v:,v:-1,v:0.1 0.5 2 7,v:
+stats.pmean/recipe-0334,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:0.1 0.5 2 7,v:
+stats.pmean/recipe-0335,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:0.1 0.5 2 7,v:
+stats.pmean/recipe-0336,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:0.1 0.5 2 7,v:
+stats.pmean/recipe-0337,reference recipe; binary64 SciPy reference,t:,v:,v:8,v:0.1 0.5 2 7,v:
+stats.pmean/recipe-0354,reference recipe; binary64 SciPy reference,t:,v:,v:-3,v:2 2 2,v:
+stats.pmean/recipe-0355,reference recipe; binary64 SciPy reference,t:,v:,v:-1,v:2 2 2,v:
+stats.pmean/recipe-0356,reference recipe; binary64 SciPy reference,t:,v:,v:0,v:2 2 2,v:
+stats.pmean/recipe-0357,reference recipe; binary64 SciPy reference,t:,v:,v:1,v:2 2 2,v:
+stats.pmean/recipe-0358,reference recipe; binary64 SciPy reference,t:,v:,v:2,v:2 2 2,v:
+stats.pmean/recipe-0359,reference recipe; binary64 SciPy reference,t:,v:,v:8,v:2 2 2,v:

@@ -1,0 +1,13 @@
+id,group,arguments
+signal.welch/recipe-0523,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,true,""density""]"
+signal.welch/recipe-0527,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,false,""density""]"
+signal.welch/recipe-0531,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,true,""spectrum""]"
+signal.welch/recipe-0535,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,4,4.0,false,""spectrum""]"
+signal.welch/recipe-0540,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,true,""density""]"
+signal.welch/recipe-0544,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,false,""density""]"
+signal.welch/recipe-0548,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,true,""spectrum""]"
+signal.welch/recipe-0552,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,5,4.0,false,""spectrum""]"
+signal.welch/recipe-0557,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,true,""density""]"
+signal.welch/recipe-0561,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,false,""density""]"
+signal.welch/recipe-0565,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,true,""spectrum""]"
+signal.welch/recipe-0569,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,-1.0,0.0,3.0,2.0,4.0,-2.0,1.0,0.0,2.0,3.0],[1.0,0.5,0.5,1.0],2,8,4.0,false,""spectrum""]"

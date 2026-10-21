@@ -1,0 +1,3 @@
+id,group,arguments
+signal.sosfreqz/recipe-0402,reference recipe; binary64 SciPy reference,"j:[[[0.2,0.4,0.2,1.0,-0.4,0.1]],[0.0,0.2,1.0,2.0]]"
+signal.sosfreqz/recipe-0409,reference recipe; binary64 SciPy reference,"j:[[[0.2,0.4,0.2,1.0,-0.4,0.1],[1.0,-0.2,0.1,1.0,-0.5,0.2]],[0.0,0.2,1.0,2.0]]"

@@ -1,0 +1,7 @@
+id,group,arguments
+signal.peak_prominences/recipe-0681,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,2.0,1.0,3.0,1.0,2.0,1.0],[1,4,6],null]"
+signal.peak_prominences/recipe-0686,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,2.0,1.0,3.0,1.0,2.0,1.0],[1,4,6],3]"
+signal.peak_prominences/recipe-0691,reference recipe; binary64 SciPy reference,"j:[[1.0,2.0,2.0,1.0,3.0,1.0,2.0,1.0],[1,4,6],4]"
+signal.peak_prominences/recipe-0696,reference recipe; binary64 SciPy reference,"j:[[0.0,2.0,0.0,1.0,0.0,3.0,0.0],[1,3,5],null]"
+signal.peak_prominences/recipe-0701,reference recipe; binary64 SciPy reference,"j:[[0.0,2.0,0.0,1.0,0.0,3.0,0.0],[1,3,5],3]"
+signal.peak_prominences/recipe-0706,reference recipe; binary64 SciPy reference,"j:[[0.0,2.0,0.0,1.0,0.0,3.0,0.0],[1,3,5],4]"

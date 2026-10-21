@@ -1,0 +1,4 @@
+id,group,fields,raw,suite,suite_name
+linalg.hankel/recipe-0003,reference recipe; binary64 SciPy reference,"j:[""0"",""hankel"",""1.0;2.0;3.0"",""none"","""","""",""""]","j:{""api"":""hankel"",""args"":[[1.0,2.0,3.0],null]}",t:linalg,t:linalg
+linalg.hankel/recipe-0004,reference recipe; binary64 SciPy reference,"j:[""0"",""hankel"",""2.0;-1.0"",""9.0;4.0;-2.0;1.0"","""","""",""""]","j:{""api"":""hankel"",""args"":[[2.0,-1.0],[9.0,4.0,-2.0,1.0]]}",t:linalg,t:linalg
+linalg.hankel/recipe-0005,reference recipe; binary64 SciPy reference,"j:[""0"",""hankel"","""","""","""","""",""""]","j:{""api"":""hankel"",""args"":[[],[]]}",t:linalg,t:linalg
