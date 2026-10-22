@@ -2,4 +2,4 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SCI = ROOT.parent / "sci"
+SCI = ROOT / "sci"

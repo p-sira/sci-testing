@@ -12,7 +12,7 @@ class SourceDigestTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             for name in (
-                'Cargo.toml', 'Cargo.lock', 'pyproject.toml', 'uv.lock',
+                '.gitmodules', 'Cargo.toml', 'Cargo.lock', 'pyproject.toml', 'uv.lock',
                 'sci-revision.txt', 'api_inventory.csv', 'README.md',
                 'sci_testing/report.py', 'tests/test_report.py',
             ):
@@ -21,7 +21,7 @@ class SourceDigestTests(unittest.TestCase):
                 path.write_text('original')
             with patch.object(report, 'ROOT', root):
                 original = report.digest_sources()
-                for name in ('sci_testing/report.py', 'tests/test_report.py'):
+                for name in ('.gitmodules', 'sci_testing/report.py', 'tests/test_report.py'):
                     with self.subTest(path=name):
                         path = root / name
                         path.write_text('changed')

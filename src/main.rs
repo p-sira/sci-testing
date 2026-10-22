@@ -11,7 +11,7 @@ use std::{
     io::{self, BufRead},
 };
 
-#[path = "../../sci/tests/common/mod.rs"]
+#[path = "../sci/tests/common/mod.rs"]
 mod common;
 mod extra;
 mod extracted;

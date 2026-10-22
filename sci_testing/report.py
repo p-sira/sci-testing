@@ -32,7 +32,7 @@ import scipy
 from scipy import cluster, constants, differentiate, fft, integrate, interpolate
 from scipy import linalg, optimize, signal, spatial, special, stats
 
-from . import ROOT
+from . import ROOT, SCI
 EPS = mp.mpf(2) ** -52
 TINY = mp.mpf(2) ** -1022
 MODULES = ('cluster complex constants differentiate fft filter integrate interpolate '
@@ -286,7 +286,7 @@ def component_error(actual, reference, *, binary64):
 
 
 def digest_sources():
-    names={'Cargo.toml','Cargo.lock','pyproject.toml','uv.lock','sci-revision.txt','api_inventory.csv','README.md'}
+    names={'.gitmodules','Cargo.toml','Cargo.lock','pyproject.toml','uv.lock','sci-revision.txt','api_inventory.csv','README.md'}
     names.update(p.relative_to(ROOT).as_posix() for pattern in ['*.py','sci_testing/**/*.py','tests/**/*.py','*.rs','src/*.rs','native/*.cpp','.github/workflows/*.yml','cases/**/*.csv'] for p in ROOT.glob(pattern))
     digest=hashlib.sha256()
     for name in sorted(names):digest.update(name.encode()+b'\0'+(ROOT/name).read_bytes()+b'\0')
@@ -499,12 +499,12 @@ This adapts [Boost.Math's error-report convention](https://www.boost.org/doc/lib
 
 ## Reproduce
 
-Keep sibling `sci` and `sci-testing` checkouts, with Sci at `sci-revision.txt`.
+Initialize the `sci/` submodule at the revision recorded in `sci-revision.txt`.
 Install a C++17 compiler, libclang, Boost.Math headers and GSL development files.
 The Cargo and uv lockfiles pin Rust/Python dependencies separately from Sci.
 
 ```sh
-cd ../sci-testing
+git submodule update --init --recursive
 uv sync --frozen
 uv run --frozen python -m unittest -v
 cargo test --locked
@@ -517,8 +517,9 @@ references and other library results. Select modules with `--module special` or
 nested namespaces with `--module sparse.linalg`; repeat `--module` to select several.
 Unselected measurements stay fixed. Original reference provenance is retained under
 `reference_environment` in `results/environment.json`; partial refreshes record
-per-function Sci revisions under `sci_measurement_commits`. Update `sci-revision.txt`
-and, if necessary, `Cargo.lock` before measuring a newer Sci commit.
+per-function Sci revisions under `sci_measurement_commits`. Commit the updated
+`sci/` submodule pointer and `sci-revision.txt` and, if necessary, `Cargo.lock` before
+measuring a newer Sci commit.
 Use `--full` for the initial snapshot, changed inputs, or refreshing all references
 and comparison libraries. `--check` validates source/input/result digests,
 the complete coverage audit and every generated page without compiling or writing
@@ -670,9 +671,9 @@ def main():
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
     pinned=(ROOT/'sci-revision.txt').read_text().strip()
-    if command('git','rev-parse','HEAD',cwd=ROOT.parent/'sci') != pinned:
+    if command('git','rev-parse','HEAD',cwd=SCI) != pinned:
         raise RuntimeError('Sci checkout differs from sci-revision.txt; update the pin intentionally before measuring')
-    meta=environment(ROOT.parent/'sci')
+    meta=environment(SCI)
     if not args.full:
         meta['reference_environment']=previous.get('reference_environment',previous)
         if args.module:

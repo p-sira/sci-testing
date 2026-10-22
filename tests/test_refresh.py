@@ -52,7 +52,7 @@ class RefreshTests(unittest.TestCase):
         (self.root/'sci-revision.txt').write_text('new\n')
         self.stack=ExitStack()
         self.addCleanup(self.stack.close)
-        for name,value in [('ROOT',self.root),('MODULES',['sparse','special'])]:
+        for name,value in [('ROOT',self.root),('SCI',self.root/'sci'),('MODULES',['sparse','special'])]:
             self.stack.enter_context(patch.object(report,name,value))
         self.stack.enter_context(patch.object(report,'build_cases',return_value=self.cases))
         self.stack.enter_context(patch.object(report,'command',return_value='new'))

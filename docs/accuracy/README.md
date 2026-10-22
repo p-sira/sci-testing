@@ -84,12 +84,12 @@ This adapts [Boost.Math's error-report convention](https://www.boost.org/doc/lib
 
 ## Reproduce
 
-Keep sibling `sci` and `sci-testing` checkouts, with Sci at `sci-revision.txt`.
+Initialize the `sci/` submodule at the revision recorded in `sci-revision.txt`.
 Install a C++17 compiler, libclang, Boost.Math headers and GSL development files.
 The Cargo and uv lockfiles pin Rust/Python dependencies separately from Sci.
 
 ```sh
-cd ../sci-testing
+git submodule update --init --recursive
 uv sync --frozen
 uv run --frozen python -m unittest -v
 cargo test --locked

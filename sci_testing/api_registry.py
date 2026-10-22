@@ -1,6 +1,6 @@
 """Audit Sci's functional surface and generate concise typed Rust registrations.
 
-The source signature inventory is pinned to the sibling checkout. Recipes and
+The source signature inventory is pinned to the Sci submodule. Recipes and
 reference adapters must be registered separately; discovery never implies a
 successful numerical comparison.
 """

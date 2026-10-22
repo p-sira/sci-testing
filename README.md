@@ -1,10 +1,11 @@
 # sci-testing
 
-Library comparisons using Sci as the baseline for every public function in the sibling
-[Sci](../sci) checkout. Reports, inputs, recipes and measurements live here;
-start with the [comparison tables](docs/accuracy/README.md).
+Library comparisons using Sci as the baseline for every public function in the
+[Sci](https://github.com/p-sira/sci) submodule at `sci/`. Reports, inputs, recipes
+and measurements live here; start with the [comparison tables](docs/accuracy/README.md).
 
 ```sh
+git submodule update --init --recursive
 uv sync --frozen
 uv run --frozen python -m sci_testing.report --full
 uv run --frozen python -m sci_testing.report --check
@@ -26,9 +27,9 @@ namespace and can be repeated; unselected measurements remain unchanged.
 references and library results, including when inputs change or no snapshot exists.
 `--module` applies only to Sci-only refreshes.
 
-Before measuring an updated Sci checkout, update `sci-revision.txt` to its commit
-and refresh `Cargo.lock` if its dependencies changed. Sci-only runs require the
-same generated inputs and intact saved measurements. They rebuild the Rust runner,
+Before measuring an updated Sci checkout, commit the updated `sci/` submodule
+pointer and `sci-revision.txt`, and refresh `Cargo.lock` if its dependencies changed.
+Sci-only runs require the same generated inputs and intact saved measurements. They rebuild the Rust runner,
 refresh coverage and reports, and avoid evaluating comparison libraries or
 independent references. Original reference provenance is retained under
 `reference_environment` in `results/environment.json`; partial refreshes also
@@ -61,14 +62,17 @@ cargo clippy --locked --all-targets -- -D warnings
 RUSTDOCFLAGS='-D warnings' cargo doc --no-deps
 ```
 
-Keep the repositories next to each other: the Rust dependency is `../sci`.
-Sci must match `sci-revision.txt`; modified numerical sources or fixture providers
+The Rust dependency and Python fixture importers use the `sci/` submodule.
+Its `tests/fixtures/` and `tests/scipy/` data are included through the submodule,
+so no separate Sci checkout or data copy is required. Sci must match
+`sci-revision.txt`; modified numerical sources or fixture providers
 are refused. Documentation edits are permitted. The runner uses Cargo's dev
 profile without custom compiler/profile/target overrides. Set `CARGO_TARGET_DIR`
 to reuse an existing build directory.
 
 ## Files and recipes
 
+- `sci/`: pinned Sci sources, fixture data and fixture generators (Git submodule).
 - `sci_testing/`: Python reporting, reference evaluation, CSV handling and generators.
 - `tests/`: Python regression tests, discovered by `python -m unittest`.
 - `src/`: Rust public-API runner and generated fixture adapters.

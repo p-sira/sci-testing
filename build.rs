@@ -3,7 +3,7 @@ use std::{env, fs, path::PathBuf};
 
 fn main() {
     let manifest = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
-    let tests = manifest.join("../sci/tests").canonicalize().unwrap();
+    let tests = manifest.join("sci/tests").canonicalize().unwrap();
     let output = PathBuf::from(env::var_os("OUT_DIR").unwrap());
     let escaped = tests
         .to_string_lossy()

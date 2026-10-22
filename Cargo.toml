@@ -5,7 +5,7 @@ edition = "2024"
 publish = false
 
 [dependencies]
-sci = { path = "../sci" }
+sci = { path = "sci" }
 serde_json = { version = "1", features = ["float_roundtrip"] }
 
 approx = "0.5.1"
