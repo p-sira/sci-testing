@@ -13,8 +13,8 @@ from . import ROOT, SCI
 
 
 def sci_target():
-    """Sci 0.3 checkout, distinct from the independently pinned fixture tree."""
-    return ROOT.parent / 'sci'
+    """Use the pinned Sci 0.3 submodule in every checkout, including CI."""
+    return SCI
 
 
 @dataclass(frozen=True)

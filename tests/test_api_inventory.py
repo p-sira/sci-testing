@@ -5,11 +5,16 @@ import tempfile
 import unittest
 
 from sci_testing.api_registry import (Function, dispatch_paths,
-                                      rust_registrations, typed_manifest)
+                                      rust_registrations, sci_target, typed_manifest)
 from sci_testing.inventory import inventory, reconcile, resolve_legacy_api
+from sci_testing import SCI
 
 
 class InventoryTests(unittest.TestCase):
+    def test_codegen_uses_pinned_submodule_with_no_sibling_checkout(self):
+        self.assertEqual(sci_target().resolve(), SCI.resolve())
+        self.assertTrue((sci_target()/'tests/fft_extended.rs').is_file())
+
     def test_rustdoc_resolves_public_reexports_through_private_modules(self):
         def item(name, visibility, inner, crate=0, span=None):
             return dict(name=name, visibility=visibility, crate_id=crate, inner=inner,

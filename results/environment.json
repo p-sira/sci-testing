@@ -1,7 +1,7 @@
 {
   "sci_commit": "3fbdbf3a73bcad57fa91e30262a4e9f9d09fd57a",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "827096beac94a6c4013a702cfb1c10e63805767cc1d6c6673c69676c2149b764",
+  "testing_sources_sha256": "9b806b00dd16330a3acc24ed8c2ff9399bd069fd0a2017e2d4988c55f8cd6e81",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
