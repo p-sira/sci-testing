@@ -1,12 +1,15 @@
 """Reuse the pinned interpolation dispatch and record its observable outputs."""
 from .rust_source import formatted
-from .api_registry import SCI
+from pathlib import Path
+from .api_registry import SCI, sci_target
 
 from . import ROOT
 
 
-def generated():
-    text=(SCI/'tests/interpolation.rs').read_text()
+def generated(source=None):
+    if source is None:
+        source=sci_target()
+    text=(Path(source)/'tests/interpolation.rs').read_text()
     prefix=text[:text.index('#[test]')].replace('mod common;','use crate::common;')
     start=prefix.index('fn check(actual:');end=prefix.index('fn extension(',start)
     prefix=prefix[:start]+'''fn check(actual: &[f64], _expected: &str) { emit(actual); }

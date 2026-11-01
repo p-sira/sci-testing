@@ -27,8 +27,11 @@ class NativeComparisons:
                          for i, name in enumerate(['Boost.Math', 'GSL'])}
 
     def evaluate(self, case):
-        module, name = case['api'].split('.',1)
+        module, _, name = case['api'].partition('.')
         if module not in ['special', 'stats']: return {}
+        # 0.3 uses mathematical-family modules. Native Boost/GSL identifiers
+        # remain the final function name, irrespective of Sci's namespace.
+        name = name.rsplit('.',1)[-1]
         count = self.library.comparison_supported(name.encode())
         if not count: return {}
         a = case['args']

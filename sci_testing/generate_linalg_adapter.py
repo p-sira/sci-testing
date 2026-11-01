@@ -7,18 +7,25 @@ reconstructions, ordered eigenvalues and residuals as the established Sci tests.
 """
 from .rust_source import formatted
 import re
-from .api_registry import SCI
+from pathlib import Path
+from .api_registry import SCI, sci_target
 
 from . import ROOT
 
 
-def generated():
-    text=(SCI/'tests/linalg.rs').read_text()
+def generated(source=None):
+    if source is None:
+        source=sci_target()
+    text=(Path(source)/'tests/linalg.rs').read_text()
     prefix=text[:text.index('fn check_scipy_references')]
     prefix=prefix.replace('mod common;', 'use crate::common;')
     prefix=prefix.replace('fn check_vector(', 'fn check_vector_plain(').replace('fn check_matrix(', 'fn check_matrix_plain(').replace('fn ccheck(', 'fn ccheck_plain(')
     start=text.index('        let a = || matrix(c[2]);')
-    end=text.index('\n    }\n    assert_eq!(covered.len(), 105);',start)
+    # The namespace refactor changed the number of public linalg functions;
+    # avoid treating a historical coverage count as a fixture delimiter.
+    match=re.search(r'\n    }\n    assert_eq!\(covered\.len\(\), \d+\);',text[start:])
+    if match is None:raise ValueError('linalg reference dispatcher end not found')
+    end=start+match.start()
     body=text[start:end]
     # ID skeletons can differ. Measure spectral residual and rank explicitly.
     first=body.index('                let expected = matrix(e[1]);')
@@ -28,6 +35,15 @@ def generated():
 '''+body[last:]
     body=body.replace('assert_eq!(t.prefix.to_string(), e[1]);','assert_eq!(t.prefix.to_string(), e[1].to_string());')
     body=body.replace('assert_eq!(t.dtype, "f64");','emit(t.dtype.to_string());')
+    if Path(source).resolve()==sci_target().resolve():
+        first=body.index('            "solve_lyapunov" | "solve_continuous_lyapunov" => {')
+        last=body.index('            "solve_discrete_lyapunov"',first)
+        body=body[:first]+'''            "solve_continuous_lyapunov" => mm(l::solvers::solve_continuous_lyapunov(
+                &convert_matrix(&a()),
+                &convert_matrix(&matrix(c[3])),
+            ).unwrap()),
+            "solve_lyapunov" => mm(l::solvers::solve_continuous_lyapunov(&a(), &matrix(c[3])).unwrap()),
+'''+body[last:]
     source=prefix+'\npub fn run(c: &[&str]) -> Vec<f64> {\nlet e=["";5];\nlet convert_matrix=|a: &[Vec<f64>]| a.to_vec();\nlet convert_vector=|a: &[f64]| a.to_vec();\nOUTPUT.with(|o|o.borrow_mut().clear());\n'+body+'\nOUTPUT.with(|o|o.borrow().clone())\n}\n'
     for name in ['check_vector','check_matrix','finite_close','ccheck']:
         source=re.sub(r'\b'+name+r'\(',name+'!(',source)

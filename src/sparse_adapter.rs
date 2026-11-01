@@ -54,8 +54,10 @@ pub mod core {
         let rows = f[2].parse().unwrap();
         let cols = f[3].parse().unwrap();
         let t = triples(f[4]);
-        let a = s::from_coo(rows, cols, &t).unwrap();
-        let b = s::from_coo(f[5].parse().unwrap(), f[6].parse().unwrap(), &triples(f[7])).unwrap();
+        let a = s::construct::from_coo(rows, cols, &t).unwrap();
+        let b =
+            s::construct::from_coo(f[5].parse().unwrap(), f[6].parse().unwrap(), &triples(f[7]))
+                .unwrap();
         let k = numbers(f[9]);
         let scalar = k.first().copied().unwrap_or(0.0);
         let x = if matches!(api, "diags" | "diags_array") {
@@ -64,8 +66,10 @@ pub mod core {
             numbers(f[8])
         };
         let matrix: Option<SparseMatrix> = match api {
-            "from_coo" => Some(s::from_coo(rows, cols, &t).unwrap()),
-            "from_csr" => Some(s::from_csr(rows, cols, &a.indptr, &a.indices, &a.data).unwrap()),
+            "from_coo" => Some(s::construct::from_coo(rows, cols, &t).unwrap()),
+            "from_csr" => {
+                Some(s::construct::from_csr(rows, cols, &a.indptr, &a.indices, &a.data).unwrap())
+            }
             "from_csc" => {
                 // Build CSC directly from the input coordinates, independently of Sci transpose.
                 let mut t = t.clone();
@@ -81,50 +85,45 @@ pub mod core {
                 for j in 0..cols {
                     p[j + 1] += p[j];
                 }
-                Some(s::from_csc(rows, cols, &p, &indices, &data).unwrap())
+                Some(s::construct::from_csc(rows, cols, &p, &indices, &data).unwrap())
             }
-            "from_dense" => Some(s::from_dense(&raw_dense(rows, cols, &t)).unwrap()),
+            "from_dense" => Some(s::construct::from_dense(&raw_dense(rows, cols, &t)).unwrap()),
             "to_dense" | "validate" => {
-                s::validate(&a).unwrap();
+                s::operations::validate(&a).unwrap();
                 Some(a.clone())
             }
-            "eye" => Some(s::eye(rows, cols, scalar as isize).unwrap()),
-            "eye_array" => Some(s::eye_array(rows, cols, scalar as isize).unwrap()),
-            "identity" => Some(s::identity(rows).unwrap()),
+            "eye" => Some(s::construct::eye(rows, cols, scalar as isize).unwrap()),
+            "eye_array" => Some(s::construct::eye(rows, cols, scalar as isize).unwrap()),
+            "identity" => Some(s::construct::identity(rows).unwrap()),
             "diags" | "diags_array" => {
                 let diagonals: Vec<_> = f[8].split(':').map(numbers).collect();
                 let offsets: Vec<_> = k.iter().map(|&v| v as isize).collect();
-                Some(
-                    if api == "diags" {
-                        s::diags(rows, cols, &diagonals, &offsets)
-                    } else {
-                        s::diags_array(rows, cols, &diagonals, &offsets)
-                    }
-                    .unwrap(),
-                )
+                Some(s::construct::diags(rows, cols, &diagonals, &offsets).unwrap())
             }
-            "transpose" => Some(s::transpose(&a).unwrap()),
-            "matrix_transpose" => Some(s::matrix_transpose(&a).unwrap()),
-            "eliminate_zeros" => Some(s::eliminate_zeros(&a).unwrap()),
-            "tril" => Some(s::tril(&a, scalar as isize).unwrap()),
-            "triu" => Some(s::triu(&a, scalar as isize).unwrap()),
-            "scale" => Some(s::scale(&a, scalar).unwrap()),
-            "add" => Some(s::add(&a, &b).unwrap()),
-            "multiply" => Some(s::multiply(&a, &b).unwrap()),
-            "matmul" => Some(s::matmul(&a, &b).unwrap()),
-            "hstack" => Some(s::hstack(&[&a, &b]).unwrap()),
-            "vstack" => Some(s::vstack(&[&a, &b]).unwrap()),
-            "block_diag" => Some(s::block_diag(&[&a, &b]).unwrap()),
-            "block_array" => Some(s::block_array(&[vec![&a, &b], vec![&b, &a]]).unwrap()),
-            "bmat" => Some(s::bmat(&[vec![&a, &b], vec![&b, &a]]).unwrap()),
-            "kron" => Some(s::kron(&a, &b).unwrap()),
-            "kronsum" => Some(s::kronsum(&a, &b).unwrap()),
+            "transpose" => Some(s::operations::transpose(&a).unwrap()),
+            "matrix_transpose" => Some(s::operations::transpose(&a).unwrap()),
+            "eliminate_zeros" => Some(s::operations::eliminate_zeros(&a).unwrap()),
+            "tril" => Some(s::operations::tril(&a, scalar as isize).unwrap()),
+            "triu" => Some(s::operations::triu(&a, scalar as isize).unwrap()),
+            "scale" => Some(s::operations::scale(&a, scalar).unwrap()),
+            "add" => Some(s::operations::add(&a, &b).unwrap()),
+            "multiply" => Some(s::operations::multiply(&a, &b).unwrap()),
+            "matmul" => Some(s::operations::matmul(&a, &b).unwrap()),
+            "hstack" => Some(s::construct::hstack(&[&a, &b]).unwrap()),
+            "vstack" => Some(s::construct::vstack(&[&a, &b]).unwrap()),
+            "block_diag" => Some(s::construct::block_diag(&[&a, &b]).unwrap()),
+            "block_array" => {
+                Some(s::construct::block_array(&[vec![&a, &b], vec![&b, &a]]).unwrap())
+            }
+            "bmat" => Some(s::construct::block_array(&[vec![&a, &b], vec![&b, &a]]).unwrap()),
+            "kron" => Some(s::construct::kron(&a, &b).unwrap()),
+            "kronsum" => Some(s::construct::kronsum(&a, &b).unwrap()),
             "inv" => Some(l::inv(&a).unwrap()),
             "matrix_power" => Some(l::matrix_power(&a, scalar as u32).unwrap()),
             _ => None,
         };
         let (actual_rows, actual_cols, values) = if let Some(matrix) = matrix {
-            let dense = s::to_dense(&matrix).unwrap();
+            let dense = s::construct::to_dense(&matrix).unwrap();
             (
                 matrix.rows,
                 matrix.cols,
@@ -132,15 +131,15 @@ pub mod core {
             )
         } else {
             let values = match api {
-                "find" => s::find(&a)
+                "find" => s::operations::find(&a)
                     .unwrap()
                     .into_iter()
                     .flat_map(|(r, c, v)| [r as f64, c as f64, v])
                     .collect(),
-                "matvec" => s::matvec(&a, &x).unwrap(),
+                "matvec" => s::operations::matvec(&a, &x).unwrap(),
                 "spsolve" => l::spsolve(&a, &x).unwrap(),
                 "splu" => l::splu(&a).unwrap().solve(&x).unwrap(),
-                "factorized" => l::factorized(&a).unwrap().solve(&x).unwrap(),
+                "factorized" => l::splu(&a).unwrap().solve(&x).unwrap(),
                 "spsolve_triangular" => l::spsolve_triangular(
                     &a,
                     &x,
@@ -209,7 +208,7 @@ pub mod parity {
                 })
                 .collect()
         };
-        s::from_coo(rows, cols, &t).unwrap()
+        s::construct::from_coo(rows, cols, &t).unwrap()
     }
     fn flat(a: &s::Matrix) -> Vec<f64> {
         a.iter().flatten().copied().collect()
@@ -331,7 +330,7 @@ pub mod parity {
                     g::depth_first_tree(&a, p[0] as usize, p[1] != 0.)
                 }
                 .unwrap();
-                assert_m("a", &s::to_dense(&out).unwrap(), 0.);
+                assert_m("a", &s::construct::to_dense(&out).unwrap(), 0.);
             }
             "connected_components" => {
                 let out = g::connected_components(&a, p[0] != 0., p[1] != 0.).unwrap();
@@ -356,7 +355,7 @@ pub mod parity {
             }
             "laplacian" => {
                 let out = g::laplacian(&a, p[0] != 0., p[1] != 0., p[2] != 0.).unwrap();
-                assert_m("a", &s::to_dense(&out.matrix).unwrap(), 3e-12);
+                assert_m("a", &s::construct::to_dense(&out.matrix).unwrap(), 3e-12);
                 assert_v("diag", &out.diagonal, 3e-12);
             }
             "maximum_bipartite_matching" => {
@@ -393,7 +392,7 @@ pub mod parity {
             "maximum_flow" => {
                 let out = g::maximum_flow(&a, p[0] as usize, p[1] as usize).unwrap();
                 assert_v("value", &[out.value], 0.);
-                let d = s::to_dense(&out.flow).unwrap();
+                let d = s::construct::to_dense(&out.flow).unwrap();
                 for (i, row) in d.iter().enumerate() {
                     for (j, &v) in row.iter().enumerate() {
                         assert_eq!(v, -d[j][i]);
@@ -431,14 +430,14 @@ pub mod parity {
                 }
             }
             "csgraph_from_dense" | "csgraph_masked_from_dense" | "csgraph_from_masked" => {
-                let d = s::to_dense(&a).unwrap();
+                let d = s::construct::to_dense(&a).unwrap();
                 let masked = g::csgraph_masked_from_dense(&d, p[0], true, true).unwrap();
                 let out = if api == "csgraph_from_dense" {
                     g::csgraph_from_dense(&d, p[0], true, true).unwrap()
                 } else {
                     g::csgraph_from_masked(&masked).unwrap()
                 };
-                assert_m("a", &s::to_dense(&out).unwrap(), 0.);
+                assert_m("a", &s::construct::to_dense(&out).unwrap(), 0.);
                 if api == "csgraph_masked_from_dense" {
                     assert_v(
                         "mask",
@@ -477,7 +476,7 @@ pub mod parity {
                 .unwrap()
                 .predecessors;
                 let out = g::reconstruct_path(&a, &predecessors[0], p[0] != 0.).unwrap();
-                assert_m("a", &s::to_dense(&out).unwrap(), 0.);
+                assert_m("a", &s::construct::to_dense(&out).unwrap(), 0.);
             }
             "construct_dist_matrix" => {
                 let pr = g::shortest_path(
@@ -554,8 +553,8 @@ pub mod parity {
                 for (j, w) in out.eigenvalues.iter().enumerate() {
                     let re: Vec<_> = out.eigenvectors.iter().map(|r| r[j].re).collect();
                     let im: Vec<_> = out.eigenvectors.iter().map(|r| r[j].im).collect();
-                    let ar = s::matvec(&a, &re).unwrap();
-                    let ai = s::matvec(&a, &im).unwrap();
+                    let ar = s::operations::matvec(&a, &re).unwrap();
+                    let ai = s::operations::matvec(&a, &im).unwrap();
                     for i in 0..m {
                         assert!((ar[i] - (w.re * re[i] - w.im * im[i])).abs() < 1e-10);
                         assert!((ai[i] - (w.re * im[i] + w.im * re[i])).abs() < 1e-10);
@@ -573,7 +572,7 @@ pub mod parity {
                 assert_eq!(out.eigenvectors.len(), m);
                 for (j, w) in out.eigenvalues.iter().enumerate() {
                     let v: Vec<_> = out.eigenvectors.iter().map(|r| r[j]).collect();
-                    let av = s::matvec(&a, &v).unwrap();
+                    let av = s::operations::matvec(&a, &v).unwrap();
                     close(&av, &v.iter().map(|v| v * w).collect::<Vec<_>>(), 3e-11, id);
                 }
             }
@@ -583,7 +582,7 @@ pub mod parity {
                 assert_eq!(out.u.len(), m);
                 assert_eq!(out.vh.len(), p[0] as usize);
                 for (j, &sigma) in out.singular_values.iter().enumerate() {
-                    let av = s::matvec(&a, &out.vh[j]).unwrap();
+                    let av = s::operations::matvec(&a, &out.vh[j]).unwrap();
                     close(
                         &av,
                         &out.u.iter().map(|r| r[j] * sigma).collect::<Vec<_>>(),
@@ -592,7 +591,11 @@ pub mod parity {
                     );
                 }
             }
-            "expm" => assert_m("a", &s::to_dense(&l::expm(&a).unwrap()).unwrap(), 3e-11),
+            "expm" => assert_m(
+                "a",
+                &s::construct::to_dense(&l::expm(&a).unwrap()).unwrap(),
+                3e-11,
+            ),
             "expm_multiply" => assert_m(
                 "a",
                 &l::expm_multiply(&a, &x, &[0., 0.5, 1.]).unwrap(),
@@ -632,19 +635,15 @@ pub mod parity {
                 &l::spilu(&a, 0., 20.).unwrap().solve(&x).unwrap(),
                 3e-11,
             ),
-            "aslinearoperator" => {
-                let op = l::aslinearoperator(&a).unwrap();
-                assert_v("x", &op.apply(&x).unwrap(), 3e-12);
-                assert_v("xt", &op.transpose_apply(&x).unwrap(), 3e-12);
-            }
             "as_array" | "expand_dims" | "permute_dims" | "swapaxes" => {
-                let a = s::as_array(&a).unwrap();
+                let a = s::array::as_array(&a).unwrap();
                 let out = match api {
-                    "expand_dims" => s::expand_dims(&a, p[0] as isize),
-                    "permute_dims" => {
-                        s::permute_dims(&a, &p.iter().map(|v| *v as isize).collect::<Vec<_>>())
-                    }
-                    "swapaxes" => s::swapaxes(&a, p[0] as isize, p[1] as isize),
+                    "expand_dims" => s::array::expand_dims(&a, p[0] as isize),
+                    "permute_dims" => s::array::permute_dims(
+                        &a,
+                        &p.iter().map(|v| *v as isize).collect::<Vec<_>>(),
+                    ),
+                    "swapaxes" => s::array::swapaxes(&a, p[0] as isize, p[1] as isize),
                     _ => Ok(a),
                 }
                 .unwrap();
@@ -655,54 +654,12 @@ pub mod parity {
                 );
                 assert_v("data", &array_dense(&out), 0.);
             }
-            "issparse" => assert_v(
-                "value",
-                &[f64::from(if p[0] != 0. {
-                    s::issparse(&a)
-                } else {
-                    s::issparse(&s::to_dense(&a).unwrap())
-                })],
-                0.,
-            ),
-            "get_index_dtype" => {
-                let v: Vec<_> = x.iter().map(|v| *v as u64).collect();
-                let dtype = s::get_index_dtype(&[&v], None).unwrap();
-                assert_v(
-                    "value",
-                    &[if dtype == s::IndexDtype::I32 {
-                        32.
-                    } else {
-                        64.
-                    }],
-                    0.,
-                );
-            }
-            "safely_cast_index_arrays" => {
-                let (ptr, idx) = s::safely_cast_index_arrays(
-                    &a,
-                    if p[0] == 32. {
-                        s::IndexDtype::I32
-                    } else {
-                        s::IndexDtype::I64
-                    },
-                )
-                .unwrap();
-                assert_v(
-                    "indptr",
-                    &ptr.iter().map(|v| *v as f64).collect::<Vec<_>>(),
-                    0.,
-                );
-                assert_v(
-                    "indices",
-                    &idx.iter().map(|v| *v as f64).collect::<Vec<_>>(),
-                    0.,
-                );
-            }
             "random" | "random_array" => {
                 let out = if api == "random" {
-                    s::as_array(&s::random(m, n, p[0], p[1] as u64).unwrap()).unwrap()
+                    s::array::as_array(&s::construct::random(m, n, p[0], p[1] as u64).unwrap())
+                        .unwrap()
                 } else {
-                    s::random_array(&[m, n], p[0], p[1] as u64).unwrap()
+                    s::array::random_array(&[m, n], p[0], p[1] as u64).unwrap()
                 };
                 assert_v("nnz", &[out.data.len() as f64], 0.);
                 assert_v(
@@ -711,20 +668,24 @@ pub mod parity {
                     0.,
                 );
                 assert!(out.data.iter().all(|v| (0.0..1.0).contains(v)));
-                assert_eq!(out, s::random_array(&[m, n], p[0], p[1] as u64).unwrap());
+                assert_eq!(
+                    out,
+                    s::array::random_array(&[m, n], p[0], p[1] as u64).unwrap()
+                );
             }
             "spdiags" => {
                 let data: Vec<Vec<f64>> = r[6].split(':').map(nums).collect();
                 let offsets = p.iter().map(|v| *v as isize).collect::<Vec<_>>();
                 assert_m(
                     "a",
-                    &s::to_dense(&s::spdiags(&data, &offsets, m, n).unwrap()).unwrap(),
+                    &s::construct::to_dense(&s::construct::spdiags(&data, &offsets, m, n).unwrap())
+                        .unwrap(),
                     0.,
                 );
             }
             "load_npz" | "save_npz" => {
                 let mut archive = std::io::Cursor::new(Vec::new());
-                s::save_npz(&mut archive, &a, p[0] != 0.).unwrap();
+                s::io::save_npz(&mut archive, &a, p[0] != 0.).unwrap();
                 archive.set_position(0);
                 let loaded = if api == "load_npz" {
                     let hex = r[8].as_bytes();
@@ -734,11 +695,11 @@ pub mod parity {
                         .iter()
                         .map(|b| u8::from_str_radix(std::str::from_utf8(b).unwrap(), 16).unwrap())
                         .collect::<Vec<_>>();
-                    s::load_npz(std::io::Cursor::new(bytes)).unwrap()
+                    s::io::load_npz(std::io::Cursor::new(bytes)).unwrap()
                 } else {
-                    s::load_npz(&mut archive).unwrap()
+                    s::io::load_npz(&mut archive).unwrap()
                 };
-                assert_m("a", &s::to_dense(&loaded).unwrap(), 0.);
+                assert_m("a", &s::construct::to_dense(&loaded).unwrap(), 0.);
                 assert_eq!(loaded, a);
             }
             _ => panic!("untested API {api}"),

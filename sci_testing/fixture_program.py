@@ -5,6 +5,7 @@ CSV rows. Its numerical calls remain the upstream public SciPy calls.
 """
 import ast
 from functools import lru_cache
+import sys
 import types
 from .api_registry import SCI
 
@@ -34,7 +35,14 @@ def program(module):
             prefix.append(node)
         elif isinstance(node,ast.Assign) and not any(isinstance(t,ast.Name) and t.id=='cases' for t in node.targets):prefix.append(node)
     if loop is None:raise ValueError(f'{module}: no independent case loop')
-    exec(compile(ast.Module(body=prefix,type_ignores=[]),str(path),'exec'),namespace)
+    # Upstream generators are scripts whose `case_catalog` sibling import is
+    # resolved from tests/scipy when run directly. Reproduce that import path
+    # while loading their in-memory recipes, without running fixture writers.
+    sys.path.insert(0,str(path.parent))
+    try:
+        exec(compile(ast.Module(body=prefix,type_ignores=[]),str(path),'exec'),namespace)
+    finally:
+        sys.path.pop(0)
     body=[CollectRows().visit(node) for node in loop.body]
     aliases=ast.parse('case=c\nindex=0').body
     fields_init=ast.Assign(targets=[ast.Name(id='fields',ctx=ast.Store())],value=ast.Constant(None))

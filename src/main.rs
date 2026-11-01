@@ -18,9 +18,13 @@ mod extracted;
 mod fixture_adapters;
 mod generated;
 mod interpolate_adapter;
+mod io_adapter;
 mod linalg_adapter;
 mod numeric;
 mod sparse_adapter;
+mod special03_adapter;
+mod special_complex03_adapter;
+mod structural03_adapter;
 
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
 fn vector(v: &Value) -> Result<Vec<f64>> {
@@ -43,6 +47,18 @@ fn gaussian(g: filter::Gaussian) -> Vec<f64> {
 }
 fn evaluate(case: &Value) -> Result<Vec<f64>> {
     let a = &case["args"];
+    if a["special03_case"].as_bool() == Some(true) {
+        return special03_adapter::evaluate(case["api"].as_str().ok_or("missing API")?, a);
+    }
+    if a["structural03_case"].as_bool() == Some(true) {
+        return structural03_adapter::evaluate(case["api"].as_str().ok_or("missing API")?, a);
+    }
+    if a["special_complex03_case"].as_bool() == Some(true) {
+        return special_complex03_adapter::evaluate(case["api"].as_str().ok_or("missing API")?, a);
+    }
+    if a["io_case"].as_bool() == Some(true) {
+        return io_adapter::evaluate(case["api"].as_str().ok_or("missing API")?, a);
+    }
     if a["explicit"].as_bool() == Some(true) {
         return extra::evaluate(case["api"].as_str().ok_or("missing API")?, a);
     }
@@ -135,9 +151,9 @@ fn evaluate(case: &Value) -> Result<Vec<f64>> {
                 .map(|r| Complex { re: r[0], im: r[1] })
                 .collect();
             flatten(if api == "fft.fft" {
-                fft::fft(&z)
+                fft::fourier::fft(&z)
             } else {
-                fft::ifft(&z)
+                fft::fourier::ifft(&z)
             })
         }
         "filter.kalman_predict" | "filter.kalman_update" => {
@@ -146,40 +162,42 @@ fn evaluate(case: &Value) -> Result<Vec<f64>> {
                 covariance: m("covariance")?,
             };
             gaussian(if api == "filter.kalman_predict" {
-                filter::kalman_predict(&g, &m("f")?, &m("q")?)?
+                filter::kalman::kalman_predict(&g, &m("f")?, &m("q")?)?
             } else {
-                filter::kalman_update(&g, &v("z")?, &m("h")?, &m("r")?)?.estimate
+                filter::kalman::kalman_update(&g, &v("z")?, &m("h")?, &m("r")?)?.estimate
             })
         }
-        "integrate.trapezoid" => vec![integrate::trapezoid(
+        "integrate.trapezoid" => vec![integrate::sampled::trapezoid(
             &v("y")?,
             Some(&v("coordinates")?),
             1.0,
         )?],
-        "integrate.fixed_quad" => vec![integrate::fixed_quad(
+        "integrate.fixed_quad" => vec![integrate::quadrature::fixed_quad(
             f64::exp,
             scalar(&a["a"])?,
             scalar(&a["b"])?,
             16,
         )?],
-        "interpolate.barycentric_interpolate" => {
-            interpolate::barycentric_interpolate(&v("nodes")?, &v("values")?, &v("query")?)?
-        }
+        "interpolate.barycentric_interpolate" => interpolate::polynomial::barycentric_interpolate(
+            &v("nodes")?,
+            &v("values")?,
+            &v("query")?,
+        )?,
         "interpolate.krogh_interpolate" => {
-            interpolate::krogh_interpolate(&v("nodes")?, &v("values")?, &v("query")?)?
+            interpolate::polynomial::krogh_interpolate(&v("nodes")?, &v("values")?, &v("query")?)?
         }
-        "linalg.solve" => linalg::solve(&m("a")?, &v("b")?)?,
-        "linalg.det" => vec![linalg::det(&m("a")?)?],
-        "optimize.rosen" => vec![optimize::rosen(&v("point")?)?],
-        "optimize.rosen_der" => optimize::rosen_der(&v("point")?)?,
-        "signal.convolve" => signal::convolve(&v("x")?, &v("h")?, sci::Mode::Full)?,
-        "signal.correlate" => signal::correlate(&v("x")?, &v("h")?, sci::Mode::Full)?,
-        "spatial.euclidean" => vec![spatial::euclidean(&v("u")?, &v("v")?, None)?],
-        "spatial.cosine" => vec![spatial::cosine(&v("u")?, &v("v")?, None)?],
-        "special.erf" => vec![special::erf(x()?)],
-        "special.gamma" => vec![special::gamma(x()?)],
-        "stats.normal_cdf" => vec![stats::normal_cdf(x()?, 0.0, 1.0)?],
-        "stats.variance" => vec![stats::variance(&v("values")?, 1)?],
+        "linalg.solve" => linalg::solvers::solve(&m("a")?, &v("b")?)?,
+        "linalg.det" => vec![linalg::basic::det(&m("a")?)?],
+        "optimize.rosen" => vec![optimize::derivatives::rosen(&v("point")?)?],
+        "optimize.rosen_der" => optimize::derivatives::rosen_der(&v("point")?)?,
+        "signal.convolve" => signal::convolution::convolve(&v("x")?, &v("h")?, sci::Mode::Full)?,
+        "signal.correlate" => signal::convolution::correlate(&v("x")?, &v("h")?, sci::Mode::Full)?,
+        "spatial.euclidean" => vec![spatial::distance::euclidean(&v("u")?, &v("v")?, None)?],
+        "spatial.cosine" => vec![spatial::distance::cosine(&v("u")?, &v("v")?, None)?],
+        "special.erf" => vec![special::elementary::erf(x()?)],
+        "special.gamma" => vec![special::gamma::gamma(x()?)],
+        "stats.normal_cdf" => vec![stats::distributions::normal_cdf(x()?, 0.0, 1.0)?],
+        "stats.variance" => vec![stats::descriptive::variance(&v("values")?, 1)?],
         _ => return Err(format!("unsupported API: {api}").into()),
     })
 }
@@ -241,9 +259,109 @@ mod tests {
                 r#"{{"api":"special.gamma","args":{{"x":{text}}}}}"#
             ))
             .unwrap();
-            let expected = special::gamma(text.parse().unwrap());
+            let expected: f64 = special::gamma::gamma(text.parse().unwrap());
             assert!(expected.is_finite());
             assert_eq!(evaluate(&case).unwrap(), vec![expected]);
         }
+    }
+
+    #[test]
+    fn namespaced_dispatch_preserves_independent_values() {
+        // Exact polynomial, linear algebra and sampled integral identities.
+        for (api, args, expected) in [
+            (
+                "linalg.solve",
+                json!({"a": [[2., 0.], [0., 4.]], "b": [6., 8.]}),
+                vec![3., 2.],
+            ),
+            (
+                "signal.convolve",
+                json!({"x": [1., 2.], "h": [1., -1.]}),
+                vec![1., 1., -2.],
+            ),
+            (
+                "integrate.trapezoid",
+                json!({"y": [0., 1., 4.], "coordinates": [0., 1., 2.]}),
+                vec![3.],
+            ),
+            ("stats.variance", json!({"values": [1., 3., 5.]}), vec![4.]),
+            (
+                "special.assoc_laguerre",
+                json!({"p0": 0.5, "p1": 1, "p2": 0.0}),
+                vec![0.5],
+            ),
+        ] {
+            let actual = evaluate(&json!({"api": api, "args": args})).unwrap();
+            assert_eq!(actual, expected, "{api}");
+        }
+    }
+
+    #[test]
+    fn complex_special_namespace_preserves_real_gamma_and_complex_zeta() {
+        let real = json!({"api": "special.gamma", "args": {"x": 5.0}});
+        assert_eq!(evaluate(&real).unwrap(), vec![24.0]);
+
+        let complex_gamma = json!({
+            "api": "special.complex.gamma",
+            "args": {"special_complex03_case": true, "z": [5.0, 0.0]}
+        });
+        let result = evaluate(&complex_gamma).unwrap();
+        assert!((result[0] - 24.0).abs() < 1e-11);
+        assert!(result[1].abs() < 1e-11);
+
+        let complex_zeta = json!({
+            "api": "special.complex.zeta",
+            "args": {"special_complex03_case": true, "z": [2.0, 0.0]}
+        });
+        let result = evaluate(&complex_zeta).unwrap();
+        assert!((result[0] - std::f64::consts::PI.powi(2) / 6.0).abs() < 1e-11);
+        assert!(result[1].abs() < 1e-11);
+
+        // A marker cannot accidentally redirect an unrelated real-valued API.
+        let misrouted = json!({
+            "api": "special.gamma",
+            "args": {"special_complex03_case": true, "z": [5.0, 0.0]}
+        });
+        assert!(evaluate(&misrouted).is_err());
+    }
+
+    #[test]
+    fn new_special_and_structural_markers_reach_distinct_adapters() {
+        let special = json!({
+            "api": "special.gamma.gamma_ratio",
+            "args": {"special03_case": true, "a": 6.0, "b": 5.0}
+        });
+        assert_eq!(evaluate(&special).unwrap(), vec![5.0]);
+
+        let structural = json!({
+            "api": "core.csr.from_coo",
+            "args": {
+                "structural03_case": true,
+                "operation": "success",
+                "rows": 1,
+                "cols": 1,
+                "coordinates": [[0, 0, 2.5]]
+            }
+        });
+        // rows, columns, indptr count and values, index count and values, data count,
+        // data with an explicit signed-zero bit in the structural transport.
+        assert_eq!(
+            evaluate(&structural).unwrap(),
+            vec![1.0, 1.0, 2.0, 0.0, 1.0, 1.0, 0.0, 1.0, 2.5, 0.0]
+        );
+
+        let rejected = json!({
+            "api": "core.csr.validate",
+            "args": {
+                "structural03_case": true,
+                "operation": "reject",
+                "rows": 1,
+                "cols": 1,
+                "indptr": [0, 1],
+                "indices": [2],
+                "data": [1.0]
+            }
+        });
+        assert_eq!(evaluate(&rejected).unwrap(), vec![1.0]);
     }
 }

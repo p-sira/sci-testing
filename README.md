@@ -1,13 +1,16 @@
 # sci-testing
 
-Library comparisons using Sci as the baseline for every public function in the
-[Sci](https://github.com/p-sira/sci) submodule at `sci/`. Reports, inputs, recipes
-and measurements live here; start with the [comparison tables](docs/accuracy/README.md).
+Library comparisons using Sci as the baseline, with independently generated
+references and a compiler-resolved coverage inventory for the
+[Sci](https://github.com/p-sira/sci) submodule at `sci/`. Reports, inputs,
+recipes and measurements live here; start with the
+[comparison tables](docs/accuracy/README.md). The coverage audit records
+unverified 0.3 exports explicitly until they have measured evidence.
 
 ```sh
 git submodule update --init --recursive
 uv sync --frozen
-uv run --frozen python -m sci_testing.report --full
+uv run --frozen python -m unittest -v
 uv run --frozen python -m sci_testing.report --check
 ```
 
@@ -18,6 +21,8 @@ uv run --frozen python -m sci_testing.report
 uv run --frozen python -m sci_testing.report --module special
 uv run --frozen python -m sci_testing.report --module sparse.linalg
 uv run --frozen python -m sci_testing.report --module linalg --module interpolate
+uv run --frozen python -m sci_testing.report --render
+uv run --frozen python -m sci_testing.report --extend
 ```
 
 The default reuses saved independent references and all other library results,
@@ -26,6 +31,15 @@ namespace and can be repeated; unselected measurements remain unchanged.
 `--sci-only` explicitly selects the default mode. Use `--full` to recompute all
 references and library results, including when inputs change or no snapshot exists.
 `--module` applies only to Sci-only refreshes.
+The normal validation command, `--check`, verifies the cached inputs, measurements,
+coverage and generated tables without evaluating numerical libraries.
+Use `--render` to regenerate the coverage audit and Markdown comparison tables
+from verified measurements without compiling Sci or evaluating any reference
+library. It preserves the stored numerical observations and provenance.
+Use `--extend` when independent cases are added for new public APIs. It verifies
+the saved input and reference digests, calculates only the newly added
+references, then publishes the new inputs, measurements and tables together.
+Unchanged historical case bytes and independent measurements are retained.
 
 Before measuring an updated Sci checkout, commit the updated `sci/` submodule
 pointer and `sci-revision.txt`, and refresh `Cargo.lock` if its dependencies changed.
@@ -35,13 +49,17 @@ independent references. Original reference provenance is retained under
 `reference_environment` in `results/environment.json`; partial refreshes also
 record per-function Sci revisions under `sci_measurement_commits`.
 
-The full suite has about 2.26 million cases for 1,109 distinct public functions.
-Each recipe adds 1,000 endpoint-inclusive NumPy linspace cases and 1,000 uniform
-random cases from seed `20261020`, with independent streams per API. Original
+The preserved historical snapshot has about 2.26 million cases for 1,109
+distinct public functions. These counts describe the pinned historical API;
+Sci 0.3 coverage is tracked against its separately reconciled public inventory.
+The original dense recipes add 1,000 endpoint-inclusive NumPy linspace cases
+and 1,000 uniform random cases from seed `20261020`, with independent streams per API. Original
 boundary profiles are retained. Constrained integer domains, fixed shapes and
 metadata queries can repeat bounded inputs; `results/coverage.csv` reports unique
-inputs separately. The audit requires every compiler-inventoried function to
-have a successful public-API comparison and both dense sample groups.
+inputs separately. New binary I/O recipes use distinct independent file payloads,
+while structural and complex-function recipes use suitable domain-specific samples.
+The audit records successful comparisons and pending public exports separately;
+a strict completeness audit is available once all exports are validated.
 Distribution density sweeps use 1%–99% quantiles to preserve continuous support
 and integer arguments for probability masses.
 The runner evaluates identical deterministic inputs once and expands the measured
@@ -67,8 +85,10 @@ Its `tests/fixtures/` and `tests/scipy/` data are included through the submodule
 so no separate Sci checkout or data copy is required. Sci must match
 `sci-revision.txt`; modified numerical sources or fixture providers
 are refused. Documentation edits are permitted. The runner uses Cargo's dev
-profile without custom compiler/profile/target overrides. Set `CARGO_TARGET_DIR`
-to reuse an existing build directory.
+profile with `debug = "line-tables-only"` to reduce debug artifact size while
+keeping file/line information for stack traces. Avoid overriding compiler,
+profile or target flags while recording reproducible results. Set
+`CARGO_TARGET_DIR` to reuse an existing build directory.
 
 ## Files and recipes
 
@@ -79,7 +99,7 @@ to reuse an existing build directory.
 - `native/`: C++ bridge for Boost.Math and GSL comparisons.
 - `cases/base/<module>/<function>.csv`: original hand-picked inputs.
 - `cases/recipes/<module>/<function>.csv`: imported valid fixture profiles.
-- `cases/generated/<module>/<function>.csv`: complete generated input cases.
+- `cases/generated/<module>/<function>.csv[.gz]`: complete generated input cases.
 - `results/measurements/<module>/<function>.csv[.gz]`: independent references, actual
   library outputs, exceptions and warnings, keyed by case ID and library.
 - `results/coverage.csv`: per-function counts, uniqueness and successful coverage.
@@ -96,8 +116,13 @@ subnormals; large integer parameters retain their exact integer values.
 Measurement reference vectors are written once on the first library row for a
 case; later rows for that case leave the reference cell empty. Warning columns
 preserve multiple messages, including embedded newlines.
-Measurement CSVs above 16 MiB use deterministic gzip compression. The loader
-handles both forms without changing stored precision or numerical values.
+Large input and measurement CSVs use deterministic gzip compression. The loader
+handles both forms without changing stored precision, original case IDs or
+numerical values. A verified `cases/generated/.cache.json` index lets routine
+checks and Sci-only refreshes reuse checked-in inputs without regenerating every
+linspace and random case. When input recipes change, the existing snapshot may
+still be reused after checking its original content and reference digests; an
+extension manifest records that original generator equivalence was not assumed.
 
 `sci_testing/generate_cases.py` generates inputs only. Python family decorators
 and typed Rust macro registrations reduce repetitive adapters.

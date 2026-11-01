@@ -5,7 +5,7 @@
 Measured binary64 (`f64`) results using **Sci-sparse as the reference**.
 Each library is compared with Sci on the same inputs. These differences measure
 agreement with Sci; independent accuracy references remain in the raw CSVs. This page
-covers 196255 cases and 98 public API names;
+covers 198293 cases and 100 public API names;
 coverage is limited to the operations and inputs below.
 
 ## Agreement with Sci
@@ -21,6 +21,8 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | Function | Cases | SciPy |
 | --- | ---: | --- |
 | `add` | 2002 | 0.0 / 0.0 |
+| `array.csr_indices_i32` | 1019 | 0.0 / 0.0 |
+| `array.csr_indices_i64` | 1019 | 0.0 / 0.0 |
 | `as_array` | 2002 | 0.0 / 0.0 |
 | `block_array` | 2002 | 0.0 / 0.0 |
 | `block_diag` | 2002 | 0.0 / 0.0 |
@@ -128,7 +130,7 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 
 Canonical CSR and COO arrays retain explicit zeros. Matrix outputs include dimensions; graph distances retain infinities. Eigenpairs are compared by ordered values with independent residual checks; matching cardinality, permutation validity, flow conservation and random shape/count use invariants where outputs are nonunique. Sparse LU, iterative solves and matrix functions use pinned public SciPy references. Each scalar uses (class,value): class 0 for finite data, ±1 for signed infinity and 2 for NaN, with zero nonfinite payloads. This preserves unreachable vertices; exact tags contribute to component means. RNG streams differ. Dense samples preserve graph structure, integer capacities and dependent dimensions; fixed discrete profiles may repeat. Rust signature adaptations and bounded dense fallbacks are documented in Sci sparse coverage.
 
-Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv`; raw outputs, high-precision
+Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.
 NaN, infinity, signed-zero contracts, invalid domains and work-limit enforcement
 are outside this finite-input accuracy sample. Existing Sci API tests cover
@@ -139,11 +141,15 @@ variants are not counted as independent implementations.
 
 ## Reproduction
 
-- Sci source: `b52c598535920279dc0aadb14a9085b8545ba4c1` (numerical sources clean: true).
-- Testing source SHA-256: `a1dbbae1205dbebed9bfb371b138d8f9a215cfec01568c6e3de356becdf58cd9`.
+- Sci source: `3fbdbf3a73bcad57fa91e30262a4e9f9d09fd57a` (numerical sources clean: true).
+- Testing source SHA-256: `827096beac94a6c4013a702cfb1c10e63805767cc1d6c6673c69676c2149b764`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
-- rustc 1.98.1 (48a229cea 2026-09-01); Python 3.13.3; Cargo dev profile, opt-level 0.
+- rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.
 - Linux-7.2.11-arch1-1-x86_64-with-glibc2.44; AMD Ryzen 5 4600H with Radeon Graphics.
 
 See the [shared metric, provenance and reproduction instructions](README.md).
+
+Sci-only refresh: independent references and other library outputs are retained from the saved snapshot. Their original environment is recorded in `results/environment.json` under `reference_environment`.
+
+Sci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.

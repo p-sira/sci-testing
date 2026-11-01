@@ -86,16 +86,6 @@ tuples!(A:0, B:1);
 tuples!(A:0, B:1, C:2, D:3);
 tuples!(A:0, B:1, C:2, D:3, E:4, F:5, G:6, H:7);
 
-impl Argument for sci::special::ErrorPolicy {
-    fn read(value: &Value) -> Result<Self> {
-        match scalar(value)? {
-            0.0 => Ok(Self::Ieee),
-            1.0 => Ok(Self::Finite),
-            _ => Err("unknown special error policy".into()),
-        }
-    }
-}
-
 impl<T: Argument> Argument for Vec<T> {
     fn read(value: &Value) -> Result<Self> {
         value

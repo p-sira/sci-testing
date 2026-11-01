@@ -5,7 +5,7 @@
 Measured binary64 (`f64`) results using **Sci-signal as the reference**.
 Each library is compared with Sci on the same inputs. These differences measure
 agreement with Sci; independent accuracy references remain in the raw CSVs. This page
-covers 357492 cases and 178 public API names;
+covers 358507 cases and 179 public API names;
 coverage is limited to the operations and inputs below.
 
 ## Agreement with Sci
@@ -164,6 +164,7 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | `unique_roots` | 2009 | 0.0 / 0.0 | — |
 | `unit_impulse` | 2004 | 0.0 / 0.0 | — |
 | `upfirdn` | 2005 | 0.0 / 0.0 | — |
+| `utilities.closest_stft_dual_window` | 1015 | 4.5036e+15 / 2.6721e+11 | — |
 | `vectorstrength` | 2003 | 9.5247e+15 / 2.3776e+12 | — |
 | `welch` | 2012 | 6.0447 / 0.39974 | — |
 | `whittaker_henderson` | 2018 | 51.0 / 0.029234 | — |
@@ -204,7 +205,7 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 
 The pinned signal fixture adapters cover waveform, filtering, design, spectral, window, peak, spline, convolution and system functions through the public Sci facade. Output tuples flatten in the documented fixture order. Parameters, modes, shapes and normalization are retained in each function CSV; original real convolution/correlation also call NumPy.
 
-Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv`; raw outputs, high-precision
+Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.
 NaN, infinity, signed-zero contracts, invalid domains and work-limit enforcement
 are outside this finite-input accuracy sample. Existing Sci API tests cover
@@ -215,11 +216,15 @@ variants are not counted as independent implementations.
 
 ## Reproduction
 
-- Sci source: `b52c598535920279dc0aadb14a9085b8545ba4c1` (numerical sources clean: true).
-- Testing source SHA-256: `a1dbbae1205dbebed9bfb371b138d8f9a215cfec01568c6e3de356becdf58cd9`.
+- Sci source: `3fbdbf3a73bcad57fa91e30262a4e9f9d09fd57a` (numerical sources clean: true).
+- Testing source SHA-256: `827096beac94a6c4013a702cfb1c10e63805767cc1d6c6673c69676c2149b764`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
-- rustc 1.98.1 (48a229cea 2026-09-01); Python 3.13.3; Cargo dev profile, opt-level 0.
+- rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.
 - Linux-7.2.11-arch1-1-x86_64-with-glibc2.44; AMD Ryzen 5 4600H with Radeon Graphics.
 
 See the [shared metric, provenance and reproduction instructions](README.md).
+
+Sci-only refresh: independent references and other library outputs are retained from the saved snapshot. Their original environment is recorded in `results/environment.json` under `reference_environment`.
+
+Sci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.

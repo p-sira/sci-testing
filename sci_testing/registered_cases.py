@@ -7,11 +7,12 @@ import ast
 import types
 import warnings
 import random
+import sys
 
 import numpy as np
 from scipy import special
 
-from .api_registry import SCI, registered_functions
+from .api_registry import SCI, Function, typed_functions
 from .case_csv import read_cases
 
 from . import ROOT
@@ -32,9 +33,17 @@ def scipy_special_reference():
 
 @reference_family('special')
 def special_reference(case):
-    name = case['api'].split('.')[1]
+    name = case['api'].rsplit('.', 1)[1]
     args = [case['args'][f'p{i}'] for i in range(len(case['args']))]
-    function = specs()[case['api']]
+    function = specs().get(case['api'])
+    if function is None:
+        # Historical snapshots still include these six Sci 0.1 scalar APIs.
+        # Sci 0.3 no longer exports them. Their independent SciPy oracle can
+        # still be evaluated without claiming the APIs exist in Sci 0.3.
+        removed = {'cbrt','exp10','exp2','expm1','log1p','round'}
+        if name not in removed or list(case['args']) != ['p0']:
+            raise KeyError(case['api'])
+        function = Function(case['api'], (('p0','f64'),), 'f64', 'legacy reference only')
     args = [int(value) if kind in ['usize','isize','u32','i32','u64','i64'] else
             complex(*value) if kind == 'Complex' else value
             for value, (_, kind) in zip(args, function.arguments)]
@@ -64,7 +73,7 @@ def special_reference(case):
 @reference_family('complex')
 def complex_reference(case):
     import cmath
-    name=case['api'].split('.')[1]
+    name=case['api'].rsplit('.',1)[1]
     args=[case['args'][f'p{i}'] for i in range(len(case['args']))]
     if name=='from_polar': value=cmath.rect(*args)
     else:
@@ -92,7 +101,7 @@ def complex_reference(case):
 
 @lru_cache(maxsize=1)
 def specs():
-    return {f.api:f for f in registered_functions()}
+    return {f.api:f for f in typed_functions()}
 
 
 @lru_cache(maxsize=8192)
@@ -104,6 +113,18 @@ def cached_reference(api, arguments):
 
 
 def reference(case):
+    if case['args'].get('special03_case'):
+        from .special03_cases import reference as special03_reference
+        return [float(v) for v in special03_reference(case)]
+    if case['args'].get('structural03_case'):
+        from .structural03_cases import reference as structural03_reference
+        return structural03_reference(case)
+    if case['args'].get('special_complex03_case'):
+        from .special_complex03_cases import reference as special_complex03_reference
+        return [float(v) for v in special_complex03_reference(case)]
+    if case['args'].get('io_case'):
+        from .io_cases import reference as io_reference
+        return io_reference(case)
     if case['args'].get('explicit'):
         from .explicit_cases import reference as explicit_reference
         return explicit_reference(case)
@@ -337,21 +358,30 @@ def fixture_definitions(module):
         if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='cases' for t in node.targets):break
         definitions.append(node)
     namespace={'__file__':str(path),'__name__':f'fixture_reference_{module}'}
-    exec(compile(ast.Module(body=definitions,type_ignores=[]),str(path),'exec'),namespace)
+    # Upstream SciPy generators import siblings such as elliptic_reference and
+    # case_catalog. Make their original package directory visible while
+    # executing only definitions, never the file-writing generator loop.
+    sys.path.insert(0,str(path.parent))
+    try:
+        exec(compile(ast.Module(body=definitions,type_ignores=[]),str(path),'exec'),namespace)
+    finally:
+        sys.path.pop(0)
     return types.SimpleNamespace(**namespace)
 
 
 @reference_family('stats')
 def statistics_reference(case):
     module=fixture_definitions('statistics')
-    values=np.asarray(module.reference({'api':case['args'].get('dispatch_api',case['api'].split('.',1)[1]),**case['args']}),dtype=float).ravel().tolist()
+    values=np.asarray(module.reference({'api':case['args'].get('dispatch_api',case['api'].rsplit('.',1)[1]),**case['args']}),dtype=float).ravel().tolist()
     return values[:1] if case['api']=='stats.weightedtau' else values
 
 
 @reference_family('signal')
 def signal_reference(case):
     module=fixture_definitions('signal')
-    name=case['api'].split('.',1)[1]
+    name=case['api'].partition('.')[2]
+    if not name.startswith('windows.'):
+        name=name.rsplit('.',1)[-1]
     rows=module.output_rows(module.reference(name,case['args']['arguments']))
     return [value for row in rows for value in row]
 
@@ -423,4 +453,11 @@ def reference_result(case):
 @reference_family('sparse')
 def sparse_reference(case):
     from .sparse_cases import reference
+    return reference(case)
+
+
+@reference_family('io')
+def io_reference(case):
+    """Delegate byte-stream fixtures to the independent SciPy/NumPy codec oracle."""
+    from .io_cases import reference
     return reference(case)

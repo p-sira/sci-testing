@@ -34,14 +34,21 @@ jobs:
           rustup update stable
           rustup default stable
           uv sync --frozen
-      - name: Check input recipes, metrics and adapters
-        run: uv run --frozen python -m unittest -v
-      - name: Check Rust input parsing and public API evaluation
-        run: cargo test --locked
-      - name: Generate all tables and validate generated files
+      - name: Check Rust formatting and public API evaluation
         run: |
-          uv run --frozen python -m sci_testing.report --full
-          uv run --frozen python -m sci_testing.report --check
+          cargo fmt --all -- --check
+          cargo test --locked
+          cargo build --locked
+      - name: Check independent references and Rust writer interoperability
+        run: |
+          runner_dir="$(cargo metadata --locked --format-version 1 --no-deps | python -c 'import json,sys; print(json.load(sys.stdin)["target_directory"])')"
+          SCI_TESTING_IO_RUNNER="$runner_dir/debug/sci-testing" uv run --frozen python -m unittest -v
+      - name: Lint Rust adapters
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Verify Rust documentation
+        run: RUSTDOCFLAGS='-D warnings' cargo doc --locked --no-deps
+      - name: Validate pinned references, coverage and generated tables
+        run: uv run --frozen python -m sci_testing.report --check
       - uses: actions/upload-artifact@v7
         with:
           name: accuracy-reports
