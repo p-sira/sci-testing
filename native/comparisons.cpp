@@ -1,5 +1,6 @@
 // C ABI for independent Boost.Math and GSL comparisons. No exceptions cross it.
 #include <boost/math/special_functions/erf.hpp>
+#include <boost/math/special_functions/airy.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/beta.hpp>
 #include <boost/math/special_functions/digamma.hpp>
@@ -13,6 +14,7 @@
 #include <boost/version.hpp>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_erf.h>
+#include <gsl/gsl_sf_airy.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_psi.h>
 #include <gsl/gsl_sf_bessel.h>
@@ -23,6 +25,7 @@
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_version.h>
 #include <cmath>
+#include <array>
 #include <cstring>
 #include <stdexcept>
 #include <string>
@@ -57,11 +60,75 @@ extern "C" {
 const char* comparison_version(int library) { return library == 0 ? BOOST_LIB_VERSION : gsl_version; }
 const char* comparison_error() { return error.c_str(); }
 int comparison_supported(const char* name) {
+    if (std::strcmp(name, "airy") == 0 || std::strcmp(name, "airye") == 0) return 1;
 #define SUPPORTED(name_, arity, boost_, gsl_) if (std::strcmp(name, #name_) == 0) return arity;
     SCALAR_FUNCTIONS(SUPPORTED)
 #undef SUPPORTED
     if (std::strcmp(name, "normal_cdf") == 0 || std::strcmp(name, "normal_pdf") == 0 || std::strcmp(name, "normal_ppf") == 0) return 1;
     return 0;
+}
+int comparison_output_count(const char* name) {
+    if (std::strcmp(name, "airy") == 0 || std::strcmp(name, "airye") == 0) return 4;
+    return comparison_supported(name) ? 1 : 0;
+}
+// Multi-component real Airy comparisons. The scalar ABI remains unchanged.
+int comparison_evaluate_many(int library, const char* name, const double* a, int count,
+                             double* result, int capacity) {
+    error.clear();
+    gsl_set_error_handler_off();
+    try {
+        if (library != 0 && library != 1) throw std::invalid_argument("unknown library");
+        if (count != 1 || comparison_output_count(name) != 4 || capacity < 4)
+            throw std::invalid_argument("incorrect arity or output capacity");
+        const double x = a[0];
+        if (!std::isfinite(x)) throw std::invalid_argument("nonfinite Airy input");
+        const bool scaled = std::strcmp(name, "airye") == 0;
+        // Sci's real airye has no real scaled Ai or Ai' for x < 0.
+        // GSL instead returns their unscaled real values on this domain.
+        if (scaled && x < 0) throw std::invalid_argument("real airye requires x >= 0");
+
+        std::array<double, 4> values{}; // Ai, Ai', Bi, Bi'
+        if (library == 0) {
+            if (scaled) {
+                // Boost provides only unscaled functions. Use extended-range
+                // intermediates so exp(zeta) does not overflow before the
+                // exponentially small Ai values can cancel its magnitude.
+                const long double y = x;
+                const long double zeta = (2.0L / 3.0L) * y * std::sqrt(y);
+                const long double ai_scale = std::exp(zeta);
+                const long double bi_scale = std::exp(-zeta);
+                values = {static_cast<double>(boost::math::airy_ai(y) * ai_scale),
+                          static_cast<double>(boost::math::airy_ai_prime(y) * ai_scale),
+                          static_cast<double>(boost::math::airy_bi(y) * bi_scale),
+                          static_cast<double>(boost::math::airy_bi_prime(y) * bi_scale)};
+            } else {
+                values = {boost::math::airy_ai(x), boost::math::airy_ai_prime(x),
+                          boost::math::airy_bi(x), boost::math::airy_bi_prime(x)};
+            }
+        } else {
+            using AiryFunction = int (*)(double, gsl_mode_t, gsl_sf_result*);
+            const std::array<AiryFunction, 4> functions = scaled
+                ? std::array<AiryFunction, 4>{gsl_sf_airy_Ai_scaled_e,
+                                              gsl_sf_airy_Ai_deriv_scaled_e,
+                                              gsl_sf_airy_Bi_scaled_e,
+                                              gsl_sf_airy_Bi_deriv_scaled_e}
+                : std::array<AiryFunction, 4>{gsl_sf_airy_Ai_e,
+                                              gsl_sf_airy_Ai_deriv_e,
+                                              gsl_sf_airy_Bi_e,
+                                              gsl_sf_airy_Bi_deriv_e};
+            for (size_t i = 0; i < values.size(); ++i) {
+                gsl_sf_result component{};
+                const int status = functions[i](x, GSL_PREC_DOUBLE, &component);
+                if (status != GSL_SUCCESS) { error = gsl_strerror(status); return status; }
+                values[i] = component.val;
+            }
+        }
+        for (double value : values)
+            if (!std::isfinite(value)) throw std::runtime_error("nonfinite output");
+        for (size_t i = 0; i < values.size(); ++i) result[i] = values[i];
+        return 0;
+    } catch (const std::exception& e) { error = e.what(); return -1; }
+      catch (...) { error = "unknown native exception"; return -1; }
 }
 int comparison_evaluate(int library, const char* name, const double* a, int count, double* result) {
     error.clear();

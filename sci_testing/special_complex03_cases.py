@@ -23,6 +23,7 @@ The sampling avoids singularities and known bounded-work limits in Sci 0.3.
 import hashlib
 import math
 import random
+import warnings
 
 import mpmath as mp
 
@@ -47,6 +48,42 @@ _SCIPY_IGNORES_LOWER_ZERO = frozenset(('hankel1', 'hankel1e',
                                       'kv', 'kve', 'yv', 'yve'))
 _ENTIRE = frozenset(('airy', 'airye', 'dawsn', 'erf', 'erfc', 'erfcx',
                       'erfi', 'fresnel', 'wofz', 'rgamma'))
+
+
+def scipy_comparison(case):
+    """Compare against public SciPy complex overloads independently of mpmath.
+
+    Use the input's signed imaginary zero unchanged. Some SciPy functions select
+    the upper bank at -0j whereas Sci and the stored mpmath oracle select the
+    lower bank; those differences must be visible in the comparison table.
+    """
+    from scipy import special
+
+    name=case['api'].split('.')[-1]
+    if name not in _NAMES:
+        raise ValueError(f'No registered complex SciPy comparison: {name}')
+    a=case['args']
+    try:
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter('always')
+            if name in ('xlogy','xlog1py'):
+                result=getattr(special,name)(complex(*a['x']),complex(*a['y']))
+            elif name=='lambertw':
+                result=special.lambertw(complex(*a['z']),k=int(a['k']))
+            elif name in _BESSEL:
+                result=getattr(special,name)(a['v'],complex(*a['z']))
+            else:
+                result=getattr(special,name)(complex(*a['z']))
+            parts=result if isinstance(result,(list,tuple)) else (result,)
+            values=[v for part in parts for v in (float(complex(part).real),
+                                                  float(complex(part).imag))]
+            if not all(math.isfinite(v) for v in values):
+                raise ValueError('nonfinite output')
+            row={'values':values}
+            if captured:row['warnings']=[str(w.message) for w in captured]
+            return {'SciPy':row}
+    except (ValueError,TypeError,ArithmeticError) as error:
+        return {'SciPy':{'error':f'{type(error).__name__}: {error}'}}
 
 
 def _case(api, name, args, description):

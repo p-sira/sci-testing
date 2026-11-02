@@ -160,6 +160,57 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(self.measure.call_count,1)
         self.run_report('--check')
 
+    def test_sci_refresh_retains_comparator_backfill_provenance(self):
+        history=[{'apis':['special.erf'],'scipy':'1.18.1',
+                  'testing_sources_sha256':'original-comparator-code'}]
+        self.meta['comparison_refreshes']=history
+        (self.root/'results/environment.json').write_text(json.dumps(self.meta))
+        self.run_report('--module','special.erf')
+        meta=self.assert_preserved({'special.erf'})
+        self.assertEqual(meta['comparison_refreshes'],history)
+        self.run_report('--check')
+
+    def test_comparator_backfill_keeps_sci_references_and_unselected_measurements(self):
+        untouched=self.root/'results/measurements/sparse.linalg/norm.csv.gz'
+        original=untouched.read_bytes()
+        self.native.side_effect=None
+        self.native.return_value.versions={'Boost.Math':'test','GSL':'test'}
+        self.native.return_value.evaluate.return_value={'Boost.Math':{'values':[.5]}}
+        self.competitors.side_effect=None
+        self.competitors.return_value={'SciPy':{'values':[.5]}}
+        self.run_report('--comparators-only','--module','special.erf')
+        self.assertEqual(untouched.read_bytes(),original)
+        updated=read_measurements(self.root/'results/measurements')
+        for case in self.cases:
+            saved=self.records[case['id']]
+            actual=updated[case['id']]
+            self.assertEqual(actual['reference'],saved['reference'])
+            self.assertEqual(actual['libraries']['Sci'],saved['libraries']['Sci'])
+            if case['api']=='special.erf':
+                self.assertEqual(actual['libraries']['Boost.Math'],{'values':[.5]})
+                self.assertEqual(actual['libraries']['SciPy'],{'values':[.5]})
+            else:self.assertEqual(actual,saved)
+        self.measure.assert_not_called()
+        self.reference.assert_not_called()
+        meta=json.loads((self.root/'results/environment.json').read_text())
+        self.assertEqual(meta['reference_environment'],self.meta)
+        self.assertEqual(meta['comparison_refreshes'][-1]['apis'],['special.erf'])
+        self.assertIn('Boost.Math',meta['module_libraries']['special'])
+        self.run_report('--check')
+
+    def test_comparator_backfill_is_atomic_if_reporting_fails(self):
+        before={p:p.read_bytes() for p in (self.root/'results').rglob('*') if p.is_file()}
+        self.native.side_effect=None
+        self.native.return_value.versions={'Boost.Math':'test','GSL':'test'}
+        self.native.return_value.evaluate.return_value={'Boost.Math':{'values':[.5]}}
+        self.competitors.side_effect=None
+        self.competitors.return_value={}
+        with patch.object(report,'render',side_effect=ValueError('report failed')):
+            with self.assertRaisesRegex(ValueError,'report failed'):
+                self.run_report('--comparators-only','--module','special.erf')
+        self.assertEqual(before,{p:p.read_bytes() for p in before})
+
+
     def test_invalid_selection_is_rejected_before_measurement(self):
         for arguments in [('--module','unknown'),('--full','--module','special'),('--check','--module','special')]:
             with self.subTest(arguments=arguments), redirect_stdout(io.StringIO()), patch('sys.stderr',new_callable=io.StringIO):

@@ -10,20 +10,27 @@ coverage is limited to the operations and inputs below.
 
 ## Agreement with Sci
 
-Each library cell is **maximum / mean difference from Sci in ε** over cases
+`Sci vs reference` is **maximum / mean difference between Sci and the saved
+independent mathematical reference in ε**. Other library cells are **maximum /
+mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means unavailable or no paired finite results.
+because Sci failed. A dash means no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
+Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
+canonical API inventory. Historical flat recipe aliases appear under their
+current public namespace, with their measured recipe names preserved.
 
-| Function | Cases | SciPy |
-| --- | ---: | --- |
-| `derivative` | 2201 | 7.5061e+10 / 2.5002e+10 |
-| `gradient` | 2076 | 2.0684e+8 / 1.0616e+6 |
-| `hessian` | 2000 | 1.2274e+9 / 4.1672e+7 |
-| `jacobian` | 2000 | 10018.0 / 665.08 |
+### `sci::differentiate` (4 functions, 8277 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `derivative` | 2201 | 7.5061e+10 / 2.5002e+10 | 7.5061e+10 / 2.5002e+10 |
+| `gradient` | 2076 | 2.0684e+8 / 1.0616e+6 | 2.0684e+8 / 1.0616e+6 |
+| `hessian` | 2000 | 1.2274e+9 / 4.1672e+7 | 1.2274e+9 / 4.1672e+7 |
+| `jacobian` | 2000 | 10000.0 / 662.56 | 10018.0 / 665.08 |
 
 
 ## Conventions and limitations
@@ -42,7 +49,7 @@ variants are not counted as independent implementations.
 ## Reproduction
 
 - Sci source: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998` (numerical sources clean: true).
-- Testing source SHA-256: `a9a4095493112b6b04c27596db78ecaef74ca844a93c23be4da6563ce7cbfcbe`.
+- Testing source SHA-256: `3d1f538d12ef58c6738188ac9a526fb0459c4c5cb1023a3c7edaa3c23d5a3452`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
 - rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.

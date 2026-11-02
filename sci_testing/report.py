@@ -183,7 +183,10 @@ def flatten(value):
 def competitors(case):
     """Public library APIs, or explicitly labelled elementary NumPy expressions."""
     api, a = case['api'], case['args']
-    if a.get('special03_case') or a.get('special_complex03_case'):
+    if a.get('special_complex03_case'):
+        from .special_complex03_cases import scipy_comparison
+        return scipy_comparison(case)
+    if a.get('special03_case'):
         # High-precision mathematical oracles are stored separately, without
         # presenting the same formula as an independent competitor library.
         return {}
@@ -337,8 +340,16 @@ def environment(sci_path):
 def number(x): return mp.nstr(x,5,min_fixed=-3,max_fixed=5)
 
 
+def comparison_submodule(api, canonical):
+    """Group historical aliases under their Sci 0.3 public namespace."""
+    path=(canonical or api).split('.')
+    return path[1] if len(path)>2 else None
+
+
 def render(cases, records, meta, output):
     output.mkdir(parents=True,exist_ok=True)
+    from .coverage_audit import inventory
+    canonical={row['api']:row['canonical'] for row in inventory()}
     for module in MODULES:
         if hasattr(cases,'function'):
             names=[api for api in cases.apis if api.split('.')[0]==module]
@@ -355,10 +366,11 @@ def render(cases, records, meta, output):
         available.discard('Sci')
         preferred=['SciPy','Boost.Math','GSL','NumPy','stdlib','FilterPy']
         libraries=sorted(available,key=lambda lib:(preferred.index(lib) if lib in preferred else len(preferred),lib))
-        rows=[];failed={}
+        sections=defaultdict(list);section_cases=defaultdict(int);failed={}
         for api,batch in groups:
             cells=[]
             baseline_failures=0
+            reference_maximum=None;reference_sum=ZERO;reference_count=0
             for case in batch:
                 record=records[case['id']]
                 baseline=record['libraries']['Sci']
@@ -367,6 +379,14 @@ def render(cases, records, meta, output):
                     entry=failed.setdefault((api,'Sci'),[0,baseline['error'],case['id']]);entry[0]+=1
                 elif len(baseline['values'])!=len(record['reference']):
                     raise ValueError(f'{case["id"]}: shape mismatch in Sci')
+                else:
+                    errors=[component_error(actual,reference,binary64=False)
+                            for actual,reference in zip(baseline['values'],record['reference'])]
+                    if errors:
+                        current=max(errors)
+                        reference_maximum=current if reference_maximum is None else max(reference_maximum,current)
+                        reference_sum+=mp.fsum(errors)
+                        reference_count+=len(errors)
             for lib in libraries:
                 sums=[];maximum=None;scalar_count=0;failures=0;unavailable=0;baseline_missing=0
                 for case in batch:
@@ -390,9 +410,21 @@ def render(cases, records, meta, output):
                 cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
                              (f'; Sci unavailable {baseline_missing}/{len(batch)}' if baseline_missing else ''))
             count=str(len(batch))+(f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')
-            rows.append(f'| `{api.split(".",1)[1]}` | {count} | '+' | '.join(cells)+' |')
+            reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
+                            if reference_count else '—')
+            section=comparison_submodule(api,canonical.get(api))
+            section_cases[section]+=len(batch)
+            sections[section].append(f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |')
         failures=[f'- `{api}` ({lib}): {count} failed; {reason}. Example: `{identifier}`.' for (api,lib),(count,reason,identifier) in failed.items()]
         failure_section='\n## Evaluation failures\n\n'+'\n'.join(failures)+'\n' if failures else ''
+        headers=['Function','Cases','Sci vs reference',*libraries]
+        table_header='| '+' | '.join(headers)+' |\n| '+' | '.join(['---','---:',*('---' for _ in headers[2:])])+' |\n'
+        tables=[]
+        for section in sorted(sections,key=lambda name:(name is None,name or '')):
+            namespace=f'sci::{module}'+(f'::{section}' if section else '')
+            title=f'### `{namespace}` ({len(sections[section])} functions, {section_cases[section]} cases)'
+            tables.append(title+'\n\n'+table_header+'\n'.join(sections[section]))
+        tables_text='\n\n'.join(tables)
         text = f'''# {module}: library comparison
 
 [All modules and methodology](README.md) · [Public API](https://docs.rs/sci-{module})
@@ -405,17 +437,21 @@ coverage is limited to the operations and inputs below.
 
 ## Agreement with Sci
 
-Each library cell is **maximum / mean difference from Sci in ε** over cases
+`Sci vs reference` is **maximum / mean difference between Sci and the saved
+independent mathematical reference in ε**. Other library cells are **maximum /
+mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means unavailable or no paired finite results.
+because Sci failed. A dash means no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
+Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
+canonical API inventory. Historical flat recipe aliases appear under their
+current public namespace, with their measured recipe names preserved.
 
-| {' | '.join(['Function','Cases',*libraries])} |
-| {' | '.join(['---','---:',*('---' for _ in libraries)])} |
-'''+ '\n'.join(rows)+'\n'+failure_section+f'''
+{tables_text}
+'''+failure_section+f'''
 
 ## Conventions and limitations
 
@@ -446,7 +482,6 @@ See the [shared metric, provenance and reproduction instructions](README.md).
         if 'sci_measurement_commits' in meta:
             text+='\nSci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.\n'
         (output/f'{module}.md').write_text(text)
-    from .coverage_audit import inventory
     exports=inventory();canonical=len({row['canonical'] for row in exports if row['canonical']})
     sampled_apis=set(cases.apis) if hasattr(cases,'apis') else {case['api'] for case in cases}
     new_apis={row['api'] for row in exports if row.get('status')=='new_api_untested'}
@@ -470,9 +505,12 @@ unmeasured new API names, {pending_other} other untested exports and
 The [coverage audit](../../results/coverage.csv) explicitly marks pending names
 alongside measured sample counts, unique inputs, successes and failures.
 
-Tables list **Function**, **Cases**, then relevant libraries (SciPy, Boost.Math,
-GSL and others). Each library cell is **maximum / mean symmetric relative
-difference from Sci in machine epsilon**, over cases where both evaluations
+Tables are grouped by Sci 0.3 public submodule (including historical aliases)
+and list **Function**, **Cases**, **Sci vs reference**, then relevant libraries
+(SciPy, Boost.Math, GSL and others). The reference column compares Sci with
+the saved independent mathematical oracle; library columns compare each
+competitor with Sci. Each cell is **maximum / mean symmetric relative
+difference in machine epsilon**, over cases where both evaluations
 succeed. `failed N/T` counts that library's failures; `Sci failed N/T` in Cases
 counts baseline failures, and `Sci unavailable N/T` marks otherwise successful
 evaluations excluded from comparison. Unavailable comparisons use a dash. The per-function
@@ -755,6 +793,33 @@ def refresh_sci(cases, records, executable, destination, apis):
     return changed
 
 
+def refresh_comparators(cases, records, destination, apis, *, native=None):
+    """Add measured competitors without evaluating Sci or rewriting stored oracles."""
+    from itertools import groupby
+    changed=set();libraries=defaultdict(set)
+    for api,iterator in groupby(cases,key=lambda c:c['api']):
+        if api not in apis:continue
+        batch=list(iterator)
+        print(f'Measuring comparison libraries only: {api}: {len(batch)} cases',flush=True)
+        updated={}
+        for case in batch:
+            saved=records[case['id']]
+            new={**competitors(case),**(native.evaluate(case) if native and
+                not (case['args'].get('special03_case') or case['args'].get('special_complex03_case')) else {})}
+            for library,result in new.items():
+                if library=='Sci':raise ValueError('Competitor cannot replace Sci measurement')
+                validate_result(case,result,saved['reference'])
+                libraries[api.split('.')[0]].add(library)
+            updated[case['id']]={**saved,'libraries':{**saved['libraries'],**new}}
+        files=measurement_files(batch,updated)
+        # A staged tree can share hard links with the source snapshot.
+        for name in files:
+            (destination/name).unlink(missing_ok=True)
+            (destination/(name+'.gz')).unlink(missing_ok=True)
+        changed.update(write_measurements(destination,files))
+    return changed,libraries
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,default=ROOT/'docs/accuracy')
@@ -764,10 +829,13 @@ def main():
     mode.add_argument('--extend',action='store_true',help='measure only new API names and retain every historical independent reference')
     mode.add_argument('--full',action='store_true',help='recompute all Sci, reference and comparison-library results')
     mode.add_argument('--sci-only',action='store_true',help='refresh only Sci outputs (the default)')
+    mode.add_argument('--comparators-only',action='store_true',help='backfill comparison libraries from verified saved inputs, preserving Sci and independent reference results')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
     args=parser.parse_args()
     if args.module and (args.full or args.check or args.render or args.extend):
         parser.error('--module is available only for Sci-only refreshes')
+    if args.comparators_only and not args.module:
+        parser.error('--comparators-only requires explicit --module selection')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
         raise RuntimeError('Run uv sync --frozen with the pinned library versions')
     if not args.check and any(k.startswith(('RUSTFLAGS','CARGO_ENCODED_RUSTFLAGS','CARGO_PROFILE_')) or k == 'CARGO_BUILD_TARGET' for k in os.environ):
@@ -836,6 +904,47 @@ def main():
         write_cases(ROOT/'cases/generated',cases,signature=case_signature())
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
+    if args.comparators_only:
+        from .coverage_audit import audit
+        native=NativeComparisons() if any(api.startswith(('special.','stats.'))
+            and not api.startswith('special.complex.') for api in selected) else None
+        meta=previous.copy()
+        meta['module_libraries']={module:list(names) for module,names in previous['module_libraries'].items()}
+        if meta['testing_sources_sha256']!=digest_sources():
+            meta['reference_environment']=meta.get('reference_environment',previous)
+            meta['testing_sources_sha256']=digest_sources()
+        if native:
+            meta['native_libraries']=native.versions
+            meta['cxx']=command('c++','--version')
+            meta['native_build_flags']='-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas'
+        with tempfile.TemporaryDirectory(dir=ROOT/'results') as directory:
+            workspace=Path(directory)
+            staged=workspace/'measurements'
+            shutil.copytree(ROOT/'results/measurements',staged,copy_function=os.link)
+            changed,libraries=refresh_comparators(cases,records,staged,selected,native=native)
+            staged_records=MeasurementStore(staged)
+            coverage=audit(cases,staged_records)
+            meta['measurements_sha256']=directory_digest(staged)
+            meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
+            for module,names in libraries.items():
+                meta['module_libraries'][module]=sorted(set(meta['module_libraries'][module])|names)
+            meta.setdefault('comparison_refreshes',[]).append({
+                'apis':sorted(selected),'testing_sources_sha256':meta['testing_sources_sha256'],
+                'scipy':meta['scipy'],'native_libraries':meta.get('native_libraries',{})})
+            pages=workspace/'pages'
+            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            for name in sorted(changed):
+                src=staged/name;dest=ROOT/'results/measurements'/name
+                dest.parent.mkdir(parents=True,exist_ok=True)
+                src.replace(dest)
+                alternate=dest.with_suffix('') if dest.suffix=='.gz' else dest.with_suffix('.csv.gz')
+                alternate.unlink(missing_ok=True)
+            (ROOT/'results/coverage.csv').write_text(coverage)
+            (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
+            args.output.resolve().mkdir(parents=True,exist_ok=True)
+            for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
+        print(f'Backfilled {len(selected)} APIs from saved inputs and references')
+        return
     pinned=(ROOT/'sci-revision.txt').read_text().strip()
     if command('git','rev-parse','HEAD',cwd=SCI) != pinned:
         raise RuntimeError('Sci checkout differs from sci-revision.txt; update the pin intentionally before measuring')
@@ -846,6 +955,8 @@ def main():
         # new APIs. A Sci-only refresh must not erase that provenance.
         if 'reference_extensions' in previous:
             meta['reference_extensions']=previous['reference_extensions']
+        if 'comparison_refreshes' in previous:
+            meta['comparison_refreshes']=previous['comparison_refreshes']
         if args.module or args.extend:
             commits=previous.get('sci_measurement_commits',{api:previous['sci_commit'] for api in cases.apis}).copy()
             if args.extend:
@@ -978,7 +1089,9 @@ def main():
                     scale=max([TINY]+[abs(v) for v in high])
                     if any(abs(x-y)>mp.mpf('1e-90')*scale for x,y in zip(low,high)):
                         raise ValueError(f'unstable reference: {case["id"]}')
-                    libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native.evaluate(case)}
+                    native_results=({} if case['args'].get('special03_case') or
+                                    case['args'].get('special_complex03_case') else native.evaluate(case))
+                    libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native_results}
                     for res in libs.values():validate_result(case,res,high)
                     records[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],'libraries':libs}
                 module_libraries[api.split('.')[0]].update(libs)

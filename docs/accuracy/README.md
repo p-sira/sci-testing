@@ -9,9 +9,12 @@ unmeasured new API names, 0 other untested exports and
 The [coverage audit](../../results/coverage.csv) explicitly marks pending names
 alongside measured sample counts, unique inputs, successes and failures.
 
-Tables list **Function**, **Cases**, then relevant libraries (SciPy, Boost.Math,
-GSL and others). Each library cell is **maximum / mean symmetric relative
-difference from Sci in machine epsilon**, over cases where both evaluations
+Tables are grouped by Sci 0.3 public submodule (including historical aliases)
+and list **Function**, **Cases**, **Sci vs reference**, then relevant libraries
+(SciPy, Boost.Math, GSL and others). The reference column compares Sci with
+the saved independent mathematical oracle; library columns compare each
+competitor with Sci. Each cell is **maximum / mean symmetric relative
+difference in machine epsilon**, over cases where both evaluations
 succeed. `failed N/T` counts that library's failures; `Sci failed N/T` in Cases
 counts baseline failures, and `Sci unavailable N/T` marks otherwise successful
 evaluations excluded from comparison. Unavailable comparisons use a dash. The per-function
@@ -130,7 +133,7 @@ All reports and data belong to this repository; Sci links to them externally.
 ## Snapshot
 
 - Sci commit: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998`.
-- Harness source SHA-256: `a9a4095493112b6b04c27596db78ecaef74ca844a93c23be4da6563ce7cbfcbe`.
+- Harness source SHA-256: `3d1f538d12ef58c6738188ac9a526fb0459c4c5cb1023a3c7edaa3c23d5a3452`.
 - Input SHA-256: `f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854`.
 - 2349606 saved cases covering 1181 recipe API names; 1142 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
