@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::linalg::basic` (13 functions, 26133 cases)
+### `sci::linalg::basic`
+
+13 functions · 26133 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -44,7 +46,9 @@ current public namespace, with their measured recipe names preserved.
 | `pinvh` | 2018 | 53.341 / 2.1188 | 53.341 / 2.1188 | — | — | — |
 | `transpose` | 2000 | 0.0 / 0.0 | — | — | 0.0 / 0.0 | 0.0 / 0.0 |
 
-### `sci::linalg::decompositions` (20 functions, 40105 cases)
+### `sci::linalg::decompositions`
+
+20 functions · 40105 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -69,7 +73,9 @@ current public namespace, with their measured recipe names preserved.
 | `svd` | 2005 | 1.0525e+18 / 1.5578e+16 | 1.0525e+18 / 1.5578e+16 | — | — | — |
 | `svdvals` | 2005 | 3.6493 / 0.8805 | 3.6493 / 0.8805 | 3.6516 / 0.84989 | — | — |
 
-### `sci::linalg::eigen` (11 functions, 22046 cases)
+### `sci::linalg::eigen`
+
+11 functions · 22046 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -85,7 +91,9 @@ current public namespace, with their measured recipe names preserved.
 | `ordqz` | 2008 | 1.0273e+17 / 2.7242e+13 | 1.0273e+17 / 2.7242e+13 | — | — | — |
 | `qz` | 2004 | 9.2181e+16 / 1.4036e+13 | 9.2181e+16 / 1.4036e+13 | — | — | — |
 
-### `sci::linalg::interpolative` (9 functions, 18042 cases)
+### `sci::linalg::interpolative`
+
+9 functions · 18042 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -99,7 +107,9 @@ current public namespace, with their measured recipe names preserved.
 | `interpolative.reconstruct_skel_matrix` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `interpolative.svd` | 2008 | 6.5 / 5.4349e-3 | 6.5 / 5.4349e-3 | — | — | — |
 
-### `sci::linalg::matrix_functions` (14 functions, 28097 cases)
+### `sci::linalg::matrix_functions`
+
+14 functions · 28097 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -118,7 +128,9 @@ current public namespace, with their measured recipe names preserved.
 | `tanhm` | 2004 | 29.297 / 0.71794 | 29.297 / 0.71794 | — | — | — |
 | `tanm` | 2004 | 4.8006 / 0.63213 | 4.8006 / 0.63213 | — | — | — |
 
-### `sci::linalg::solvers` (15 functions, 30116 cases)
+### `sci::linalg::solvers`
+
+15 functions · 30116 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -138,7 +150,9 @@ current public namespace, with their measured recipe names preserved.
 | `solve_triangular` | 2008 | 1.3321 / 0.031869 | 1.3321 / 0.031869 | — | — | — |
 | `solveh_banded` | 2004 | 8.4375 / 0.77894 | 8.4375 / 0.77894 | — | — | — |
 
-### `sci::linalg::structured` (18 functions, 36085 cases)
+### `sci::linalg::structured`
+
+18 functions · 36085 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -161,7 +175,9 @@ current public namespace, with their measured recipe names preserved.
 | `pascal` | 2009 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `toeplitz` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::linalg::subspaces` (5 functions, 10043 cases)
+### `sci::linalg::subspaces`
+
+5 functions · 10043 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -171,7 +187,9 @@ current public namespace, with their measured recipe names preserved.
 | `orthogonal_procrustes` | 2002 | 4.5036e+15 / 1.1116e+14 | 4.5036e+15 / 1.1116e+14 | — | — | — |
 | `subspace_angles` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::linalg` (4 functions, 8013 cases)
+### `sci::linalg`
+
+4 functions · 8013 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |

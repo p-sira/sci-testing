@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::cluster::hierarchy` (27 functions, 54114 cases)
+### `sci::cluster::hierarchy`
+
+27 functions · 54114 cases
 
 | Function | Cases | Sci vs reference | SciPy |
 | --- | ---: | --- | --- |
@@ -58,7 +60,9 @@ current public namespace, with their measured recipe names preserved.
 | `hierarchy.ward` | 2004 | 1.7727 / 0.024594 | 1.7727 / 0.024594 |
 | `hierarchy.weighted` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 |
 
-### `sci::cluster::vq` (4 functions, 8103 cases)
+### `sci::cluster::vq`
+
+4 functions · 8103 cases
 
 | Function | Cases | Sci vs reference | SciPy |
 | --- | ---: | --- | --- |

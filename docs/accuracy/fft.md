@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::fft::fourier` (6 functions, 12098 cases)
+### `sci::fft::fourier`
+
+6 functions · 12098 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -37,7 +39,9 @@ current public namespace, with their measured recipe names preserved.
 | `ifft2` | 2004 | 5.2326e+16 / 3.4286e+15 | 5.2326e+16 / 3.4286e+15 | — | — |
 | `ifftn` | 2005 | 7.676e+16 / 3.4467e+15 | 7.676e+16 / 3.4467e+15 | — | — |
 
-### `sci::fft::hankel` (3 functions, 6018 cases)
+### `sci::fft::hankel`
+
+3 functions · 6018 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -45,7 +49,9 @@ current public namespace, with their measured recipe names preserved.
 | `fhtoffset` | 2006 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `ifht` | 2006 | 612.77 / 0.27612 | 612.77 / 0.27612 | — | — |
 
-### `sci::fft::real` (20 functions, 40118 cases)
+### `sci::fft::real`
+
+20 functions · 40118 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -70,7 +76,9 @@ current public namespace, with their measured recipe names preserved.
 | `rfft2` | 2004 | 4.0532e+16 / 2.5891e+15 | 4.0532e+16 / 2.5891e+15 | — | — |
 | `rfftn` | 2004 | 4.0532e+16 / 2.6188e+15 | 4.0532e+16 / 2.6188e+15 | — | — |
 
-### `sci::fft::utilities` (16 functions, 32102 cases)
+### `sci::fft::utilities`
+
+16 functions · 32102 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |

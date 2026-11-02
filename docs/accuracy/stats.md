@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::stats::association` (9 functions, 18131 cases)
+### `sci::stats::association`
+
+9 functions · 18131 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -40,7 +42,9 @@ current public namespace, with their measured recipe names preserved.
 | `spearmanrho` | 2012 | 3.6053 / 0.50006 | 3.6053 / 0.50006 | — | 4.5036e+15 / 2.2384e+12 | — |
 | `weightedtau` | 2032 | 6.7659 / 0.01214 | 6.7659 / 0.01214 | — | — | — |
 
-### `sci::stats::binning` (5 functions, 10027 cases)
+### `sci::stats::binning`
+
+5 functions · 10027 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -50,7 +54,9 @@ current public namespace, with their measured recipe names preserved.
 | `cumfreq` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `relfreq` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::stats::contingency` (10 functions, 20115 cases)
+### `sci::stats::contingency`
+
+10 functions · 20115 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -65,7 +71,9 @@ current public namespace, with their measured recipe names preserved.
 | `contingency.relative_risk` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `fisher_exact` | 2009 | 1192.0 / 170.67 | 1192.0 / 170.67 | 1191.0 / 170.73 | — | — |
 
-### `sci::stats::descriptive` (42 functions, 84446 cases)
+### `sci::stats::descriptive`
+
+42 functions · 84446 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -112,7 +120,9 @@ current public namespace, with their measured recipe names preserved.
 | `zmap` | 2005 | 1.0 / 4.2184e-4 | 1.0 / 4.2184e-4 | — | — | — |
 | `zscore` | 2004 | 7.9687 / 0.85237 | 7.9687 / 0.85237 | 7.9687 / 0.95088 | 5.9765 / 0.70329 | — |
 
-### `sci::stats::diagnostics` (7 functions, 14072 cases)
+### `sci::stats::diagnostics`
+
+7 functions · 14072 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -124,7 +134,9 @@ current public namespace, with their measured recipe names preserved.
 | `yeojohnson_normmax` | 2008 | 2.2946e+8 / 4.7734e+7 | 2.2946e+8 / 4.7734e+7 | — | — | — |
 | `yeojohnson_normplot` | 2009 | 2.6227 / 0.22653 | 2.6227 / 0.22653 | — | — | — |
 
-### `sci::stats::distances` (3 functions, 6016 cases)
+### `sci::stats::distances`
+
+3 functions · 6016 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -132,7 +144,9 @@ current public namespace, with their measured recipe names preserved.
 | `wasserstein_distance` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `wasserstein_distance_nd` | 2006 | 1.4142 / 0.67917 | 1.4142 / 0.67917 | — | — | — |
 
-### `sci::stats::distributions` (12 functions, 25995 cases)
+### `sci::stats::distributions`
+
+12 functions · 25995 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -149,14 +163,18 @@ current public namespace, with their measured recipe names preserved.
 | `sf` | 2379 | 2.9859e+5 / 4114.0 | 2.9859e+5 / 4114.0 | 1.9413e+5 / 1707.9; unavailable 289/2379 | 1.9413e+5 / 1765.0; unavailable 357/2379 | — |
 | `truncate` | 2075 | 4.5036e+15 / 2.6045e+12 | 4.5036e+15 / 2.6045e+12 | — | — | — |
 
-### `sci::stats::estimation` (2 functions, 4030 cases)
+### `sci::stats::estimation`
+
+2 functions · 4030 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `bayes_mvs` | 2012 | 83.096 / 3.6539 | 83.096 / 3.6539 | — | — | — |
 | `mvsdist` | 2018 | 516.22 / 1.083 | 516.22 / 1.083 | — | — | — |
 
-### `sci::stats::goodness` (9 functions, 18125 cases)
+### `sci::stats::goodness`
+
+9 functions · 18125 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -170,7 +188,9 @@ current public namespace, with their measured recipe names preserved.
 | `ks_2samp` | 2012 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `power_divergence` | 2034 | 34.056 / 0.81664 | 34.056 / 0.81664 | 29.69 / 1.1525 | — | — |
 
-### `sci::stats::inference` (27 functions, 54625 cases)
+### `sci::stats::inference`
+
+27 functions · 54625 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -202,7 +222,9 @@ current public namespace, with their measured recipe names preserved.
 | `tukey_hsd` | 2010 | 3.1942e+15 / 3.8324e+11 | 3.1942e+15 / 3.8324e+11 | — | — | — |
 | `wilcoxon` | 2114 | 0.52036 / 1.2307e-4 | 0.52036 / 1.2307e-4 | — | — | — |
 
-### `sci::stats::multivariate` (10 functions, 20083 cases)
+### `sci::stats::multivariate`
+
+10 functions · 20083 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -217,7 +239,9 @@ current public namespace, with their measured recipe names preserved.
 | `multivariate_t_logpdf` | 2006 | 27.701 / 2.4638 | 27.701 / 2.4638 | — | — | — |
 | `multivariate_t_pdf` | 2006 | 200.81 / 8.5053 | 200.81 / 8.5053 | — | — | — |
 
-### `sci::stats::normality` (7 functions, 14077 cases)
+### `sci::stats::normality`
+
+7 functions · 14077 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -229,7 +253,9 @@ current public namespace, with their measured recipe names preserved.
 | `shapiro` | 2021 | 6.0048e+15 / 1.4856e+12 | 6.0048e+15 / 1.4856e+12 | — | — | — |
 | `skewtest` | 2018 | 2.7302e+31 / 3.5875e+30 | 2.7302e+31 / 3.5875e+30 | — | — | — |
 
-### `sci::stats::qmc` (4 functions, 8039 cases)
+### `sci::stats::qmc`
+
+4 functions · 8039 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -238,7 +264,9 @@ current public namespace, with their measured recipe names preserved.
 | `qmc.scale` | 2006 | 2.6666 / 0.537 | 2.6666 / 0.537 | — | — | — |
 | `qmc.update_discrepancy` | 2003 | 105.64 / 29.38 | 105.64 / 29.38 | — | — | — |
 
-### `sci::stats::ranking` (5 functions, 10332 cases)
+### `sci::stats::ranking`
+
+5 functions · 10332 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -248,7 +276,9 @@ current public namespace, with their measured recipe names preserved.
 | `rankdata` | 2020 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `tiecorrect` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::stats::regression` (3 functions, 6071 cases)
+### `sci::stats::regression`
+
+3 functions · 6071 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -256,7 +286,9 @@ current public namespace, with their measured recipe names preserved.
 | `siegelslopes` | 2014 | 0.5 / 0.015268 | 0.5 / 0.015268 | — | — | — |
 | `theilslopes` | 2048 | 0.5 / 0.015808 | 0.5 / 0.015808 | — | — | — |
 
-### `sci::stats::resampling` (4 functions, 8111 cases)
+### `sci::stats::resampling`
+
+4 functions · 8111 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -265,19 +297,25 @@ current public namespace, with their measured recipe names preserved.
 | `monte_carlo_test` | 2027 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `permutation_test` | 2036 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::stats::sensitivity` (1 functions, 2007 cases)
+### `sci::stats::sensitivity`
+
+1 function · 2007 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `sobol_indices` | 2007 | 9.0076e+15 / 1.683e+12 | 9.0076e+15 / 1.683e+12 | — | — | — |
 
-### `sci::stats::survival` (1 functions, 2024 cases)
+### `sci::stats::survival`
+
+1 function · 2024 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `logrank` | 2024 | 3.9598 / 4.3075e-3 | 3.9598 / 4.3075e-3 | — | — | — |
 
-### `sci::stats::transformations` (4 functions, 8060 cases)
+### `sci::stats::transformations`
+
+4 functions · 8060 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -286,7 +324,9 @@ current public namespace, with their measured recipe names preserved.
 | `yeojohnson` | 2021 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `yeojohnson_llf` | 2014 | 1.9043 / 0.11034 | 1.9043 / 0.11034 | — | — | — |
 
-### `sci::stats` (4 functions, 8028 cases)
+### `sci::stats`
+
+4 functions · 8028 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |

@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::complex` (34 functions, 70919 cases)
+### `sci::complex`
+
+34 functions · 70919 cases
 
 | Function | Cases | Sci vs reference | NumPy | Boost.Multiprecision |
 | --- | ---: | --- | --- | --- |

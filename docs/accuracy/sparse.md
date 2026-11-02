@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::sparse::array` (7 functions, 12049 cases)
+### `sci::sparse::array`
+
+7 functions · 12049 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | Boost.Graph | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -38,7 +40,9 @@ current public namespace, with their measured recipe names preserved.
 | `random_array` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `swapaxes` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::sparse::construct` (16 functions, 32038 cases)
+### `sci::sparse::construct`
+
+16 functions · 32038 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | Boost.Graph | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -59,7 +63,9 @@ current public namespace, with their measured recipe names preserved.
 | `to_dense` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — | 0.0 / 0.0 |
 | `vstack` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::sparse::csgraph` (25 functions, 50056 cases)
+### `sci::sparse::csgraph`
+
+25 functions · 50056 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | Boost.Graph | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -89,14 +95,18 @@ current public namespace, with their measured recipe names preserved.
 | `csgraph.structural_rank` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | 0.0 / 0.0 | — |
 | `csgraph.yen` | 2002 | 0.8008 / 0.067462 | 0.8008 / 0.067462 | — | — | — |
 
-### `sci::sparse::io` (2 functions, 4004 cases)
+### `sci::sparse::io`
+
+2 functions · 4004 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | Boost.Graph | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `load_npz` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `save_npz` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::sparse::linalg` (32 functions, 64100 cases)
+### `sci::sparse::linalg`
+
+32 functions · 64100 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | Boost.Graph | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -133,7 +143,9 @@ current public namespace, with their measured recipe names preserved.
 | `linalg.svds` | 2003 | 2.538 / 0.34642 | 2.538 / 0.34642 | — | — | — |
 | `linalg.tfqmr` | 2003 | 7.6561e+16 / 1.7852e+15 | 7.6561e+16 / 1.7852e+15 | — | — | — |
 
-### `sci::sparse::operations` (11 functions, 22029 cases)
+### `sci::sparse::operations`
+
+11 functions · 22029 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | Boost.Graph | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -149,7 +161,9 @@ current public namespace, with their measured recipe names preserved.
 | `triu` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `validate` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 
-### `sci::sparse` (7 functions, 14017 cases)
+### `sci::sparse`
+
+7 functions · 14017 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | Boost.Graph | Boost.Numeric.uBLAS |
 | --- | ---: | --- | --- | --- | --- | --- |

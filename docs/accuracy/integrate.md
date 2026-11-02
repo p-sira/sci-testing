@@ -26,14 +26,18 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::integrate::quadrature` (2 functions, 4068 cases)
+### `sci::integrate::quadrature`
+
+2 functions · 4068 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `fixed_quad` | 2068 | 21.656 / 2.9595 | 41.586 / 5.142 | 18.905 / 3.0513 | 18.598 / 2.976 | — |
 | `newton_cotes` | 2000 | 1.1988e+7 / 8920.3 | 1.1988e+7 / 8920.3 | — | — | — |
 
-### `sci::integrate::sampled` (5 functions, 10067 cases)
+### `sci::integrate::sampled`
+
+5 functions · 10067 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
