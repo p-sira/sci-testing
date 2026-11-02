@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "0d8e28a9071bd8c81ffc9d3d0ee9086928c3e3799517f236aca1b5fdee4c3eed",
+  "testing_sources_sha256": "107f38e5e6b61aebb209b71a177ad9f7b7a21d0644dfafa3d27cb632ef633931",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1395,7 +1395,7 @@
       "SciPy"
     ]
   },
-  "measurements_sha256": "d2b6452fa585b971547672a0fd1a41d49c4815b8a1a548fec94ffa5b7768f084",
+  "measurements_sha256": "a82daaeca877e25f1af1b61ff340b1d7c286d6118df775cd810ab50f0c8e045c",
   "coverage_sha256": "48cad6be78cb1605d775f556813d677b1c89bb2fc8dfea67c80133ab8b66da3d",
   "reference_extensions": [
     {
@@ -1853,6 +1853,82 @@
         "Boost.Math": "1_92",
         "GSL": "2.8"
       }
+    },
+    {
+      "apis": [
+        "special.agm",
+        "special.ai_zeros",
+        "special.bei",
+        "special.beip",
+        "special.ber",
+        "special.berp",
+        "special.bi_zeros",
+        "special.boxcox",
+        "special.boxcox1p",
+        "special.elliprg",
+        "special.erfcinv",
+        "special.erfcx",
+        "special.erfi",
+        "special.erfinv",
+        "special.factorialk",
+        "special.gdtria",
+        "special.jnjnp_zeros",
+        "special.jnp_zeros",
+        "special.jnyn_zeros",
+        "special.ln_multinomial",
+        "special.log_expit",
+        "special.log_ndtr",
+        "special.lqn",
+        "special.multigammaln",
+        "special.ndtri_exp",
+        "special.nrdtrimn",
+        "special.nrdtrisd",
+        "special.roots_chebyc",
+        "special.roots_chebys",
+        "special.roots_chebyt",
+        "special.roots_chebyu",
+        "special.roots_gegenbauer",
+        "special.roots_genlaguerre",
+        "special.roots_hermite",
+        "special.roots_hermitenorm",
+        "special.roots_jacobi",
+        "special.roots_laguerre",
+        "special.roots_legendre",
+        "special.roots_sh_chebyt",
+        "special.roots_sh_chebyu",
+        "special.roots_sh_jacobi",
+        "special.roots_sh_legendre",
+        "special.softplus",
+        "special.y0_zeros",
+        "special.y1_zeros",
+        "special.y1p_zeros",
+        "special.yn_zeros",
+        "special.ynp_zeros",
+        "stats.bartlett",
+        "stats.binomtest",
+        "stats.chisquare",
+        "stats.circmean",
+        "stats.circstd",
+        "stats.circvar",
+        "stats.f_oneway",
+        "stats.fisher_exact",
+        "stats.gmean",
+        "stats.gstd",
+        "stats.gzscore",
+        "stats.hmean",
+        "stats.jarque_bera",
+        "stats.mode",
+        "stats.moment",
+        "stats.pmean",
+        "stats.power_divergence",
+        "stats.ttest_ind_from_stats"
+      ],
+      "testing_sources_sha256": "2cacdbd9e54330004e192bdee69eb4990980942b216c3fca210da74d7718acdf",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "GSL": "2.8"
+      }
     }
   ],
   "reference_refreshes": [
@@ -1898,5 +1974,5 @@
       "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
     }
   ],
-  "accuracy_summaries_sha256": "b532d9b147c1e2c50f5aea36ee99eb68d328ea456cbb83d33a15bafea21201ce"
+  "accuracy_summaries_sha256": "7a67b5e8eb72a33347168c28c7382ed93f2e3315ce4d57aa20fd7e0755e04cdc"
 }

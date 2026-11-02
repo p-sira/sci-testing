@@ -30,13 +30,13 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
-| `bei` | 2001 | 0.0 / 0.0 | 1.0001 / 0.16827 | 2.0 / 0.28878 | — |
+| `bei` | 2001 | 0.0 / 0.0 | 1.0001 / 0.16827 | 2.0 / 0.28878 | 4.9998 / 1.5185 |
 | `bei_zeros` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `beip` | 2001 | 0.0 / 0.0 | 2.0 / 0.24158 | 2.0 / 0.30216 | — |
+| `beip` | 2001 | 0.0 / 0.0 | 2.0 / 0.24158 | 2.0 / 0.30216 | 3.9986 / 1.0903 |
 | `beip_zeros` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `ber` | 2001 | 0.0 / 0.0 | 0.50049 / 2.5012e-4 | 0.50049 / 0.17158 | — |
+| `ber` | 2001 | 0.0 / 0.0 | 0.50049 / 2.5012e-4 | 0.50049 / 0.17158 | 2.5024 / 0.56202 |
 | `ber_zeros` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `berp` | 2001 | 0.0 / 0.0 | 43.979 / 11.282 | 1.0025 / 0.29698 | — |
+| `berp` | 2001 | 0.0 / 0.0 | 43.979 / 11.282 | 1.0025 / 0.29698 | 23.997 / 10.566 |
 | `berp_zeros` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `bessel.iv_ratio` | 2008 | 0.53833 / 0.16254 | — | 0.95404 / 7.7393e-3 | — |
 | `bessel.iv_ratio_c` | 2008 | 1.8003 / 0.17179 | — | 1.8724 / 0.067333 | — |
@@ -66,9 +66,9 @@ current public namespace, with their measured recipe names preserved.
 | `j1` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.6007 / 0.48569 | 2.6013 / 0.53855 |
 | `jn` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.5531 / 0.65311 | 3.5787 / 0.96057 |
 | `jn_zeros` | 2004 | 2.7694 / 0.82563 | 2.7694 / 0.82563 | 2.2155 / 0.68725 | 2.2155 / 0.73129 |
-| `jnjnp_zeros` | 2001 | 1.9042 / 0.20715 | 1.9042 / 0.20715 | 1.9042 / 0.19944 | — |
-| `jnp_zeros` | 2004 | 2.1725 / 0.81284 | 2.1725 / 0.81284 | 1.8013 / 0.7765 | — |
-| `jnyn_zeros` | 2001 | 2.1725 / 0.75254 | 2.1725 / 0.75254 | 1.9822 / 0.72363 | — |
+| `jnjnp_zeros` | 2001 | 1.9042 / 0.20715 | 1.9042 / 0.20715 | 1.9042 / 0.19944 | 2.1725 / 0.18423 |
+| `jnp_zeros` | 2004 | 2.1725 / 0.81284 | 2.1725 / 0.81284 | 1.8013 / 0.7765 | 2.7186 / 0.93339 |
+| `jnyn_zeros` | 2001 | 2.1725 / 0.75254 | 2.1725 / 0.75254 | 1.9822 / 0.72363 | 2.7186 / 0.83347 |
 | `jv` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 7.8081 / 5.6399 | 12.687 / 10.404 |
 | `jve` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 8.7801 / 5.6437 | 12.687 / 10.393 |
 | `jvp` | 2001 | 1.6738 / 0.0989 | 1.6738 / 0.0989 | 7.4962 / 4.1051 | 11.668 / 7.6983 |
@@ -99,13 +99,13 @@ current public namespace, with their measured recipe names preserved.
 | `spherical_yn` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.9183 / 0.41702 | 1.9208 / 0.5386 |
 | `struve` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.2526 / 0.27709 | — |
 | `y0` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.9601 / 0.4891 | 1.9602 / 0.52141 |
-| `y0_zeros` | 2001 | 1.7537e+7 / 1.2955e+6 | 1.7537e+7 / 1.2955e+6 | 3.5042 / 1.1048 | — |
+| `y0_zeros` | 2001 | 1.7537e+7 / 1.2955e+6 | 1.7537e+7 / 1.2955e+6 | 3.5042 / 1.1048 | 3.4113 / 1.1433 |
 | `y1` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 6.9827 / 1.6766 | 8.7554 / 2.0884 |
-| `y1_zeros` | 2001 | 1.0344e+7 / 7.5412e+5 | 1.0344e+7 / 7.5412e+5 | 2.8803 / 0.70415 | — |
-| `y1p_zeros` | 2001 | 3.2631e+7 / 2.2931e+6 | 3.2631e+7 / 2.2931e+6 | 3.724 / 1.0097 | — |
+| `y1_zeros` | 2001 | 1.0344e+7 / 7.5412e+5 | 1.0344e+7 / 7.5412e+5 | 2.8803 / 0.70415 | 3.0921 / 0.94165 |
+| `y1p_zeros` | 2001 | 3.2631e+7 / 2.2931e+6 | 3.2631e+7 / 2.2931e+6 | 3.724 / 1.0097 | 3.724 / 1.1082 |
 | `yn` | 2001 | 5.1374 / 0.93603 | 5.1374 / 0.93603 | 3.6821 / 0.93895 | 4.4137 / 1.0775 |
-| `yn_zeros` | 2004 | 2.2382 / 0.69188 | 2.2382 / 0.69188 | 2.2382 / 0.78776 | — |
-| `ynp_zeros` | 2004 | 1.9465 / 0.87439 | 1.9465 / 0.87439 | 1.9465 / 0.85649 | — |
+| `yn_zeros` | 2004 | 2.2382 / 0.69188 | 2.2382 / 0.69188 | 2.2382 / 0.78776 | 2.7977 / 0.7407 |
+| `ynp_zeros` | 2004 | 1.9465 / 0.87439 | 1.9465 / 0.87439 | 1.9465 / 0.85649 | 1.8205 / 0.81071 |
 | `yv` | 2001 | 2.1341 / 0.29492 | 2.1341 / 0.29492 | 3.7236 / 1.1416 | 10.148 / 2.1179 |
 | `yve` | 2001 | 2.1372 / 0.30725 | 3.1918 / 0.76925 | 3.7151 / 1.2292 | 10.152 / 2.1815 |
 | `yvp` | 2001 | 1.6774 / 0.22764 | 1.6774 / 0.22764 | 3.9116 / 1.7106 | 6.1487 / 2.7366 |
@@ -132,12 +132,12 @@ current public namespace, with their measured recipe names preserved.
 | `euler` | 2001 | 5.1888 / 0.64984 | 5.1888 / 0.64984 | — | — |
 | `factorial` | 2001 | 4.2785 / 0.93799 | 4.2785 / 0.93799 | 3.7401 / 0.85808 | 5.8747 / 1.6192 |
 | `factorial2` | 2001 | 1.0667 / 0.23223 | 1.0667 / 0.23223 | 0.0 / 0.0 | 0.0 / 0.0 |
-| `factorialk` | 2001 | 5.4857 / 1.1432 | 5.4857 / 1.1432 | — | — |
+| `factorialk` | 2001 | 5.4857 / 1.1432 | 5.4857 / 1.1432 | 4.0727 / 1.1762 | — |
 | `gen_harmonic` | 2010 | 0.0 / 0.0 | 0.0 / 0.0 | — | 3.2009 / 0.70614; failed 5/2010 |
 | `harmonic` | 2006 | 0.81633 / 0.36478 | 0.81633 / 0.36478 | 1.2578 / 0.38904 | 1.2578 / 0.43301 |
 | `ln_binomial` | 2007 | 47081.0 / 23.464 | 47081.0 / 23.464 | 47081.0 / 23.464 | 47081.0 / 23.461 |
 | `ln_factorial` | 2007 | 1.4189 / 0.34424 | 1.4189 / 0.34424 | 0.9384 / 0.26606 | 0.9384 / 0.26606 |
-| `ln_multinomial` | 2006 | 699.67 / 111.84 | 699.67 / 111.84 | — | — |
+| `ln_multinomial` | 2006 | 699.67 / 111.84 | 699.67 / 111.84 | — | 635.62 / 101.06 |
 | `multinomial` | 2006 | 8776.0 / 1371.5 | 8776.0 / 1371.5 | — | — |
 | `perm` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.80029 / 3.9995e-4 | — |
 | `poch` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.0803 / 1.09 | 9.7823 / 2.9267 |
@@ -185,7 +185,7 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
-| `agm` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `agm` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.3733 / 0.20755 | — |
 | `cosdg` | 2001 | 1.155 / 0.25795 | 1.155 / 0.25795 | — | — |
 | `cosm1` | 2001 | 1.8215 / 0.53599 | 1.8215 / 0.53599 | — | — |
 | `cotdg` | 2001 | 2.8884 / 0.69191 | 2.8884 / 0.69191 | — | — |
@@ -196,17 +196,17 @@ current public namespace, with their measured recipe names preserved.
 | `erf` | 2143 | 0.57385 / 0.10437 | 1.4674 / 0.049532 | 0.96062 / 0.017472 | 2.2205 / 0.15874 |
 | `erf_zeros` | 2001 | 27.467 / 8.5619 | 27.467 / 8.5619 | — | — |
 | `erfc` | 2001 | 1.5644 / 0.36296 | 1.5644 / 0.36296 | 1.0436 / 0.3034 | 1.0435 / 0.40725 |
-| `erfcinv` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.73 / 0.66078 | — |
-| `erfcx` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `erfi` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `erfinv` | 2001 | 1.5722 / 0.37406 | 1.5722 / 0.37406 | 1.0482 / 0.2263 | — |
+| `erfcinv` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.73 / 0.66078 | 3.4119 / 0.81079 |
+| `erfcx` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | 4.0622 / 1.0507 |
+| `erfi` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | 2.4416 / 0.68913 |
+| `erfinv` | 2001 | 1.5722 / 0.37406 | 1.5722 / 0.37406 | 1.0482 / 0.2263 | 2.6226 / 0.71072 |
 | `expit` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.80342 / 0.18666 | 0.0 / 0.0 |
 | `exprel` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | 1.0 / 0.21989 |
 | `huber` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `kl_div` | 2001 | 8.705 / 2.5692 | 8.705 / 2.5692 | — | — |
 | `lambertw` | 2001 | 2.8438 / 0.61451 | 2.8438 / 0.61451 | 2.8435 / 0.63439 | 2.1339 / 0.63157 |
 | `lambertwm1` | 2001 | 2.7966 / 0.73794 | 2.7966 / 0.73794 | 3.3537 / 0.74101 | 2.7966 / 0.73934 |
-| `log_expit` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `log_expit` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
 | `log_softmax` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.1611 / 0.22163 | — |
 | `logit` | 2001 | 1.7691 / 0.40078 | 1.7691 / 0.40078 | 1.182 / 0.30316 | 1.7723 / 0.41347 |
 | `logsumexp` | 2001 | 0.51156 / 2.5565e-4 | 0.51156 / 2.5565e-4 | 0.51156 / 2.5565e-4 | — |
@@ -217,7 +217,7 @@ current public namespace, with their measured recipe names preserved.
 | `sinc` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.78618 / 0.24138 |
 | `sindg` | 2001 | 0.99993 / 0.031487 | 0.99993 / 0.031487 | — | — |
 | `softmax` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.6111 / 0.32034 | — |
-| `softplus` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `softplus` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
 | `tandg` | 2001 | 1.7314 / 0.31981 | 1.7314 / 0.31981 | — | — |
 | `wofz` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `wrightomega` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
@@ -251,7 +251,7 @@ current public namespace, with their measured recipe names preserved.
 | `elliprc` | 2001 | 2.0939 / 0.49619 | 2.0939 / 0.49619 | 1.0472 / 0.24352 | 2.0943 / 0.50534 |
 | `elliprd` | 2001 | 2.277 / 0.46848 | 2.277 / 0.46848 | 2.2774 / 0.54381 | 2.844 / 0.44289 |
 | `elliprf` | 2001 | 2.9002 / 0.57425 | 2.9002 / 0.57425 | 1.7405 / 0.47134 | 2.8998 / 0.63339 |
-| `elliprg` | 2001 | 2.4904 / 0.45294 | 2.4904 / 0.45294 | 1.6603 / 0.32768 | — |
+| `elliprg` | 2001 | 2.4904 / 0.45294 | 2.4904 / 0.45294 | 1.6603 / 0.32768 | 3.3193 / 0.63254 |
 | `elliprj` | 2001 | 3.586 / 0.90923 | 3.586 / 0.90923 | 2.1515 / 0.49796 | 2.8689 / 0.65166 |
 | `heuman_lambda` | 2001 | 4.9099 / 1.3411 | 4.9099 / 1.3411 | 2.9456 / 0.63202 | — |
 | `jacobi_zeta` | 2001 | 10.482 / 2.5691 | 10.482 / 2.5691 | 4.0275 / 0.94676 | — |
@@ -271,7 +271,7 @@ current public namespace, with their measured recipe names preserved.
 | `gammaln` | 2001 | 1.7588 / 0.29268 | 1.7588 / 0.29268 | 0.88356 / 0.085589 | 48.921 / 20.063 |
 | `gammasgn` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 |
 | `loggamma` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.7558 / 0.29047 | 48.921 / 19.794 |
-| `multigammaln` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `multigammaln` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.2942 / 0.2947 | — |
 | `polygamma` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.6486 / 0.61892 | 2.1199 / 0.47531 |
 | `rgamma` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.1941 / 0.44404; failed 1/2001 | 7.2204 / 1.6321 |
 | `trigamma` | 2005 | 3.5692 / 1.3033 | 3.5692 / 1.3033 | 2.0418 / 0.95601 | 3.0612 / 1.1846 |
@@ -341,22 +341,22 @@ current public namespace, with their measured recipe names preserved.
 | `legendre_p_all` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `lpmv` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `lqmn` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `lqn` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `roots_chebyc` | 2001 | 4.5036e+15 / 1.1458e+14 | 4.5036e+15 / 1.1458e+14 | — | — |
-| `roots_chebys` | 2001 | 1.6474e+16 / 2.6089e+14 | 1.6474e+16 / 2.6089e+14 | — | — |
-| `roots_chebyt` | 2001 | 4.5036e+15 / 1.1502e+14 | 4.5036e+15 / 1.1502e+14 | — | — |
-| `roots_chebyu` | 2001 | 1.6474e+16 / 2.6038e+14 | 1.6474e+16 / 2.6038e+14 | — | — |
-| `roots_gegenbauer` | 2001 | 4.5036e+15 / 4.9477e+14 | 4.5036e+15 / 4.9477e+14 | — | — |
-| `roots_genlaguerre` | 2001 | 21.72 / 2.1716 | 21.72 / 2.1716 | — | — |
-| `roots_hermite` | 2001 | 4.5036e+15 / 1.027e+14 | 4.5036e+15 / 1.027e+14 | — | — |
-| `roots_hermitenorm` | 2001 | 4.5036e+15 / 1.1496e+14 | 4.5036e+15 / 1.1496e+14 | — | — |
-| `roots_jacobi` | 2001 | 49.914 / 3.9343 | 49.914 / 3.9343 | — | — |
-| `roots_laguerre` | 2001 | 4379.2 / 51.388 | 4379.2 / 51.388 | — | — |
-| `roots_legendre` | 2001 | 4.5036e+15 / 1.1386e+14 | 4.5036e+15 / 1.1386e+14 | — | — |
-| `roots_sh_chebyt` | 2001 | 830.69 / 20.158 | 830.69 / 20.158 | — | — |
-| `roots_sh_chebyu` | 2001 | 176.68 / 11.645 | 176.68 / 11.645 | — | — |
-| `roots_sh_jacobi` | 2001 | 17.07 / 2.1388 | 17.07 / 2.1388 | — | — |
-| `roots_sh_legendre` | 2001 | 399.94 / 17.093 | 399.94 / 17.093 | — | — |
+| `lqn` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.8398 / 0.30551 | — |
+| `roots_chebyc` | 2001 | 4.5036e+15 / 1.1458e+14 | 4.5036e+15 / 1.1458e+14 | — | 1.3468e+17 / 8.4698e+14 |
+| `roots_chebys` | 2001 | 1.6474e+16 / 2.6089e+14 | 1.6474e+16 / 2.6089e+14 | — | 5.7894e+16 / 6.5262e+14 |
+| `roots_chebyt` | 2001 | 4.5036e+15 / 1.1502e+14 | 4.5036e+15 / 1.1502e+14 | — | 1.3468e+17 / 8.1273e+14 |
+| `roots_chebyu` | 2001 | 1.6474e+16 / 2.6038e+14 | 1.6474e+16 / 2.6038e+14 | — | 5.7894e+16 / 6.6135e+14 |
+| `roots_gegenbauer` | 2001 | 4.5036e+15 / 4.9477e+14 | 4.5036e+15 / 4.9477e+14 | — | 6.7013e+17 / 2.0062e+15 |
+| `roots_genlaguerre` | 2001 | 21.72 / 2.1716 | 21.72 / 2.1716 | — | 25.149 / 3.3025 |
+| `roots_hermite` | 2001 | 4.5036e+15 / 1.027e+14 | 4.5036e+15 / 1.027e+14 | — | 5.272e+16 / 5.1921e+14 |
+| `roots_hermitenorm` | 2001 | 4.5036e+15 / 1.1496e+14 | 4.5036e+15 / 1.1496e+14 | — | 5.3572e+16 / 5.5183e+14 |
+| `roots_jacobi` | 2001 | 49.914 / 3.9343 | 49.914 / 3.9343 | — | 45.695 / 4.8997 |
+| `roots_laguerre` | 2001 | 4379.2 / 51.388 | 4379.2 / 51.388 | — | 4412.3 / 54.029 |
+| `roots_legendre` | 2001 | 4.5036e+15 / 1.1386e+14 | 4.5036e+15 / 1.1386e+14 | 4.5036e+15 / 1.1386e+14 | 2.711e+17 / 1.1666e+15 |
+| `roots_sh_chebyt` | 2001 | 830.69 / 20.158 | 830.69 / 20.158 | — | 726.85 / 23.368 |
+| `roots_sh_chebyu` | 2001 | 176.68 / 11.645 | 176.68 / 11.645 | — | 208.17 / 13.383 |
+| `roots_sh_jacobi` | 2001 | 17.07 / 2.1388 | 17.07 / 2.1388 | — | 15.772 / 2.489 |
+| `roots_sh_legendre` | 2001 | 399.94 / 17.093 | 399.94 / 17.093 | — | 328.08 / 15.218 |
 | `sh_chebyt` | 2003 | 58.0 / 2.1017 | 58.0 / 2.1017 | — | — |
 | `sh_chebyu` | 2003 | 9.6 / 0.64961 | 9.6 / 0.64961 | — | — |
 | `sh_jacobi` | 2003 | 15.985 / 6.281 | 15.985 / 6.281 | — | — |
@@ -373,8 +373,8 @@ current public namespace, with their measured recipe names preserved.
 | `bdtri` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.6393 / 0.42425 | 3.2783 / 0.74818 |
 | `bdtrik` | 2001 | 7.1304 / 1.6731 | 7.1304 / 1.6731 | — | — |
 | `bdtrin` | 2001 | 3.1597 / 0.71833 | 3.1597 / 0.71833 | 2.5227 / 0.5145 | — |
-| `boxcox` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `boxcox1p` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `boxcox` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
+| `boxcox1p` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
 | `btdtria` | 2001 | 7.5267 / 1.4761 | 7.5267 / 1.4761 | 5.3827 / 1.1529 | — |
 | `btdtrib` | 2001 | 5.7996 / 1.3467 | 5.7996 / 1.3467 | 4.5108 / 0.98309 | — |
 | `chdtr` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.7605 / 0.97621 | 6.6758 / 4.5845 |
@@ -391,14 +391,14 @@ current public namespace, with their measured recipe names preserved.
 | `fdtridfd` | 2001 | 1.0855e+5 / 954.14 | 1.0855e+5 / 954.14 | — | — |
 | `gdtr` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.3222 / 1.0682 | 4.321 / 1.814 |
 | `gdtrc` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.54771 / 0.10317 | 0.54771 / 0.16529 |
-| `gdtria` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `gdtria` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | 1.9998 / 1.333 |
 | `gdtrib` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.5792 / 0.63575 | — |
 | `gdtrix` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.9997 / 0.74709 | 3.5011 / 1.1332 |
 | `inv_boxcox` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `inv_boxcox1p` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `kolmogi` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.5417 / 0.35797 | — |
 | `kolmogorov` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.51887 / 0.053919 | — |
-| `log_ndtr` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `log_ndtr` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.2582 / 1.252 | 1.6938 / 1.2261 |
 | `nbdtr` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.0899 / 0.35013 | 22.704 / 14.917 |
 | `nbdtrc` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.51489 / 0.064321 | 1.0298 / 0.44253 |
 | `nbdtri` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 1.8474 / 0.41535 | 7.3896 / 4.4027 |
@@ -415,9 +415,9 @@ current public namespace, with their measured recipe names preserved.
 | `nctdtrit` | 2001 | 43.516 / 10.793 | 43.516 / 10.793 | 39.556 / 11.521 | — |
 | `ndtr` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.72329 / 0.12901 | 0.72329 / 0.14563 |
 | `ndtri` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.95504 / 0.20538 | 2.8646 / 0.63899 |
-| `ndtri_exp` | 2001 | 0.57617 / 1.7271e-3 | 0.57617 / 1.7271e-3 | — | — |
-| `nrdtrimn` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `nrdtrisd` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `ndtri_exp` | 2001 | 0.57617 / 1.7271e-3 | 0.57617 / 1.7271e-3 | 1.1526 / 0.37451 | — |
+| `nrdtrimn` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
+| `nrdtrisd` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
 | `owens_t` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.3007 / 0.56936 | — |
 | `pdtr` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 0.61845 / 0.17886 | 3.0922 / 2.3308 |
 | `pdtrc` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 3.276 / 0.76931 | 12.439 / 9.8777 |
@@ -435,10 +435,10 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
-| `ai_zeros` | 2001 | 43772.0 / 1367.2 | 43772.0 / 1367.2 | 8.9608 / 0.64738 | — |
+| `ai_zeros` | 2001 | 43772.0 / 1367.2 | 43772.0 / 1367.2 | 8.9608 / 0.64738 | 7.9652 / 0.79766 |
 | `airy` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.3171 / 0.87812 | 4.3171 / 0.87795 |
 | `airye` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.2623 / 0.88446 | 4.3904 / 0.85109 |
-| `bi_zeros` | 2001 | 71439.0 / 3266.4 | 71439.0 / 3266.4 | 59.16 / 1.7868 | — |
+| `bi_zeros` | 2001 | 71439.0 / 3266.4 | 71439.0 / 3266.4 | 59.16 / 1.7868 | 57.583 / 1.963 |
 | `ellip_harm` | 2037 | 1.8991 / 0.029334 | 1.8991 / 0.029334 | — | — |
 | `ellip_harm_2` | 2037 | 56527.0 / 729.09 | 56527.0 / 729.09 | — | — |
 | `ellip_normal` | 2037 | 2669.1 / 5.9574 | 2669.1 / 5.9574 | — | — |
@@ -510,7 +510,7 @@ current public namespace, with their measured recipe names preserved.
 
 ## Conventions and limitations
 
-All public special-function implementations have typed registrations or an explicit policy recipe. Original erf/gamma recipes use high-precision mpmath; added recipes use independent public SciPy calls, identities or quadrature. Polynomial constructors return descending coefficients; sequence and tuple ordering follows the pinned fixtures. Boost.Math/GSL are called where the bridge has matching scalar APIs, converting elliptic parameter m to modulus sqrt(m). Public GSL provides complex digamma and complex Spence; its Spence on negative real inputs with negative imaginary zero selects the upper bank, which can disagree with the independent lower-bank reference. Additional Bessel comparisons are explicitly derived: real-positive-argument Hankel functions combine public cylindrical J/Y functions, zero collections use public Bessel/Airy zeros and bracketed derivative roots, and Riccati arrays use spherical Bessel recurrences. Modified-Bessel I ratios use Boost I evaluations for moderate arguments, plus independent small-argument series and large-argument Riccati asymptotics where a direct Boost quotient would underflow or overflow; the latter cases are not direct Boost evaluations. Bessel integrals use Boost Gauss–Kronrod quadrature over either Boost or GSL Bessel kernels: GSL-labelled integral results therefore share a Boost quadrature backend, not an independent GSL integration algorithm. These composed bridges enforce bounded real domains. Kelvin ber/bei, real Struve and the sampled half-order Wright-Bessel functions use public Boost.Math generalized hypergeometric pFq reductions, with their own narrower domains. The three real Struve-integral comparisons similarly use public Boost 2F3 identities. Kelvin ker/kei and derivative comparisons and the full Kelvin tuple use GSL quadrature of defining complex-Bessel integral representations, not a public complex-valued GSL Bessel function. None of these adapters implies support for general complex-argument Bessel functions.
+All public special-function implementations have typed registrations or an explicit policy recipe. Original erf/gamma recipes use high-precision mpmath; added recipes use independent public SciPy calls, identities or quadrature. Polynomial constructors return descending coefficients; sequence and tuple ordering follows the pinned fixtures. Boost.Math/GSL are called where the bridge has matching scalar APIs, converting elliptic parameter m to modulus sqrt(m). Public GSL provides complex digamma and complex Spence; its Spence on negative real inputs with negative imaginary zero selects the upper bank, which can disagree with the independent lower-bank reference. Additional Bessel comparisons are explicitly derived: real-positive-argument Hankel functions combine public cylindrical J/Y functions, zero collections use public Bessel/Airy zeros and bracketed derivative roots, and Riccati arrays use spherical Bessel recurrences. Modified-Bessel I ratios use Boost I evaluations for moderate arguments, plus independent small-argument series and large-argument Riccati asymptotics where a direct Boost quotient would underflow or overflow; the latter cases are not direct Boost evaluations. Bessel integrals use Boost Gauss–Kronrod quadrature over either Boost or GSL Bessel kernels: GSL-labelled integral results therefore share a Boost quadrature backend, not an independent GSL integration algorithm. These composed bridges enforce bounded real domains. Kelvin ber/bei, real Struve and the sampled half-order Wright-Bessel functions use public Boost.Math generalized hypergeometric pFq reductions, with their own narrower domains. The three real Struve-integral comparisons similarly use public Boost 2F3 identities. Kelvin ker/kei and derivative comparisons and the full Kelvin tuple use GSL quadrature of defining complex-Bessel integral representations, not a public complex-valued GSL Bessel function. None of these adapters implies support for general complex-argument Bessel functions. Further native competitors are independently validated compositions, not a claim of matching named APIs: GSL fixed Gaussian quadrature provides nodes and weights for Legendre, Jacobi, Gegenbauer, Laguerre, Hermite and Chebyshev roots, with explicit shifted/scaled rule transformations. Boost Legendre roots and Q primitives produce the sampled roots_legendre/lqn arrays. Public GSL Airy zero routines supply both zeros and derivative zeros and their companion values; GSL Bessel Jn/Yn primitives and root solvers give integer-order zero collections, with full sequence ordering validated against the independent SciPy fixtures. Additional scalar inverses, gamma/elliptic identities, Box-Cox/logistic transforms, and combinatorial functions compose Boost.Math or GSL primitives under guarded domains. GSL Kelvin ber/bei and derivatives reuse the already documented GSL quadrature backend; they are not public GSL Kelvin APIs.
 
 Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.

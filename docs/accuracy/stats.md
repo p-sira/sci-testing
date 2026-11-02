@@ -63,24 +63,24 @@ current public namespace, with their measured recipe names preserved.
 | `contingency.margins` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `contingency.odds_ratio` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `contingency.relative_risk` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
-| `fisher_exact` | 2009 | 1192.0 / 170.67 | 1192.0 / 170.67 | — | — | — |
+| `fisher_exact` | 2009 | 1192.0 / 170.67 | 1192.0 / 170.67 | 1191.0 / 170.73 | — | — |
 
 ### `sci::stats::descriptive` (42 functions, 84446 cases)
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
-| `circmean` | 2003 | 2.6782 / 0.56516 | 2.6782 / 0.56516 | — | — | — |
-| `circstd` | 2006 | 97.198 / 21.938 | 97.198 / 21.938 | — | — | — |
-| `circvar` | 2003 | 193.53 / 43.992 | 193.53 / 43.992 | — | — | — |
+| `circmean` | 2003 | 2.6782 / 0.56516 | 2.6782 / 0.56516 | 2.682 / 0.65694 | 5.5074 / 0.4317 | — |
+| `circstd` | 2006 | 97.198 / 21.938 | 97.198 / 21.938 | 96.579 / 22.096 | 65.14 / 13.481 | — |
+| `circvar` | 2003 | 193.53 / 43.992 | 193.53 / 43.992 | 129.08 / 43.893 | 128.82 / 26.111 | — |
 | `describe` | 2004 | 28.797 / 1.3885 | 28.797 / 1.3885 | 14.399 / 0.83213 | 21.941 / 1.1608 | — |
 | `differential_entropy` | 2008 | 1.6289 / 0.33512 | 1.6289 / 0.33512 | — | — | — |
 | `directional_stats` | 2004 | 1.202 / 0.1994 | 1.202 / 0.1994 | — | — | — |
 | `entropy` | 2006 | 3.7856 / 5.1559e-3 | 3.7856 / 5.1559e-3 | — | — | — |
 | `expectile` | 2015 | 0.92308 / 4.581e-4 | 0.92308 / 4.581e-4 | — | — | — |
-| `gmean` | 2003 | 1.4156 / 0.083665 | 1.4156 / 0.083665 | — | — | — |
-| `gstd` | 2006 | 0.92144 / 0.053096 | 0.92144 / 0.053096 | — | — | — |
-| `gzscore` | 2004 | 3.9131 / 0.81393 | 3.9131 / 0.81393 | — | — | — |
-| `hmean` | 2003 | 0.93844 / 0.26447 | 0.93844 / 0.26447 | — | — | — |
+| `gmean` | 2003 | 1.4156 / 0.083665 | 1.4156 / 0.083665 | 1.4156 / 0.083665 | 0.0 / 0.0 | — |
+| `gstd` | 2006 | 0.92144 / 0.053096 | 0.92144 / 0.053096 | 0.92144 / 0.34354 | 0.92144 / 0.053096 | — |
+| `gzscore` | 2004 | 3.9131 / 0.81393 | 3.9131 / 0.81393 | — | 3.9131 / 0.93416 | — |
+| `hmean` | 2003 | 0.93844 / 0.26447 | 0.93844 / 0.26447 | 0.93844 / 0.26447 | 0.93844 / 0.2289 | — |
 | `iqr` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | 0.0 / 0.0 | — |
 | `kstat` | 2008 | 8.9074 / 7.0074e-3 | 8.9074 / 7.0074e-3 | — | — | — |
 | `kstatvar` | 2004 | 3.9016 / 0.67103 | 3.9016 / 0.67103 | — | — | — |
@@ -89,9 +89,9 @@ current public namespace, with their measured recipe names preserved.
 | `mean` | 2004 | 0.83416 / 0.13556 | 0.83416 / 0.13556 | 0.83417 / 0.20042 | 0.83417 / 0.14347 | — |
 | `median` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
 | `median_abs_deviation` | 2008 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
-| `mode` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
-| `moment` | 2024 | 1.9207 / 3.348e-3 | 1.9207 / 3.348e-3 | — | — | — |
-| `pmean` | 2018 | 1.0667 / 0.16185 | 1.0667 / 0.16185 | — | — | — |
+| `mode` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `moment` | 2024 | 1.9207 / 3.348e-3 | 1.9207 / 3.348e-3 | — | 2.7473 / 4.2611e-3 | — |
+| `pmean` | 2018 | 1.0667 / 0.16185 | 1.0667 / 0.16185 | — | 1.0667 / 0.23163 | — |
 | `quantile` | 2020 | 1.6667 / 1.3751e-3 | 1.6667 / 1.3751e-3 | — | 0.0 / 0.0 | — |
 | `scoreatpercentile` | 2020 | 0.0 / 0.0 | 0.0 / 0.0 | — | 0.0 / 0.0 | — |
 | `sem` | 2006 | 1.4042 / 0.26019 | 1.4042 / 0.26019 | 1.4044 / 0.3053 | 1.4044 / 0.2969 | — |
@@ -162,26 +162,26 @@ current public namespace, with their measured recipe names preserved.
 | --- | ---: | --- | --- | --- | --- | --- |
 | `anderson` | 2011 | 99.687 / 0.4487 | 99.687 / 0.4487 | — | — | — |
 | `anderson_ksamp` | 2014 | 6.1166 / 2.0784 | 6.1166 / 2.0784 | — | — | — |
-| `chisquare` | 2006 | 5.2329 / 1.0128 | 5.2329 / 1.0128 | — | — | — |
+| `chisquare` | 2006 | 5.2329 / 1.0128 | 5.2329 / 1.0128 | 5.3776 / 0.98982 | 6.2384 / 1.0033 | — |
 | `cramervonmises` | 2014 | 2.6969e+5 / 67.074 | 2.6969e+5 / 67.074 | — | — | — |
 | `cramervonmises_2samp` | 2013 | 15961.0 / 3.9766 | 15961.0 / 3.9766 | — | — | — |
 | `goodness_of_fit` | 2012 | 4.7452 / 0.14129 | 4.7452 / 0.14129 | — | — | — |
 | `ks_1samp` | 2009 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
 | `ks_2samp` | 2012 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
-| `power_divergence` | 2034 | 34.056 / 0.81664 | 34.056 / 0.81664 | — | — | — |
+| `power_divergence` | 2034 | 34.056 / 0.81664 | 34.056 / 0.81664 | 29.69 / 1.1525 | — | — |
 
 ### `sci::stats::inference` (27 functions, 54625 cases)
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `ansari` | 2015 | 0.0 / 0.0 | 0.0 / 0.0 | — | — | — |
-| `bartlett` | 2003 | 14.111 / 3.3287 | 14.111 / 3.3287 | — | — | — |
-| `binomtest` | 2048 | 138.29 / 3.8558 | 138.29 / 3.8558 | — | — | — |
+| `bartlett` | 2003 | 14.111 / 3.3287 | 14.111 / 3.3287 | 14.111 / 3.4521 | 14.107 / 3.5599 | — |
+| `binomtest` | 2048 | 138.29 / 3.8558 | 138.29 / 3.8558 | 138.29 / 3.925 | — | — |
 | `brunnermunzel` | 2030 | 87.763 / 8.0938 | 87.763 / 8.0938 | — | — | — |
 | `combine_pvalues` | 2011 | 1.9401e+5 / 100.03 | 1.9401e+5 / 100.03 | — | — | — |
 | `dunnett` | 2015 | 1.3013e+10 / 7.1396e+6 | 1.3013e+10 / 7.1396e+6 | — | — | — |
 | `epps_singleton_2samp` | 2020 | 5.5464e+6 / 36092.0 | 5.5464e+6 / 36092.0 | — | — | — |
-| `f_oneway` | 2003 | 36.246 / 11.131 | 36.246 / 11.131 | — | — | — |
+| `f_oneway` | 2003 | 36.246 / 11.131 | 36.246 / 11.131 | 36.246 / 11.439 | 34.896 / 14.082 | — |
 | `false_discovery_control` | 2006 | 0.93844 / 0.062734 | 0.93844 / 0.062734 | — | — | — |
 | `fligner` | 2008 | 48.635 / 20.564 | 48.635 / 20.564 | — | — | — |
 | `friedmanchisquare` | 2002 | 2.1827 / 1.0911 | 2.1827 / 1.0911 | — | — | — |
@@ -197,7 +197,7 @@ current public namespace, with their measured recipe names preserved.
 | `ranksums` | 2015 | 4.1473e+5 / 1.0352e+5 | 4.1473e+5 / 1.0352e+5 | — | — | — |
 | `ttest_1samp` | 2012 | 17.687 / 3.3458 | 17.687 / 3.3458 | 15.64 / 3.1794 | 11.145 / 1.0664 | — |
 | `ttest_ind` | 2030 | 63.924 / 5.5843 | 63.924 / 5.5843 | 61.91 / 5.6048 | 64.427 / 5.8326 | — |
-| `ttest_ind_from_stats` | 2002 | 554.04 / 50.071 | 554.04 / 50.071 | — | — | — |
+| `ttest_ind_from_stats` | 2002 | 554.04 / 50.071 | 554.04 / 50.071 | 557.44 / 50.089 | 556.87 / 50.116 | — |
 | `ttest_rel` | 2015 | 21.796 / 2.3601 | 21.796 / 2.3601 | 18.874 / 3.0263 | 17.841 / 1.2283 | — |
 | `tukey_hsd` | 2010 | 3.1942e+15 / 3.8324e+11 | 3.1942e+15 / 3.8324e+11 | — | — | — |
 | `wilcoxon` | 2114 | 0.52036 / 1.2307e-4 | 0.52036 / 1.2307e-4 | — | — | — |
@@ -222,7 +222,7 @@ current public namespace, with their measured recipe names preserved.
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `alexandergovern` | 2005 | 88.121 / 4.8069 | 88.121 / 4.8069 | — | — | — |
-| `jarque_bera` | 2002 | 5.7494 / 1.0431 | 5.7494 / 1.0431 | — | — | — |
+| `jarque_bera` | 2002 | 5.7494 / 1.0431 | 5.7494 / 1.0431 | 6.5707 / 0.9736 | 4.1067 / 0.93696 | — |
 | `kurtosistest` | 2021 | 576.73 / 2.4259 | 576.73 / 2.4259 | — | — | — |
 | `normaltest` | 2006 | 6.78e+15 / 1.2996e+15 | 6.78e+15 / 1.2996e+15 | — | — | — |
 | `obrientransform` | 2004 | 21.538 / 0.72203 | 21.538 / 0.72203 | — | — | — |
@@ -302,7 +302,7 @@ current public namespace, with their measured recipe names preserved.
 
 ## Conventions and limitations
 
-Distribution parameters, tail conventions, alternatives, ddof, explicit resampling draws and output ordering follow the pinned statistics fixtures. SciPy supplies binary64 references for added APIs, including documented adaptations and independently seeded probabilistic references. Weighted tau compares its statistic; its always-NaN p-value is left to the ordinary API tests. Normality, inverse and joint-tail approximations have reference and algorithm accuracy limits.
+Distribution parameters, tail conventions, alternatives, ddof, explicit resampling draws and output ordering follow the pinned statistics fixtures. SciPy supplies binary64 references for added APIs, including documented adaptations and independently seeded probabilistic references. Weighted tau compares its statistic; its always-NaN p-value is left to the ordinary API tests. Normality, inverse and joint-tail approximations have reference and algorithm accuracy limits. Additional Boost.Math-derived statistics use its public sample-moment primitives and chi-square, binomial and hypergeometric distributions; alternatives, ties, degrees of freedom and paired outputs follow the specific saved Sci contracts. GSL-derived statistics combine public GSL sample moments with t, F and chi-square distribution tails and explicit circular/logarithmic transformations. These are mathematical compositions with independent SciPy validation, not claims that the libraries export identical named Sci statistical functions.
 
 Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.

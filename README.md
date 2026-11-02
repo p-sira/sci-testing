@@ -183,6 +183,17 @@ mixed-library calculations must be identified as such. The small
 against accidental disappearance; adapter-specific tests check numerical
 correctness. **Neither test can replace manual competitor research.**
 
+The native bridge also implements verified *derived* competitors where a Sci
+function has no identically named Boost.Math/GSL entry point. Examples include
+GSL Gaussian-quadrature nodes and weights, integer-order Bessel roots, Kelvin
+integrals and statistical tests composed from GSL moments/CDFs; and Boost.Math
+Legendre arrays, inverse transforms, and statistics composed from its public
+distributions. Airy zeros use GSL's public direct zero routines. These
+comparisons are limited to their independently tested saved signatures and
+guarded numerical domains; family-specific tests check the full saved-case
+arrays, including ordering and auxiliary outputs. See the notes in the special
+and statistics report pages for provenance and limitations.
+
 Tables are split by canonical **Sci 0.3 submodule**, including historical recipes
 whose old names map to the new namespaces. They contain **Function**, **Cases**,
 **Sci vs reference**, and the relevant libraries (SciPy, Boost.Math, GSL and
@@ -202,6 +213,14 @@ and all generated pages without compiling or writing files. The cache stored in
 `results/accuracy-summaries.json` binds each API's metrics to its input and
 measurement bytes, comparison columns, and metric implementation. The nightly
 `--check --exhaustive` recomputes every metric and audits coverage independently.
+The summary cache fingerprints the numerical row calculation independently of
+report prose. Editing commentary or Markdown presentation therefore does not
+force recalculation of millions of high-precision samples; changed measurement
+files still invalidate their own per-API summaries. The whole-source SHA-256
+continues to authenticate both code and documentation. A selective `--render
+--module special.agm` normally reuses all unchanged numerical summaries.
+Replacing the high-precision `Sci vs reference` calculation with binary64 is
+not equivalent: the stored oracle strings often carry more than 100 digits.
 Moving or editing harness sources invalidates the recorded source digest; rerun
 the report against the pinned Sci checkout to update the snapshot. Use `--render`
 to regenerate only the report from verified saved measurements; `--comparators-only

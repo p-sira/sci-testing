@@ -31,6 +31,16 @@ def _native_library():
                         str(ROOT/'native/bessel_hypergeom.cpp'),
                         str(ROOT/'native/bessel_kelvin_k.cpp'),
                         str(ROOT/'native/bessel_struve_integrals.cpp'),
+                        str(ROOT/'native/gsl_bessel_zeros.cpp'),
+                        str(ROOT/'native/boost_stats_more.cpp'),
+                        str(ROOT/'native/boost_special_transforms.cpp'),
+                        str(ROOT/'native/gsl_special_derived.cpp'),
+                        str(ROOT/'native/gsl_stats_more.cpp'),
+                        str(ROOT/'native/gsl_quadrature_roots.cpp'),
+                        str(ROOT/'native/boost_special_arrays.cpp'),
+                        str(ROOT/'native/gsl_kelvin_ber.cpp'),
+                        str(ROOT/'native/boost_stats_inference.cpp'),
+                        str(ROOT/'native/gsl_stats_aggregates.cpp'),
                         '-lgsl', '-lgslcblas',
                         '-o', str(target)], check=True)
     return ct.CDLL(str(target))
@@ -93,6 +103,26 @@ class NativeComparisons:
         self.bessel_kelvin_k = BesselKelvinKComparisons(self.library)
         from .bessel_struve_integrals import BesselStruveIntegralsComparisons
         self.bessel_struve_integrals = BesselStruveIntegralsComparisons(self.library)
+        from .gsl_bessel_zeros import GSLBesselZerosComparisons
+        self.gsl_bessel_zeros = GSLBesselZerosComparisons(self.library)
+        from .boost_stats_more import BoostStatsMoreComparisons
+        self.boost_stats_more = BoostStatsMoreComparisons(self.library)
+        from .boost_special_transforms import BoostSpecialTransformsComparisons
+        self.boost_special_transforms = BoostSpecialTransformsComparisons(self.library)
+        from .gsl_special_derived import GslSpecialDerivedComparisons
+        self.gsl_special_derived = GslSpecialDerivedComparisons(self.library)
+        from .gsl_stats_more import StatsMoreGSLComparisons
+        self.gsl_stats_more = StatsMoreGSLComparisons(self.library)
+        from .gsl_quadrature_roots import GSLQuadratureRootsComparisons
+        self.gsl_quadrature_roots = GSLQuadratureRootsComparisons(self.library)
+        from .boost_special_arrays import BoostSpecialArraysComparisons
+        self.boost_special_arrays = BoostSpecialArraysComparisons(self.library)
+        from .gsl_kelvin_ber import GSLKelvinBerComparisons
+        self.gsl_kelvin_ber = GSLKelvinBerComparisons(self.library)
+        from .boost_stats_inference import BoostStatsInferenceComparisons
+        self.boost_stats_inference = BoostStatsInferenceComparisons(self.library)
+        from .gsl_stats_aggregates import StatsAggregatesGSLComparisons
+        self.gsl_stats_aggregates = StatsAggregatesGSLComparisons(self.library)
 
     def evaluate_complex(self, case):
         """Compare supported Sci complex-special inputs with public GSL functions."""
@@ -118,6 +148,19 @@ class NativeComparisons:
         return {'GSL': {'values': list(output)}}
 
     def evaluate(self, case):
+        # Independent providers may implement the same Sci API through distinct
+        # native primitives. Preserve existing dispatch precedence within a
+        # provider, while retaining supplementary library comparisons.
+        supplemental = {}
+        for adapter in (self.gsl_bessel_zeros, self.boost_stats_more,
+                        self.boost_special_transforms, self.gsl_special_derived,
+                        self.gsl_stats_more, self.gsl_quadrature_roots,
+                        self.boost_special_arrays, self.gsl_kelvin_ber,
+                        self.boost_stats_inference, self.gsl_stats_aggregates):
+            supplemental.update(adapter.evaluate(case))
+        return {**supplemental, **self._evaluate_existing(case)}
+
+    def _evaluate_existing(self, case):
         module, _, name = case['api'].partition('.')
         if module not in ['special', 'stats']: return {}
         if case['api'] in ('stats.pdf', 'stats.logpdf', 'stats.cdf', 'stats.sf', 'stats.ppf'):

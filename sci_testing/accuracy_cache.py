@@ -5,6 +5,7 @@ physical input and measurement file, the current metric implementation, and
 the set of competitor columns.  The full snapshot digests and per-case ID
 checks remain the responsibility of report.load_snapshot.
 """
+import ast
 import hashlib
 import json
 from pathlib import Path
@@ -14,6 +15,39 @@ from .case_csv import case_paths, csv_paths
 
 SCHEMA = 1
 FILENAME = 'accuracy-summaries.json'
+
+# Per-API numerical rows depend on these definitions, not page presentation
+# prose or the code that invokes the comparison libraries. Row aggregation and
+# row formatting are both included; Markdown page formatting is not.
+METRIC_FUNCTIONS = frozenset({'symmetric_error', 'component_error', 'number',
+                              'summarize_api'})
+METRIC_CONSTANTS = frozenset({'EPS', 'TINY', 'ZERO', 'METRIC_PRECISION_DPS'})
+
+
+def metric_source_sha256(path):
+    """Fingerprint executable accuracy calculations, excluding report prose.
+
+    Extract full Python ASTs rather than looking for an edit-sensitive range of
+    source lines. Missing/renamed definitions fail closed instead of silently
+    preserving stale summaries. The separate testing_sources_sha256 continues
+    to authenticate *all* source bytes, including report notes and adapters.
+    """
+    tree = ast.parse(Path(path).read_text(encoding='utf-8'))
+    functions = {}
+    constants = {}
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in METRIC_FUNCTIONS:
+            functions[node.name] = ast.dump(node, include_attributes=False)
+        elif isinstance(node, (ast.Assign, ast.AnnAssign)):
+            targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+            for target in targets:
+                if isinstance(target, ast.Name) and target.id in METRIC_CONSTANTS:
+                    constants[target.id] = ast.dump(node.value, include_attributes=False)
+    if set(functions) != METRIC_FUNCTIONS or set(constants) != METRIC_CONSTANTS:
+        raise ValueError('Missing numerical metric definition; cannot trust cached summaries')
+    payload = json.dumps({'functions': functions, 'constants': constants},
+                         sort_keys=True, separators=(',', ':'))
+    return hashlib.sha256(payload.encode()).hexdigest()
 
 
 def sha256_file(path):
@@ -29,7 +63,7 @@ class AccuracyCache:
                  previous_sha256=None, reuse=True, require_hits=False):
         self.root = Path(root)
         self.measurements = Path(measurements)
-        self.metric_sha256 = hashlib.sha256((sha256_file(metric_source) +
+        self.metric_sha256 = hashlib.sha256((metric_source_sha256(metric_source) +
                                             sha256_file(__file__)).encode()).hexdigest()
         self.reuse = reuse
         self.require_hits = require_hits

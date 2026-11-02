@@ -85,6 +85,33 @@ NOTES['special'] += (
     'functions.'
 )
 
+NOTES['special'] += (
+    ' Further native competitors are independently validated compositions, not '
+    'a claim of matching named APIs: GSL fixed Gaussian quadrature provides '
+    'nodes and weights for Legendre, Jacobi, Gegenbauer, Laguerre, Hermite and '
+    'Chebyshev roots, with explicit shifted/scaled rule transformations. Boost '
+    'Legendre roots and Q primitives produce the sampled roots_legendre/lqn '
+    'arrays. Public GSL Airy zero routines supply both zeros and derivative '
+    'zeros and their companion values; GSL Bessel Jn/Yn primitives and root '
+    'solvers give integer-order zero collections, with full sequence ordering '
+    'validated against the independent SciPy fixtures. Additional scalar '
+    'inverses, gamma/elliptic identities, Box-Cox/logistic transforms, and '
+    'combinatorial functions compose Boost.Math or GSL primitives under '
+    'guarded domains. GSL Kelvin ber/bei and derivatives reuse the already '
+    'documented GSL quadrature backend; they are not public GSL Kelvin APIs.'
+)
+
+NOTES['stats'] += (
+    ' Additional Boost.Math-derived statistics use its public sample-moment '
+    'primitives and chi-square, binomial and hypergeometric distributions; '
+    'alternatives, ties, degrees of freedom and paired outputs follow the '
+    'specific saved Sci contracts. GSL-derived statistics combine public '
+    'GSL sample moments with t, F and chi-square distribution tails and '
+    'explicit circular/logarithmic transformations. These are mathematical '
+    'compositions with independent SciPy validation, not claims that the '
+    'libraries export identical named Sci statistical functions.'
+)
+
 
 
 def command(*args, cwd=ROOT):
@@ -358,6 +385,7 @@ def symmetric_error(actual, reference):
 
 
 ZERO=mp.mpf(0)
+METRIC_PRECISION_DPS = 160
 
 
 def component_error(actual, reference, *, binary64):
@@ -405,6 +433,55 @@ def comparison_submodule(api, canonical):
     return path[1] if len(path)>2 else None
 
 
+def summarize_api(api, batch, records, libraries, failed):
+    """Produce the authenticated numerical row without page presentation prose."""
+    cells=[]
+    baseline_failures=0
+    reference_maximum=None;reference_sum=ZERO;reference_count=0
+    for case in batch:
+        record=records[case['id']]
+        baseline=record['libraries']['Sci']
+        if 'error' in baseline:
+            baseline_failures+=1
+            entry=failed.setdefault((api,'Sci'),[0,baseline['error'],case['id']]);entry[0]+=1
+        elif len(baseline['values'])!=len(record['reference']):
+            raise ValueError(f'{case["id"]}: shape mismatch in Sci')
+        else:
+            errors=[component_error(actual,reference,binary64=False)
+                    for actual,reference in zip(baseline['values'],record['reference'])]
+            if errors:
+                current=max(errors)
+                reference_maximum=current if reference_maximum is None else max(reference_maximum,current)
+                reference_sum+=mp.fsum(errors)
+                reference_count+=len(errors)
+    for lib in libraries:
+        sums=[];maximum=None;scalar_count=0;failures=0;unavailable=0;baseline_missing=0
+        for case in batch:
+            record=records[case['id']];result=record['libraries'].get(lib)
+            if result is None:unavailable+=1;continue
+            if 'error' in result:
+                failures+=1
+                entry=failed.setdefault((api,lib),[0,result['error'],case['id']]);entry[0]+=1
+                continue
+            if len(result['values'])!=len(record['reference']):raise ValueError(f'{case["id"]}: shape mismatch in {lib}')
+            baseline=record['libraries']['Sci']
+            if 'error' in baseline:baseline_missing+=1;continue
+            skip=len(case['args']['obs']) if api=='cluster.vq.vq' else 0
+            errors=[component_error(actual,ref,binary64=True) for actual,ref in zip(result['values'][skip:],baseline['values'][skip:])]
+            if errors:
+                current=max(errors);maximum=current if maximum is None else max(maximum,current)
+                sums.append(mp.fsum(errors));scalar_count+=len(errors)
+        if unavailable==len(batch):cells.append('—');continue
+        text=f'{number(maximum)} / {number(mp.fsum(sums)/scalar_count)}' if scalar_count else '—'
+        cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
+                     (f'; unavailable {unavailable}/{len(batch)}' if unavailable else '')+
+                     (f'; Sci unavailable {baseline_missing}/{len(batch)}' if baseline_missing else ''))
+    count=str(len(batch))+(f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')
+    reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
+                    if reference_count else '—')
+    return f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |'
+
+
 def render(cases, records, meta, output, *, modules=None, cache=None):
     output.mkdir(parents=True,exist_ok=True)
     from .coverage_audit import inventory
@@ -435,53 +512,9 @@ def render(cases, records, meta, output, *, modules=None, cache=None):
                 section_cases[section]+=len(batch)
                 sections[section].append(saved['row'])
                 continue
-            cells=[]
-            baseline_failures=0
-            reference_maximum=None;reference_sum=ZERO;reference_count=0
-            for case in batch:
-                record=records[case['id']]
-                baseline=record['libraries']['Sci']
-                if 'error' in baseline:
-                    baseline_failures+=1
-                    entry=failed.setdefault((api,'Sci'),[0,baseline['error'],case['id']]);entry[0]+=1
-                elif len(baseline['values'])!=len(record['reference']):
-                    raise ValueError(f'{case["id"]}: shape mismatch in Sci')
-                else:
-                    errors=[component_error(actual,reference,binary64=False)
-                            for actual,reference in zip(baseline['values'],record['reference'])]
-                    if errors:
-                        current=max(errors)
-                        reference_maximum=current if reference_maximum is None else max(reference_maximum,current)
-                        reference_sum+=mp.fsum(errors)
-                        reference_count+=len(errors)
-            for lib in libraries:
-                sums=[];maximum=None;scalar_count=0;failures=0;unavailable=0;baseline_missing=0
-                for case in batch:
-                    record=records[case['id']];result=record['libraries'].get(lib)
-                    if result is None:unavailable+=1;continue
-                    if 'error' in result:
-                        failures+=1
-                        entry=failed.setdefault((api,lib),[0,result['error'],case['id']]);entry[0]+=1
-                        continue
-                    if len(result['values'])!=len(record['reference']):raise ValueError(f'{case["id"]}: shape mismatch in {lib}')
-                    baseline=record['libraries']['Sci']
-                    if 'error' in baseline:baseline_missing+=1;continue
-                    skip=len(case['args']['obs']) if api=='cluster.vq.vq' else 0
-                    errors=[component_error(actual,ref,binary64=True) for actual,ref in zip(result['values'][skip:],baseline['values'][skip:])]
-                    if errors:
-                        current=max(errors);maximum=current if maximum is None else max(maximum,current)
-                        sums.append(mp.fsum(errors));scalar_count+=len(errors)
-                if unavailable==len(batch):cells.append('—');continue
-                text=f'{number(maximum)} / {number(mp.fsum(sums)/scalar_count)}' if scalar_count else '—'
-                cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
-                             (f'; unavailable {unavailable}/{len(batch)}' if unavailable else '')+
-                             (f'; Sci unavailable {baseline_missing}/{len(batch)}' if baseline_missing else ''))
-            count=str(len(batch))+(f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')
-            reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
-                            if reference_count else '—')
+            row=summarize_api(api,batch,records,libraries,failed)
             section=comparison_submodule(api,canonical.get(api))
             section_cases[section]+=len(batch)
-            row=f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |'
             sections[section].append(row)
             if cache is not None:
                 cache.put(api,libraries,{'row':row,'failures':[
@@ -834,7 +867,7 @@ def extend_references(cases, added, executable, destination):
             result={k:v for k,v in result.items() if k!='id'}
             if 'values' in result:result['values']=list(map(float,result['values']))
             high=stable_reference(case)
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 libs={'Sci':result,**competitors(case),**native_competitors(native,case)}
                 for value in libs.values():validate_result(case,value,high)
                 updated[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],
@@ -861,7 +894,7 @@ def check_generated(cases, output, *, root=None, cached=False, exhaustive=False)
             from .coverage_audit import audit
             if audit(cases,records)!=saved:
                 raise ValueError('Stale coverage audit; rerun python -m sci_testing.report')
-    with tempfile.TemporaryDirectory() as directory, mp.workdps(160):
+    with tempfile.TemporaryDirectory() as directory, mp.workdps(METRIC_PRECISION_DPS):
         expected=Path(directory)
         original_checksum=meta.get('accuracy_summaries_sha256')
         if original_checksum:
@@ -928,7 +961,7 @@ def refresh_sci(cases, records, executable, destination, apis):
             if 'error' not in result and 'values' not in result:
                 raise ValueError(f'{case["id"]}: runner returned neither values nor an error')
             if 'values' in result:result['values']=list(map(float,result['values']))
-            with mp.workdps(160):validate_result(case,result,saved['reference'])
+            with mp.workdps(METRIC_PRECISION_DPS):validate_result(case,result,saved['reference'])
             updated[case['id']]={**saved,'libraries':{**saved['libraries'],'Sci':result}}
         # The staging tree may share hard links with the saved snapshot. Break
         # those links before write_measurements opens a file for truncation.
@@ -983,7 +1016,7 @@ def upgrade_scientific_comparisons(cases, records, destination):
         for case in batch:
             saved=records[case['id']]
             high=stable_reference(case)
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 libraries={lib:value for lib,value in saved['libraries'].items()
                            if lib not in ('stdlib','NumPy')}
                 libraries.update(competitors(case))
@@ -1092,7 +1125,7 @@ def main():
             modules=(selective_render_modules(args.output.resolve(),
                                               {api.split('.')[0] for api in render_apis})
                      if args.module else None)
-            with mp.workdps(160):render_cached(cases,records,meta,pages,modules=modules)
+            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,records,meta,pages,modules=modules)
             (ROOT/'results/coverage.csv').write_text(coverage)
             publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
@@ -1124,7 +1157,7 @@ def main():
             meta['measurements_sha256']=directory_digest(staged)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=workspace/'pages'
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 render_cached(cases,staged_records,meta,pages,
                        modules=selective_render_modules(args.output.resolve(),
                                                         {'complex','special','stats'}))
@@ -1184,7 +1217,7 @@ def main():
                 'apis':sorted(selected),'testing_sources_sha256':meta['testing_sources_sha256'],
                 'scipy':meta['scipy'],'native_libraries':meta.get('native_libraries',{})})
             pages=workspace/'pages'
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 render_cached(cases,staged_records,meta,pages,
                        modules=selective_render_modules(args.output.resolve(),
                                                         {api.split('.')[0] for api in selected}))
@@ -1272,7 +1305,7 @@ def main():
             coverage=audit(cases,staged_records,required_apis=added)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=workspace/'pages'
-            with mp.workdps(160):render_cached(cases,staged_records,meta,pages,inputs=staged_inputs)
+            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,staged_records,meta,pages,inputs=staged_inputs)
             # All existing inputs were checked before preparing these files.
             old_inputs=ROOT/'cases/generated'
             backup=workspace/'previous-cases'
@@ -1312,7 +1345,7 @@ def main():
             meta['measurements_sha256']=directory_digest(staged)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=Path(directory)/'pages'
-            with mp.workdps(160):render_cached(cases,staged_records,meta,pages)
+            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,staged_records,meta,pages)
             # Finish all audits and page generation before publishing changes.
             for name in sorted(changed):
                 path=staged/name
@@ -1343,7 +1376,7 @@ def main():
             records={}
             for case,result in zip(batch,rust):
                 high=stable_reference(case)
-                with mp.workdps(160):
+                with mp.workdps(METRIC_PRECISION_DPS):
                     native_results=native_competitors(native,case)
                     libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native_results}
                     for res in libs.values():validate_result(case,res,high)
@@ -1364,7 +1397,7 @@ def main():
     coverage=audit(cases,records)
     (results/'coverage.csv').write_text(coverage)
     meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
-    with mp.workdps(160): render_cached(cases,records,meta,args.output.resolve())
+    with mp.workdps(METRIC_PRECISION_DPS): render_cached(cases,records,meta,args.output.resolve())
     publish_summary(args.output.resolve())
     (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
     print(f'Wrote {len(MODULES)} module pages, {len(cases)} cases to {args.output}')
