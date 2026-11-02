@@ -1,9 +1,13 @@
 # Sci library comparisons
 
-Comparisons using each Sci module as the reference for all 1109 public function implementations in
-all 14 modules. The compiler inventory contains 1195 exported names;
-aliases share implementations. The [coverage audit](../../results/coverage.csv)
-records sample counts, unique inputs, successful comparisons and failures.
+Historical and newly measured comparisons use each Sci module as the reference on
+the same saved inputs. The compiler inventory lists 1142 mapped canonical
+names across 17 modules and 2115 exported names; these are not
+all independently verified against Sci 0.3. There are 0 currently
+unmeasured new API names, 0 other untested exports and
+53 unresolved legacy mappings.
+The [coverage audit](../../results/coverage.csv) explicitly marks pending names
+alongside measured sample counts, unique inputs, successes and failures.
 
 Tables list **Function**, **Cases**, then relevant libraries (SciPy, Boost.Math,
 GSL and others). Each library cell is **maximum / mean symmetric relative
@@ -18,29 +22,34 @@ CSV preserves every reference, result, warning and exception.
 | [cluster](cluster.md) | 31 | 62217 |
 | [complex](complex.md) | 34 | 70919 |
 | [constants](constants.md) | 7 | 14252 |
+| [core](core.md) | 3 | 3053 |
 | [differentiate](differentiate.md) | 4 | 8277 |
 | [fft](fft.md) | 45 | 90336 |
 | [filter](filter.md) | 10 | 20226 |
 | [integrate](integrate.md) | 7 | 14135 |
 | [interpolate](interpolate.md) | 25 | 50224 |
+| [io](io.md) | 10 | 413 |
 | [linalg](linalg.md) | 109 | 218680 |
 | [optimize](optimize.md) | 10 | 20152 |
-| [signal](signal.md) | 178 | 357492 |
-| [sparse](sparse.md) | 98 | 196255 |
+| [signal](signal.md) | 179 | 358507 |
+| [sparse](sparse.md) | 100 | 198293 |
 | [spatial](spatial.md) | 33 | 66272 |
-| [special](special.md) | 364 | 728841 |
+| [special](special.md) | 405 | 811236 |
 | [stats](stats.md) | 169 | 342414 |
 
 
 ## Inputs and references
 
-Each recipe has 1,000 endpoint-inclusive NumPy linspace cases and 1,000 uniform
-random cases using seed `20261020` with an independent stream per API, plus
-preserved boundary profiles. Broad original recipes complement local sweeps
-around valid profiles. Integer-only functions, metadata queries and constrained
-shapes use bounded discrete profiles, so some inputs repeat; the coverage CSV
-reports unique inputs explicitly. Identical deterministic inputs share one
-measured evaluation; all repeated case records remain in the CSV and totals.
+Historical dense recipes and new special-function sweeps use 1,000
+endpoint-inclusive linspace inputs plus 1,000 independently seeded random inputs
+per API (seed `20261020`), with preserved boundary profiles. New structural CSR
+and spectral APIs use 1,000 seeded shape-varied inputs plus edge and rejection
+cases. I/O APIs use independently generated Matrix Market, WAV and MATLAB
+binary fixtures covering formats, data types and rejected inputs, with 8–136
+cases per API. Integer-only functions, metadata queries and constrained shapes
+use bounded discrete profiles, so some inputs repeat; the coverage CSV reports
+unique inputs explicitly. Identical deterministic inputs share one measured
+evaluation; all repeated case records remain in the CSV and totals.
 Error-policy APIs execute every call. These samples do not establish domain-wide
 accuracy bounds. Ordinary Sci API tests retain invalid-input, NaN, infinity,
 signed-zero and work-limit contracts.
@@ -93,12 +102,20 @@ git submodule update --init --recursive
 uv sync --frozen
 uv run --frozen python -m unittest -v
 cargo test --locked
-uv run --frozen python -m sci_testing.report
+uv run --frozen python -m sci_testing.report --full
 uv run --frozen python -m sci_testing.report --check
 ```
 
-`python -m sci_testing.report` rebuilds partitioned CSV inputs, measures each function with bounded
-memory, and writes reports here. `--check` validates source/input/result digests,
+`python -m sci_testing.report` refreshes Sci outputs while retaining saved independent
+references and other library results. Select modules with `--module special` or
+nested namespaces with `--module sparse.linalg`; repeat `--module` to select several.
+Unselected measurements stay fixed. Original reference provenance is retained under
+`reference_environment` in `results/environment.json`; partial refreshes record
+per-function Sci revisions under `sci_measurement_commits`. Commit the updated
+`sci/` submodule pointer and `sci-revision.txt` and, if necessary, `Cargo.lock` before
+measuring a newer Sci commit.
+Use `--full` for the initial snapshot, changed inputs, or refreshing all references
+and comparison libraries. `--check` validates source/input/result digests,
 the complete coverage audit and every generated page without compiling or writing
 files. It validates the recorded platform snapshot; it does not require identical
 floating-point measurements on another platform. Set `CARGO_TARGET_DIR` to reuse
@@ -112,8 +129,14 @@ All reports and data belong to this repository; Sci links to them externally.
 
 ## Snapshot
 
-- Sci commit: `b52c598535920279dc0aadb14a9085b8545ba4c1`.
-- Harness source SHA-256: `a1dbbae1205dbebed9bfb371b138d8f9a215cfec01568c6e3de356becdf58cd9`.
-- Input SHA-256: `c5885448a2609ed08864f7977b3ee900e52a39ab3a38a9e5af66cf3ad3ff6ba3`.
-- 2260692 cases; 1109 distinct public functions.
+- Sci commit: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998`.
+- Harness source SHA-256: `a9a4095493112b6b04c27596db78ecaef74ca844a93c23be4da6563ce7cbfcbe`.
+- Input SHA-256: `f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854`.
+- 2349606 saved cases covering 1181 recipe API names; 1142 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
+
+Sci-only refresh: independent references and other library outputs are retained from the saved snapshot. See `reference_environment` in `results/environment.json` for their original provenance.
+
+Per-function Sci revisions for partial refreshes are recorded under `sci_measurement_commits` in `results/environment.json`.
+
+New API references were evaluated separately from the historical snapshot. Their provenance is recorded in `reference_extensions` in `results/environment.json`.

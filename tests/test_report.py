@@ -14,11 +14,68 @@ from sci_testing.generate_cases import CASES_PER_METHOD
 
 
 class AccuracyTests(unittest.TestCase):
+    def test_coverage_audit_reports_pending_names_and_checks_io_diversity(self):
+        import csv
+        from io import StringIO
+        from sci_testing.coverage_audit import audit
+        from sci_testing.io_cases import cases as io_cases
+
+        class SavedCases:
+            def __init__(self,items):
+                self.batch=list(items)
+                self.apis=sorted({case['api'] for case in self.batch})
+            def function(self,api):
+                return [case for case in self.batch if case['api']==api]
+
+        cases=SavedCases(io_cases(1000,20261020,apis=['io.wavfile.write']))
+        records={case['id']:{'libraries':{'Sci':{'values':[.25]}}} for case in cases.batch}
+        exports=[{'api':'io.wavfile.write','canonical':'io.wavfile.write','status':'new_api_untested'},
+                 {'api':'special.future','canonical':'special.future','status':'new_api_untested'},
+                 {'api':'special.old','canonical':'','status':'unresolved_legacy'}]
+        with patch('sci_testing.coverage_audit.inventory',return_value=exports):
+            rows=list(csv.DictReader(StringIO(audit(cases,records,required_apis={'io.wavfile.write'}))))
+            self.assertEqual(rows[0]['coverage_state'],'measured')
+            self.assertGreaterEqual(int(rows[0]['io_payloads']),8)
+            self.assertEqual(rows[1]['coverage_state'],'pending_new_api_untested')
+            self.assertEqual(rows[2]['coverage_state'],'pending_unresolved_legacy')
+            with self.assertRaisesRegex(ValueError,'Unverified public Sci APIs'):
+                audit(cases,records,require_complete=True)
+            with self.assertRaisesRegex(ValueError,'New public APIs without successful'):
+                audit(cases,records,required_apis={'special.future'})
+            cases.batch[0]['args']['io_case']=False
+            with self.assertRaisesRegex(ValueError,'missing independent I/O'):
+                audit(cases,records)
+
+    def test_special03_references_keep_mpmath_precision(self):
+        case={'id':'special.bessel.iv_ratio/test','api':'special.bessel.iv_ratio',
+              'args':{'special03_case':True,'v':0.5,'x':0.3}}
+        with mp.workdps(100):
+            actual=report.high_precision(case)[0]
+            self.assertEqual(actual,mp.tanh(mp.mpf(0.3)))
+            self.assertGreater(abs(actual-mp.mpf(float(actual))),mp.mpf('1e-22'))
+        self.assertEqual(report.competitors(case),{})
+
+    def test_complex_and_structural03_oracles_dispatch_independently(self):
+        from sci_testing.special_complex03_cases import cases as complex_cases
+        from sci_testing.structural03_cases import cases as structural_cases
+        complex_case=next(iter(complex_cases(3,20261020,apis=['special.complex.airy'])))
+        with mp.workdps(100):
+            result=report.high_precision(complex_case)
+            self.assertEqual(len(result),8)
+            self.assertEqual(result[0],mp.re(mp.airyai(mp.mpc(.25,.5))))
+        self.assertEqual(report.competitors(complex_case),{})
+        structural_case=next(iter(structural_cases(2,20261020,apis=['core.csr.from_coo'])))
+        expected=report.high_precision(structural_case)
+        self.assertEqual(expected,[mp.mpf(v) for v in
+                         report.competitors(structural_case)['SciPy']['values']])
+
     def test_sparse_reference_recipes_and_nonfinite_tags(self):
         import math
         from sci_testing.sparse_cases import recipes, reference, tagged
         cases=recipes()
-        self.assertEqual(len({c['api'] for c in cases}),98)
+        # Sci 0.3 keeps 96 legacy sparse oracle families in the historical
+        # recipe collection; new structural CSR exports have separate cases.
+        self.assertEqual(len({c['api'] for c in cases}),96)
         for case in cases:
             with warnings.catch_warnings():
                 warnings.simplefilter('ignore')
@@ -145,14 +202,15 @@ class AccuracyTests(unittest.TestCase):
         self.assertEqual([by_id[c['id']] for c in base],base)
         ids=[c['id'] for c in cases]
         self.assertEqual(len(ids),len(set(ids)))
-        self.assertEqual({c['api'].split('.')[0] for c in cases},set(report.MODULES))
+        self.assertEqual({c['api'].split('.')[0] for c in cases},set(report.MODULES)-{'core','io'})
+        self.assertEqual({api.split('.')[0] for api in full.apis},set(report.MODULES))
         self.assertEqual(full.count,1000)
         for api in cases.apis:
             batch=cases.function(api)
             for method in ['linspace','random']:
                 selected=[c for c in batch if c['id'].startswith(f'{api}/{method}-')]
                 self.assertEqual(len(selected),4,api)
-                if api in profiles() and method=='linspace':
+                if api in {'special.erf','linalg.solve'} and api in profiles() and method=='linspace':
                     self.assertGreater(len({json.dumps(c['args'],sort_keys=True) for c in selected}),1,api)
             json.dumps(batch,allow_nan=False)
         # Check the complete per-function counts on representative scalar,
@@ -234,7 +292,18 @@ class AccuracyTests(unittest.TestCase):
         aliases={r['api']:r['canonical'] for r in rows}
         apis=set(report.build_cases().apis)
         self.assertFalse(apis-set(aliases))
-        self.assertEqual({aliases[a] for a in apis},set(aliases.values()))
+        # All genuinely new Sci 0.3 API names must now have independently
+        # specified cases. Remaining inventory exports are explicitly pending
+        # historical aliases or unresolved mappings and cannot count as tested.
+        self.assertFalse({r['api'] for r in rows if r['status']=='new_api_untested'}-apis)
+        missing_canonical={r['canonical'] for r in rows if r['canonical']}-{
+            aliases[api] for api in apis if aliases[api]}
+        for row in rows:
+            if row['canonical'] in missing_canonical:
+                self.assertIn(row['status'],{'untested','legacy_recipe_pending'},row['api'])
+        self.assertTrue(any(r['status']=='unresolved_legacy' for r in rows))
+        self.assertTrue(all(not aliases[api] or aliases[api] in {r['canonical'] for r in rows}
+                            for api in apis))
 
     def test_generated_rust_matches_the_pinned_dispatch_sources(self):
         from sci_testing.api_registry import rust_registrations

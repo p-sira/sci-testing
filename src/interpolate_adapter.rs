@@ -42,18 +42,18 @@ fn check(actual: &[f64], _expected: &str) {
 fn check_matrix(actual: &[Vec<f64>], _expected: &str) {
     emit(actual);
 }
-fn extension(i: &str) -> p::SplineExtension {
+fn extension(i: &str) -> p::spline::SplineExtension {
     match i {
-        "0" => p::SplineExtension::Extrapolate,
-        "1" => p::SplineExtension::Zero,
-        "2" => p::SplineExtension::Error,
-        "3" => p::SplineExtension::Clamp,
+        "0" => p::spline::SplineExtension::Extrapolate,
+        "1" => p::spline::SplineExtension::Zero,
+        "2" => p::spline::SplineExtension::Error,
+        "3" => p::spline::SplineExtension::Clamp,
         _ => panic!(),
     }
 }
 fn check_fit(s: &Spline, query: &[f64], expected: &[&str]) {
     check(
-        &p::splev(query, s, 0, p::SplineExtension::Extrapolate).unwrap(),
+        &p::spline::splev(query, s, 0, p::spline::SplineExtension::Extrapolate).unwrap(),
         expected[1],
     );
     check(&s.knots, expected[2]);
@@ -61,7 +61,7 @@ fn check_fit(s: &Spline, query: &[f64], expected: &[&str]) {
 }
 fn check_transform(s: &Spline, query: &[f64], expected: &[&str]) {
     check(
-        &p::splev(query, s, 0, p::SplineExtension::Extrapolate).unwrap(),
+        &p::spline::splev(query, s, 0, p::spline::SplineExtension::Extrapolate).unwrap(),
         expected[1],
     );
     check(&s.knots, expected[2]);
@@ -74,12 +74,13 @@ pub fn run(c: &[&str]) -> Vec<f64> {
     let e = [""; 4];
     match c[1] {
         "make_interp_spline" => check_fit(
-            &p::make_interp_spline(&vector(a[0]), &vector(a[1]), a[2].parse().unwrap()).unwrap(),
+            &p::fitting::make_interp_spline(&vector(a[0]), &vector(a[1]), a[2].parse().unwrap())
+                .unwrap(),
             &vector(a[3]),
             &e,
         ),
         "make_lsq_spline" => check_fit(
-            &p::make_lsq_spline(
+            &p::fitting::make_lsq_spline(
                 &vector(a[0]),
                 &vector(a[1]),
                 &vector(a[2]),
@@ -91,11 +92,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             &e,
         ),
         "make_splrep" | "splrep" => {
-            let f = if c[1] == "splrep" {
-                p::splrep
-            } else {
-                p::make_splrep
-            };
+            let f = p::fitting::make_splrep;
             check_fit(
                 &f(
                     &vector(a[0]),
@@ -110,7 +107,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             );
         }
         "make_smoothing_spline" => check_fit(
-            &p::make_smoothing_spline(
+            &p::fitting::make_smoothing_spline(
                 &vector(a[0]),
                 &vector(a[1]),
                 optional(a[2]).as_deref(),
@@ -121,11 +118,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             &e,
         ),
         "make_splprep" | "splprep" => {
-            let f = if c[1] == "splprep" {
-                p::splprep
-            } else {
-                p::make_splprep
-            };
+            let f = p::fitting::make_splprep;
             let s = f(
                 &matrix(a[0]),
                 optional(a[1]).as_deref(),
@@ -137,7 +130,13 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             let query = vector(a[5]);
             let mut out = vec![Vec::new(); query.len()];
             for component in &s.components {
-                let v = p::splev(&query, component, 0, p::SplineExtension::Extrapolate).unwrap();
+                let v = p::spline::splev(
+                    &query,
+                    component,
+                    0,
+                    p::spline::SplineExtension::Extrapolate,
+                )
+                .unwrap();
                 for (row, value) in out.iter_mut().zip(v) {
                     row.push(value);
                 }
@@ -160,7 +159,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 _ => panic!(),
             };
             check(
-                &p::approximate_taylor_polynomial(
+                &p::polynomial::approximate_taylor_polynomial(
                     f,
                     a[1].parse().unwrap(),
                     a[2].parse().unwrap(),
@@ -172,7 +171,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             );
         }
         "generate_knots" => check_matrix(
-            &p::generate_knots(
+            &p::fitting::generate_knots(
                 &vector(a[0]),
                 &vector(a[1]),
                 a[2].parse().unwrap(),
@@ -183,7 +182,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             e[1],
         ),
         "splev" => check(
-            &p::splev(
+            &p::spline::splev(
                 &vector(a[0]),
                 &spline(a[1]),
                 a[2].parse().unwrap(),
@@ -193,37 +192,41 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             e[1],
         ),
         "splder" => check_transform(
-            &p::splder(&spline(a[0]), a[1].parse().unwrap()).unwrap(),
+            &p::spline::splder(&spline(a[0]), a[1].parse().unwrap()).unwrap(),
             &vector(a[2]),
             &e,
         ),
         "splantider" => check_transform(
-            &p::splantider(&spline(a[0]), a[1].parse().unwrap()).unwrap(),
+            &p::spline::splantider(&spline(a[0]), a[1].parse().unwrap()).unwrap(),
             &vector(a[2]),
             &e,
         ),
-        "spalde" => check_matrix(&p::spalde(&vector(a[0]), &spline(a[1])).unwrap(), e[1]),
+        "spalde" => check_matrix(
+            &p::spline::spalde(&vector(a[0]), &spline(a[1])).unwrap(),
+            e[1],
+        ),
         "splint" => close!(
-            p::splint(a[0].parse().unwrap(), a[1].parse().unwrap(), &spline(a[2])).unwrap(),
+            p::spline::splint(a[0].parse().unwrap(), a[1].parse().unwrap(), &spline(a[2])).unwrap(),
             e[1].parse().unwrap(),
             2e-10,
             2e-10,
         ),
         "insert" => check_transform(
-            &p::insert(a[0].parse().unwrap(), &spline(a[1]), a[2].parse().unwrap()).unwrap(),
+            &p::spline::insert(a[0].parse().unwrap(), &spline(a[1]), a[2].parse().unwrap())
+                .unwrap(),
             &vector(a[3]),
             &e,
         ),
-        "sproot" => check(&p::sproot(&spline(a[0])).unwrap(), e[1]),
+        "sproot" => check(&p::spline::sproot(&spline(a[0])).unwrap(), e[1]),
         "interpn" => check(
-            &p::interpn(
+            &p::multidimensional::interpn(
                 &matrix(a[0]),
                 &vector(a[1]),
                 &matrix(a[2]),
                 if a[3] == "linear" {
-                    p::GridMethod::Linear
+                    p::multidimensional::GridMethod::Linear
                 } else {
-                    p::GridMethod::Nearest
+                    p::multidimensional::GridMethod::Nearest
                 },
                 a[4].parse().unwrap(),
                 (!a[5].is_empty()).then(|| a[5].parse().unwrap()),
@@ -232,14 +235,14 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             e[1],
         ),
         "griddata" => check(
-            &p::griddata(
+            &p::multidimensional::griddata(
                 &matrix(a[0]),
                 &vector(a[1]),
                 &matrix(a[2]),
                 match a[3] {
-                    "linear" => p::ScatteredMethod::Linear,
-                    "nearest" => p::ScatteredMethod::Nearest,
-                    "cubic" => p::ScatteredMethod::Cubic,
+                    "linear" => p::multidimensional::ScatteredMethod::Linear,
+                    "nearest" => p::multidimensional::ScatteredMethod::Nearest,
+                    "cubic" => p::multidimensional::ScatteredMethod::Cubic,
                     _ => panic!(),
                 },
                 a[4].parse().unwrap(),
@@ -249,7 +252,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             e[1],
         ),
         "bisplrep" => {
-            let s = p::bisplrep(
+            let s = p::fitting::bisplrep(
                 &vector(a[0]),
                 &vector(a[1]),
                 &vector(a[2]),
@@ -265,7 +268,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             check(&s.coefficients, e[3]);
         }
         "bisplev" => check_matrix(
-            &p::bisplev(
+            &p::multidimensional::bisplev(
                 &vector(a[0]),
                 &vector(a[1]),
                 &surface(a[2]),

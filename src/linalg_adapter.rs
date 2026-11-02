@@ -76,7 +76,7 @@ fn complex_matrix(a: &[Vec<sci::complex::Complex>]) -> (Matrix, Matrix) {
         a.iter().map(|r| r.iter().map(|z| z.im).collect()).collect(),
     )
 }
-fn cmul(a: &l::ComplexMatrix, b: &l::ComplexMatrix) -> l::ComplexMatrix {
+fn cmul(a: &l::eigen::ComplexMatrix, b: &l::eigen::ComplexMatrix) -> l::eigen::ComplexMatrix {
     use sci::complex::{Complex, add, multiply};
     (0..a.len())
         .map(|i| {
@@ -90,7 +90,7 @@ fn cmul(a: &l::ComplexMatrix, b: &l::ComplexMatrix) -> l::ComplexMatrix {
         })
         .collect()
 }
-fn cadjoint(a: &l::ComplexMatrix) -> l::ComplexMatrix {
+fn cadjoint(a: &l::eigen::ComplexMatrix) -> l::eigen::ComplexMatrix {
     (0..a[0].len())
         .map(|j| {
             (0..a.len())
@@ -99,7 +99,7 @@ fn cadjoint(a: &l::ComplexMatrix) -> l::ComplexMatrix {
         })
         .collect()
 }
-fn cfrom(a: &[Vec<f64>]) -> l::ComplexMatrix {
+fn cfrom(a: &[Vec<f64>]) -> l::eigen::ComplexMatrix {
     a.iter()
         .map(|r| {
             r.iter()
@@ -108,7 +108,7 @@ fn cfrom(a: &[Vec<f64>]) -> l::ComplexMatrix {
         })
         .collect()
 }
-fn ccheck_plain(a: &l::ComplexMatrix, b: &l::ComplexMatrix) {
+fn ccheck_plain(a: &l::eigen::ComplexMatrix, b: &l::eigen::ComplexMatrix) {
     let (ar, ai) = complex_matrix(a);
     let (br, bi) = complex_matrix(b);
     check_matrix!(&ar, &br);
@@ -135,10 +135,10 @@ fn check_matrix_plain(a: &[Vec<f64>], b: &[Vec<f64>]) {
     }
 }
 fn mul(a: &[Vec<f64>], b: &[Vec<f64>]) -> Matrix {
-    l::matmul(a, b).unwrap()
+    l::basic::matmul(a, b).unwrap()
 }
 fn trans(a: &[Vec<f64>]) -> Matrix {
-    l::transpose(a).unwrap()
+    l::basic::transpose(a).unwrap()
 }
 fn projector(a: &[Vec<f64>]) -> Matrix {
     if a.first().is_none_or(Vec::is_empty) {
@@ -152,7 +152,7 @@ fn identity(n: usize) -> Matrix {
         .map(|i| (0..n).map(|j| if i == j { 1. } else { 0. }).collect())
         .collect()
 }
-fn eigen(e: l::EigenResult, a: Option<&[Vec<f64>]>, expected: &[&str]) {
+fn eigen(e: l::eigen::EigenResult, a: Option<&[Vec<f64>]>, expected: &[&str]) {
     check_vector!(&e.eigenvalues, &vector(expected[1]));
     let squares: Matrix = e
         .eigenvectors
@@ -165,15 +165,15 @@ fn eigen(e: l::EigenResult, a: Option<&[Vec<f64>]>, expected: &[&str]) {
         &identity(e.eigenvalues.len()),
     );
     if let Some(a) = a {
-        let diagonal = l::diagsvd(&e.eigenvalues, a.len(), a.len()).unwrap();
+        let diagonal = l::structured::diagsvd(&e.eigenvalues, a.len(), a.len()).unwrap();
         check_matrix!(&mul(a, &e.eigenvectors), &mul(&e.eigenvectors, &diagonal));
     }
 }
-fn kind(s: &str) -> l::PascalKind {
+fn kind(s: &str) -> l::structured::PascalKind {
     match s {
-        "lower" => l::PascalKind::Lower,
-        "upper" => l::PascalKind::Upper,
-        "symmetric" => l::PascalKind::Symmetric,
+        "lower" => l::structured::PascalKind::Lower,
+        "upper" => l::structured::PascalKind::Upper,
+        "symmetric" => l::structured::PascalKind::Symmetric,
         _ => panic!("{s}"),
     }
 }
@@ -211,19 +211,25 @@ pub fn run(c: &[&str]) -> Vec<f64> {
         }
     };
     match c[1] {
-        "toeplitz" => mm(l::toeplitz(&convert_vector(&col()), row().as_deref()).unwrap()),
-        "hankel" => mm(l::hankel(&convert_vector(&col()), row().as_deref()).unwrap()),
-        "circulant" => mm(l::circulant(&convert_vector(&col())).unwrap()),
-        "hilbert" => mm(parsed_call!(l::hilbert; c[2]).unwrap()),
-        "invhilbert" => mm(parsed_call!(l::invhilbert; c[2]).unwrap()),
-        "pascal" => mm(l::pascal(c[2].parse().unwrap(), kind(c[3])).unwrap()),
-        "invpascal" => mm(l::invpascal(c[2].parse().unwrap(), kind(c[3])).unwrap()),
-        "hadamard" => mm(parsed_call!(l::hadamard; c[2]).unwrap()),
-        "helmert" => mm(l::helmert(c[2].parse().unwrap(), boolean(c[3])).unwrap()),
-        "fiedler" => mm(l::fiedler(&convert_vector(&col())).unwrap()),
-        "companion" => mm(l::companion(&convert_vector(&col())).unwrap()),
-        "fiedler_companion" => mm(l::fiedler_companion(&convert_vector(&col())).unwrap()),
-        "leslie" => mm(l::leslie(&convert_vector(&col()), &convert_vector(&b())).unwrap()),
+        "toeplitz" => {
+            mm(l::structured::toeplitz(&convert_vector(&col()), row().as_deref()).unwrap())
+        }
+        "hankel" => mm(l::structured::hankel(&convert_vector(&col()), row().as_deref()).unwrap()),
+        "circulant" => mm(l::structured::circulant(&convert_vector(&col())).unwrap()),
+        "hilbert" => mm(parsed_call!(l::structured::hilbert; c[2]).unwrap()),
+        "invhilbert" => mm(parsed_call!(l::structured::invhilbert; c[2]).unwrap()),
+        "pascal" => mm(l::structured::pascal(c[2].parse().unwrap(), kind(c[3])).unwrap()),
+        "invpascal" => mm(l::structured::invpascal(c[2].parse().unwrap(), kind(c[3])).unwrap()),
+        "hadamard" => mm(parsed_call!(l::structured::hadamard; c[2]).unwrap()),
+        "helmert" => mm(l::structured::helmert(c[2].parse().unwrap(), boolean(c[3])).unwrap()),
+        "fiedler" => mm(l::structured::fiedler(&convert_vector(&col())).unwrap()),
+        "companion" => mm(l::structured::companion(&convert_vector(&col())).unwrap()),
+        "fiedler_companion" => {
+            mm(l::structured::fiedler_companion(&convert_vector(&col())).unwrap())
+        }
+        "leslie" => {
+            mm(l::structured::leslie(&convert_vector(&col()), &convert_vector(&b())).unwrap())
+        }
         "block_diag" => {
             let blocks: Vec<_> = if c[2].is_empty() {
                 vec![]
@@ -231,7 +237,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 c[2].split('|').map(matrix).collect()
             };
             let blocks: Vec<_> = blocks.iter().map(|a| convert_matrix(a)).collect();
-            mm(l::block_diag(&blocks).unwrap());
+            mm(l::structured::block_diag(&blocks).unwrap());
         }
         "convolution_matrix" => {
             let mode = match c[4] {
@@ -240,19 +246,21 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 "valid" => Mode::Valid,
                 _ => panic!(),
             };
-            mm(
-                l::convolution_matrix(&convert_vector(&col()), c[3].parse().unwrap(), mode)
-                    .unwrap(),
-            );
+            mm(l::structured::convolution_matrix(
+                &convert_vector(&col()),
+                c[3].parse().unwrap(),
+                mode,
+            )
+            .unwrap());
         }
         "dft" => {
             let scale = match c[3] {
-                "none" => l::DftScale::None,
-                "sqrtn" => l::DftScale::SqrtN,
-                "n" => l::DftScale::N,
+                "none" => l::structured::DftScale::None,
+                "sqrtn" => l::structured::DftScale::SqrtN,
+                "n" => l::structured::DftScale::N,
                 _ => panic!(),
             };
-            let f = l::dft(c[2].parse().unwrap(), scale).unwrap();
+            let f = l::structured::dft(c[2].parse().unwrap(), scale).unwrap();
             mm(f.iter().map(|r| r.iter().map(|v| v.re).collect()).collect());
             check_matrix!(
                 &f.iter()
@@ -261,21 +269,21 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 &matrix(e[2]),
             );
         }
-        "diagsvd" => mm(l::diagsvd(
+        "diagsvd" => mm(l::structured::diagsvd(
             &convert_vector(&col()),
             c[3].parse().unwrap(),
             c[4].parse().unwrap(),
         )
         .unwrap()),
-        "solve" => vm(l::solve(&convert_matrix(&a()), &convert_vector(&b())).unwrap()),
-        "inv" => mm(l::inv(&convert_matrix(&a())).unwrap()),
+        "solve" => vm(l::solvers::solve(&convert_matrix(&a()), &convert_vector(&b())).unwrap()),
+        "inv" => mm(l::basic::inv(&convert_matrix(&a())).unwrap()),
         "det" => finite_close!(
-            l::det(&convert_matrix(&a())).unwrap(),
+            l::basic::det(&convert_matrix(&a())).unwrap(),
             e[1].parse().unwrap(),
             3e-11,
             3e-11,
         ),
-        "solve_triangular" => vm(l::solve_triangular(
+        "solve_triangular" => vm(l::solvers::solve_triangular(
             &convert_matrix(&a()),
             &convert_vector(&b()),
             boolean(c[4]),
@@ -283,27 +291,29 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             boolean(c[6]),
         )
         .unwrap()),
-        "solve_toeplitz" => vm(l::solve_toeplitz(
+        "solve_toeplitz" => vm(l::solvers::solve_toeplitz(
             &convert_vector(&col()),
             row().as_deref(),
             &convert_vector(&vector(c[4])),
         )
         .unwrap()),
-        "matmul_toeplitz" => mm(l::matmul_toeplitz(
+        "matmul_toeplitz" => mm(l::structured::matmul_toeplitz(
             &convert_vector(&col()),
             row().as_deref(),
             &convert_matrix(&matrix(c[4])),
         )
         .unwrap()),
-        "solve_circulant" => {
-            vm(l::solve_circulant(&convert_vector(&col()), &convert_vector(&b())).unwrap())
-        }
+        "solve_circulant" => vm(l::solvers::solve_circulant(
+            &convert_vector(&col()),
+            &convert_vector(&b()),
+        )
+        .unwrap()),
         "cholesky" | "cho_factor" => {
             let lower = boolean(c[3]);
             let f = if c[1] == "cholesky" {
-                l::cholesky(&convert_matrix(&a()), lower).unwrap()
+                l::decompositions::cholesky(&convert_matrix(&a()), lower).unwrap()
             } else {
-                let f = l::cho_factor(&convert_matrix(&a()), lower).unwrap();
+                let f = l::decompositions::cho_factor(&convert_matrix(&a()), lower).unwrap();
                 assert_eq!(f.lower, lower);
                 f.factor
             };
@@ -315,20 +325,20 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             };
             check_matrix!(&reconstruction, &selected_symmetric(&a(), lower));
         }
-        "cho_solve" => vm(l::cho_solve(
-            &l::cho_factor(&convert_matrix(&a()), boolean(c[4])).unwrap(),
+        "cho_solve" => vm(l::solvers::cho_solve(
+            &l::decompositions::cho_factor(&convert_matrix(&a()), boolean(c[4])).unwrap(),
             &convert_vector(&b()),
         )
         .unwrap()),
         "lu" => {
-            let f = l::lu(&convert_matrix(&a())).unwrap();
+            let f = l::decompositions::lu(&convert_matrix(&a())).unwrap();
             mm(f.p.clone());
             check_matrix!(&f.l, &matrix(e[2]));
             check_matrix!(&f.u, &matrix(e[3]));
             check_matrix!(&mul(&mul(&f.p, &f.l), &f.u), &a());
         }
         "lu_factor" => {
-            let f = l::lu_factor(&convert_matrix(&a())).unwrap();
+            let f = l::decompositions::lu_factor(&convert_matrix(&a())).unwrap();
             mm(f.packed);
             check_vector!(
                 &f.row_permutation
@@ -338,24 +348,26 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 &vector(e[2]),
             );
         }
-        "lu_solve" => vm(l::lu_solve(
-            &l::lu_factor(&convert_matrix(&a())).unwrap(),
+        "lu_solve" => vm(l::solvers::lu_solve(
+            &l::decompositions::lu_factor(&convert_matrix(&a())).unwrap(),
             &convert_vector(&b()),
             boolean(c[4]),
         )
         .unwrap()),
-        "khatri_rao" => {
-            mm(l::khatri_rao(&convert_matrix(&a()), &convert_matrix(&matrix(c[3]))).unwrap())
-        }
+        "khatri_rao" => mm(l::basic::khatri_rao(
+            &convert_matrix(&a()),
+            &convert_matrix(&matrix(c[3])),
+        )
+        .unwrap()),
         "rq" => {
-            let (r, q) = l::rq(&convert_matrix(&a())).unwrap();
+            let (r, q) = l::decompositions::rq(&convert_matrix(&a())).unwrap();
             mm(projector(&r));
             check_matrix!(&mul(&trans(&q), &q), &matrix(e[2]));
             check_matrix!(&mul(&r, &q), &matrix(e[3]));
             check_matrix!(&mul(&q, &trans(&q)), &identity(q.len()));
         }
         "qr_multiply" => {
-            let (product, r) = l::qr_multiply(
+            let (product, r) = l::decompositions::qr_multiply(
                 &convert_matrix(&a()),
                 &convert_matrix(&matrix(c[3])),
                 boolean(c[4]),
@@ -366,14 +378,14 @@ pub fn run(c: &[&str]) -> Vec<f64> {
         }
         "qr_update" | "qr_insert" | "qr_delete" => {
             let f = match c[1] {
-                "qr_update" => l::qr_update(
+                "qr_update" => l::decompositions::qr_update(
                     &convert_matrix(&a()),
                     &convert_matrix(&matrix(c[3])),
                     &convert_vector(&vector(c[4])),
                     &convert_vector(&vector(c[5])),
                 )
                 .unwrap(),
-                "qr_insert" => l::qr_insert(
+                "qr_insert" => l::decompositions::qr_insert(
                     &convert_matrix(&a()),
                     &convert_matrix(&matrix(c[3])),
                     &convert_matrix(&matrix(c[4])),
@@ -381,7 +393,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                     boolean(c[6]),
                 )
                 .unwrap(),
-                _ => l::qr_delete(
+                _ => l::decompositions::qr_delete(
                     &convert_matrix(&a()),
                     &convert_matrix(&matrix(c[3])),
                     c[4].parse().unwrap(),
@@ -394,18 +406,18 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             check_matrix!(&mul(&trans(&f.q), &f.q), &identity(f.r.len()));
         }
         "qr" => {
-            let f = l::qr(&convert_matrix(&a())).unwrap();
+            let f = l::decompositions::qr(&convert_matrix(&a())).unwrap();
             mm(projector(&f.q));
             check_matrix!(&mul(&trans(&f.r), &f.r), &matrix(e[2]));
             check_matrix!(&mul(&f.q, &f.r), &matrix(e[3]));
             check_matrix!(&mul(&trans(&f.q), &f.q), &identity(f.r.len()));
         }
         "svd" => {
-            let f = l::svd(&convert_matrix(&a())).unwrap();
+            let f = l::decompositions::svd(&convert_matrix(&a())).unwrap();
             mm(projector(&f.u));
             check_vector!(&f.singular_values, &vector(e[2]));
             check_matrix!(&projector(&trans(&f.vh)), &matrix(e[3]));
-            let s = l::diagsvd(
+            let s = l::structured::diagsvd(
                 &convert_vector(&f.singular_values),
                 f.singular_values.len(),
                 f.singular_values.len(),
@@ -413,12 +425,13 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             .unwrap();
             check_matrix!(&mul(&mul(&f.u, &s), &f.vh), &matrix(e[4]));
         }
-        "svdvals" => vm(l::svdvals(&convert_matrix(&a())).unwrap()),
+        "svdvals" => vm(l::decompositions::svdvals(&convert_matrix(&a())).unwrap()),
         "pinv" | "pinvh" => {
             let (p, r) = if c[1] == "pinv" {
-                l::pinv(&convert_matrix(&a()), c[3].parse().unwrap(), optional(c[4])).unwrap()
+                l::basic::pinv(&convert_matrix(&a()), c[3].parse().unwrap(), optional(c[4]))
+                    .unwrap()
             } else {
-                l::pinvh(
+                l::basic::pinvh(
                     &convert_matrix(&a()),
                     c[3].parse().unwrap(),
                     optional(c[4]),
@@ -430,7 +443,8 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             assert_eq!(r, e[2].parse().unwrap());
         }
         "lstsq" => {
-            let r = l::lstsq(&convert_matrix(&a()), &convert_vector(&b()), optional(c[4])).unwrap();
+            let r = l::solvers::lstsq(&convert_matrix(&a()), &convert_vector(&b()), optional(c[4]))
+                .unwrap();
             vm(r.solution);
             check_vector!(&r.residuals, &vector(e[2]));
             assert_eq!(r.rank, e[3].parse().unwrap());
@@ -438,9 +452,9 @@ pub fn run(c: &[&str]) -> Vec<f64> {
         }
         "orth" | "null_space" => {
             let q = if c[1] == "orth" {
-                l::orth(&convert_matrix(&a()), optional(c[3])).unwrap()
+                l::subspaces::orth(&convert_matrix(&a()), optional(c[3])).unwrap()
             } else {
-                l::null_space(&convert_matrix(&a()), optional(c[3])).unwrap()
+                l::subspaces::null_space(&convert_matrix(&a()), optional(c[3])).unwrap()
             };
             mm(projector(&q));
             let k = q[0].len();
@@ -450,7 +464,8 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 if c[1] == "null_space" {
                     let cutoff = optional(c[3])
                         .unwrap_or(f64::EPSILON * a().len().max(q.len()) as f64)
-                        * l::norm(&convert_matrix(&a()), l::MatrixNorm::Spectral).unwrap();
+                        * l::basic::norm(&convert_matrix(&a()), l::basic::MatrixNorm::Spectral)
+                            .unwrap();
                     let residual = mul(&a(), &q);
                     for j in 0..k {
                         let n = residual.iter().fold(0.0_f64, |n, r| n.hypot(r[j]));
@@ -460,7 +475,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             }
         }
         "polar" => {
-            let (u, p) = l::polar(&convert_matrix(&a()), boolean(c[3])).unwrap();
+            let (u, p) = l::decompositions::polar(&convert_matrix(&a()), boolean(c[3])).unwrap();
             mm(if u.len() >= u[0].len() {
                 mul(&trans(&u), &u)
             } else {
@@ -477,32 +492,36 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             );
         }
         "orthogonal_procrustes" => {
-            let (r, s) =
-                l::orthogonal_procrustes(&convert_matrix(&a()), &convert_matrix(&matrix(c[3])))
-                    .unwrap();
+            let (r, s) = l::subspaces::orthogonal_procrustes(
+                &convert_matrix(&a()),
+                &convert_matrix(&matrix(c[3])),
+            )
+            .unwrap();
             mm(r.clone());
             finite_close!(s, e[2].parse().unwrap(), 3e-11, 3e-11);
             check_matrix!(&mul(&trans(&r), &r), &identity(r.len()));
         }
         "eigh" => eigen(
-            l::eigh(&convert_matrix(&a()), boolean(c[3])).unwrap(),
+            l::eigen::eigh(&convert_matrix(&a()), boolean(c[3])).unwrap(),
             Some(&selected_symmetric(&a(), boolean(c[3]))),
             &e,
         ),
-        "eigvalsh" => vm(l::eigvalsh(&convert_matrix(&a()), boolean(c[3])).unwrap()),
+        "eigvalsh" => vm(l::eigen::eigvalsh(&convert_matrix(&a()), boolean(c[3])).unwrap()),
         "eigh_tridiagonal" => eigen(
-            l::eigh_tridiagonal(&convert_vector(&col()), &convert_vector(&b())).unwrap(),
+            l::eigen::eigh_tridiagonal(&convert_vector(&col()), &convert_vector(&b())).unwrap(),
             None,
             &e,
         ),
-        "eigvalsh_tridiagonal" => {
-            vm(l::eigvalsh_tridiagonal(&convert_vector(&col()), &convert_vector(&b())).unwrap())
-        }
+        "eigvalsh_tridiagonal" => vm(l::eigen::eigvalsh_tridiagonal(
+            &convert_vector(&col()),
+            &convert_vector(&b()),
+        )
+        .unwrap()),
         "hessenberg" | "schur" => {
             let (t, z) = if c[1] == "hessenberg" {
-                l::hessenberg(&convert_matrix(&a())).unwrap()
+                l::decompositions::hessenberg(&convert_matrix(&a())).unwrap()
             } else {
-                l::schur(&convert_matrix(&a())).unwrap()
+                l::decompositions::schur(&convert_matrix(&a())).unwrap()
             };
             mm(mul(&mul(&z, &t), &trans(&z)));
             check_matrix!(&mul(&trans(&z), &z), &matrix(e[2]));
@@ -518,7 +537,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             }
         }
         "eig" => {
-            let f = l::eig(&convert_matrix(&a())).unwrap();
+            let f = l::eigen::eig(&convert_matrix(&a())).unwrap();
             let mut order: Vec<usize> = (0..f.eigenvalues.len()).collect();
             order.sort_by(|&i, &j| {
                 f.eigenvalues[i]
@@ -539,7 +558,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 .collect();
             check_matrix!(&norm2, &matrix(e[3]));
             let av = cmul(&cfrom(&a()), &f.eigenvectors);
-            let vd: l::ComplexMatrix = f
+            let vd: l::eigen::ComplexMatrix = f
                 .eigenvectors
                 .iter()
                 .map(|r| {
@@ -553,7 +572,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
         }
         "ldl" => {
             let lower = boolean(c[3]);
-            let f = l::ldl(&convert_matrix(&a()), lower).unwrap();
+            let f = l::decompositions::ldl(&convert_matrix(&a()), lower).unwrap();
             mm(mul(&mul(&f.outer, &f.d), &trans(&f.outer)));
             for i in 0..f.outer.len() {
                 finite_close!(f.outer[f.permutation[i]][i], 1., 3e-11, 3e-11);
@@ -566,13 +585,14 @@ pub fn run(c: &[&str]) -> Vec<f64> {
         }
         "sqrtm" | "logm" | "signm" | "fractional_matrix_power" | "funm" => {
             let f = match c[1] {
-                "sqrtm" => l::sqrtm(&convert_matrix(&a())),
-                "logm" => l::logm(&convert_matrix(&a())),
-                "signm" => l::signm(&convert_matrix(&a())),
-                "fractional_matrix_power" => {
-                    l::fractional_matrix_power(&convert_matrix(&a()), c[3].parse().unwrap())
-                }
-                _ => l::funm(&convert_matrix(&a()), |z| {
+                "sqrtm" => l::matrix_functions::sqrtm(&convert_matrix(&a())),
+                "logm" => l::matrix_functions::logm(&convert_matrix(&a())),
+                "signm" => l::matrix_functions::signm(&convert_matrix(&a())),
+                "fractional_matrix_power" => l::matrix_functions::fractional_matrix_power(
+                    &convert_matrix(&a()),
+                    c[3].parse().unwrap(),
+                ),
+                _ => l::matrix_functions::funm(&convert_matrix(&a()), |z| {
                     if c[3] == "exp" {
                         sci::complex::exp(z)
                     } else {
@@ -592,7 +612,9 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             }
         }
         "rsf2csf" => {
-            let (t, z) = l::rsf2csf(&convert_matrix(&a()), &convert_matrix(&matrix(c[3]))).unwrap();
+            let (t, z) =
+                l::decompositions::rsf2csf(&convert_matrix(&a()), &convert_matrix(&matrix(c[3])))
+                    .unwrap();
             let f = cmul(&cmul(&z, &t), &cadjoint(&z));
             let (re, im) = complex_matrix(&f);
             mm(re);
@@ -613,7 +635,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 .zip(&w[1])
                 .map(|(&re, &im)| sci::complex::Complex { re, im })
                 .collect();
-            let v: l::ComplexMatrix = vv[0]
+            let v: l::eigen::ComplexMatrix = vv[0]
                 .iter()
                 .zip(&vv[1])
                 .map(|(r, s)| {
@@ -623,15 +645,15 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                         .collect()
                 })
                 .collect();
-            let (d, v) = l::cdf2rdf(&w, &v).unwrap();
+            let (d, v) = l::eigen::cdf2rdf(&w, &v).unwrap();
             mm(d);
             check_matrix!(&v, &matrix(e[2]));
         }
         "qz" | "ordqz" => {
             let f = if c[1] == "qz" {
-                l::qz(&convert_matrix(&a()), &convert_matrix(&matrix(c[3])))
+                l::eigen::qz(&convert_matrix(&a()), &convert_matrix(&matrix(c[3])))
             } else {
-                l::ordqz(
+                l::eigen::ordqz(
                     &convert_matrix(&a()),
                     &convert_matrix(&matrix(c[3])),
                     |a, b| {
@@ -680,14 +702,14 @@ pub fn run(c: &[&str]) -> Vec<f64> {
         }
         "solve_continuous_are" | "solve_discrete_are" => {
             let f = if c[1] == "solve_continuous_are" {
-                l::solve_continuous_are(
+                l::solvers::solve_continuous_are(
                     &convert_matrix(&a()),
                     &convert_matrix(&matrix(c[3])),
                     &convert_matrix(&matrix(c[4])),
                     &convert_matrix(&matrix(c[5])),
                 )
             } else {
-                l::solve_discrete_are(
+                l::solvers::solve_discrete_are(
                     &convert_matrix(&a()),
                     &convert_matrix(&matrix(c[3])),
                     &convert_matrix(&matrix(c[4])),
@@ -698,14 +720,21 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             mm(f);
         }
         "matrix_balance" => {
-            let (b, t) =
-                l::matrix_balance(&convert_matrix(&a()), boolean(c[3]), boolean(c[4])).unwrap();
-            mm(mul(&mul(&t, &b), &l::inv(&convert_matrix(&t)).unwrap()));
-            eigenvalues(l::eigvals(&convert_matrix(&b)).unwrap(), e[2], e[3]);
+            let (b, t) = l::decompositions::matrix_balance(
+                &convert_matrix(&a()),
+                boolean(c[3]),
+                boolean(c[4]),
+            )
+            .unwrap();
+            mm(mul(
+                &mul(&t, &b),
+                &l::basic::inv(&convert_matrix(&t)).unwrap(),
+            ));
+            eigenvalues(l::eigen::eigvals(&convert_matrix(&b)).unwrap(), e[2], e[3]);
         }
         "clarkson_woodruff_transform" => {
             let buckets: Vec<_> = vector(c[4]).iter().map(|&i| i as usize).collect();
-            mm(l::clarkson_woodruff_transform(
+            mm(l::subspaces::clarkson_woodruff_transform(
                 &convert_matrix(&a()),
                 c[3].parse().unwrap(),
                 &buckets,
@@ -718,7 +747,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 c[3].parse::<usize>().unwrap(),
                 c[4].parse::<usize>().unwrap(),
             );
-            let f = l::cossin(&convert_matrix(&a()), p, q).unwrap();
+            let f = l::decompositions::cossin(&convert_matrix(&a()), p, q).unwrap();
             vm(f.theta);
             // Each central block is a permuted diagonal of cosines,
             // sines, or identities, rather than an arbitrary factor.
@@ -746,39 +775,6 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                 }
             }
         }
-        "find_best_blas_type" => {
-            let arrays: Vec<_> = if c[2].is_empty() {
-                vec![]
-            } else {
-                c[2].split('|').map(matrix).collect()
-            };
-            let arrays: Vec<_> = arrays.iter().map(|a| convert_matrix(a)).collect();
-            let t = l::find_best_blas_type(&arrays).unwrap();
-            assert_eq!(t.prefix.to_string(), e[1].to_string());
-            emit(t.dtype.to_string());
-            assert_eq!(t.prefer_fortran, boolean(e[3]));
-        }
-        "get_blas_funcs" => match l::get_blas_funcs(&[c[2]]).unwrap()[0] {
-            l::BlasFunction::Dot(f) => finite_close!(
-                f(&vector(c[3]), &vector(c[4])).unwrap(),
-                e[1].parse().unwrap(),
-                3e-11,
-                3e-11,
-            ),
-            l::BlasFunction::Nrm2(f) => finite_close!(
-                f(&vector(c[3])).unwrap(),
-                e[1].parse().unwrap(),
-                3e-11,
-                3e-11,
-            ),
-            l::BlasFunction::Gemv(f) => vm(f(&matrix(c[3]), &vector(c[4])).unwrap()),
-            l::BlasFunction::Gemm(f) => mm(f(&matrix(c[3]), &matrix(c[4])).unwrap()),
-        },
-        "get_lapack_funcs" => match l::get_lapack_funcs(&[c[2]]).unwrap()[0] {
-            l::LapackFunction::Gesv(f) => vm(f(&matrix(c[3]), &vector(c[4])).unwrap()),
-            l::LapackFunction::Getrf(f) => mm(f(&matrix(c[3])).unwrap().packed),
-            _ => panic!("unsupported fixture"),
-        },
         "interpolative.estimate_rank" => assert_eq!(
             l::interpolative::estimate_rank(&convert_matrix(&a()), c[3].parse().unwrap()).unwrap(),
             e[1].parse::<usize>().unwrap()
@@ -836,7 +832,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             if f.singular_values.is_empty() {
                 mm(vec![vec![0.; a()[0].len()]; a().len()]);
             } else {
-                let d = l::diagsvd(
+                let d = l::structured::diagsvd(
                     &convert_vector(&f.singular_values),
                     f.singular_values.len(),
                     f.singular_values.len(),
@@ -873,7 +869,7 @@ pub fn run(c: &[&str]) -> Vec<f64> {
                     &convert_matrix(&projection),
                 )
                 .unwrap();
-                let d = l::diagsvd(
+                let d = l::structured::diagsvd(
                     &convert_vector(&f.singular_values),
                     f.singular_values.len(),
                     f.singular_values.len(),
@@ -891,105 +887,116 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             }
         }
         "eigvals" => {
-            let mut w = l::eigvals(&convert_matrix(&a())).unwrap();
+            let mut w = l::eigen::eigvals(&convert_matrix(&a())).unwrap();
             w.sort_by(|x, y| x.re.total_cmp(&y.re).then(x.im.total_cmp(&y.im)));
             vm(w.iter().map(|z| z.re).collect());
             check_vector!(&w.iter().map(|z| z.im).collect::<Vec<_>>(), &vector(e[2]));
         }
         "norm" => {
             let order = match c[3] {
-                "fro" => l::MatrixNorm::Frobenius,
-                "1" => l::MatrixNorm::One,
-                "-1" => l::MatrixNorm::NegativeOne,
-                "inf" => l::MatrixNorm::Infinity,
-                "-inf" => l::MatrixNorm::NegativeInfinity,
-                "2" => l::MatrixNorm::Spectral,
-                "-2" => l::MatrixNorm::SmallestSingular,
-                "nuc" => l::MatrixNorm::Nuclear,
+                "fro" => l::basic::MatrixNorm::Frobenius,
+                "1" => l::basic::MatrixNorm::One,
+                "-1" => l::basic::MatrixNorm::NegativeOne,
+                "inf" => l::basic::MatrixNorm::Infinity,
+                "-inf" => l::basic::MatrixNorm::NegativeInfinity,
+                "2" => l::basic::MatrixNorm::Spectral,
+                "-2" => l::basic::MatrixNorm::SmallestSingular,
+                "nuc" => l::basic::MatrixNorm::Nuclear,
                 _ => panic!(),
             };
             finite_close!(
-                l::norm(&convert_matrix(&a()), order).unwrap(),
+                l::basic::norm(&convert_matrix(&a()), order).unwrap(),
                 e[1].parse().unwrap(),
                 3e-11,
                 3e-11,
             );
         }
-        "solve_banded" => vm(l::solve_banded(
+        "solve_banded" => vm(l::solvers::solve_banded(
             c[2].parse().unwrap(),
             c[3].parse().unwrap(),
             &convert_matrix(&matrix(c[4])),
             &convert_vector(&vector(c[5])),
         )
         .unwrap()),
-        "solveh_banded" => {
-            vm(
-                l::solveh_banded(&convert_matrix(&a()), &convert_vector(&b()), boolean(c[4]))
-                    .unwrap(),
-            )
+        "solveh_banded" => vm(l::solvers::solveh_banded(
+            &convert_matrix(&a()),
+            &convert_vector(&b()),
+            boolean(c[4]),
+        )
+        .unwrap()),
+        "cholesky_banded" => {
+            mm(l::decompositions::cholesky_banded(&convert_matrix(&a()), boolean(c[3])).unwrap())
         }
-        "cholesky_banded" => mm(l::cholesky_banded(&convert_matrix(&a()), boolean(c[3])).unwrap()),
-        "cho_solve_banded" => vm(l::cho_solve_banded(
-            &convert_matrix(&l::cholesky_banded(&convert_matrix(&a()), boolean(c[4])).unwrap()),
+        "cho_solve_banded" => vm(l::solvers::cho_solve_banded(
+            &convert_matrix(
+                &l::decompositions::cholesky_banded(&convert_matrix(&a()), boolean(c[4])).unwrap(),
+            ),
             &convert_vector(&b()),
             boolean(c[4]),
         )
         .unwrap()),
         "eig_banded" => eigen(
-            l::eig_banded(&convert_matrix(&a()), boolean(c[3])).unwrap(),
+            l::eigen::eig_banded(&convert_matrix(&a()), boolean(c[3])).unwrap(),
             None,
             &e,
         ),
-        "eigvals_banded" => vm(l::eigvals_banded(&convert_matrix(&a()), boolean(c[3])).unwrap()),
-        "subspace_angles" => {
-            vm(l::subspace_angles(&convert_matrix(&a()), &convert_matrix(&matrix(c[3]))).unwrap())
+        "eigvals_banded" => {
+            vm(l::eigen::eigvals_banded(&convert_matrix(&a()), boolean(c[3])).unwrap())
         }
-        "expm" => mm(l::expm(&convert_matrix(&a())).unwrap()),
-        "sinm" => mm(l::sinm(&convert_matrix(&a())).unwrap()),
-        "cosm" => mm(l::cosm(&convert_matrix(&a())).unwrap()),
-        "tanm" => mm(l::tanm(&convert_matrix(&a())).unwrap()),
-        "sinhm" => mm(l::sinhm(&convert_matrix(&a())).unwrap()),
-        "coshm" => mm(l::coshm(&convert_matrix(&a())).unwrap()),
-        "tanhm" => mm(l::tanhm(&convert_matrix(&a())).unwrap()),
+        "subspace_angles" => vm(l::subspaces::subspace_angles(
+            &convert_matrix(&a()),
+            &convert_matrix(&matrix(c[3])),
+        )
+        .unwrap()),
+        "expm" => mm(l::matrix_functions::expm(&convert_matrix(&a())).unwrap()),
+        "sinm" => mm(l::matrix_functions::sinm(&convert_matrix(&a())).unwrap()),
+        "cosm" => mm(l::matrix_functions::cosm(&convert_matrix(&a())).unwrap()),
+        "tanm" => mm(l::matrix_functions::tanm(&convert_matrix(&a())).unwrap()),
+        "sinhm" => mm(l::matrix_functions::sinhm(&convert_matrix(&a())).unwrap()),
+        "coshm" => mm(l::matrix_functions::coshm(&convert_matrix(&a())).unwrap()),
+        "tanhm" => mm(l::matrix_functions::tanhm(&convert_matrix(&a())).unwrap()),
         "expm_frechet" => {
-            let (exp, derivative) =
-                l::expm_frechet(&convert_matrix(&a()), &convert_matrix(&matrix(c[3]))).unwrap();
+            let (exp, derivative) = l::matrix_functions::expm_frechet(
+                &convert_matrix(&a()),
+                &convert_matrix(&matrix(c[3])),
+            )
+            .unwrap();
             mm(exp);
             check_matrix!(&derivative, &matrix(e[2]));
         }
         "expm_cond" => finite_close!(
-            l::expm_cond(&convert_matrix(&a())).unwrap(),
+            l::matrix_functions::expm_cond(&convert_matrix(&a())).unwrap(),
             e[1].parse().unwrap(),
             3e-11,
             3e-11,
         ),
-        "solve_sylvester" => mm(l::solve_sylvester(
+        "solve_sylvester" => mm(l::solvers::solve_sylvester(
             &convert_matrix(&a()),
             &convert_matrix(&matrix(c[3])),
             &convert_matrix(&matrix(c[4])),
         )
         .unwrap()),
-        "solve_continuous_lyapunov" => mm(l::solve_continuous_lyapunov(
+        "solve_continuous_lyapunov" => mm(l::solvers::solve_continuous_lyapunov(
             &convert_matrix(&a()),
             &convert_matrix(&matrix(c[3])),
         )
         .unwrap()),
-        "solve_lyapunov" => mm(l::solve_lyapunov(&a(), &matrix(c[3])).unwrap()),
-        "solve_discrete_lyapunov" => mm(l::solve_discrete_lyapunov(
+        "solve_lyapunov" => mm(l::solvers::solve_continuous_lyapunov(&a(), &matrix(c[3])).unwrap()),
+        "solve_discrete_lyapunov" => mm(l::solvers::solve_discrete_lyapunov(
             &convert_matrix(&a()),
             &convert_matrix(&matrix(c[3])),
         )
         .unwrap()),
         "bandwidth" => {
-            let (lo, hi) = l::bandwidth(&convert_matrix(&a())).unwrap();
+            let (lo, hi) = l::basic::bandwidth(&convert_matrix(&a())).unwrap();
             assert_eq!((lo, hi), (e[1].parse().unwrap(), e[2].parse().unwrap()));
         }
         "issymmetric" => assert_eq!(
-            l::issymmetric(&convert_matrix(&a()), optional(c[3]), optional(c[4])).unwrap(),
+            l::basic::issymmetric(&convert_matrix(&a()), optional(c[3]), optional(c[4])).unwrap(),
             boolean(e[1])
         ),
         "ishermitian" => assert_eq!(
-            l::ishermitian(&a(), optional(c[3]), optional(c[4])).unwrap(),
+            l::basic::ishermitian(&a(), optional(c[3]), optional(c[4])).unwrap(),
             boolean(e[1])
         ),
         _ => panic!("missing dispatcher {}", c[1]),

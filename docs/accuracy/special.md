@@ -5,7 +5,7 @@
 Measured binary64 (`f64`) results using **Sci-special as the reference**.
 Each library is compared with Sci on the same inputs. These differences measure
 agreement with Sci; independent accuracy references remain in the raw CSVs. This page
-covers 728841 cases and 364 public API names;
+covers 811236 cases and 405 public API names;
 coverage is limited to the operations and inputs below.
 
 ## Agreement with Sci
@@ -41,6 +41,9 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | `bernoulli` | 2001 | 7760.6 / 691.42 | — | — | — |
 | `berp` | 2001 | 0.0 / 0.0 | — | — | — |
 | `berp_zeros` | 2001 | 0.0 / 0.0 | — | — | — |
+| `bessel.iv_ratio` | 2008 | — | — | — | — |
+| `bessel.iv_ratio_c` | 2008 | — | — | — | — |
+| `bessel.iv_ratioinv` | 2008 | — | — | — | — |
 | `besselpoly` | 2001 | 0.0 / 0.0 | — | — | — |
 | `beta` | 2001 | 5.9302 / 1.5594 | 8.4711 / 2.2767 | 22.06 / 7.0893 | — |
 | `betainc` | 2001 | 7.6968 / 2.2647 | 6.1639 / 1.334 | 16.414 / 6.0764 | — |
@@ -72,6 +75,40 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | `chndtrinc` | 2001 | 7.9331 / 1.8815 | — | — | — |
 | `chndtrix` | 2001 | 4.7771 / 1.2404 | — | — | — |
 | `comb` | 2001 | 0.0 / 0.0 | — | — | — |
+| `combinatorics.normalized_gen_harmonic` | 2008 | — | — | — | — |
+| `complex.airy` | 2011 | — | — | — | — |
+| `complex.airye` | 2013 | — | — | — | — |
+| `complex.dawsn` | 2011 | — | — | — | — |
+| `complex.digamma` | 2009 | — | — | — | — |
+| `complex.erf` | 2011 | — | — | — | — |
+| `complex.erfc` | 2011 | — | — | — | — |
+| `complex.erfcx` | 2011 | — | — | — | — |
+| `complex.erfi` | 2011 | — | — | — | — |
+| `complex.exp1` | 2011 | — | — | — | — |
+| `complex.expi` | 2011 | — | — | — | — |
+| `complex.fresnel` | 2011 | — | — | — | — |
+| `complex.gamma` | 2009 | — | — | — | — |
+| `complex.hankel1` | 2009 | — | — | — | — |
+| `complex.hankel1e` | 2009 | — | — | — | — |
+| `complex.hankel2` | 2009 | — | — | — | — |
+| `complex.hankel2e` | 2009 | — | — | — | — |
+| `complex.hurwitz_zeta` | 2008 | — | — | — | — |
+| `complex.iv` | 2009 | — | — | — | — |
+| `complex.ive` | 2009 | — | — | — | — |
+| `complex.jv` | 2009 | — | — | — | — |
+| `complex.jve` | 2009 | — | — | — | — |
+| `complex.kv` | 2009 | — | — | — | — |
+| `complex.kve` | 2009 | — | — | — | — |
+| `complex.lambertw` | 2009 | — | — | — | — |
+| `complex.loggamma` | 2011 | — | — | — | — |
+| `complex.rgamma` | 2011 | — | — | — | — |
+| `complex.spence` | 2011 | — | — | — | — |
+| `complex.wofz` | 2011 | — | — | — | — |
+| `complex.xlog1py` | 2008 | — | — | — | — |
+| `complex.xlogy` | 2008 | — | — | — | — |
+| `complex.yv` | 2009 | — | — | — | — |
+| `complex.yve` | 2009 | — | — | — | — |
+| `complex.zeta` | 2008 | — | — | — | — |
 | `cosdg` | 2001 | 1.155 / 0.25795 | — | — | — |
 | `cosm1` | 2001 | 1.8215 / 0.53599 | — | — | — |
 | `cotdg` | 2001 | 2.8884 / 0.69191 | — | — | — |
@@ -81,6 +118,7 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | `el1` | 2001 | 2.5548 / 0.53071 | — | — | — |
 | `el2` | 2001 | 2.1592 / 0.49421 | — | — | — |
 | `el3` | 2001 | 1.6937 / 0.5146 | — | — | — |
+| `elementary.log1pmx` | 2010 | — | — | — | — |
 | `ellip_harm` | 2037 | 1.8991 / 0.029334 | — | — | — |
 | `ellip_harm_2` | 2037 | 56527.0 / 729.09 | — | — | — |
 | `ellip_normal` | 2037 | 2669.1 / 5.9574 | — | — | — |
@@ -146,6 +184,8 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | `fresnelc_zeros` | 2001 | 1.977 / 0.2654 | — | — | — |
 | `fresnels_zeros` | 2001 | 1.8671 / 0.17796 | — | — | — |
 | `gamma` | 2087 | 4.1771 / 0.84064 | 3.6888 / 0.65275 | 17.917 / 1.0401; failed 1/2087 | 2.9747 / 0.54139 |
+| `gamma.digammainv` | 2010 | — | — | — | — |
+| `gamma.gamma_ratio` | 2010 | — | — | — | — |
 | `gammainc` | 2001 | 0.0 / 0.0 | 4.1696 / 0.9599 | 3.3464 / 2.1961 | — |
 | `gammaincc` | 2001 | 0.0 / 0.0 | 17.937 / 4.34 | 23.662 / 5.3599 | — |
 | `gammainccinv` | 2001 | 0.0 / 0.0 | — | — | — |
@@ -180,6 +220,7 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | `i0e` | 2001 | 0.0 / 0.0 | — | — | — |
 | `i1` | 2001 | 0.0 / 0.0 | — | — | — |
 | `i1e` | 2001 | 0.0 / 0.0 | — | — | — |
+| `integrals.scaled_exp1` | 2010 | — | — | — | — |
 | `inv_boxcox` | 2001 | 0.0 / 0.0 | — | — | — |
 | `inv_boxcox1p` | 2001 | 0.0 / 0.0 | — | — | — |
 | `it2i0k0` | 2001 | 0.0 / 0.0 | — | — | — |
@@ -394,7 +435,7 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 
 All public special-function implementations have typed registrations or an explicit policy recipe. Original erf/gamma recipes use high-precision mpmath; added recipes use independent public SciPy calls, identities or quadrature. Polynomial constructors return descending coefficients; sequence and tuple ordering follows the pinned fixtures. Boost.Math/GSL are called where the bridge has matching scalar APIs, converting elliptic parameter m to modulus sqrt(m).
 
-Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv`; raw outputs, high-precision
+Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.
 NaN, infinity, signed-zero contracts, invalid domains and work-limit enforcement
 are outside this finite-input accuracy sample. Existing Sci API tests cover
@@ -405,11 +446,15 @@ variants are not counted as independent implementations.
 
 ## Reproduction
 
-- Sci source: `b52c598535920279dc0aadb14a9085b8545ba4c1` (numerical sources clean: true).
-- Testing source SHA-256: `a1dbbae1205dbebed9bfb371b138d8f9a215cfec01568c6e3de356becdf58cd9`.
+- Sci source: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998` (numerical sources clean: true).
+- Testing source SHA-256: `a9a4095493112b6b04c27596db78ecaef74ca844a93c23be4da6563ce7cbfcbe`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
-- rustc 1.98.1 (48a229cea 2026-09-01); Python 3.13.3; Cargo dev profile, opt-level 0.
+- rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.
 - Linux-7.2.11-arch1-1-x86_64-with-glibc2.44; AMD Ryzen 5 4600H with Radeon Graphics.
 
 See the [shared metric, provenance and reproduction instructions](README.md).
+
+Sci-only refresh: independent references and other library outputs are retained from the saved snapshot. Their original environment is recorded in `results/environment.json` under `reference_environment`.
+
+Sci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.

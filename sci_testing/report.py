@@ -20,7 +20,8 @@ import warnings
 from .native_compare import NativeComparisons
 
 from .generate_cases import build_cases
-from .case_csv import (case_files, disk_files, files_digest, measurement_files,
+from .case_csv import (case_files, case_paths, case_directory_digest, csv_text,
+                      disk_files, files_digest, measurement_files,
                       read_measurements, write_files, MeasurementStore, directory_digest, iter_case_files, write_cases,
                       csv_paths, write_measurements)
 
@@ -35,7 +36,7 @@ from scipy import linalg, optimize, signal, spatial, special, stats
 from . import ROOT, SCI
 EPS = mp.mpf(2) ** -52
 TINY = mp.mpf(2) ** -1022
-MODULES = ('cluster complex constants differentiate fft filter integrate interpolate '
+MODULES = ('cluster complex constants core differentiate fft filter integrate interpolate io '
            'linalg optimize signal sparse spatial special stats').split()
 BOOST = 'https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/'
 NOTES = {
@@ -43,11 +44,13 @@ NOTES = {
     'cluster':'Vector quantization uses Euclidean distances and first-minimum ties; whitening divides by population standard deviations. Hierarchy fixtures also check counts, leaf ordering and partitions. K-means receives an explicit initial codebook. Returned discrete indices and tree metadata are recorded alongside distances.',
     'complex':'Complex outputs flatten real then imaginary components. Functions use principal branches; powers preserve their explicit real, complex or integer exponent conventions. The original exp/sqrt recipes use high-precision mpmath references; additional complex comparisons use the Python standard library as a binary64 reference. Signed-zero and nonfinite contracts remain in the Sci API tests.',
     'constants':'Vacuum conversions use metres and hertz and the exact SI value c = 299792458 m/s. Temperature recipes convert Celsius to Fahrenheit. CODATA values, uncertainties, unit strings and searches use the pinned SciPy constants table. Text metadata is encoded as UTF-8 lengths and bytes; Sci dtype f64 corresponds to NumPy float64.',
+    'core':'CSR constructors, validators and conversion routines are exercised against independent SciPy sparse and explicit storage invariants. Canonical pointer arrays, index ordering, zeros and rejection behavior are retained in the per-case measurements.',
     'differentiate':'Callbacks are supplied explicitly: original sin and quadratic recipes, a quadratic Hessian and a two-output Jacobian. Fixed-step Sci stencils and adaptive SciPy differences have different work budgets. Analytic identities supply the callback references; raw inputs retain the selected steps and points.',
     'fft':'Transforms use unnormalized forward and inverse-divided-by-length conventions. Real transforms, multidimensional shapes, transform types, FFTLog and periodic operators follow the pinned fixture conventions. FFTLog uses SciPy fft; distinct periodic operators use its legacy fftpack implementation. Real and imaginary components are interleaved, including exact imaginary zeros.',
     'filter':'Gaussian outputs place means before row-major covariance; update and particle diagnostics follow the pinned filter fixture ordering. References use independent matrix identities, supplied deterministic particle draws and nonlinear callbacks. Original linear Kalman comparisons additionally call FilterPy.',
     'integrate':'Discrete-rule references integrate the supplied binary64 samples, excluding continuous sampling error. The dense added rules use dx = 0.25 and zero initial cumulative integrals. Newton-Cotes records weights followed by its error coefficient. Fixed Gaussian quadrature uses order 16 on exp(x), with analytic references.',
     'interpolate':'Original barycentric/Krogh recipes sample an exactly represented quartic. Added fitting and spline recipes compare evaluation, knots, coefficients and degree in the established fixture order. Queries, boundary modes, repeated knots and work sizes remain explicit in the CSV inputs. Equivalent spline representations can differ at roundoff scale.',
+    'io':'Matrix Market, WAV and MATLAB comparisons use deterministic format fixtures and independent library references. Structured outputs follow the documented fixture ordering; raw input cases retain the shapes and format parameters.',
     'linalg':'Nonunique decompositions are compared through ordered eigenvalues, projectors and reconstructions, retaining independent structural invariants from the Sci fixture dispatcher. Interpolative decomposition compares spectral residual and rank; its SVD compares reconstruction and singular values. Type metadata uses the Sci f64 spelling. Dense sample sizes and constructor orders stay bounded.',
     'optimize':'Objective helpers use their pinned Rosenbrock and finite-difference conventions. Minimizers use 3+(x-1)^2+(y+2)^2, a 512-iteration budget and tolerance 1e-8; only converged points and costs are compared. Iteration trajectories are not compared. Analytic minimizers supply the reference; SciPy runs Nelder-Mead or BFGS separately.',
     'signal':'The pinned signal fixture adapters cover waveform, filtering, design, spectral, window, peak, spline, convolution and system functions through the public Sci facade. Output tuples flatten in the documented fixture order. Parameters, modes, shapes and normalization are retained in each function CSV; original real convolution/correlation also call NumPy.',
@@ -64,12 +67,22 @@ def command(*args, cwd=ROOT):
 
 def binary64_reference(case):
     a=case['args']
-    return any(key in a for key in ['p0','p','arguments','raw']) or bool(a.get('explicit'))
+    return any(key in a for key in ['p0','p','arguments','raw']) or bool(
+        a.get('explicit') or a.get('io_case') or a.get('structural03_case'))
 
 
 def high_precision(case):
     """References depend on mathematical definitions, never Sci or its backends."""
     api, a = case['api'], case['args']
+    if a.get('special03_case'):
+        from .special03_cases import reference
+        return reference(case)
+    if a.get('special_complex03_case'):
+        from .special_complex03_cases import reference
+        return reference(case)
+    if a.get('structural03_case'):
+        from .structural03_cases import reference
+        return list(map(mp.mpf,reference(case)))
     if binary64_reference(case):
         from .registered_cases import reference
         return list(map(mp.mpf, reference(case)))
@@ -170,7 +183,14 @@ def flatten(value):
 def competitors(case):
     """Public library APIs, or explicitly labelled elementary NumPy expressions."""
     api, a = case['api'], case['args']
-    if 'p0' in a or 'p' in a or 'arguments' in a or 'raw' in a or a.get('explicit'):
+    if a.get('special03_case') or a.get('special_complex03_case'):
+        # High-precision mathematical oracles are stored separately, without
+        # presenting the same formula as an independent competitor library.
+        return {}
+    if a.get('structural03_case'):
+        from .structural03_cases import reference
+        return {'SciPy':{'values':list(map(float,reference(case)))}}
+    if 'p0' in a or 'p' in a or 'arguments' in a or 'raw' in a or a.get('explicit') or a.get('io_case'):
         from .registered_cases import reference, reference_result
         library='stdlib' if api.startswith('complex.') else 'NumPy' if a.get('explicit') and api.startswith('linalg.') else 'SciPy'
         if api in ['special.geterr','special.seterr']:return {}
@@ -287,7 +307,13 @@ def component_error(actual, reference, *, binary64):
 
 def digest_sources():
     names={'.gitmodules','Cargo.toml','Cargo.lock','pyproject.toml','uv.lock','sci-revision.txt','api_inventory.csv','README.md'}
-    names.update(p.relative_to(ROOT).as_posix() for pattern in ['*.py','sci_testing/**/*.py','tests/**/*.py','*.rs','src/*.rs','native/*.cpp','.github/workflows/*.yml','cases/**/*.csv'] for p in ROOT.glob(pattern))
+    # Generated inputs already have their own logical-content digest. Keep the
+    # source fingerprint focused on code and authored fixtures, including gzip.
+    patterns=['*.py','sci_testing/**/*.py','tests/**/*.py','*.rs','src/*.rs',
+              'native/*.cpp','.github/workflows/*.yml',
+              'cases/base/**/*.csv','cases/base/**/*.csv.gz',
+              'cases/recipes/**/*.csv','cases/recipes/**/*.csv.gz']
+    names.update(p.relative_to(ROOT).as_posix() for pattern in patterns for p in ROOT.glob(pattern))
     digest=hashlib.sha256()
     for name in sorted(names):digest.update(name.encode()+b'\0'+(ROOT/name).read_bytes()+b'\0')
     return digest.hexdigest()
@@ -299,12 +325,12 @@ def environment(sci_path):
         np.show_config(); scipy.show_config()
     return dict(sci_commit=command('git','rev-parse','HEAD',cwd=sci_path),
                 sci_source_dirty=bool(command('git','status','--porcelain','--','src','crates','tests','Cargo.toml','Cargo.lock',cwd=sci_path)),
-                testing_sources_sha256=digest_sources(),cases_sha256=directory_digest(ROOT/'cases/generated'),
+                testing_sources_sha256=digest_sources(),cases_sha256=case_directory_digest(ROOT/'cases/generated'),
                 rust=command('rustc','-Vv'),cargo=command('cargo','-V'),
                 python=sys.version.split()[0],numpy=np.__version__,scipy=scipy.__version__,
                 mpmath=mp.__version__,filterpy=filterpy.__version__,platform=platform.platform(),
                 machine=platform.machine(),processor=next((l.split(':',1)[1].strip() for l in Path('/proc/cpuinfo').read_text().splitlines() if l.startswith('model name')),'unknown'),
-                profile='dev; opt-level=0; no custom RUSTFLAGS',reference_decimal_digits=[100,160],
+                profile='dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS',reference_decimal_digits=[100,160],
                 library_config=configs.getvalue())
 
 
@@ -318,7 +344,7 @@ def render(cases, records, meta, output):
             names=[api for api in cases.apis if api.split('.')[0]==module]
             api_count,case_count=cases.module_counts(module)
             groups=((api,cases.function(api)) for api in names)
-            available=set(meta['module_libraries'][module])
+            available=set(meta.get('module_libraries',{}).get(module,[]))
         else:
             selected=[c for c in cases if c['api'].split('.')[0]==module]
             case_count=len(selected);api_count=len({c['api'] for c in selected})
@@ -387,15 +413,15 @@ because Sci failed. A dash means unavailable or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
 
-| Function | Cases | {' | '.join(libraries)} |
-| --- | ---: | {' | '.join('---' for _ in libraries)} |
+| {' | '.join(['Function','Cases',*libraries])} |
+| {' | '.join(['---','---:',*('---' for _ in libraries)])} |
 '''+ '\n'.join(rows)+'\n'+failure_section+f'''
 
 ## Conventions and limitations
 
 {NOTES[module]}
 
-Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv`; raw outputs, high-precision
+Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.
 NaN, infinity, signed-zero contracts, invalid domains and work-limit enforcement
 are outside this finite-input accuracy sample. Existing Sci API tests cover
@@ -410,7 +436,7 @@ variants are not counted as independent implementations.
 - Testing source SHA-256: `{meta['testing_sources_sha256']}`.
 - NumPy {meta['numpy']}; SciPy {meta['scipy']}; FilterPy {meta['filterpy']}; mpmath {meta['mpmath']}.
 - Native comparison versions: {meta.get('native_libraries',{})}.
-- {meta['rust'].splitlines()[0]}; Python {meta['python']}; Cargo dev profile, opt-level 0.
+- {meta['rust'].splitlines()[0]}; Python {meta['python']}; {meta.get('profile','Cargo dev profile')}.
 - {meta['platform']}; {meta['processor']}.
 
 See the [shared metric, provenance and reproduction instructions](README.md).
@@ -421,13 +447,28 @@ See the [shared metric, provenance and reproduction instructions](README.md).
             text+='\nSci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.\n'
         (output/f'{module}.md').write_text(text)
     from .coverage_audit import inventory
-    exports=inventory();canonical=len({row['canonical'] for row in exports})
+    exports=inventory();canonical=len({row['canonical'] for row in exports if row['canonical']})
+    sampled_apis=set(cases.apis) if hasattr(cases,'apis') else {case['api'] for case in cases}
+    new_apis={row['api'] for row in exports if row.get('status')=='new_api_untested'}
+    try:
+        from .special_complex03_cases import APIS as complex_apis
+        new_apis.update(complex_apis)
+    except ImportError:
+        pass  # The optional new special overload provider is not installed.
+    pending_new=len(new_apis-sampled_apis)
+    pending_other=sum(row.get('status')=='untested' and row['api'] not in sampled_apis
+                      and row['api'] not in new_apis for row in exports)
+    unresolved=sum(row.get('status')=='unresolved_legacy' for row in exports)
     index=f"""# Sci library comparisons
 
-Comparisons using each Sci module as the reference for all {canonical} public function implementations in
-all 14 modules. The compiler inventory contains {len(exports)} exported names;
-aliases share implementations. The [coverage audit](../../results/coverage.csv)
-records sample counts, unique inputs, successful comparisons and failures.
+Historical and newly measured comparisons use each Sci module as the reference on
+the same saved inputs. The compiler inventory lists {canonical} mapped canonical
+names across {len(MODULES)} modules and {len(exports)} exported names; these are not
+all independently verified against Sci 0.3. There are {pending_new} currently
+unmeasured new API names, {pending_other} other untested exports and
+{unresolved} unresolved legacy mappings.
+The [coverage audit](../../results/coverage.csv) explicitly marks pending names
+alongside measured sample counts, unique inputs, successes and failures.
 
 Tables list **Function**, **Cases**, then relevant libraries (SciPy, Boost.Math,
 GSL and others). Each library cell is **maximum / mean symmetric relative
@@ -449,13 +490,16 @@ CSV preserves every reference, result, warning and exception.
 
 ## Inputs and references
 
-Each recipe has 1,000 endpoint-inclusive NumPy linspace cases and 1,000 uniform
-random cases using seed `20261020` with an independent stream per API, plus
-preserved boundary profiles. Broad original recipes complement local sweeps
-around valid profiles. Integer-only functions, metadata queries and constrained
-shapes use bounded discrete profiles, so some inputs repeat; the coverage CSV
-reports unique inputs explicitly. Identical deterministic inputs share one
-measured evaluation; all repeated case records remain in the CSV and totals.
+Historical dense recipes and new special-function sweeps use 1,000
+endpoint-inclusive linspace inputs plus 1,000 independently seeded random inputs
+per API (seed `20261020`), with preserved boundary profiles. New structural CSR
+and spectral APIs use 1,000 seeded shape-varied inputs plus edge and rejection
+cases. I/O APIs use independently generated Matrix Market, WAV and MATLAB
+binary fixtures covering formats, data types and rejected inputs, with 8–136
+cases per API. Integer-only functions, metadata queries and constrained shapes
+use bounded discrete profiles, so some inputs repeat; the coverage CSV reports
+unique inputs explicitly. Identical deterministic inputs share one measured
+evaluation; all repeated case records remain in the CSV and totals.
 Error-policy APIs execute every call. These samples do not establish domain-wide
 accuracy bounds. Ordinary Sci API tests retain invalid-input, NaN, infinity,
 signed-zero and work-limit contracts.
@@ -536,26 +580,31 @@ All reports and data belong to this repository; Sci links to them externally.
 ## Snapshot
 
 """
-    index+=f'- Sci commit: `{meta["sci_commit"]}`.\n- Harness source SHA-256: `{meta["testing_sources_sha256"]}`.\n- Input SHA-256: `{meta["cases_sha256"]}`.\n- {len(cases)} cases; {canonical} distinct public functions.\n- Native versions: {meta.get("native_libraries",{})}.\n'
+    index+=f'- Sci commit: `{meta["sci_commit"]}`.\n- Harness source SHA-256: `{meta["testing_sources_sha256"]}`.\n- Input SHA-256: `{meta["cases_sha256"]}`.\n- {len(cases)} saved cases covering {len(sampled_apis)} recipe API names; {canonical} mapped canonical public functions in the inventory.\n- Native versions: {meta.get("native_libraries",{})}.\n'
     if 'reference_environment' in meta:
         index+='\nSci-only refresh: independent references and other library outputs are retained from the saved snapshot. See `reference_environment` in `results/environment.json` for their original provenance.\n'
     if 'sci_measurement_commits' in meta:
         index+='\nPer-function Sci revisions for partial refreshes are recorded under `sci_measurement_commits` in `results/environment.json`.\n'
+    if 'reference_extensions' in meta:
+        index+='\nNew API references were evaluated separately from the historical snapshot. Their provenance is recorded in `reference_extensions` in `results/environment.json`.\n'
     (output/'README.md').write_text(index)
 
 
-def load_snapshot(cases, *, root=None):
+def load_snapshot(cases, *, root=None, cached=False):
     """Require identical inputs and intact measurements before reusing a snapshot."""
     root=ROOT if root is None else root
-    expected_names=set()
-    for name,content in iter_case_files(cases):
-        path=root/'cases/generated'/name
-        expected_names.add(name)
-        if not path.exists() or path.read_text()!=content:raise ValueError('Stale case CSV files; rerun python -m sci_testing.report --full')
-    actual_names={p.relative_to(root/'cases/generated').as_posix() for p in (root/'cases/generated').glob('*/*.csv')}
+    inputs=root/'cases/generated'
+    paths=case_paths(inputs)
+    expected_names={api.rsplit('.',1)[0]+'/'+api.rsplit('.',1)[1]+'.csv' for api in cases.apis} if cached else set()
+    if not cached:
+        for name,content in iter_case_files(cases):
+            expected_names.add(name)
+            if name not in paths or csv_text(paths[name])!=content:
+                raise ValueError('Stale case CSV files; rerun python -m sci_testing.report --full')
+    actual_names=set(paths)
     if actual_names!=expected_names:raise ValueError('Stale case CSV files; rerun python -m sci_testing.report --full')
     meta=json.loads((root/'results/environment.json').read_text())
-    if meta['cases_sha256'] != directory_digest(root/'cases/generated'):
+    if meta['cases_sha256'] != case_directory_digest(inputs):
         raise ValueError('Input digest mismatch; rerun python -m sci_testing.report --full')
     if meta.get('measurements_sha256') != directory_digest(root/'results/measurements'):
         raise ValueError('Raw measurement digest mismatch; rerun python -m sci_testing.report --full')
@@ -570,10 +619,66 @@ def load_snapshot(cases, *, root=None):
     return meta, records
 
 
-def check_generated(cases, output, *, root=None):
+def load_stored_snapshot(*, root=None):
+    """Verify the historical input and measurement snapshot without regeneration."""
+    root=ROOT if root is None else root
+    meta=json.loads((root/'results/environment.json').read_text())
+    inputs=case_paths(root/'cases/generated')
+    if meta['cases_sha256']!=case_directory_digest(root/'cases/generated'):
+        raise ValueError('Input digest mismatch; cannot extend the saved references')
+    if meta.get('measurements_sha256')!=directory_digest(root/'results/measurements'):
+        raise ValueError('Raw measurement digest mismatch; cannot extend the saved references')
+    measured={p.relative_to(root/'results/measurements').as_posix().removesuffix('.gz')
+              for p in csv_paths(root/'results/measurements')}
+    if measured!=set(inputs):
+        raise ValueError('Measurement files differ from saved inputs')
+    return meta,MeasurementStore(root/'results/measurements'),inputs
+
+
+def extend_references(cases, added, executable, destination):
+    """Evaluate only new cases; preserve all older reference strings and results."""
+    native=NativeComparisons() if any(
+        api.startswith(('special.','stats.')) and any(
+            not (case['args'].get('special03_case') or case['args'].get('special_complex03_case'))
+            for case in batch)
+        for api,batch in added.items()) else None
+    libraries={}
+    for api,batch in added.items():
+        print(f'Measuring new inputs: {api}: {len(batch)} cases',flush=True)
+        rust=measure_sci(batch,executable)
+        if [result.get('id') for result in rust]!=[case['id'] for case in batch]:
+            raise ValueError(f'{api}: runner lost, duplicated or reordered cases')
+        module,function=api.rsplit('.',1)
+        updated={}
+        for case,result in zip(batch,rust):
+            if 'values' not in result and 'error' not in result:
+                raise ValueError(f'{case["id"]}: runner returned neither values nor an error')
+            result={k:v for k,v in result.items() if k!='id'}
+            if 'values' in result:result['values']=list(map(float,result['values']))
+            with mp.workdps(100):low=high_precision(case)
+            with mp.workdps(160):
+                high=high_precision(case)
+                scale=max([TINY]+[abs(v) for v in high])
+                if len(low)!=len(high) or any(abs(x-y)>mp.mpf('1e-90')*scale for x,y in zip(low,high)):
+                    raise ValueError(f'Unstable new reference: {case["id"]}')
+                libs={'Sci':result,**competitors(case),**(native.evaluate(case) if native and
+                       not (case['args'].get('special03_case') or
+                            case['args'].get('special_complex03_case')) else {})}
+                for value in libs.values():validate_result(case,value,high)
+                updated[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],
+                                     'libraries':libs}
+                libraries.setdefault(api.split('.')[0],set()).update(libs)
+        complete=cases.function(api)
+        filename=f'{module}/{function}.csv'
+        for path in [destination/filename,destination/(filename+'.gz')]:path.unlink(missing_ok=True)
+        write_measurements(destination,measurement_files(complete,updated))
+    return libraries
+
+
+def check_generated(cases, output, *, root=None, cached=False):
     """Check derived inputs and pages against the source-pinned raw snapshot."""
     root=ROOT if root is None else root
-    meta,records=load_snapshot(cases,root=root)
+    meta,records=load_snapshot(cases,root=root,cached=cached)
     if meta['testing_sources_sha256'] != digest_sources():
         raise ValueError('Testing sources changed; rerun python -m sci_testing.report')
     if 'coverage_sha256' in meta:
@@ -621,21 +726,33 @@ def validate_result(case, result, reference):
 def refresh_sci(cases, records, executable, destination, apis):
     """Replace only Sci evaluations; retain saved oracles and competitor results."""
     from itertools import groupby
+    changed=set()
     for api,iterator in groupby(cases,key=lambda c:c['api']):
         if api not in apis:continue
         batch=list(iterator)
         print(f'Measuring Sci only: {api}: {len(batch)} cases',flush=True)
         rust=measure_sci(batch,executable)
+        if [row.get('id') for row in rust] != [case['id'] for case in batch]:
+            raise ValueError(f'{api}: runner lost, duplicated or reordered cases')
         updated={}
         for case,result in zip(batch,rust):
             saved=records[case['id']]
             if 'Sci' not in saved['libraries']:
                 raise ValueError(f'{case["id"]}: saved Sci measurement missing')
             result={k:v for k,v in result.items() if k!='id'}
+            if 'error' not in result and 'values' not in result:
+                raise ValueError(f'{case["id"]}: runner returned neither values nor an error')
             if 'values' in result:result['values']=list(map(float,result['values']))
             with mp.workdps(160):validate_result(case,result,saved['reference'])
             updated[case['id']]={**saved,'libraries':{**saved['libraries'],'Sci':result}}
-        write_measurements(destination,measurement_files(batch,updated))
+        # The staging tree may share hard links with the saved snapshot. Break
+        # those links before write_measurements opens a file for truncation.
+        files=measurement_files(batch,updated)
+        for name in files:
+            (destination/name).unlink(missing_ok=True)
+            (destination/(name+'.gz')).unlink(missing_ok=True)
+        changed.update(write_measurements(destination,files))
+    return changed
 
 
 def main():
@@ -643,31 +760,80 @@ def main():
     parser.add_argument('--output',type=Path,default=ROOT/'docs/accuracy')
     mode=parser.add_mutually_exclusive_group()
     mode.add_argument('--check',action='store_true',help='validate inputs, raw results and generated pages without writing files')
+    mode.add_argument('--render',action='store_true',help='regenerate coverage and accuracy pages from verified saved measurements, without running Sci or reference libraries')
+    mode.add_argument('--extend',action='store_true',help='measure only new API names and retain every historical independent reference')
     mode.add_argument('--full',action='store_true',help='recompute all Sci, reference and comparison-library results')
     mode.add_argument('--sci-only',action='store_true',help='refresh only Sci outputs (the default)')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
     args=parser.parse_args()
-    if args.module and (args.full or args.check):
+    if args.module and (args.full or args.check or args.render or args.extend):
         parser.error('--module is available only for Sci-only refreshes')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
         raise RuntimeError('Run uv sync --frozen with the pinned library versions')
     if not args.check and any(k.startswith(('RUSTFLAGS','CARGO_ENCODED_RUSTFLAGS','CARGO_PROFILE_')) or k == 'CARGO_BUILD_TARGET' for k in os.environ):
         raise RuntimeError('Unset custom compiler/profile/target overrides for this snapshot')
-    cases=build_cases()
+    cached=False
+    if args.full:
+        cases=build_cases()
+    elif args.extend:
+        from .case_set import historical_cases
+        from .generate_cases import extend_historical_cases
+        previous,records,_=load_stored_snapshot()
+        historic=historical_cases(ROOT/'cases/generated',
+                                  expected_cases_sha256=previous['cases_sha256'],
+                                  measurements_directory=ROOT/'results/measurements',
+                                  expected_measurements_sha256=previous['measurements_sha256'])
+        cases=extend_historical_cases(historic)
+        added=cases.added
+        if not added:raise ValueError('No new public API cases to extend')
+    else:
+        from .case_set import cached_cases, historical_cases
+        from .generate_cases import case_signature
+        cases=cached_cases(ROOT/'cases/generated',case_signature())
+        if cases is None and (ROOT/'results/environment.json').is_file():
+            previous=json.loads((ROOT/'results/environment.json').read_text())
+            cases=historical_cases(ROOT/'cases/generated',
+                                   expected_cases_sha256=previous['cases_sha256'],
+                                   measurements_directory=ROOT/'results/measurements',
+                                   expected_measurements_sha256=previous['measurements_sha256'])
+        cached=cases is not None
+        if cases is None:cases=build_cases()
     if args.check:
-        check_generated(cases,args.output.resolve())
+        check_generated(cases,args.output.resolve(),cached=cached)
+        return
+    if args.render:
+        from .coverage_audit import audit
+        previous,records=load_snapshot(cases,cached=cached)
+        meta=previous.copy()
+        if meta['testing_sources_sha256'] != digest_sources():
+            meta['reference_environment']=meta.get('reference_environment',previous)
+            meta['testing_sources_sha256']=digest_sources()
+        coverage=audit(cases,records)
+        meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
+        with tempfile.TemporaryDirectory(dir=ROOT/'results') as directory:
+            pages=Path(directory)
+            with mp.workdps(160):render(cases,records,meta,pages)
+            (ROOT/'results/coverage.csv').write_text(coverage)
+            (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
+            args.output.resolve().mkdir(parents=True,exist_ok=True)
+            for page in pages.glob('*.md'):
+                page.replace(args.output.resolve()/page.name)
+        print(f'Rendered {len(MODULES)} module pages, {len(cases)} saved cases to {args.output}')
         return
     selected=set(cases.apis)
     if args.module:
         selected=set()
         for module in args.module:
-            matching={api for api in cases.apis if api.startswith(module+'.')}
+            # A full public API name selects just that function; namespace
+            # prefixes retain their existing multi-function selection behavior.
+            matching={api for api in cases.apis if api == module or api.startswith(module+'.')}
             if not matching:parser.error(f'unknown or empty module: {module}')
             selected.update(matching)
-    if not args.full:
-        previous,records=load_snapshot(cases)
-    else:
-        write_cases(ROOT/'cases/generated', cases)
+    if not (args.full or args.extend):
+        previous,records=load_snapshot(cases,cached=cached)
+    elif args.full:
+        from .generate_cases import case_signature
+        write_cases(ROOT/'cases/generated',cases,signature=case_signature())
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
     pinned=(ROOT/'sci-revision.txt').read_text().strip()
@@ -676,9 +842,16 @@ def main():
     meta=environment(SCI)
     if not args.full:
         meta['reference_environment']=previous.get('reference_environment',previous)
-        if args.module:
+        # Append-only reference extensions document independently evaluated
+        # new APIs. A Sci-only refresh must not erase that provenance.
+        if 'reference_extensions' in previous:
+            meta['reference_extensions']=previous['reference_extensions']
+        if args.module or args.extend:
             commits=previous.get('sci_measurement_commits',{api:previous['sci_commit'] for api in cases.apis}).copy()
-            commits.update(dict.fromkeys(selected,meta['sci_commit']))
+            if args.extend:
+                commits={api:commits.get(api,previous['sci_commit']) for api in cases.apis}
+                commits.update(dict.fromkeys(added,meta['sci_commit']))
+            else:commits.update(dict.fromkeys(selected,meta['sci_commit']))
             meta['sci_measurement_commits']=commits
         for key in ['native_libraries','cxx','native_build_flags','module_libraries']:
             meta[key]=previous[key]
@@ -689,22 +862,102 @@ def main():
         meta['native_build_flags']='-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas'
     if meta['sci_source_dirty']: raise RuntimeError('Refusing to measure modified Sci numerical sources')
     subprocess.run(['cargo','build','--locked'],cwd=ROOT,check=True)
-    target=Path(os.environ.get('CARGO_TARGET_DIR',ROOT/'target')).resolve()
+    # Cargo may inherit a workspace target-dir from .cargo/config.toml even
+    # when CARGO_TARGET_DIR is unset. Resolve the actual artifact directory.
+    cargo_metadata=json.loads(subprocess.check_output(
+        ['cargo','metadata','--format-version','1','--no-deps'],cwd=ROOT,text=True))
+    target=Path(cargo_metadata['target_directory'])
     from itertools import groupby
     results=ROOT/'results'; results.mkdir(exist_ok=True)
+    if args.extend:
+        from .coverage_audit import audit
+        from .generate_cases import case_signature
+        from .case_csv import stage_case_extension, finalize_extended_cache
+        new_cases=[case for api in sorted(added) for case in added[api]]
+        with tempfile.TemporaryDirectory(dir=results) as directory:
+            workspace=Path(directory)
+            staged_inputs=workspace/'cases'
+            stage_case_extension(historic,new_cases,staged_inputs)
+            staged=workspace/'measurements'
+            shutil.copytree(results/'measurements',staged,copy_function=os.link)
+            new_libraries=extend_references(cases,added,target/'debug/sci-testing',staged)
+            meta['module_libraries']={module:list(names) for module,names in previous['module_libraries'].items()}
+            for module,names in new_libraries.items():
+                meta['module_libraries'].setdefault(module,[])
+                meta['module_libraries'][module]=sorted(set(meta['module_libraries'][module])|names)
+            meta['cases_sha256']=finalize_extended_cache(
+                staged_inputs,historic,new_cases,signature=case_signature(),
+                historical_cases_sha256=previous['cases_sha256'],
+                historical_measurements_directory=results/'measurements',
+                historical_measurements_sha256=previous['measurements_sha256'],
+                measurements_directory=staged)
+            meta['measurements_sha256']=directory_digest(staged)
+            extensions=list(previous.get('reference_extensions',[]))
+            extensions.append(dict(apis=sorted(added),sci_commit=meta['sci_commit'],
+                                   testing_sources_sha256=meta['testing_sources_sha256'],
+                                   cases_sha256=meta['cases_sha256'],
+                                   numpy=meta['numpy'],scipy=meta['scipy'],filterpy=meta['filterpy'],
+                                   mpmath=meta['mpmath'],python=meta['python'],rust=meta['rust']))
+            meta['reference_extensions']=extensions
+            staged_records=MeasurementStore(staged)
+            coverage=audit(cases,staged_records,required_apis=added)
+            meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
+            pages=workspace/'pages'
+            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            # All existing inputs were checked before preparing these files.
+            old_inputs=ROOT/'cases/generated'
+            backup=workspace/'previous-cases'
+            old_inputs.replace(backup)
+            try:staged_inputs.replace(old_inputs)
+            except Exception:
+                backup.replace(old_inputs)
+                raise
+            for api in added:
+                module,function=api.rsplit('.',1)
+                for suffix in ('.csv','.csv.gz'):
+                    path=staged/module/(function+suffix)
+                    if path.exists():
+                        destination=results/'measurements'/module/(function+suffix)
+                        destination.parent.mkdir(parents=True,exist_ok=True)
+                        path.replace(destination)
+                        other=destination.with_suffix('') if destination.suffix=='.gz' else destination.with_suffix('.csv.gz')
+                        other.unlink(missing_ok=True)
+            (results/'coverage.csv').write_text(coverage)
+            (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
+            args.output.resolve().mkdir(parents=True,exist_ok=True)
+            for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
+        print(f'Extended {len(added)} functions, {sum(map(len,added.values()))} new cases')
+        return
     if not args.full:
         from .coverage_audit import audit
         with tempfile.TemporaryDirectory(dir=results) as directory:
-            staged=Path(directory)
-            shutil.copytree(results/'measurements',staged,dirs_exist_ok=True)
-            refresh_sci(cases,records,target/'debug/sci-testing',staged,selected)
-            audit(cases,MeasurementStore(staged))
-            for path in csv_paths(staged):
-                destination=results/'measurements'/path.relative_to(staged)
+            staged=Path(directory)/'measurements'
+            # Hard links are safe because refresh_sci removes selected links
+            # before writing. Reusing unchanged files avoids copying the whole
+            # (potentially multi-gigabyte) reference snapshot on each refresh.
+            shutil.copytree(results/'measurements',staged,copy_function=os.link)
+            changed=refresh_sci(cases,records,target/'debug/sci-testing',staged,selected)
+            staged_records=MeasurementStore(staged)
+            coverage=audit(cases,staged_records)
+            meta['measurements_sha256']=directory_digest(staged)
+            meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
+            pages=Path(directory)/'pages'
+            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            # Finish all audits and page generation before publishing changes.
+            for name in sorted(changed):
+                path=staged/name
+                destination=results/'measurements'/name
                 destination.parent.mkdir(parents=True,exist_ok=True)
                 path.replace(destination)
                 alternate=destination.with_suffix('') if destination.suffix=='.gz' else destination.with_suffix('.csv.gz')
                 alternate.unlink(missing_ok=True)
+            (results/'coverage.csv').write_text(coverage)
+            (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
+            args.output.resolve().mkdir(parents=True,exist_ok=True)
+            for page in pages.glob('*.md'):
+                page.replace(args.output.resolve()/page.name)
+        print(f'Wrote {len(MODULES)} module pages, {len(cases)} cases to {args.output}')
+        return
     else:
         files={};module_libraries={module:set() for module in MODULES}
         for api, iterator in groupby(cases, key=lambda c:c['api']):

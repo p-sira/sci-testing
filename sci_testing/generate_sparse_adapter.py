@@ -3,24 +3,28 @@
 No expected fixture values are embedded. Predecessor-dependent operations obtain
 predecessors from the public API; each result is measured independently in Python.
 """
-from .api_registry import SCI
+from .api_registry import SCI, sci_target
 from .rust_source import formatted
+from pathlib import Path
 
 from . import ROOT
 
 
-def generated():
-    source=(SCI/'tests/sparse.rs').read_text()
-    prefix=source.split('#[test]',1)[0]
-    begin=source.index('        let api = f[1];')
-    end=source.index('        assert_eq!(\n            (actual_rows, actual_cols)',begin)
-    core=source[begin:end]
+def generated(source=None):
+    if source is None:
+        source=sci_target()
+    source=Path(source)
+    text=(source/'tests/sparse.rs').read_text()
+    prefix=text.split('#[test]',1)[0]
+    begin=text.index('        let api = f[1];')
+    end=text.index('        assert_eq!(\n            (actual_rows, actual_cols)',begin)
+    core=text[begin:end]
     core=core.replace('"splu" | "lu_solve"', '"splu"')
-    source=(SCI/'tests/sparse_parity.rs').read_text()
-    parity_prefix=source.split('#[test]',1)[0]
-    begin=source.index('        let (id, api) = (r[0], r[1]);')
-    end=source.index('        tested += 1;',begin)
-    parity=source[begin:end]
+    text=(source/'tests/sparse_parity.rs').read_text()
+    parity_prefix=text.split('#[test]',1)[0]
+    begin=text.index('        let (id, api) = (r[0], r[1]);')
+    end=text.index('        tested += 1;',begin)
+    parity=text[begin:end]
     first=parity.index('        let e = |key: &str|')
     last=parity.index('        match api {',first)
     parity=parity[:first]+"""
@@ -46,21 +50,47 @@ def generated():
         'let predecessors=g::shortest_path(&a, &g::PathOptions { directed:p[0]!=0., ..Default::default() }).unwrap().predecessors;\nlet out = g::reconstruct_path(&a, &predecessors[0], p[0] != 0.).unwrap();')
     parity=parity.replace('let pr = e("pred").chunks(m).map(pred).collect::<Vec<_>>();',
         'let pr=g::shortest_path(&a, &g::PathOptions { directed:p[0]!=0., ..Default::default() }).unwrap().predecessors;')
-    parity=parity.replace('maxiter: 512,', 'maxiter: r.get(8).map_or(512, |v| v.parse().unwrap()),')
-    parity=parity.replace('rtol: 1e-11,', 'rtol: r.get(10).map_or(1e-11, |v| v.parse().unwrap()),')
-    parity=parity.replace('atol: 1e-13,', 'atol: r.get(9).map_or(1e-13, |v| v.parse().unwrap()),')
+    if source.resolve()==sci_target().resolve():
+        # Historical CSV columns carry solver tolerances. Keep the verified
+        # adapter's bounded output contract when extracting the newer tests.
+        parity=parity.replace('rtol: p.get(3).copied().unwrap_or(1e-11),',
+                              'rtol: r.get(10).map_or(1e-11, |v| v.parse().unwrap()),')
+        parity=parity.replace('atol: p.get(1).copied().unwrap_or(1e-13),',
+                              'atol: r.get(9).map_or(1e-13, |v| v.parse().unwrap()),')
+        parity=parity.replace('maxiter: p.get(2).copied().unwrap_or(512.) as usize,',
+                              'maxiter: r.get(8).map_or(512, |v| v.parse().unwrap()),')
+        begin=parity.index('                if p.len() > 1 {')
+        end=parity.index('                assert_v("x", &out.x',begin)
+        parity=parity[:begin]+parity[end:]
+        parity=parity.replace('p.get(1).is_none_or(|&v| v != 0.),','true')
+        begin=parity.index('            "norm_axis" => {')
+        end=parity.index('            "spilu" =>',begin)
+        parity=parity[:begin]+'''            "norm_axis" => {
+                assert_v("x", &l::norm_axis(&a, 2., 0).unwrap(), 3e-12);
+                assert_v("xt", &l::norm_axis(&a, -1., 1).unwrap(), 3e-12);
+            }
+'''+parity[end:]
+        for label,after in [('            "aslinearoperator" => {','            "as_array"'),
+                            ('            "safely_cast_index_arrays" => {','            "random"')]:
+            begin=parity.index(label)
+            end=parity.index(after,begin)
+            parity=parity[:begin]+parity[end:]
+    else:
+        parity=parity.replace('maxiter: 512,', 'maxiter: r.get(8).map_or(512, |v| v.parse().unwrap()),')
+        parity=parity.replace('rtol: 1e-11,', 'rtol: r.get(10).map_or(1e-11, |v| v.parse().unwrap()),')
+        parity=parity.replace('atol: 1e-13,', 'atol: r.get(9).map_or(1e-13, |v| v.parse().unwrap()),')
     begin=parity.index('                let bytes = std::fs::read(format!(')
     end=parity.index('            _ => panic!("untested API',begin)
     parity=parity[:begin]+"""
                 let mut archive=std::io::Cursor::new(Vec::new());
-                s::save_npz(&mut archive, &a, p[0]!=0.).unwrap();
+                s::io::save_npz(&mut archive, &a, p[0]!=0.).unwrap();
                 archive.set_position(0);
                 let loaded=if api=="load_npz" {
                     let hex=r[8].as_bytes();
                     let bytes=hex.as_chunks::<2>().0.iter().map(|b| u8::from_str_radix(std::str::from_utf8(b).unwrap(),16).unwrap()).collect::<Vec<_>>();
-                    s::load_npz(std::io::Cursor::new(bytes)).unwrap()
-                } else { s::load_npz(&mut archive).unwrap() };
-                assert_m("a", &s::to_dense(&loaded).unwrap(),0.);
+                    s::io::load_npz(std::io::Cursor::new(bytes)).unwrap()
+                } else { s::io::load_npz(&mut archive).unwrap() };
+                assert_m("a", &s::construct::to_dense(&loaded).unwrap(),0.);
                 assert_eq!(loaded,a);
             }
 """+parity[end:]

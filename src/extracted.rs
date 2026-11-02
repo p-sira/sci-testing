@@ -5,7 +5,7 @@ pub mod fft {
     use common::finite_close;
     use common::vector;
 
-    use f::RealTransformType as T;
+    use f::real::RealTransformType as T;
     use sci::{complex::Complex, fft as f};
     fn sizes(s: &str) -> Vec<usize> {
         vector(s).into_iter().map(|v| v as usize).collect()
@@ -44,30 +44,30 @@ pub mod fft {
                 let offset = c[13].parse().unwrap();
                 let bias = c[14].parse().unwrap();
                 let v = match c[1] {
-                    "fht" => f::fht(&re, dln, mu, offset, bias).unwrap(),
-                    "ifht" => f::ifht(&re, dln, mu, offset, bias).unwrap(),
-                    _ => vec![f::fhtoffset(dln, mu, offset, bias).unwrap()],
+                    "fht" => f::hankel::fht(&re, dln, mu, offset, bias).unwrap(),
+                    "ifht" => f::hankel::ifht(&re, dln, mu, offset, bias).unwrap(),
+                    _ => vec![f::hankel::fhtoffset(dln, mu, offset, bias).unwrap()],
                 };
                 let len = v.len();
                 (complex(&v, &vec![0.0; len]), vec![len])
             }
-            "fft" => (f::fft(&x), vec![x.len()]),
-            "ifft" => (f::ifft(&x), vec![x.len()]),
+            "fft" => (f::fourier::fft(&x), vec![x.len()]),
+            "ifft" => (f::fourier::ifft(&x), vec![x.len()]),
             "rfft" => {
-                let v = f::rfft(&re);
+                let v = f::real::rfft(&re);
                 let len = v.len();
                 (v, vec![len])
             }
             "ihfft" => {
-                let v = f::ihfft(&re, n).unwrap();
+                let v = f::real::ihfft(&re, n).unwrap();
                 let len = v.len();
                 (v, vec![len])
             }
             "irfft" | "hfft" => {
                 let v = if c[1] == "irfft" {
-                    f::irfft(&x, n)
+                    f::real::irfft(&x, n)
                 } else {
-                    f::hfft(&x, n)
+                    f::real::hfft(&x, n)
                 }
                 .unwrap();
                 let len = v.len();
@@ -76,9 +76,9 @@ pub mod fft {
             "fftfreq" | "rfftfreq" => {
                 let d = c[7].parse().unwrap();
                 let v = if c[1] == "fftfreq" {
-                    f::fftfreq(n.unwrap(), d)
+                    f::utilities::fftfreq(n.unwrap(), d)
                 } else {
-                    f::rfftfreq(n.unwrap(), d)
+                    f::utilities::rfftfreq(n.unwrap(), d)
                 }
                 .unwrap();
                 let len = v.len();
@@ -86,11 +86,10 @@ pub mod fft {
             }
             "next_fast_len" | "prev_fast_len" => {
                 let target = c[8].parse().unwrap();
-                let real = c[9] == "1";
                 let v = if c[1] == "next_fast_len" {
-                    f::next_fast_len(target, real)
+                    f::utilities::next_fast_len(target)
                 } else {
-                    f::prev_fast_len(target, real)
+                    f::utilities::prev_fast_len(target)
                 }
                 .unwrap();
                 (
@@ -101,17 +100,17 @@ pub mod fft {
                     vec![1],
                 )
             }
-            "fftshift" => (f::fftshift(&x).unwrap(), vec![x.len()]),
-            "ifftshift" => (f::ifftshift(&x).unwrap(), vec![x.len()]),
-            "fftn" => (f::fftn(&x, &shape, &axes).unwrap(), shape.clone()),
-            "ifftn" => (f::ifftn(&x, &shape, &axes).unwrap(), shape.clone()),
-            "rfftn" => f::rfftn(&re, &shape, &axes).unwrap(),
-            "ihfftn" => f::ihfftn(&re, &shape, &axes).unwrap(),
+            "fftshift" => (f::utilities::fftshift(&x).unwrap(), vec![x.len()]),
+            "ifftshift" => (f::utilities::ifftshift(&x).unwrap(), vec![x.len()]),
+            "fftn" => (f::fourier::fftn(&x, &shape, &axes).unwrap(), shape.clone()),
+            "ifftn" => (f::fourier::ifftn(&x, &shape, &axes).unwrap(), shape.clone()),
+            "rfftn" => f::real::rfftn(&re, &shape, &axes).unwrap(),
+            "ihfftn" => f::real::ihfftn(&re, &shape, &axes).unwrap(),
             "irfftn" | "hfftn" => {
                 let v = if c[1] == "irfftn" {
-                    f::irfftn(&x, &shape, &axes)
+                    f::real::irfftn(&x, &shape, &axes)
                 } else {
-                    f::hfftn(&x, &shape, &axes)
+                    f::real::hfftn(&x, &shape, &axes)
                 }
                 .unwrap();
                 (complex(&v, &vec![0.0; v.len()]), shape.clone())
@@ -119,9 +118,9 @@ pub mod fft {
             "fft2" | "ifft2" => {
                 let m = rows(&x, shape[1]);
                 let v = if c[1] == "fft2" {
-                    f::fft2(&m)
+                    f::fourier::fft2(&m)
                 } else {
-                    f::ifft2(&m)
+                    f::fourier::ifft2(&m)
                 }
                 .unwrap();
                 (v.into_iter().flatten().collect(), shape.clone())
@@ -129,9 +128,9 @@ pub mod fft {
             "rfft2" | "ihfft2" => {
                 let m = rows(&re, shape[1]);
                 let v = if c[1] == "rfft2" {
-                    f::rfft2(&m)
+                    f::real::rfft2(&m)
                 } else {
-                    f::ihfft2(&m)
+                    f::real::ihfft2(&m)
                 }
                 .unwrap();
                 let out_shape = vec![v.len(), v[0].len()];
@@ -140,9 +139,9 @@ pub mod fft {
             "irfft2" | "hfft2" => {
                 let m = rows(&x, shape[1] / 2 + 1);
                 let v = if c[1] == "irfft2" {
-                    f::irfft2(&m, n.unwrap())
+                    f::real::irfft2(&m, n.unwrap())
                 } else {
-                    f::hfft2(&m, n.unwrap())
+                    f::real::hfft2(&m, n.unwrap())
                 }
                 .unwrap();
                 let out_shape = vec![v.len(), v[0].len()];
@@ -151,14 +150,14 @@ pub mod fft {
             }
             "dct" | "idct" | "dst" | "idst" | "dctn" | "idctn" | "dstn" | "idstn" => {
                 let v = match c[1] {
-                    "dct" => f::dct(&re, kind),
-                    "idct" => f::idct(&re, kind),
-                    "dst" => f::dst(&re, kind),
-                    "idst" => f::idst(&re, kind),
-                    "dctn" => f::dctn(&re, &shape, &axes, kind),
-                    "idctn" => f::idctn(&re, &shape, &axes, kind),
-                    "dstn" => f::dstn(&re, &shape, &axes, kind),
-                    _ => f::idstn(&re, &shape, &axes, kind),
+                    "dct" => f::real::dct(&re, kind),
+                    "idct" => f::real::idct(&re, kind),
+                    "dst" => f::real::dst(&re, kind),
+                    "idst" => f::real::idst(&re, kind),
+                    "dctn" => f::real::dctn(&re, &shape, &axes, kind),
+                    "idctn" => f::real::idctn(&re, &shape, &axes, kind),
+                    "dstn" => f::real::dstn(&re, &shape, &axes, kind),
+                    _ => f::real::idstn(&re, &shape, &axes, kind),
                 }
                 .unwrap();
                 (complex(&v, &vec![0.0; v.len()]), shape.clone())
@@ -180,31 +179,31 @@ pub mod periodic {
     pub fn run(c: &[&str]) -> Vec<f64> {
         let re = vector(c[2]);
         match c[1] {
-            "diff" => f::diff(&re, c[7].parse().unwrap(), c[6].parse().unwrap()),
-            "hilbert" => f::hilbert(&re),
-            "ihilbert" => f::ihilbert(&re),
-            "tilbert" => f::tilbert(&re, c[5].parse().unwrap(), c[6].parse().unwrap()),
-            "itilbert" => f::itilbert(&re, c[5].parse().unwrap(), c[6].parse().unwrap()),
-            "shift" => f::shift(&re, c[3].parse().unwrap(), c[6].parse().unwrap()),
-            "cc_diff" => f::cc_diff(
+            "diff" => f::utilities::diff(&re, c[7].parse().unwrap(), c[6].parse().unwrap()),
+            "hilbert" => f::utilities::hilbert(&re),
+            "ihilbert" => f::utilities::ihilbert(&re),
+            "tilbert" => f::utilities::tilbert(&re, c[5].parse().unwrap(), c[6].parse().unwrap()),
+            "itilbert" => f::utilities::itilbert(&re, c[5].parse().unwrap(), c[6].parse().unwrap()),
+            "shift" => f::utilities::shift(&re, c[3].parse().unwrap(), c[6].parse().unwrap()),
+            "cc_diff" => f::utilities::cc_diff(
                 &re,
                 c[3].parse().unwrap(),
                 c[4].parse().unwrap(),
                 c[6].parse().unwrap(),
             ),
-            "cs_diff" => f::cs_diff(
+            "cs_diff" => f::utilities::cs_diff(
                 &re,
                 c[3].parse().unwrap(),
                 c[4].parse().unwrap(),
                 c[6].parse().unwrap(),
             ),
-            "sc_diff" => f::sc_diff(
+            "sc_diff" => f::utilities::sc_diff(
                 &re,
                 c[3].parse().unwrap(),
                 c[4].parse().unwrap(),
                 c[6].parse().unwrap(),
             ),
-            "ss_diff" => f::ss_diff(
+            "ss_diff" => f::utilities::ss_diff(
                 &re,
                 c[3].parse().unwrap(),
                 c[4].parse().unwrap(),
@@ -279,7 +278,7 @@ pub mod cluster {
             "inconsistent" => h::inconsistent(&z, depth).unwrap(),
             "is_valid_im" => boolean(h::is_valid_im(&z)),
             "maxRstat" => vec![
-                h::maxRstat(
+                h::max_rstat(
                     &z,
                     &h::inconsistent(&z, depth).unwrap(),
                     c[5].parse().unwrap(),
@@ -342,7 +341,7 @@ pub mod spatial {
     use common::close;
     use common::{matrix, vector};
 
-    use g::{DistanceForm, DistanceOutput, Metric};
+    use g::distance::{DistanceForm, DistanceOutput, Metric};
     use sci::{linalg, spatial as g, spatial};
 
     fn metric<'a>(name: &str, extra: &str, v: &'a [f64], m: &'a [Vec<f64>]) -> Metric<'a> {
@@ -379,27 +378,40 @@ pub mod spatial {
         );
         let weights = (!w.is_empty()).then_some(w.as_slice());
         let scalar = match c[1] {
-            "euclidean" => Some(g::euclidean(&u, &v, weights)),
-            "sqeuclidean" => Some(g::sqeuclidean(&u, &v, weights)),
-            "cityblock" => Some(g::cityblock(&u, &v, weights)),
-            "chebyshev" => Some(g::chebyshev(&u, &v, weights)),
-            "canberra" => Some(g::canberra(&u, &v, weights)),
-            "braycurtis" => Some(g::braycurtis(&u, &v, weights)),
-            "cosine" => Some(g::cosine(&u, &v, weights)),
-            "correlation" => Some(g::correlation(&u, &v, weights, c[6] == "true")),
-            "hamming" => Some(g::hamming(&u, &v, weights)),
-            "jaccard" => Some(g::jaccard(&u, &v, weights)),
-            "dice" => Some(g::dice(&u, &v, weights)),
-            "rogerstanimoto" => Some(g::rogerstanimoto(&u, &v, weights)),
-            "russellrao" => Some(g::russellrao(&u, &v, weights)),
-            "sokalsneath" => Some(g::sokalsneath(&u, &v, weights)),
-            "yule" => Some(g::yule(&u, &v, weights)),
-            "minkowski" => Some(g::minkowski(&u, &v, c[5].parse().unwrap(), weights)),
-            "minkowski_distance" => Some(g::minkowski_distance(&u, &v, c[5].parse().unwrap())),
-            "minkowski_distance_p" => Some(g::minkowski_distance_p(&u, &v, c[5].parse().unwrap())),
-            "seuclidean" => Some(g::seuclidean(&u, &v, &vector(c[6]))),
-            "mahalanobis" => Some(g::mahalanobis(&u, &v, &matrix(c[6]))),
-            "jensenshannon" => Some(g::jensenshannon(
+            "euclidean" => Some(g::distance::euclidean(&u, &v, weights)),
+            "sqeuclidean" => Some(g::distance::sqeuclidean(&u, &v, weights)),
+            "cityblock" => Some(g::distance::cityblock(&u, &v, weights)),
+            "chebyshev" => Some(g::distance::chebyshev(&u, &v, weights)),
+            "canberra" => Some(g::distance::canberra(&u, &v, weights)),
+            "braycurtis" => Some(g::distance::braycurtis(&u, &v, weights)),
+            "cosine" => Some(g::distance::cosine(&u, &v, weights)),
+            "correlation" => Some(g::distance::correlation(&u, &v, weights, c[6] == "true")),
+            "hamming" => Some(g::distance::hamming(&u, &v, weights)),
+            "jaccard" => Some(g::distance::jaccard(&u, &v, weights)),
+            "dice" => Some(g::distance::dice(&u, &v, weights)),
+            "rogerstanimoto" => Some(g::distance::rogerstanimoto(&u, &v, weights)),
+            "russellrao" => Some(g::distance::russellrao(&u, &v, weights)),
+            "sokalsneath" => Some(g::distance::sokalsneath(&u, &v, weights)),
+            "yule" => Some(g::distance::yule(&u, &v, weights)),
+            "minkowski" => Some(g::distance::minkowski(
+                &u,
+                &v,
+                c[5].parse().unwrap(),
+                weights,
+            )),
+            "minkowski_distance" => Some(g::distance::minkowski_distance(
+                &u,
+                &v,
+                c[5].parse().unwrap(),
+            )),
+            "minkowski_distance_p" => Some(g::distance::minkowski_distance_p(
+                &u,
+                &v,
+                c[5].parse().unwrap(),
+            )),
+            "seuclidean" => Some(g::distance::seuclidean(&u, &v, &vector(c[6]))),
+            "mahalanobis" => Some(g::distance::mahalanobis(&u, &v, &matrix(c[6]))),
+            "jensenshannon" => Some(g::distance::jensenshannon(
                 &u,
                 &v,
                 if c[5].is_empty() {
@@ -408,13 +420,13 @@ pub mod spatial {
                     Some(c[5].parse().unwrap())
                 },
             )),
-            "is_valid_y" => Some(Ok(f64::from(g::is_valid_y(&u)))),
-            "is_valid_dm" => Some(Ok(f64::from(g::is_valid_dm(
+            "is_valid_y" => Some(Ok(f64::from(g::distance::is_valid_y(&u)))),
+            "is_valid_dm" => Some(Ok(f64::from(g::distance::is_valid_dm(
                 &matrix(c[2]),
                 c[5].parse().unwrap(),
             )))),
-            "num_obs_y" => Some(g::num_obs_y(&u).map(|x| x as f64)),
-            "num_obs_dm" => Some(g::num_obs_dm(&matrix(c[2])).map(|x| x as f64)),
+            "num_obs_y" => Some(g::distance::num_obs_y(&u).map(|x| x as f64)),
+            "num_obs_dm" => Some(g::distance::num_obs_dm(&matrix(c[2])).map(|x| x as f64)),
             _ => None,
         };
         let actual = if let Some(s) = scalar {
@@ -425,14 +437,22 @@ pub mod spatial {
             let extra_matrix = matrix(c[6]);
             match c[1] {
                 "cdist" => {
-                    g::cdist(&x, &y, metric(c[5], c[6], &extra_vector, &extra_matrix)).unwrap()
+                    g::distance::cdist(&x, &y, metric(c[5], c[6], &extra_vector, &extra_matrix))
+                        .unwrap()
                 }
                 "pdist" => {
-                    vec![g::pdist(&x, metric(c[5], c[6], &extra_vector, &extra_matrix)).unwrap()]
+                    vec![
+                        g::distance::pdist(&x, metric(c[5], c[6], &extra_vector, &extra_matrix))
+                            .unwrap(),
+                    ]
                 }
-                "distance_matrix" => g::distance_matrix(&x, &y, c[5].parse().unwrap()).unwrap(),
-                "geometric_slerp" => g::geometric_slerp(&u, &v, &w, c[5].parse().unwrap()).unwrap(),
-                "squareform" => match g::squareform(if c[5] == "condensed" {
+                "distance_matrix" => {
+                    g::distance::distance_matrix(&x, &y, c[5].parse().unwrap()).unwrap()
+                }
+                "geometric_slerp" => {
+                    g::transform::geometric_slerp(&u, &v, &w, c[5].parse().unwrap()).unwrap()
+                }
+                "squareform" => match g::distance::squareform(if c[5] == "condensed" {
                     DistanceForm::Condensed(&u)
                 } else {
                     DistanceForm::Square(&x)
@@ -443,7 +463,7 @@ pub mod spatial {
                     DistanceOutput::Condensed(v) => vec![v],
                 },
                 "procrustes" => {
-                    let r = g::procrustes(&x, &y).unwrap();
+                    let r = g::transform::procrustes(&x, &y).unwrap();
                     assert_eq!(r.reference.len(), x.len());
                     assert_eq!(r.transformed.len(), x.len());
                     assert!(
@@ -462,16 +482,16 @@ pub mod spatial {
                     ]
                 }
                 "directed_hausdorff" => {
-                    let r = g::directed_hausdorff(&x, &y).unwrap();
+                    let r = g::distance::directed_hausdorff(&x, &y).unwrap();
                     close(
-                        g::euclidean(&x[r.index_u], &y[r.index_v], None).unwrap(),
+                        g::distance::euclidean(&x[r.index_u], &y[r.index_v], None).unwrap(),
                         r.distance,
                         3e-12,
                         3e-12,
                     );
                     let nearest = y
                         .iter()
-                        .map(|b| g::euclidean(&x[r.index_u], b, None).unwrap())
+                        .map(|b| g::distance::euclidean(&x[r.index_u], b, None).unwrap())
                         .fold(f64::INFINITY, f64::min);
                     close(nearest, r.distance, 3e-12, 3e-12);
                     vec![vec![r.distance, r.index_u as f64, r.index_v as f64]]
@@ -482,7 +502,7 @@ pub mod spatial {
                         .map(|r| r.split(';').map(|x| x.parse().unwrap()).collect())
                         .collect();
                     vec![
-                        g::tsearch(&x, &cells, &y, c[5].parse().unwrap())
+                        g::transform::tsearch(&x, &cells, &y, c[5].parse().unwrap())
                             .unwrap()
                             .into_iter()
                             .map(|x| x.map_or(-1.0, |x| x as f64))
@@ -511,7 +531,7 @@ pub mod optimize {
                 x[0] * x[1],
                 x[0].sin() + x[1].cos(),
             ],
-            "rosen" => vec![o::rosen(x).unwrap()],
+            "rosen" => vec![o::derivatives::rosen(x).unwrap()],
             _ => panic!("unknown objective"),
         }
     }
@@ -522,19 +542,21 @@ pub mod optimize {
         let epsilon = vector(c[4]);
         let bias: f64 = c[6].parse().unwrap();
         let got = match c[1] {
-            "rosen" => vec![vec![o::rosen(&x).unwrap()]],
-            "rosen_der" => vec![o::rosen_der(&x).unwrap()],
-            "rosen_hess" => o::rosen_hess(&x).unwrap(),
-            "rosen_hess_prod" => vec![o::rosen_hess_prod(&x, &p).unwrap()],
-            "approx_fprime" => o::approx_fprime(|x| objective(c[5], x), &x, &epsilon).unwrap(),
+            "rosen" => vec![vec![o::derivatives::rosen(&x).unwrap()]],
+            "rosen_der" => vec![o::derivatives::rosen_der(&x).unwrap()],
+            "rosen_hess" => o::derivatives::rosen_hess(&x).unwrap(),
+            "rosen_hess_prod" => vec![o::derivatives::rosen_hess_prod(&x, &p).unwrap()],
+            "approx_fprime" => {
+                o::derivatives::approx_fprime(|x| objective(c[5], x), &x, &epsilon).unwrap()
+            }
             "check_grad" => vec![vec![
-                o::check_grad(
+                o::derivatives::check_grad(
                     |x| objective(c[5], x)[0],
                     |x| {
                         let g = if c[5] == "quadratic" {
                             vec![2.0 * x[0] + x[1], 6.0 * x[1] + x[0]]
                         } else {
-                            o::rosen_der(x).unwrap()
+                            o::derivatives::rosen_der(x).unwrap()
                         };
                         g.into_iter().map(|v| v + bias).collect()
                     },

@@ -12,6 +12,7 @@ import io
 import json
 import math
 from pathlib import Path
+import shutil
 
 # Flattened multidimensional outputs and high-precision references exceed the
 # csv module's 128 KiB default. Keep an explicit bound on individual cells.
@@ -68,7 +69,7 @@ def decode(cell):
     return value
 
 
-def iter_case_files(cases):
+def _case_batches(cases):
     from itertools import groupby
     ordered=cases if hasattr(cases,'function') else sorted(cases,key=lambda c:(c['api'],c['id']))
     for api, iterator in groupby(ordered,key=lambda c:c['api']):
@@ -78,18 +79,200 @@ def iter_case_files(cases):
         if any(sorted(c['args']) != arguments for c in batch):
             raise ValueError(f'Inconsistent arguments for {api}')
         yield f'{module}/{function}.csv', table(['id', 'group', *arguments],
-            ([c['id'], c['group'], *(encode(c['args'][a]) for a in arguments)] for c in batch))
+            ([c['id'], c['group'], *(encode(c['args'][a]) for a in arguments)] for c in batch)), len(batch)
+
+
+def iter_case_files(cases):
+    for name, content, _ in _case_batches(cases):
+        yield name, content
 
 
 def case_files(cases):return dict(iter_case_files(cases))
 
 
-def write_cases(directory,cases):
-    directory=Path(directory);names=set()
-    for name,content in iter_case_files(cases):
-        path=directory/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_text(content);names.add(name)
-    for path in directory.glob('*/*.csv'):
+def _write_if_changed(path, data):
+    if not path.exists() or path.read_bytes() != data:
+        path.write_bytes(data)
+
+
+def write_cases(directory, cases, *, compress_above=256 * 1024, signature=None):
+    """Store large input CSVs in deterministic gzip; optionally index a reusable snapshot.
+
+    The canonical CSV content and numerical repr do not change. A cache index is
+    written only after every input file has been stored successfully.
+    """
+    directory=Path(directory);names=set();index={}
+    manifest=directory/'.cache.json'
+    manifest.unlink(missing_ok=True)
+    for name,content,count in _case_batches(cases):
+        raw=content.encode('utf-8')
+        compressed=len(raw)>compress_above
+        actual=name+'.gz' if compressed else name
+        path=directory/actual;path.parent.mkdir(parents=True,exist_ok=True)
+        data=gzip.compress(raw,compresslevel=6,mtime=0) if compressed else raw
+        _write_if_changed(path,data)
+        (directory/(name if compressed else name+'.gz')).unlink(missing_ok=True)
+        names.add(actual)
+        index[name]={'count':count,'sha256':hashlib.sha256(data).hexdigest()}
+    for path in csv_paths(directory):
         if path.relative_to(directory).as_posix() not in names:path.unlink()
+    if signature is not None:
+        manifest.write_text(json.dumps({'format':1,'recipe_sha256':signature,'files':index},
+                                       sort_keys=True,indent=2)+'\n')
+
+
+def case_paths(directory):
+    """Map canonical input names to CSV or CSV.gz paths, refusing ambiguities."""
+    directory=Path(directory);paths={}
+    for path in csv_paths(directory):
+        name=path.relative_to(directory).as_posix().removesuffix('.gz')
+        if name in paths:raise ValueError(f'Duplicate case input files: {name}')
+        paths[name]=path
+    return paths
+
+
+def case_directory_digest(directory):
+    """Hash logical input CSVs exactly as the original uncompressed snapshots did.
+
+    This preserves cases_sha256 in saved environment metadata when input files are
+    compressed, while measurement digests continue hashing their physical bytes.
+    """
+    digest=hashlib.sha256()
+    for name,path in sorted(case_paths(directory).items()):
+        digest.update(name.encode()+b'\0')
+        opener=gzip.open if path.suffix=='.gz' else open
+        with opener(path,'rb') as stream:
+            for chunk in iter(lambda:stream.read(1024*1024),b''):
+                digest.update(chunk)
+        digest.update(b'\0')
+    return digest.hexdigest()
+
+
+def compact_existing_cases(directory, *, signature, expected_digest, compress_above=256*1024):
+    """Compress a verified saved input snapshot without generating numerical cases.
+
+    The original content digest must match the independent snapshot metadata
+    before any files are changed. CSV parsing counts the rows even when fields
+    contain embedded newlines; source bytes and all numeric strings are retained.
+    """
+    directory=Path(directory)
+    if case_directory_digest(directory)!=expected_digest:
+        raise ValueError('Existing case inputs do not match the saved snapshot digest')
+    manifest=directory/'.cache.json'
+    manifest.unlink(missing_ok=True)
+    entries={}
+    for name,path in sorted(case_paths(directory).items()):
+        raw=path.read_bytes()
+        if path.suffix=='.gz':raw=gzip.decompress(raw)
+        with io.StringIO(raw.decode('utf-8'),newline='') as stream:
+            count=sum(1 for _ in csv.reader(stream))-1
+        if count<1:raise ValueError(f'No cases in {name}')
+        compressed=len(raw)>compress_above
+        target=directory/(name+'.gz' if compressed else name)
+        data=gzip.compress(raw,compresslevel=6,mtime=0) if compressed else raw
+        if target!=path:
+            _write_if_changed(target,data)
+            path.unlink()
+        else:
+            _write_if_changed(target,data)
+        entries[name]={'count':count,'sha256':hashlib.sha256(data).hexdigest()}
+    manifest.write_text(json.dumps({'format':1,'recipe_sha256':signature,'files':entries},
+                                   sort_keys=True,indent=2)+'\n')
+
+
+def stage_case_extension(historical, additions, destination, *, compress_above=256*1024):
+    """Copy historical input bytes verbatim, add files for genuinely new APIs.
+
+    `historical` must be a verified CachedCaseSet. No numerical inputs from the
+    old generator are evaluated; the original data files remain untouched.
+    This stage has no cache manifest until new measurements are validated.
+    """
+    destination=Path(destination)
+    if destination.exists():raise ValueError('Case extension stage already exists')
+    destination.mkdir(parents=True)
+    for name,path in sorted(historical.paths.items()):
+        target=destination/path.relative_to(historical.directory)
+        target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(path,target)
+    expected={}
+    for name,content,count in _case_batches(additions):
+        if name in historical.paths:raise ValueError(f'Changed historical case function: {name}')
+        raw=content.encode('utf-8')
+        compressed=len(raw)>compress_above
+        target=destination/(name+'.gz' if compressed else name)
+        target.parent.mkdir(parents=True,exist_ok=True)
+        _write_if_changed(target,gzip.compress(raw,compresslevel=6,mtime=0) if compressed else raw)
+        expected[name]=count
+    if not expected:raise ValueError('No new case files to extend')
+    return expected
+
+
+def finalize_extended_cache(destination, historical, additions, *, signature,
+                            historical_cases_sha256, historical_measurements_directory,
+                            historical_measurements_sha256, measurements_directory):
+    """Index an extended input snapshot only after validating its measurement files.
+
+    The manifest records historical lineage rather than asserting that new
+    generator code reproduces the historical input bytes.
+    """
+    destination=Path(destination)
+    historical_measurements_directory=Path(historical_measurements_directory)
+    measurements_directory=Path(measurements_directory)
+    if (destination/'.cache.json').exists():
+        raise ValueError('Staged cache manifest already exists')
+    if case_directory_digest(historical.directory)!=historical_cases_sha256:
+        raise ValueError('Historical case digest changed during extension')
+    if directory_digest(historical_measurements_directory)!=historical_measurements_sha256:
+        raise ValueError('Historical measurement digest changed during extension')
+    paths=case_paths(destination)
+    added={}
+    for name,content,count in _case_batches(additions):
+        if name in added or name in historical.paths:raise ValueError(f'Duplicate extension API: {name}')
+        if name not in paths or csv_text(paths[name])!=content:
+            raise ValueError(f'Changed new input file: {name}')
+        added[name]=count
+    if not added or set(paths)!=set(historical.paths)|set(added):
+        raise ValueError('Staged input file set differs from historical plus new inputs')
+    for name,path in historical.paths.items():
+        staged=paths[name]
+        if staged.name!=path.name or _sha256_file(staged)!=_sha256_file(path):
+            raise ValueError(f'Changed historical input bytes: {name}')
+    old_measurements={p.relative_to(historical_measurements_directory).as_posix():p
+                      for p in csv_paths(historical_measurements_directory)}
+    new_measurements={p.relative_to(measurements_directory).as_posix():p
+                      for p in csv_paths(measurements_directory)}
+    if {name.removesuffix('.gz') for name in new_measurements}!=set(paths) or len(new_measurements)!=len(paths):
+        raise ValueError('Extended measurements do not cover exactly the input files')
+    for name,path in old_measurements.items():
+        if name not in new_measurements or _sha256_file(path)!=_sha256_file(new_measurements[name]):
+            raise ValueError(f'Changed historical measurements: {name}')
+    for name in added:
+        measured=new_measurements.get(name) or new_measurements.get(name+'.gz')
+        records=read_measurement_content(csv_text(measured))
+        original=read_case_file(paths[name],name)
+        ids=[case['id'] for case in original]
+        if len(ids)!=len(set(ids)) or set(ids)!=set(records) or len(ids)!=added[name]:
+            raise ValueError(f'Missing, extra or duplicate measurement IDs: {name}')
+        if any('Sci' not in record['libraries'] or not record['reference'] for record in records.values()):
+            raise ValueError(f'Missing new Sci measurement or reference: {name}')
+    index={name:{'count':historical.counts[name] if name in historical.counts else added[name],
+                 'sha256':_sha256_file(path)} for name,path in sorted(paths.items())}
+    provenance={'kind':'historical_snapshot_extension','historical_cases_sha256':historical_cases_sha256,
+                'historical_measurements_sha256':historical_measurements_sha256,
+                'historical_file_count':len(historical.paths),
+                'new_file_count':len(added), 'generator_equivalence_verified':False}
+    (destination/'.cache.json').write_text(json.dumps(
+        {'format':2,'recipe_sha256':signature,'files':index,'provenance':provenance},
+        sort_keys=True,indent=2)+'\n')
+    return case_directory_digest(destination)
+
+
+def _sha256_file(path):
+    digest=hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for chunk in iter(lambda:stream.read(1024*1024),b''):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def directory_digest(directory):
@@ -99,14 +282,18 @@ def directory_digest(directory):
     return digest.hexdigest()
 
 
+def read_case_file(path, name):
+    api=name.removesuffix('.csv').replace('/','.')
+    opener=gzip.open if path.suffix=='.gz' else open
+    with opener(path,'rt',newline='',encoding='utf-8') as stream:
+        return [dict(id=row.pop('id'), api=api, group=row.pop('group'),
+                     args={k:decode(v) for k,v in row.items()}) for row in csv.DictReader(stream)]
+
+
 def read_cases(directory):
-    cases = []
-    for path in sorted(Path(directory).glob('*/*.csv'),key=lambda p:f'{p.parent.name}.{p.stem}'):
-        api = f'{path.parent.name}.{path.stem}'
-        with path.open(newline='') as stream:
-            for row in csv.DictReader(stream):
-                cases.append(dict(id=row.pop('id'), api=api, group=row.pop('group'),
-                                  args={k: decode(v) for k, v in row.items()}))
+    cases=[]
+    for name,path in sorted(case_paths(directory).items(),key=lambda item:item[0].replace('/','.')):
+        cases.extend(read_case_file(path,name))
     return cases
 
 
@@ -142,7 +329,7 @@ def disk_files(directory):
     return {p.relative_to(directory).as_posix():csv_text(p) for p in csv_paths(directory)}
 
 
-def write_measurements(directory, files, *, compress_above=16*1024*1024):
+def write_measurements(directory, files, *, compress_above=256*1024):
     """Keep large per-function CSVs compact, with reproducible gzip headers."""
     directory=Path(directory);names=set()
     for name,content in files.items():

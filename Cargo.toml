@@ -6,6 +6,13 @@ publish = false
 
 [dependencies]
 sci = { path = "sci" }
+sci-core = { path = "sci/crates/sci-core" }
 serde_json = { version = "1", features = ["float_roundtrip"] }
 
 approx = "0.5.1"
+
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.test]
+debug = "line-tables-only"

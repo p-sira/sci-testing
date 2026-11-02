@@ -6,15 +6,66 @@ inputs only. Every generated problem has bounded dimensions and work.
 """
 from collections import Counter
 import hashlib
+from importlib import import_module
 import numpy as np
 import math
 import random
 
-from .case_csv import case_files, read_cases, write_files, write_cases
+from .case_csv import case_directory_digest, read_cases, write_cases
 
 from . import ROOT
 CASES_PER_METHOD = 1000
 SEED = 20261020
+ADDED_CASE_PROVIDERS = ('io_cases','special03_cases','structural03_cases','special_complex03_cases')
+
+
+def case_signature():
+    """Fingerprint every input recipe and the code that expands it.
+
+    Kept separate from the report source digest: documentation or measurement
+    changes must not regenerate the 2-million-case input snapshot.
+    """
+    source_names=[
+        'sci_testing/api_registry.py', 'sci_testing/case_csv.py',
+        'sci_testing/case_set.py', 'sci_testing/explicit_cases.py',
+        'sci_testing/fixture_program.py', 'sci_testing/generate_cases.py',
+        'sci_testing/registered_cases.py', 'sci_testing/sparse_cases.py',
+    ]
+    for provider in ADDED_CASE_PROVIDERS:
+        if (ROOT/f'sci_testing/{provider}.py').is_file():
+            source_names.append(f'sci_testing/{provider}.py')
+    digest=hashlib.sha256()
+    for name in source_names:
+        path=ROOT/name
+        digest.update(name.encode()+b'\0'+path.read_bytes()+b'\0')
+    for name in ['cases/base','cases/recipes']:
+        digest.update(name.encode()+b'\0'+case_directory_digest(ROOT/name).encode()+b'\0')
+    digest.update(f'count={CASES_PER_METHOD};seed={SEED}'.encode())
+    return digest.hexdigest()
+
+
+def load_cached_cases():
+    """Load saved input cases when the checked-in recipes and generator still match."""
+    from .case_set import cached_cases
+    return cached_cases(ROOT/'cases/generated',case_signature())
+
+
+def added_api_cases():
+    """Generate only newly registered API fixtures, one provider at a time."""
+    for provider in ADDED_CASE_PROVIDERS:
+        if (ROOT/f'sci_testing/{provider}.py').is_file():
+            yield from import_module(f'.{provider}',__package__).cases(CASES_PER_METHOD,SEED)
+
+
+def extend_historical_cases(historical):
+    """Append only truly new API fixtures to a verified historical snapshot.
+
+    The snapshot's existing bytes and case IDs remain authoritative; changed
+    generator code does not establish equivalence for old numerical problems.
+    Additional providers are imported only when their modules are installed.
+    """
+    from .case_set import ExtendedCaseSet
+    return ExtendedCaseSet(historical,added_api_cases())
 
 
 def build_cases():
@@ -165,6 +216,9 @@ def build_cases():
     # Exact first-minimum tie behavior and exact codebook matches are also tested.
     add('cluster.vq.vq', 'ties and exact matches', obs=[[0., 0.], [-1., 0.], [1., 0.]], codebook=[[-1., 0.], [1., 0.]])
     cases.extend(dense_cases(sorted({case['api'] for case in cases})))
+    # The Sci 0.3 additions each supply deterministic, independently sourced
+    # fixtures. Only this explicit list is generated for historical extension.
+    cases.extend(added_api_cases())
     from .case_set import CaseSet
     return CaseSet(cases,CASES_PER_METHOD,SEED)
 
@@ -237,5 +291,5 @@ def dense_cases(apis,count=CASES_PER_METHOD):
 
 if __name__ == '__main__':
     cases = build_cases()
-    write_cases(ROOT / 'cases/generated', cases)
+    write_cases(ROOT / 'cases/generated', cases,signature=case_signature())
     print(f'Generated {len(cases)} cases with seed {SEED}')

@@ -10,8 +10,10 @@ import copy
 from functools import lru_cache
 import io
 import json
+from pathlib import Path
+import sys
 import numpy as np
-from .api_registry import SCI
+from .api_registry import SCI, sci_target
 
 GRAPH = {
     'shortest_path','dijkstra','bellman_ford','floyd_warshall','johnson',
@@ -53,7 +55,7 @@ def rows(values):
     return ':'.join(enc(row) for row in values)
 
 
-def materialize(suite, raw):
+def materialize(suite, raw, *, catalog='pinned'):
     # Match the fixture input encodings without computing any expected values.
     name=raw['api']
     if suite=='sparse':
@@ -80,17 +82,31 @@ def materialize(suite, raw):
                indices=np.array([c for _,c,_ in ordered],dtype=np.int64),
                indptr=np.cumsum(pointers))
         fields.append(archive.getvalue().hex())
-    return dict(fields=fields,raw=raw,suite=suite,suite_name=suite)
+    result=dict(fields=fields,raw=raw,suite=suite,suite_name=suite)
+    if catalog != 'pinned':
+        result['catalog'] = catalog
+    return result
 
 
-def recipes():
+def load_catalog(source, suite):
+    """Read both pinned JSON and Sci 0.3's one-case-per-line JSONL inputs."""
+    directory = Path(source)/'tests/scipy'
+    jsonl = directory/f'{suite}_cases.jsonl'
+    if jsonl.is_file():
+        return [json.loads(line) for line in jsonl.read_text().splitlines() if line.strip()]
+    return json.loads((directory/f'{suite}_cases.json').read_text())
+
+
+def recipes(source=SCI):
     cases=[]
+    catalog = '0.3' if Path(source).resolve() == sci_target().resolve() else 'pinned'
     for suite in ('sparse','sparse_parity'):
-        for i,raw in enumerate(json.loads((SCI/f'tests/scipy/{suite}_cases.json').read_text())):
+        for i,raw in enumerate(load_catalog(source,suite)):
             if raw['api']=='lu_solve':continue  # This record method is covered by splu.
             api=api_name(raw['api'])
             cases.append(dict(id=f'{api}/recipe-{suite}-{i:04d}',api=api,
-                group='reference recipe; binary64 SciPy reference',args=materialize(suite,raw)))
+                group='reference recipe; binary64 SciPy reference',
+                args=materialize(suite,raw,catalog=catalog)))
     for scale in (1.,1e-20):
         raw=dict(id=f'gmres_scale_{scale}',api='gmres',
             a=[[4*scale,scale],[scale,3*scale]],x=[scale,2*scale],p=[],
@@ -98,13 +114,14 @@ def recipes():
         api=api_name('gmres')
         cases.append(dict(id=f'{api}/review-scale-{scale}',api=api,
             group='uniform operator/RHS scaling; two inner iterations',
-            args=materialize('sparse_parity',raw)))
+            args=materialize('sparse_parity',raw,catalog=catalog)))
     return cases
 
 
-@lru_cache(maxsize=2)
-def program(suite):
-    path=SCI/f'tests/scipy/generate_{suite}.py'
+@lru_cache(maxsize=4)
+def program(suite, catalog='pinned'):
+    source = sci_target() if catalog == '0.3' else SCI
+    path=source/f'tests/scipy/generate_{suite}.py'
     tree=ast.parse(path.read_text(),filename=str(path))
     prefix=[]
     for node in tree.body:
@@ -114,7 +131,13 @@ def program(suite):
         if isinstance(node,(ast.Import,ast.ImportFrom,ast.FunctionDef,ast.Assert,ast.Assign)):
             prefix.append(node)
     namespace={'__file__':str(path),'__name__':'sparse_reference','io':io}
-    exec(compile(ast.Module(body=prefix,type_ignores=[]),str(path),'exec'),namespace)
+    # 0.3 generators import their sibling case_catalog module. Execute only
+    # their definitions with that directory available; never run file writers.
+    sys.path.insert(0,str(path.parent))
+    try:
+        exec(compile(ast.Module(body=prefix,type_ignores=[]),str(path),'exec'),namespace)
+    finally:
+        sys.path.pop(0)
     body=[]
     for node in copy.deepcopy(loop.body):
         # Input/output writers are never executed. NPZ interchange stays in memory.
@@ -148,7 +171,7 @@ def program(suite):
 
 
 def raw_reference(case):
-    args=case['args'];raw=args['raw'];name=raw['api'];namespace=program(args['suite'])
+    args=case['args'];raw=args['raw'];name=raw['api'];namespace=program(args['suite'],args.get('catalog','pinned'))
     if args['suite']=='sparse':return namespace['evaluate'](raw)
     collected={}
     def emit(c,key,value):
