@@ -365,7 +365,8 @@ class AccuracyTests(unittest.TestCase):
             with self.subTest(partitioned=hasattr(batch,'function')), tempfile.TemporaryDirectory() as directory:
                 report.render(batch,records,meta,Path(directory))
                 text=(Path(directory)/'special.md').read_text()
-                self.assertIn('### `sci::special::elementary` (1 functions, 4 cases)',text)
+                self.assertIn('### `sci::special::elementary`\n\n1 function · 4 cases',text)
+                self.assertIn('covers 4 cases and 1 public API names;',text)
                 self.assertIn('| Function | Cases | Sci vs reference | SciPy | Boost.Math |',text)
                 self.assertIn('| `erf` | 4; Sci failed 2/4 | 4.5036e+15 / 4.5036e+15 | 1.0 / 1.0; failed 2/4; Sci unavailable 1/4 | 0.0 / 0.0; Sci unavailable 2/4 |',text)
                 self.assertIn('**Sci-special as the reference**',text)
@@ -383,9 +384,26 @@ class AccuracyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             report.render(cases,records,meta,Path(directory))
             text=(Path(directory)/'special.md').read_text()
-        self.assertIn('### `sci::special::complex` (1 functions, 1 cases)',text)
+        self.assertIn('### `sci::special::complex`\n\n1 function · 1 case',text)
         self.assertIn('| `complex.hankel1` | 1 | 1.0 / 0.5 |',text)
         self.assertIn('independent mathematical reference',text)
+
+    def test_namespace_heading_does_not_change_when_counts_change(self):
+        cases=[dict(id=f'special.{name}/0',api=f'special.{name}',group='sample',
+                    args={'x':.5}) for name in ('erf','erfc')]
+        records={case['id']:dict(reference=['1.0'],libraries={'Sci':{'values':[1.]}})
+                 for case in cases}
+        meta=dict(sci_commit='test',testing_sources_sha256='test',cases_sha256='test')
+        with tempfile.TemporaryDirectory() as directory:
+            output=Path(directory)
+            report.render(cases[:1],records,meta,output,modules=['special'])
+            before=(output/'special.md').read_text()
+            report.render(cases,records,meta,output,modules=['special'])
+            after=(output/'special.md').read_text()
+        self.assertIn('### `sci::special::elementary`\n\n1 function · 1 case',before)
+        self.assertIn('### `sci::special::elementary`\n\n2 functions · 2 cases',after)
+        self.assertEqual([line for line in before.splitlines() if line.startswith('### ')],
+                         [line for line in after.splitlines() if line.startswith('### ')])
 
     def test_symmetric_denominator(self):
         with mp.workdps(160):

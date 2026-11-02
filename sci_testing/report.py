@@ -614,8 +614,12 @@ def render(cases, records, meta, output, *, modules=None, cache=None):
         tables=[]
         for section in sorted(sections,key=lambda name:(name is None,name or '')):
             namespace=f'sci::{module}'+(f'::{section}' if section else '')
-            title=f'### `{namespace}` ({len(sections[section])} functions, {section_cases[section]} cases)'
-            tables.append(title+'\n\n'+table_header+'\n'.join(sections[section]))
+            title=f'### `{namespace}`'
+            count=len(sections[section])
+            section_case_count=section_cases[section]
+            totals=(f'{count} function{"s" if count != 1 else ""} · '
+                    f'{section_case_count} case{"s" if section_case_count != 1 else ""}')
+            tables.append(title+'\n\n'+totals+'\n\n'+table_header+'\n'.join(sections[section]))
         tables_text='\n\n'.join(tables)
         text = f'''# {module}: library comparison
 

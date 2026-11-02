@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::optimize::derivatives` (6 functions, 12152 cases)
+### `sci::optimize::derivatives`
+
+6 functions · 12152 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL |
 | --- | ---: | --- | --- | --- |
@@ -37,7 +39,9 @@ current public namespace, with their measured recipe names preserved.
 | `rosen_hess` | 2006 | 1.28 / 0.098842 | 1.28 / 0.098842 | — |
 | `rosen_hess_prod` | 2006 | 1.2806 / 0.097823 | 1.2806 / 0.097823 | — |
 
-### `sci::optimize::minimize` (4 functions, 8000 cases)
+### `sci::optimize::minimize`
+
+4 functions · 8000 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL |
 | --- | ---: | --- | --- | --- |

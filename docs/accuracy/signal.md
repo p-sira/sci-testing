@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::signal::advanced_design` (10 functions, 20151 cases)
+### `sci::signal::advanced_design`
+
+10 functions · 20151 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -41,7 +43,9 @@ current public namespace, with their measured recipe names preserved.
 | `iircomb` | 2008 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `iirdesign` | 2020 | 10.876 / 3.6349 | 10.876 / 3.6349 | — | — |
 
-### `sci::signal::convolution` (8 functions, 16168 cases)
+### `sci::signal::convolution`
+
+8 functions · 16168 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -54,7 +58,9 @@ current public namespace, with their measured recipe names preserved.
 | `resample_poly` | 2010 | 34.154 / 4.0757e-3 | 34.154 / 4.0757e-3 | — | — |
 | `upfirdn` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::signal::design` (28 functions, 56165 cases)
+### `sci::signal::design`
+
+28 functions · 56165 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -87,7 +93,9 @@ current public namespace, with their measured recipe names preserved.
 | `tf2zpk` | 2003 | 11.0 / 4.1576e-3 | 11.0 / 4.1576e-3 | — | — |
 | `zpk2tf` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::signal::filtering` (24 functions, 48113 cases)
+### `sci::signal::filtering`
+
+24 functions · 48113 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -116,7 +124,9 @@ current public namespace, with their measured recipe names preserved.
 | `sosfiltfilt` | 2004 | 3.3461 / 0.33608 | 3.3461 / 0.33608 | — | — |
 | `wiener` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 | 0.86957 / 7.9271e-5 | — |
 
-### `sci::signal::fir` (5 functions, 10038 cases)
+### `sci::signal::fir`
+
+5 functions · 10038 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -126,7 +136,9 @@ current public namespace, with their measured recipe names preserved.
 | `minimum_phase` | 2012 | 229.3 / 67.865 | 229.3 / 67.865 | — | — |
 | `remez` | 2006 | 3.8424e+8 / 1.5651e+7 | 3.8424e+8 / 1.5651e+7 | — | — |
 
-### `sci::signal::multidimensional` (5 functions, 10045 cases)
+### `sci::signal::multidimensional`
+
+5 functions · 10045 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -136,7 +148,9 @@ current public namespace, with their measured recipe names preserved.
 | `medfilt2d` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | — |
 | `sepfir2d` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::signal::peaks` (6 functions, 12082 cases)
+### `sci::signal::peaks`
+
+6 functions · 12082 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -147,7 +161,9 @@ current public namespace, with their measured recipe names preserved.
 | `peak_prominences` | 2006 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `peak_widths` | 2024 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::signal::representations` (7 functions, 14041 cases)
+### `sci::signal::representations`
+
+7 functions · 14041 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -159,7 +175,9 @@ current public namespace, with their measured recipe names preserved.
 | `unique_roots` | 2009 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `zpk2sos` | 2004 | 110.68 / 1.0752 | 110.68 / 1.0752 | — | — |
 
-### `sci::signal::spectral` (15 functions, 30122 cases)
+### `sci::signal::spectral`
+
+15 functions · 30122 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -179,7 +197,9 @@ current public namespace, with their measured recipe names preserved.
 | `welch` | 2012 | 6.0447 / 0.39974 | 6.0447 / 0.39974 | — | — |
 | `zoom_fft` | 2002 | 220.68 / 9.9508 | 220.68 / 9.9508 | — | — |
 
-### `sci::signal::splines` (10 functions, 20053 cases)
+### `sci::signal::splines`
+
+10 functions · 20053 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -194,7 +214,9 @@ current public namespace, with their measured recipe names preserved.
 | `symiirorder2` | 2006 | 961.31 / 0.85295 | 961.31 / 0.85295 | — | — |
 | `whittaker_henderson` | 2018 | 51.0 / 0.029234 | 51.0 / 0.029234 | — | — |
 
-### `sci::signal::systems` (13 functions, 26058 cases)
+### `sci::signal::systems`
+
+13 functions · 26058 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -212,7 +234,9 @@ current public namespace, with their measured recipe names preserved.
 | `tf2ss` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `zpk2ss` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::signal::utilities` (5 functions, 9120 cases)
+### `sci::signal::utilities`
+
+5 functions · 9120 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -222,7 +246,9 @@ current public namespace, with their measured recipe names preserved.
 | `oaconvolve` | 2012 | 9.0072e+15 / 7.6696e+13 | 9.0072e+15 / 7.6696e+13 | — | — |
 | `utilities.closest_stft_dual_window` | 1015 | 4.5036e+15 / 2.6721e+11 | 4.5036e+15 / 2.6721e+11 | — | — |
 
-### `sci::signal::waveforms` (9 functions, 18092 cases)
+### `sci::signal::waveforms`
+
+9 functions · 18092 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -236,7 +262,9 @@ current public namespace, with their measured recipe names preserved.
 | `unit_impulse` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `vectorstrength` | 2003 | 9.5247e+15 / 2.3776e+12 | 9.5247e+15 / 2.3776e+12 | — | — |
 
-### `sci::signal::windows` (27 functions, 54213 cases)
+### `sci::signal::windows`
+
+27 functions · 54213 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |
@@ -268,7 +296,9 @@ current public namespace, with their measured recipe names preserved.
 | `windows.triang` | 2008 | 4.125 / 0.39496 | 4.125 / 0.39496 | — | — |
 | `windows.tukey` | 2012 | 48.629 / 0.75994 | 48.629 / 0.75994 | — | — |
 
-### `sci::signal` (7 functions, 14046 cases)
+### `sci::signal`
+
+7 functions · 14046 cases
 
 | Function | Cases | Sci vs reference | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- |

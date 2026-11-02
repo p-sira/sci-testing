@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::filter::kalman` (5 functions, 10156 cases)
+### `sci::filter::kalman`
+
+5 functions · 10156 cases
 
 | Function | Cases | Sci vs reference | SciPy | FilterPy |
 | --- | ---: | --- | --- | --- |
@@ -36,7 +38,9 @@ current public namespace, with their measured recipe names preserved.
 | `kalman_update` | 2067 | 592.4 / 1.4033 | — | 536.75 / 1.1847 |
 | `unscented_kalman_step` | 2016 | 160.0 / 0.18685 | 160.0 / 0.18685 | — |
 
-### `sci::filter::particle` (5 functions, 10070 cases)
+### `sci::filter::particle`
+
+5 functions · 10070 cases
 
 | Function | Cases | Sci vs reference | SciPy | FilterPy |
 | --- | ---: | --- | --- | --- |

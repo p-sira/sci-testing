@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::io::matlab` (4 functions, 342 cases)
+### `sci::io::matlab`
+
+4 functions · 342 cases
 
 | Function | Cases | Sci vs reference | SciPy |
 | --- | ---: | --- | --- |
@@ -35,7 +37,9 @@ current public namespace, with their measured recipe names preserved.
 | `matlab.savemat` | 136 | 0.0 / 0.0 | 0.0 / 0.0 |
 | `matlab.whosmat` | 69 | 0.0 / 0.0 | 0.0 / 0.0 |
 
-### `sci::io::matrix_market` (3 functions, 33 cases)
+### `sci::io::matrix_market`
+
+3 functions · 33 cases
 
 | Function | Cases | Sci vs reference | SciPy |
 | --- | ---: | --- | --- |
@@ -43,7 +47,9 @@ current public namespace, with their measured recipe names preserved.
 | `matrix_market.mmread` | 11 | 0.0 / 0.0 | 0.0 / 0.0 |
 | `matrix_market.mmwrite` | 10 | 0.0 / 0.0 | 0.0 / 0.0 |
 
-### `sci::io::wavfile` (3 functions, 38 cases)
+### `sci::io::wavfile`
+
+3 functions · 38 cases
 
 | Function | Cases | Sci vs reference | SciPy |
 | --- | ---: | --- | --- |

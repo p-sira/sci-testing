@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::spatial::distance` (30 functions, 60263 cases)
+### `sci::spatial::distance`
+
+30 functions · 60263 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -61,7 +63,9 @@ current public namespace, with their measured recipe names preserved.
 | `squareform` | 2008 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `yule` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::spatial::transform` (3 functions, 6009 cases)
+### `sci::spatial::transform`
+
+3 functions · 6009 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |

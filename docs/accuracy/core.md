@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::core::csr` (3 functions, 3053 cases)
+### `sci::core::csr`
+
+3 functions · 3053 cases
 
 | Function | Cases | Sci vs reference | SciPy |
 | --- | ---: | --- | --- |

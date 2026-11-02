@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::special::bessel` (79 functions, 158117 cases)
+### `sci::special::bessel`
+
+79 functions · 158117 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -110,7 +112,9 @@ current public namespace, with their measured recipe names preserved.
 | `yve` | 2001 | 2.1372 / 0.30725 | 3.1918 / 0.76925 | 3.7151 / 1.2292 | 10.152 / 2.1815 |
 | `yvp` | 2001 | 1.6774 / 0.22764 | 1.6774 / 0.22764 | 3.9116 / 1.7106 | 6.1487 / 2.7366 |
 
-### `sci::special::beta` (6 functions, 12006 cases)
+### `sci::special::beta`
+
+6 functions · 12006 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -121,7 +125,9 @@ current public namespace, with their measured recipe names preserved.
 | `betaincinv` | 2001 | 5.6373 / 1.4373 | 5.6373 / 1.4373 | 4.2293 / 1.0307 | 9.8663 / 3.0761 |
 | `betaln` | 2001 | 1.8183 / 0.45892 | 1.8183 / 0.45892 | 2.4244 / 0.6917 | 7.2662 / 1.6828 |
 
-### `sci::special::combinatorics` (17 functions, 34060 cases)
+### `sci::special::combinatorics`
+
+17 functions · 34060 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -143,7 +149,9 @@ current public namespace, with their measured recipe names preserved.
 | `poch` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.0803 / 1.09 | 9.7823 / 2.9267 |
 | `stirling2` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::special::complex` (33 functions, 66323 cases)
+### `sci::special::complex`
+
+33 functions · 66323 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -181,7 +189,9 @@ current public namespace, with their measured recipe names preserved.
 | `complex.yve` | 2009 | 4.5036e+15 / 1.1209e+12 | 9.0072e+15 / 3.3626e+12 | — | — |
 | `complex.zeta` | 2008 | 23075.0 / 10.784 | 17076.0 / 8.486 | — | — |
 
-### `sci::special::elementary` (38 functions, 76189 cases)
+### `sci::special::elementary`
+
+38 functions · 76189 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -224,7 +234,9 @@ current public namespace, with their measured recipe names preserved.
 | `xlog1py` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `xlogy` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::special::elliptic` (27 functions, 54027 cases)
+### `sci::special::elliptic`
+
+27 functions · 54027 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -256,7 +268,9 @@ current public namespace, with their measured recipe names preserved.
 | `heuman_lambda` | 2001 | 4.9099 / 1.3411 | 4.9099 / 1.3411 | 2.9456 / 0.63202 | — |
 | `jacobi_zeta` | 2001 | 10.482 / 2.5691 | 10.482 / 2.5691 | 4.0275 / 0.94676 | — |
 
-### `sci::special::gamma` (15 functions, 30127 cases)
+### `sci::special::gamma`
+
+15 functions · 30127 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -276,7 +290,9 @@ current public namespace, with their measured recipe names preserved.
 | `rgamma` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.1941 / 0.44404; failed 1/2001 | 7.2204 / 1.6321 |
 | `trigamma` | 2005 | 3.5692 / 1.3033 | 3.5692 / 1.3033 | 2.0418 / 0.95601 | 3.0612 / 1.1846 |
 
-### `sci::special::hypergeometric` (6 functions, 12006 cases)
+### `sci::special::hypergeometric`
+
+6 functions · 12006 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -287,7 +303,9 @@ current public namespace, with their measured recipe names preserved.
 | `log_wright_bessel` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.5439 / 0.91777 | — |
 | `wright_bessel` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.308 / 0.49236 | — |
 
-### `sci::special::integrals` (13 functions, 26022 cases)
+### `sci::special::integrals`
+
+13 functions · 26022 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -305,7 +323,9 @@ current public namespace, with their measured recipe names preserved.
 | `sici` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | 14.101 / 2.1213 |
 | `spence` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | 19.773 / 8.5206 |
 
-### `sci::special::orthogonal` (54 functions, 108099 cases)
+### `sci::special::orthogonal`
+
+54 functions · 108099 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -364,7 +384,9 @@ current public namespace, with their measured recipe names preserved.
 | `sph_legendre_p` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.9404 / 0.78453 | 8.0796 / 2.7428 |
 | `sph_legendre_p_all` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::special::probability` (62 functions, 124098 cases)
+### `sci::special::probability`
+
+62 functions · 124098 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -431,7 +453,9 @@ current public namespace, with their measured recipe names preserved.
 | `tklmbda` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 | `voigt_profile` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::special::wave` (43 functions, 86151 cases)
+### `sci::special::wave`
+
+43 functions · 86151 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -479,14 +503,18 @@ current public namespace, with their measured recipe names preserved.
 | `sph_harm_y` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 2.8753 / 1.6208 | 1.9171 / 1.1284 |
 | `sph_harm_y_all` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
 
-### `sci::special::zeta` (2 functions, 4002 cases)
+### `sci::special::zeta`
+
+2 functions · 4002 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
 | `zeta` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | — | 3.3891 / 0.85298 |
 | `zetac` | 2001 | 0.0 / 0.0 | 0.0 / 0.0 | 4.3971 / 1.0808 | 23.403 / 5.9072 |
 
-### `sci::special` (10 functions, 20009 cases)
+### `sci::special`
+
+10 functions · 20009 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |

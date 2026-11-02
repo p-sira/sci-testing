@@ -26,7 +26,9 @@ Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
 canonical API inventory. Historical flat recipe aliases appear under their
 current public namespace, with their measured recipe names preserved.
 
-### `sci::interpolate::fitting` (7 functions, 14029 cases)
+### `sci::interpolate::fitting`
+
+7 functions · 14029 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -38,7 +40,9 @@ current public namespace, with their measured recipe names preserved.
 | `make_splprep` | 2007 | 2.674e+16 / 3.004e+14 | 2.674e+16 / 3.004e+14 | — | — |
 | `make_splrep` | 2005 | 4.5036e+15 / 1.2476e+11 | 4.5036e+15 / 1.2476e+11 | — | — |
 
-### `sci::interpolate::multidimensional` (3 functions, 6024 cases)
+### `sci::interpolate::multidimensional`
+
+3 functions · 6024 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -46,7 +50,9 @@ current public namespace, with their measured recipe names preserved.
 | `griddata` | 2007 | 11.871 / 0.4387 | 11.871 / 0.4387 | — | — |
 | `interpn` | 2014 | 0.57199 / 0.024425 | 0.57199 / 0.024425 | — | 0.0 / 0.0 |
 
-### `sci::interpolate::polynomial` (6 functions, 12104 cases)
+### `sci::interpolate::polynomial`
+
+6 functions · 12104 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -57,7 +63,9 @@ current public namespace, with their measured recipe names preserved.
 | `pade` | 2000 | 0.66574 / 0.051564 | 0.66574 / 0.051564 | — | — |
 | `pchip_interpolate` | 2000 | 1.7699 / 0.33489 | 1.7699 / 0.33489 | 2.0659 / 0.36574 | — |
 
-### `sci::interpolate::spline` (7 functions, 14055 cases)
+### `sci::interpolate::spline`
+
+7 functions · 14055 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
@@ -69,7 +77,9 @@ current public namespace, with their measured recipe names preserved.
 | `splint` | 2013 | 1.0508e+16 / 5.2203e+12 | 1.0508e+16 / 5.2203e+12 | — | — |
 | `sproot` | 2004 | 12.5 / 2.601 | 12.5 / 2.601 | — | — |
 
-### `sci::interpolate` (2 functions, 4012 cases)
+### `sci::interpolate`
+
+2 functions · 4012 cases
 
 | Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
