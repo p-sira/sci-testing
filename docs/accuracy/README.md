@@ -144,10 +144,10 @@ All reports and data belong to this repository; Sci links to them externally.
 ## Snapshot
 
 - Sci commit: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998`.
-- Harness source SHA-256: `4e2af78bce478470045921c727c3671c33670e79cea5bb28a95051d84d9f3492`.
+- Harness source SHA-256: `bf6d417e43a27b122ef1567b35e144f9982676d3962ba351e58aea63ec971d00`.
 - Input SHA-256: `f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854`.
 - 2349606 saved cases covering 1181 recipe API names; 1142 mapped canonical public functions in the inventory.
-- Native versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
+- Native versions: {'Boost.Math': '1_92', 'Boost.Multiprecision': '1_92', 'Boost.Numeric.uBLAS': '1_92', 'Boost.Graph': '1_92', 'Boost.Units': '1_92', 'GSL': '2.8'}.
 
 Sci-only refresh: independent references and other library outputs are retained from the saved snapshot. See `reference_environment` in `results/environment.json` for their original provenance.
 

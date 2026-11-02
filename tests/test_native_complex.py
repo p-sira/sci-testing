@@ -54,7 +54,12 @@ class NativeComplexTests(unittest.TestCase):
         self.assertNotIn('values', pole['GSL'])
 
     def test_unsupported_or_malformed_input(self):
-        self.assertEqual(self.native.evaluate_complex(self.case('gamma', 1., 1.)), {})
+        # Gamma is now handled by the dedicated checked GSL complex bridge.
+        gamma = self.native.evaluate_complex(self.case('gamma', 1., 1.))
+        self.assertEqual(set(gamma), {'GSL'})
+        self.assertNotIn('error', gamma['GSL'])
+        self.assertEqual(len(gamma['GSL']['values']), 2)
+        self.assertEqual(self.native.evaluate_complex(self.case('wofz', 1., 1.)), {})
         self.assertEqual(self.native.evaluate_complex({'api': 'special.digamma',
                                                        'args': {'z': [.5, .5]}}), {})
         with self.assertRaisesRegex(ValueError, 'expected a complex'):

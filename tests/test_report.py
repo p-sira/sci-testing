@@ -321,7 +321,10 @@ class AccuracyTests(unittest.TestCase):
     def test_native_comparisons_and_individual_library_failures(self):
         from sci_testing.native_compare import NativeComparisons
         native=NativeComparisons()
-        self.assertEqual(set(native.versions),{'Boost.Math','GSL'})
+        self.assertEqual(set(native.versions),{
+            'Boost.Math','Boost.Multiprecision','Boost.Numeric.uBLAS',
+            'Boost.Graph','Boost.Units','GSL',
+        })
         for api,args,want in [('special.erf',{'x':.5},float(mp.erf(.5))),
                              ('special.betainc',{'p0':2.,'p1':3.,'p2':.25},.26171875)]:
             for result in native.evaluate({'api':api,'args':args}).values():

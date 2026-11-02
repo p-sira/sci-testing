@@ -38,6 +38,9 @@ EPS = mp.mpf(2) ** -52
 TINY = mp.mpf(2) ** -1022
 MODULES = ('cluster complex constants core differentiate fft filter integrate interpolate io '
            'linalg optimize signal sparse spatial special stats').split()
+NATIVE_MODULES = frozenset(('complex', 'constants', 'differentiate', 'fft',
+                            'integrate', 'interpolate', 'linalg', 'optimize', 'signal',
+                            'sparse', 'spatial', 'special', 'stats'))
 BOOST = 'https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/'
 NOTES = {
     'sparse':'Canonical CSR and COO arrays retain explicit zeros. Matrix outputs include dimensions; graph distances retain infinities. Eigenpairs are compared by ordered values with independent residual checks; matching cardinality, permutation validity, flow conservation and random shape/count use invariants where outputs are nonunique. Sparse LU, iterative solves and matrix functions use pinned public SciPy references. Each scalar uses (class,value): class 0 for finite data, ±1 for signed infinity and 2 for NaN, with zero nonfinite payloads. This preserves unreachable vertices; exact tags contribute to component means. RNG streams differ. Dense samples preserve graph structure, integer capacities and dependent dimensions; fixed discrete profiles may repeat. Rust signature adaptations and bounded dense fallbacks are documented in Sci sparse coverage.',
@@ -58,6 +61,144 @@ NOTES = {
     'special':'All public special-function implementations have typed registrations or an explicit policy recipe. Original erf/gamma recipes use high-precision mpmath; added recipes use independent public SciPy calls, identities or quadrature. Polynomial constructors return descending coefficients; sequence and tuple ordering follows the pinned fixtures. Boost.Math/GSL are called where the bridge has matching scalar APIs, converting elliptic parameter m to modulus sqrt(m). Public GSL provides complex digamma and complex Spence; its Spence on negative real inputs with negative imaginary zero selects the upper bank, which can disagree with the independent lower-bank reference.',
     'stats':'Distribution parameters, tail conventions, alternatives, ddof, explicit resampling draws and output ordering follow the pinned statistics fixtures. SciPy supplies binary64 references for added APIs, including documented adaptations and independently seeded probabilistic references. Weighted tau compares its statistic; its always-NaN p-value is left to the ordinary API tests. Normality, inverse and joint-tail approximations have reference and algorithm accuracy limits.',
 }
+
+# Derived adapters are mathematical comparisons built around public numerical
+# building blocks, rather than dedicated public full-function APIs. Disclose
+# their composition, validated domains and cross-library dependencies alongside
+# the generated special-function accuracy table.
+NOTES['special'] += (
+    ' Additional Bessel comparisons are explicitly derived: real-positive-argument '
+    'Hankel functions combine public cylindrical J/Y functions, zero collections '
+    'use public Bessel/Airy zeros and bracketed derivative roots, and Riccati '
+    'arrays use spherical Bessel recurrences. Modified-Bessel I ratios use Boost '
+    'I evaluations for moderate arguments, plus independent small-argument series '
+    'and large-argument Riccati asymptotics where a direct Boost quotient would '
+    'underflow or overflow; the latter cases are not direct Boost evaluations. '
+    'Bessel integrals use Boost Gauss–Kronrod quadrature over either Boost or GSL '
+    'Bessel kernels: GSL-labelled integral results therefore share a Boost '
+    'quadrature backend, not an independent GSL integration algorithm. These '
+    'composed bridges enforce bounded real domains. Kelvin ber/bei, real Struve '
+    'and the sampled half-order Wright-Bessel functions use public Boost.Math '
+    'generalized hypergeometric pFq reductions, with their own narrower domains. '
+    'The three real Struve-integral comparisons similarly use public Boost 2F3 '
+    'identities. Kelvin ker/kei and derivative comparisons and the full Kelvin '
+    'tuple use GSL quadrature of defining complex-Bessel integral representations, '
+    'not a public complex-valued GSL Bessel function. '
+    'None of these adapters implies support for general complex-argument Bessel '
+    'functions.'
+)
+
+NOTES['special'] += (
+    ' Further native competitors are independently validated compositions, not '
+    'a claim of matching named APIs: GSL fixed Gaussian quadrature provides '
+    'nodes and weights for Legendre, Jacobi, Gegenbauer, Laguerre, Hermite and '
+    'Chebyshev roots, with explicit shifted/scaled rule transformations. Boost '
+    'Legendre roots and Q primitives produce the sampled roots_legendre/lqn '
+    'arrays. Public GSL Airy zero routines supply both zeros and derivative '
+    'zeros and their companion values; GSL Bessel Jn/Yn primitives and root '
+    'solvers give integer-order zero collections, with full sequence ordering '
+    'validated against the independent SciPy fixtures. Additional scalar '
+    'inverses, gamma/elliptic identities, Box-Cox/logistic transforms, and '
+    'combinatorial functions compose Boost.Math or GSL primitives under '
+    'guarded domains. GSL Kelvin ber/bei and derivatives reuse the already '
+    'documented GSL quadrature backend; they are not public GSL Kelvin APIs.'
+)
+
+NOTES['stats'] += (
+    ' Additional Boost.Math-derived statistics use its public sample-moment '
+    'primitives and chi-square, binomial and hypergeometric distributions; '
+    'alternatives, ties, degrees of freedom and paired outputs follow the '
+    'specific saved Sci contracts. GSL-derived statistics combine public '
+    'GSL sample moments with t, F and chi-square distribution tails and '
+    'explicit circular/logarithmic transformations. These are mathematical '
+    'compositions with independent SciPy validation, not claims that the '
+    'libraries export identical named Sci statistical functions.'
+)
+
+NOTES['complex'] += (
+    ' Boost.Multiprecision cpp_complex_50 is a separate public Boost complex '
+    'arithmetic backend, not Boost.Math and not std::complex relabeled as Boost. '
+    'Its transcendental and arithmetic comparisons are deliberately bounded '
+    'around signed-zero banks, branch cuts and overflow; unavailable samples '
+    'are not silently substituted with Sci or NumPy values.'
+)
+NOTES['integrate'] += (
+    ' For the saved exponential callback only, Boost.Math and GSL independently '
+    'provide fixed 16-point Gauss-Legendre quadrature. These are distinct from '
+    'adaptive quadrature and the sampled-data trapezoid/Simpson operations.'
+)
+NOTES['differentiate'] += (
+    ' Boost.Math numerical finite differences and automatic differentiation '
+    'evaluate the saved analytic callbacks independently. Their method and '
+    'step policy differ from Sci fixed-step stencils, so agreement is numerical '
+    'rather than a claim of identical algorithms.'
+)
+NOTES['linalg'] += (
+    ' Boost.Numeric.uBLAS provides public matrix/vector arithmetic and LU '
+    'solves; GSL provides BLAS, LU, Cholesky, symmetric eigenvalue and SVD '
+    'primitives. Output order is adapted to the saved Sci contracts. '
+    'Ill-conditioned solves can disagree with SciPy rounding while still '
+    'being closer to independent high-precision mathematical references.'
+)
+NOTES['sparse'] += (
+    ' Boost.Graph comparisons use public traversal, connected-component, '
+    'shortest-path and minimum-spanning-tree algorithms on saved adjacency '
+    'matrices; Boost.Numeric.uBLAS supplies sparse matrix arithmetic. '
+    'Nonfinite distances use Sci\'s explicit (class,value) encoding, and '
+    'matrix shape metadata is preserved. These adapters are not a general '
+    'replacement for arbitrary Sci graph options or sparse formats.'
+)
+NOTES['spatial'] += (
+    ' Boost.Math public vector norms independently implement bounded L1, '
+    'L2, L-infinity and integer-p distance kernels; pairwise matrices and '
+    'weighted distance conventions are documented derived compositions. '
+    'Unsupported metric names and fractional powers remain unavailable.'
+)
+NOTES['spatial'] += (
+    ' GSL-labelled distances are explicitly derived from public GSL BLAS '
+    'norm/dot operations and sample covariance/mean statistics, with weighted '
+    'Sci conventions applied by the adapter; GSL does not provide identical '
+    'publicly named distance APIs.'
+)
+NOTES['interpolate'] += (
+    ' Public Boost.Math PCHIP and barycentric polynomial interpolators '
+    'provide independent bounded real-data comparisons. SciPy-compatible '
+    'endpoint slopes must be supplied to Boost PCHIP; nontrivial extrapolation '
+    'and repeated-node Krogh/Hermite derivatives are not automatically '
+    'equivalent to the saved polynomial interpolation profile.'
+)
+NOTES['interpolate'] += (
+    ' GSL polynomial interpolation and public interval search provide '
+    'independent saved Barycentric/Krogh and limited tensor-grid comparisons; '
+    'general Sci PCHIP slope rules are not identical to GSL Steffen splines.'
+)
+NOTES['signal'] += (
+    ' The limited GSL statistical-filter competitors compose public '
+    'GSL linear-regression, mean/variance, sorting and median primitives '
+    'for the exact saved 1-D/2-D detrend, Wiener and median-filter profiles. '
+    'These are derived DSP implementations, not GSL exports of Sci\'s named '
+    'signal-processing algorithms.'
+)
+NOTES['constants'] += (
+    ' Boost.Units adds independently typed affine temperature and SI '
+    'wavelength/frequency conversions; it is not part of Boost.Math. '
+    'The currently sampled CODATA lookup/metadata tables are not assumed '
+    'to match Boost.Units constants from other release years.'
+)
+NOTES['optimize'] += (
+    ' GSL native multidimensional simplex and BFGS optimizers provide '
+    'independent solutions of the saved convex two-dimensional quadratic '
+    'objective, with guarded convergence, iteration budgets and function '
+    'offset handling. Convergence trajectories and algorithms need not '
+    'match Sci optimizers; only the saved final position and cost are '
+    'compared.'
+)
+NOTES['fft'] += (
+    ' GSL public complex forward/inverse FFT routines independently evaluate '
+    'the saved finite, one-dimensional fft/ifft profiles, including non-power-of-two '
+    'lengths and inverse scaling. Real, multidimensional, cosine/sine and '
+    'arbitrary-transform-option variants are not thereby covered.'
+)
 
 
 
@@ -311,9 +452,9 @@ def competitors(case):
 
 def native_competitors(native, case):
     """Use only matching public Boost.Math/GSL interfaces and their true ABI."""
-    if native is None or case['args'].get('special03_case'):
+    if native is None:
         return {}
-    if case['args'].get('special_complex03_case'):
+    if case['api'].startswith('special.complex.'):
         return native.evaluate_complex(case)
     return native.evaluate(case)
 
@@ -332,6 +473,7 @@ def symmetric_error(actual, reference):
 
 
 ZERO=mp.mpf(0)
+METRIC_PRECISION_DPS = 160
 
 
 def component_error(actual, reference, *, binary64):
@@ -379,6 +521,55 @@ def comparison_submodule(api, canonical):
     return path[1] if len(path)>2 else None
 
 
+def summarize_api(api, batch, records, libraries, failed):
+    """Produce the authenticated numerical row without page presentation prose."""
+    cells=[]
+    baseline_failures=0
+    reference_maximum=None;reference_sum=ZERO;reference_count=0
+    for case in batch:
+        record=records[case['id']]
+        baseline=record['libraries']['Sci']
+        if 'error' in baseline:
+            baseline_failures+=1
+            entry=failed.setdefault((api,'Sci'),[0,baseline['error'],case['id']]);entry[0]+=1
+        elif len(baseline['values'])!=len(record['reference']):
+            raise ValueError(f'{case["id"]}: shape mismatch in Sci')
+        else:
+            errors=[component_error(actual,reference,binary64=False)
+                    for actual,reference in zip(baseline['values'],record['reference'])]
+            if errors:
+                current=max(errors)
+                reference_maximum=current if reference_maximum is None else max(reference_maximum,current)
+                reference_sum+=mp.fsum(errors)
+                reference_count+=len(errors)
+    for lib in libraries:
+        sums=[];maximum=None;scalar_count=0;failures=0;unavailable=0;baseline_missing=0
+        for case in batch:
+            record=records[case['id']];result=record['libraries'].get(lib)
+            if result is None:unavailable+=1;continue
+            if 'error' in result:
+                failures+=1
+                entry=failed.setdefault((api,lib),[0,result['error'],case['id']]);entry[0]+=1
+                continue
+            if len(result['values'])!=len(record['reference']):raise ValueError(f'{case["id"]}: shape mismatch in {lib}')
+            baseline=record['libraries']['Sci']
+            if 'error' in baseline:baseline_missing+=1;continue
+            skip=len(case['args']['obs']) if api=='cluster.vq.vq' else 0
+            errors=[component_error(actual,ref,binary64=True) for actual,ref in zip(result['values'][skip:],baseline['values'][skip:])]
+            if errors:
+                current=max(errors);maximum=current if maximum is None else max(maximum,current)
+                sums.append(mp.fsum(errors));scalar_count+=len(errors)
+        if unavailable==len(batch):cells.append('—');continue
+        text=f'{number(maximum)} / {number(mp.fsum(sums)/scalar_count)}' if scalar_count else '—'
+        cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
+                     (f'; unavailable {unavailable}/{len(batch)}' if unavailable else '')+
+                     (f'; Sci unavailable {baseline_missing}/{len(batch)}' if baseline_missing else ''))
+    count=str(len(batch))+(f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')
+    reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
+                    if reference_count else '—')
+    return f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |'
+
+
 def render(cases, records, meta, output, *, modules=None, cache=None):
     output.mkdir(parents=True,exist_ok=True)
     from .coverage_audit import inventory
@@ -409,53 +600,9 @@ def render(cases, records, meta, output, *, modules=None, cache=None):
                 section_cases[section]+=len(batch)
                 sections[section].append(saved['row'])
                 continue
-            cells=[]
-            baseline_failures=0
-            reference_maximum=None;reference_sum=ZERO;reference_count=0
-            for case in batch:
-                record=records[case['id']]
-                baseline=record['libraries']['Sci']
-                if 'error' in baseline:
-                    baseline_failures+=1
-                    entry=failed.setdefault((api,'Sci'),[0,baseline['error'],case['id']]);entry[0]+=1
-                elif len(baseline['values'])!=len(record['reference']):
-                    raise ValueError(f'{case["id"]}: shape mismatch in Sci')
-                else:
-                    errors=[component_error(actual,reference,binary64=False)
-                            for actual,reference in zip(baseline['values'],record['reference'])]
-                    if errors:
-                        current=max(errors)
-                        reference_maximum=current if reference_maximum is None else max(reference_maximum,current)
-                        reference_sum+=mp.fsum(errors)
-                        reference_count+=len(errors)
-            for lib in libraries:
-                sums=[];maximum=None;scalar_count=0;failures=0;unavailable=0;baseline_missing=0
-                for case in batch:
-                    record=records[case['id']];result=record['libraries'].get(lib)
-                    if result is None:unavailable+=1;continue
-                    if 'error' in result:
-                        failures+=1
-                        entry=failed.setdefault((api,lib),[0,result['error'],case['id']]);entry[0]+=1
-                        continue
-                    if len(result['values'])!=len(record['reference']):raise ValueError(f'{case["id"]}: shape mismatch in {lib}')
-                    baseline=record['libraries']['Sci']
-                    if 'error' in baseline:baseline_missing+=1;continue
-                    skip=len(case['args']['obs']) if api=='cluster.vq.vq' else 0
-                    errors=[component_error(actual,ref,binary64=True) for actual,ref in zip(result['values'][skip:],baseline['values'][skip:])]
-                    if errors:
-                        current=max(errors);maximum=current if maximum is None else max(maximum,current)
-                        sums.append(mp.fsum(errors));scalar_count+=len(errors)
-                if unavailable==len(batch):cells.append('—');continue
-                if unavailable:raise ValueError('partially missing implementation')
-                text=f'{number(maximum)} / {number(mp.fsum(sums)/scalar_count)}' if scalar_count else '—'
-                cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
-                             (f'; Sci unavailable {baseline_missing}/{len(batch)}' if baseline_missing else ''))
-            count=str(len(batch))+(f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')
-            reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
-                            if reference_count else '—')
+            row=summarize_api(api,batch,records,libraries,failed)
             section=comparison_submodule(api,canonical.get(api))
             section_cases[section]+=len(batch)
-            row=f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |'
             sections[section].append(row)
             if cache is not None:
                 cache.put(api,libraries,{'row':row,'failures':[
@@ -488,7 +635,10 @@ mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means no saved comparison or no paired finite results.
+because Sci failed. `unavailable N/T` means the library has no compatible
+public operation for those inputs or distribution families; they are excluded
+from the reported mean and are not counted as numerical failures. A dash means
+no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
 Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
@@ -685,6 +835,12 @@ def render_cached(cases,records,meta,output,*,modules=None,root=None,inputs=None
                         previous=prior if checksum else None,
                         previous_sha256=checksum,
                         reuse=not exhaustive,require_hits=require_hits)
+    # Selective rendering can reuse unaffected API summaries only when the
+    # stored metric implementation fingerprint still matches. If that
+    # fingerprint changes, all previous summaries are untrusted and must be
+    # rebuilt together before the full index can be authenticated.
+    if modules is not None and set(cache.entries) != set(cases.apis):
+        modules = None
     render(cases,records,meta,output,modules=modules,cache=cache)
     content=cache.serialize(cases.apis)
     output.mkdir(parents=True,exist_ok=True)
@@ -783,7 +939,7 @@ def selective_render_modules(output, dirty_modules):
 
 def extend_references(cases, added, executable, destination):
     """Evaluate only new cases; preserve all older reference strings and results."""
-    native=NativeComparisons() if any(api.startswith(('special.','stats.'))
+    native=NativeComparisons() if any(api.split('.',1)[0] in NATIVE_MODULES
                                       for api in added) else None
     libraries={}
     for api,batch in added.items():
@@ -799,7 +955,7 @@ def extend_references(cases, added, executable, destination):
             result={k:v for k,v in result.items() if k!='id'}
             if 'values' in result:result['values']=list(map(float,result['values']))
             high=stable_reference(case)
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 libs={'Sci':result,**competitors(case),**native_competitors(native,case)}
                 for value in libs.values():validate_result(case,value,high)
                 updated[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],
@@ -826,7 +982,7 @@ def check_generated(cases, output, *, root=None, cached=False, exhaustive=False)
             from .coverage_audit import audit
             if audit(cases,records)!=saved:
                 raise ValueError('Stale coverage audit; rerun python -m sci_testing.report')
-    with tempfile.TemporaryDirectory() as directory, mp.workdps(160):
+    with tempfile.TemporaryDirectory() as directory, mp.workdps(METRIC_PRECISION_DPS):
         expected=Path(directory)
         original_checksum=meta.get('accuracy_summaries_sha256')
         if original_checksum:
@@ -893,7 +1049,7 @@ def refresh_sci(cases, records, executable, destination, apis):
             if 'error' not in result and 'values' not in result:
                 raise ValueError(f'{case["id"]}: runner returned neither values nor an error')
             if 'values' in result:result['values']=list(map(float,result['values']))
-            with mp.workdps(160):validate_result(case,result,saved['reference'])
+            with mp.workdps(METRIC_PRECISION_DPS):validate_result(case,result,saved['reference'])
             updated[case['id']]={**saved,'libraries':{**saved['libraries'],'Sci':result}}
         # The staging tree may share hard links with the saved snapshot. Break
         # those links before write_measurements opens a file for truncation.
@@ -948,7 +1104,7 @@ def upgrade_scientific_comparisons(cases, records, destination):
         for case in batch:
             saved=records[case['id']]
             high=stable_reference(case)
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 libraries={lib:value for lib,value in saved['libraries'].items()
                            if lib not in ('stdlib','NumPy')}
                 libraries.update(competitors(case))
@@ -1057,7 +1213,7 @@ def main():
             modules=(selective_render_modules(args.output.resolve(),
                                               {api.split('.')[0] for api in render_apis})
                      if args.module else None)
-            with mp.workdps(160):render_cached(cases,records,meta,pages,modules=modules)
+            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,records,meta,pages,modules=modules)
             (ROOT/'results/coverage.csv').write_text(coverage)
             publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
@@ -1089,7 +1245,7 @@ def main():
             meta['measurements_sha256']=directory_digest(staged)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=workspace/'pages'
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 render_cached(cases,staged_records,meta,pages,
                        modules=selective_render_modules(args.output.resolve(),
                                                         {'complex','special','stats'}))
@@ -1123,7 +1279,7 @@ def main():
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
     if args.comparators_only:
-        native=NativeComparisons() if any(api.startswith(('special.','stats.'))
+        native=NativeComparisons() if any(api.split('.',1)[0] in NATIVE_MODULES
                                           for api in selected) else None
         meta=previous.copy()
         meta['module_libraries']={module:list(names) for module,names in previous['module_libraries'].items()}
@@ -1149,7 +1305,7 @@ def main():
                 'apis':sorted(selected),'testing_sources_sha256':meta['testing_sources_sha256'],
                 'scipy':meta['scipy'],'native_libraries':meta.get('native_libraries',{})})
             pages=workspace/'pages'
-            with mp.workdps(160):
+            with mp.workdps(METRIC_PRECISION_DPS):
                 render_cached(cases,staged_records,meta,pages,
                        modules=selective_render_modules(args.output.resolve(),
                                                         {api.split('.')[0] for api in selected}))
@@ -1237,7 +1393,7 @@ def main():
             coverage=audit(cases,staged_records,required_apis=added)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=workspace/'pages'
-            with mp.workdps(160):render_cached(cases,staged_records,meta,pages,inputs=staged_inputs)
+            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,staged_records,meta,pages,inputs=staged_inputs)
             # All existing inputs were checked before preparing these files.
             old_inputs=ROOT/'cases/generated'
             backup=workspace/'previous-cases'
@@ -1277,7 +1433,7 @@ def main():
             meta['measurements_sha256']=directory_digest(staged)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=Path(directory)/'pages'
-            with mp.workdps(160):render_cached(cases,staged_records,meta,pages)
+            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,staged_records,meta,pages)
             # Finish all audits and page generation before publishing changes.
             for name in sorted(changed):
                 path=staged/name
@@ -1308,7 +1464,7 @@ def main():
             records={}
             for case,result in zip(batch,rust):
                 high=stable_reference(case)
-                with mp.workdps(160):
+                with mp.workdps(METRIC_PRECISION_DPS):
                     native_results=native_competitors(native,case)
                     libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native_results}
                     for res in libs.values():validate_result(case,res,high)
@@ -1329,7 +1485,7 @@ def main():
     coverage=audit(cases,records)
     (results/'coverage.csv').write_text(coverage)
     meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
-    with mp.workdps(160): render_cached(cases,records,meta,args.output.resolve())
+    with mp.workdps(METRIC_PRECISION_DPS): render_cached(cases,records,meta,args.output.resolve())
     publish_summary(args.output.resolve())
     (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
     print(f'Wrote {len(MODULES)} module pages, {len(cases)} cases to {args.output}')

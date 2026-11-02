@@ -161,11 +161,62 @@ Sci and its private backends never generate expectations. Nonunique factors use
 projectors, reconstructions and ordered eigenvalues. Module pages document the
 remaining adaptations and reference accuracy limits.
 
-The separate C++ bridge calls Boost.Math and GSL where matching scalar APIs exist.
+The separate C++ bridge calls public Boost.Math, Boost.Multiprecision,
+Boost.Graph, Boost.Numeric.uBLAS, Boost.Units and GSL interfaces where an
+independently verified numerical comparison exists. These are distinct
+provider labels in the saved measurements; compositions are not falsely
+described as dedicated named functions in the underlying libraries.
 It converts elliptic parameter m to modulus sqrt(m), contains native exceptions,
 disables GSL's abort handler and retains GSL error statuses. Versions and native
 compiler flags are recorded. See the [Boost.Math reference](https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html)
 and [GSL special-function conventions](https://www.gnu.org/software/gsl/doc/html/specfunc.html).
+
+**Competitor coverage is an observed measurement, not an exhaustion claim.**
+The generated [special](docs/accuracy/special.md) and
+[statistics](docs/accuracy/stats.md) tables inventory the Boost.Math and GSL
+comparisons actually recorded for each sampled API; the raw measurements retain
+their per-input results and errors. A dash does **not** establish that the
+competitor lacks a direct function or a mathematically equivalent composition.
+In particular, `results/coverage.csv` measures *Sci API/fixture* coverage, not
+the completeness of Boost.Math/GSL adapters. Finding further equivalents
+requires reviewing public library interfaces and supported versions, checking
+the complete Sci argument/output conventions, and validating implementations
+against saved inputs and independent mathematical references. Derived or
+mixed-library calculations must be identified as such. The small
+`tests/test_native_registration.py` guards previously successful comparisons
+against accidental disappearance; adapter-specific tests check numerical
+correctness. **Neither test can replace manual competitor research.**
+
+The native bridge also implements verified *derived* competitors where a Sci
+function has no identically named Boost.Math/GSL entry point. Examples include
+GSL Gaussian-quadrature nodes and weights, integer-order Bessel roots, Kelvin
+integrals and statistical tests composed from GSL moments/CDFs; and Boost.Math
+Legendre arrays, inverse transforms, and statistics composed from its public
+distributions. Airy zeros use GSL's public direct zero routines. These
+comparisons are limited to their independently tested saved signatures and
+guarded numerical domains; family-specific tests check the full saved-case
+arrays, including ordering and auxiliary outputs. See the notes in the special
+and statistics report pages for provenance and limitations.
+
+The non-special adapters extend comparisons to Boost.Multiprecision complex
+arithmetic, Boost.Graph sparse graph algorithms, Boost.Numeric.uBLAS dense and
+sparse operations, Boost.Units quantity conversions, and GSL/Boost.Math
+linear algebra, fixed quadrature, interpolation, differentiation, geometric
+distances and bounded signal/optimization algorithms. Saved graph traversal,
+matching, flow, derived Laplacian and one-dimensional GSL complex FFT profiles
+are included where independently verified. Full output shapes, matrix order,
+parameter restrictions and complex branch conventions are
+checked in standalone adapter suites against independent public SciPy or
+high-precision mathematical references. Some inputs are deliberately
+unavailable: a named competitor column reports a successfully evaluated
+subset, never a guarantee of complete Sci signature or domain coverage.
+Report headers show providers available somewhere in a module, not support
+for every API in that module; only populated per-function cells and successful
+saved measurements establish actual coverage. Some deliberately unsupported
+domains retain explicit native error records rather than fabricated values.
+The generated namespace directories deliberately retain dotted names such as
+`cases/generated/sparse.csgraph/` and `sparse.linalg/`; neither inputs nor
+independent references have been renamed or regenerated for this extension.
 
 Tables are split by canonical **Sci 0.3 submodule**, including historical recipes
 whose old names map to the new namespaces. They contain **Function**, **Cases**,
@@ -186,6 +237,14 @@ and all generated pages without compiling or writing files. The cache stored in
 `results/accuracy-summaries.json` binds each API's metrics to its input and
 measurement bytes, comparison columns, and metric implementation. The nightly
 `--check --exhaustive` recomputes every metric and audits coverage independently.
+The summary cache fingerprints the numerical row calculation independently of
+report prose. Editing commentary or Markdown presentation therefore does not
+force recalculation of millions of high-precision samples; changed measurement
+files still invalidate their own per-API summaries. The whole-source SHA-256
+continues to authenticate both code and documentation. A selective `--render
+--module special.agm` normally reuses all unchanged numerical summaries.
+Replacing the high-precision `Sci vs reference` calculation with binary64 is
+not equivalent: the stored oracle strings often carry more than 100 digits.
 Moving or editing harness sources invalidates the recorded source digest; rerun
 the report against the pinned Sci checkout to update the snapshot. Use `--render`
 to regenerate only the report from verified saved measurements; `--comparators-only

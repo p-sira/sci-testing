@@ -16,7 +16,10 @@ mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means no saved comparison or no paired finite results.
+because Sci failed. `unavailable N/T` means the library has no compatible
+public operation for those inputs or distribution families; they are excluded
+from the reported mean and are not counted as numerical failures. A dash means
+no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
 Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
@@ -25,25 +28,25 @@ current public namespace, with their measured recipe names preserved.
 
 ### `sci::integrate::quadrature` (2 functions, 4068 cases)
 
-| Function | Cases | Sci vs reference | SciPy | NumPy |
-| --- | ---: | --- | --- | --- |
-| `fixed_quad` | 2068 | 21.656 / 2.9595 | 41.586 / 5.142 | — |
-| `newton_cotes` | 2000 | 1.1988e+7 / 8920.3 | 1.1988e+7 / 8920.3 | — |
+| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
+| --- | ---: | --- | --- | --- | --- | --- |
+| `fixed_quad` | 2068 | 21.656 / 2.9595 | 41.586 / 5.142 | 18.905 / 3.0513 | 18.598 / 2.976 | — |
+| `newton_cotes` | 2000 | 1.1988e+7 / 8920.3 | 1.1988e+7 / 8920.3 | — | — | — |
 
 ### `sci::integrate::sampled` (5 functions, 10067 cases)
 
-| Function | Cases | Sci vs reference | SciPy | NumPy |
-| --- | ---: | --- | --- | --- |
-| `cumulative_simpson` | 2000 | 499.5 / 0.48561 | 499.5 / 0.48561 | — |
-| `cumulative_trapezoid` | 2000 | 666.0 / 0.18511 | 666.0 / 0.18511 | — |
-| `romb` | 2000 | 1.984 / 0.1853 | 1.984 / 0.1853 | — |
-| `simpson` | 2000 | 1.9521 / 0.361 | 1.9521 / 0.361 | — |
-| `trapezoid` | 2067 | 130.12 / 0.43205 | 102.39 / 0.34064 | 102.39 / 0.34064 |
+| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
+| --- | ---: | --- | --- | --- | --- | --- |
+| `cumulative_simpson` | 2000 | 499.5 / 0.48561 | 499.5 / 0.48561 | — | — | — |
+| `cumulative_trapezoid` | 2000 | 666.0 / 0.18511 | 666.0 / 0.18511 | — | — | — |
+| `romb` | 2000 | 1.984 / 0.1853 | 1.984 / 0.1853 | — | — | — |
+| `simpson` | 2000 | 1.9521 / 0.361 | 1.9521 / 0.361 | — | — | — |
+| `trapezoid` | 2067 | 130.12 / 0.43205 | 102.39 / 0.34064 | — | — | 102.39 / 0.34064 |
 
 
 ## Conventions and limitations
 
-Discrete-rule references integrate the supplied binary64 samples, excluding continuous sampling error. The dense added rules use dx = 0.25 and zero initial cumulative integrals. Newton-Cotes records weights followed by its error coefficient. Fixed Gaussian quadrature uses order 16 on exp(x), with analytic references.
+Discrete-rule references integrate the supplied binary64 samples, excluding continuous sampling error. The dense added rules use dx = 0.25 and zero initial cumulative integrals. Newton-Cotes records weights followed by its error coefficient. Fixed Gaussian quadrature uses order 16 on exp(x), with analytic references. For the saved exponential callback only, Boost.Math and GSL independently provide fixed 16-point Gauss-Legendre quadrature. These are distinct from adaptive quadrature and the sampled-data trapezoid/Simpson operations.
 
 Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.

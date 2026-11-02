@@ -16,7 +16,10 @@ mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means no saved comparison or no paired finite results.
+because Sci failed. `unavailable N/T` means the library has no compatible
+public operation for those inputs or distribution families; they are excluded
+from the reported mean and are not counted as numerical failures. A dash means
+no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
 Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
@@ -25,28 +28,28 @@ current public namespace, with their measured recipe names preserved.
 
 ### `sci::optimize::derivatives` (6 functions, 12152 cases)
 
-| Function | Cases | Sci vs reference | SciPy |
-| --- | ---: | --- | --- |
-| `approx_fprime` | 2012 | 32000.0 / 2851.2 | 32000.0 / 2851.2 |
-| `check_grad` | 2008 | 6.0541e+6 / 1.3246e+6 | 6.0541e+6 / 1.3246e+6 |
-| `rosen` | 2060 | 3.7821e+7 / 47584.0 | 2.5376 / 0.23879 |
-| `rosen_der` | 2060 | 4.5036e+15 / 8.5513e+11 | 45.844 / 0.2412 |
-| `rosen_hess` | 2006 | 1.28 / 0.098842 | 1.28 / 0.098842 |
-| `rosen_hess_prod` | 2006 | 1.2806 / 0.097823 | 1.2806 / 0.097823 |
+| Function | Cases | Sci vs reference | SciPy | GSL |
+| --- | ---: | --- | --- | --- |
+| `approx_fprime` | 2012 | 32000.0 / 2851.2 | 32000.0 / 2851.2 | — |
+| `check_grad` | 2008 | 6.0541e+6 / 1.3246e+6 | 6.0541e+6 / 1.3246e+6 | — |
+| `rosen` | 2060 | 3.7821e+7 / 47584.0 | 2.5376 / 0.23879 | — |
+| `rosen_der` | 2060 | 4.5036e+15 / 8.5513e+11 | 45.844 / 0.2412 | — |
+| `rosen_hess` | 2006 | 1.28 / 0.098842 | 1.28 / 0.098842 | — |
+| `rosen_hess_prod` | 2006 | 1.2806 / 0.097823 | 1.2806 / 0.097823 | — |
 
 ### `sci::optimize::minimize` (4 functions, 8000 cases)
 
-| Function | Cases | Sci vs reference | SciPy |
-| --- | ---: | --- | --- |
-| `minimize` | 2000 | 6.7039e+7 / 1.8008e+7 | 91936.0 / 95.782 |
-| `minimize_with_gradient` | 2000 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 |
-| `try_minimize` | 2000 | 6.7098e+7 / 1.7947e+7 | 95031.0 / 108.9 |
-| `try_minimize_with_gradient` | 2000 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 |
+| Function | Cases | Sci vs reference | SciPy | GSL |
+| --- | ---: | --- | --- | --- |
+| `minimize` | 2000 | 6.7039e+7 / 1.8008e+7 | 91936.0 / 95.782 | 2.6245e+8 / 2.0693e+7 |
+| `minimize_with_gradient` | 2000 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 |
+| `try_minimize` | 2000 | 6.7098e+7 / 1.7947e+7 | 95031.0 / 108.9 | 2.5491e+8 / 2.0422e+7 |
+| `try_minimize_with_gradient` | 2000 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 |
 
 
 ## Conventions and limitations
 
-Objective helpers use their pinned Rosenbrock and finite-difference conventions. Minimizers use 3+(x-1)^2+(y+2)^2, a 512-iteration budget and tolerance 1e-8; only converged points and costs are compared. Iteration trajectories are not compared. Analytic minimizers supply the reference; SciPy runs Nelder-Mead or BFGS separately.
+Objective helpers use their pinned Rosenbrock and finite-difference conventions. Minimizers use 3+(x-1)^2+(y+2)^2, a 512-iteration budget and tolerance 1e-8; only converged points and costs are compared. Iteration trajectories are not compared. Analytic minimizers supply the reference; SciPy runs Nelder-Mead or BFGS separately. GSL native multidimensional simplex and BFGS optimizers provide independent solutions of the saved convex two-dimensional quadratic objective, with guarded convergence, iteration budgets and function offset handling. Convergence trajectories and algorithms need not match Sci optimizers; only the saved final position and cost are compared.
 
 Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.
