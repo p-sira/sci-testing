@@ -16,7 +16,10 @@ mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means no saved comparison or no paired finite results.
+because Sci failed. `unavailable N/T` means the library has no compatible
+public operation for those inputs or distribution families; they are excluded
+from the reported mean and are not counted as numerical failures. A dash means
+no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
 Tables are grouped by Sci 0.3 public submodule using the compiler-resolved

@@ -311,9 +311,9 @@ def competitors(case):
 
 def native_competitors(native, case):
     """Use only matching public Boost.Math/GSL interfaces and their true ABI."""
-    if native is None or case['args'].get('special03_case'):
+    if native is None:
         return {}
-    if case['args'].get('special_complex03_case'):
+    if case['api'].startswith('special.complex.'):
         return native.evaluate_complex(case)
     return native.evaluate(case)
 
@@ -446,9 +446,9 @@ def render(cases, records, meta, output, *, modules=None, cache=None):
                         current=max(errors);maximum=current if maximum is None else max(maximum,current)
                         sums.append(mp.fsum(errors));scalar_count+=len(errors)
                 if unavailable==len(batch):cells.append('—');continue
-                if unavailable:raise ValueError('partially missing implementation')
                 text=f'{number(maximum)} / {number(mp.fsum(sums)/scalar_count)}' if scalar_count else '—'
                 cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
+                             (f'; unavailable {unavailable}/{len(batch)}' if unavailable else '')+
                              (f'; Sci unavailable {baseline_missing}/{len(batch)}' if baseline_missing else ''))
             count=str(len(batch))+(f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')
             reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
@@ -488,7 +488,10 @@ mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means no saved comparison or no paired finite results.
+because Sci failed. `unavailable N/T` means the library has no compatible
+public operation for those inputs or distribution families; they are excluded
+from the reported mean and are not counted as numerical failures. A dash means
+no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
 Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
@@ -685,6 +688,12 @@ def render_cached(cases,records,meta,output,*,modules=None,root=None,inputs=None
                         previous=prior if checksum else None,
                         previous_sha256=checksum,
                         reuse=not exhaustive,require_hits=require_hits)
+    # Selective rendering can reuse unaffected API summaries only when the
+    # stored metric implementation fingerprint still matches. If that
+    # fingerprint changes, all previous summaries are untrusted and must be
+    # rebuilt together before the full index can be authenticated.
+    if modules is not None and set(cache.entries) != set(cases.apis):
+        modules = None
     render(cases,records,meta,output,modules=modules,cache=cache)
     content=cache.serialize(cases.apis)
     output.mkdir(parents=True,exist_ok=True)

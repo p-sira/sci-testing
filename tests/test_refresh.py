@@ -198,6 +198,24 @@ class RefreshTests(unittest.TestCase):
         self.assertIn('Boost.Math',meta['module_libraries']['special'])
         self.run_report('--check')
 
+    def test_partial_native_support_is_reported_as_unavailable(self):
+        self.native.side_effect=None
+        self.native.return_value.versions={'Boost.Math':'test','GSL':'test'}
+        self.native.return_value.evaluate.side_effect=lambda case: (
+            {'Boost.Math': {'values': [.5]}}
+            if case['id'].split('/')[-1].startswith('linspace') else {})
+        self.competitors.side_effect=None
+        self.competitors.return_value={'SciPy': {'values': [.5]}}
+        self.run_report('--comparators-only','--module','special.erf')
+        page=(self.output/'special.md').read_text()
+        self.assertIn('unavailable 1000/2000',page)
+        updated=read_measurements(self.root/'results/measurements')
+        available=sum('Boost.Math' in record['libraries']
+                      for identifier,record in updated.items()
+                      if identifier.startswith('special.erf/'))
+        self.assertEqual(available,1000)
+        self.run_report('--check')
+
     def test_incremental_backfill_reuses_coverage_and_untouched_report_page(self):
         self.run_report('--render')
         untouched=(self.output/'sparse.md').read_bytes()
@@ -213,6 +231,33 @@ class RefreshTests(unittest.TestCase):
             self.assertEqual(rendered.call_args.kwargs['modules'],['special'])
         self.assertEqual((self.output/'sparse.md').read_bytes(),untouched)
         self.assertEqual((self.root/'results/coverage.csv').read_bytes(),baseline_coverage)
+        self.run_report('--check')
+
+    def test_selective_backfill_rebuilds_index_when_metric_fingerprint_changes(self):
+        self.run_report('--render')
+        summary=self.root/'results/accuracy-summaries.json'
+        saved=json.loads(summary.read_text())
+        # A different metric fingerprint invalidates every old summary, even
+        # when the corresponding source measurements have not changed.
+        saved['metric_sha256']='0'*64
+        changed=(json.dumps(saved,sort_keys=True,separators=(',',':'),
+                            ensure_ascii=False)+'\n').encode()
+        summary.write_bytes(changed)
+        import hashlib
+        meta=json.loads((self.root/'results/environment.json').read_text())
+        meta['accuracy_summaries_sha256']=hashlib.sha256(changed).hexdigest()
+        (self.root/'results/environment.json').write_text(json.dumps(meta))
+        self.native.side_effect=None
+        self.native.return_value.versions={'GSL':'test'}
+        self.native.return_value.evaluate.return_value={'GSL':{'values':[.5]}}
+        self.competitors.side_effect=None
+        self.competitors.return_value={'SciPy':{'values':[.5]}}
+        with patch.object(report,'render',wraps=report.render) as rendered:
+            self.run_report('--comparators-only','--module','special.erf')
+            self.assertIsNone(rendered.call_args.kwargs['modules'])
+        rebuilt=json.loads(summary.read_text())
+        self.assertEqual(set(rebuilt['entries']),set(self.cases.apis))
+        self.assertNotEqual(rebuilt['metric_sha256'],'0'*64)
         self.run_report('--check')
 
     def test_targeted_render_keeps_unrelated_module_page(self):
