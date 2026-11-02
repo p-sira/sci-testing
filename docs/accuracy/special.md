@@ -184,7 +184,7 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 | `fresnelc_zeros` | 2001 | 1.977 / 0.2654 | — | — | — |
 | `fresnels_zeros` | 2001 | 1.8671 / 0.17796 | — | — | — |
 | `gamma` | 2087 | 4.1771 / 0.84064 | 3.6888 / 0.65275 | 17.917 / 1.0401; failed 1/2087 | 2.9747 / 0.54139 |
-| `gamma.digammainv` | 2010; Sci failed 7/2010 | — | — | — | — |
+| `gamma.digammainv` | 2010 | — | — | — | — |
 | `gamma.gamma_ratio` | 2010 | — | — | — | — |
 | `gammainc` | 2001 | 0.0 / 0.0 | 4.1696 / 0.9599 | 3.3464 / 2.1961 | — |
 | `gammaincc` | 2001 | 0.0 / 0.0 | 17.937 / 4.34 | 23.662 / 5.3599 | — |
@@ -429,7 +429,6 @@ Full outputs, references, warnings and errors remain in the per-function CSVs.
 ## Evaluation failures
 
 - `special.gamma` (GSL): 1 failed; overflow. Example: `special.gamma/expanded-0076`.
-- `special.gamma.digammainv` (Sci): 7 failed; nonfinite output. Example: `special.gamma.digammainv/edge-007`.
 
 
 ## Conventions and limitations
@@ -447,8 +446,8 @@ variants are not counted as independent implementations.
 
 ## Reproduction
 
-- Sci source: `3fbdbf3a73bcad57fa91e30262a4e9f9d09fd57a` (numerical sources clean: true).
-- Testing source SHA-256: `9b806b00dd16330a3acc24ed8c2ff9399bd069fd0a2017e2d4988c55f8cd6e81`.
+- Sci source: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998` (numerical sources clean: true).
+- Testing source SHA-256: `c14b0f0785743d5b2db5b424517f90d9ba22c18610b5fa112d43cfca507e5d09`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
 - rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.

@@ -145,6 +145,21 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(meta['reference_environment'],self.meta)
         self.assertEqual(set(meta['sci_measurement_commits'].values()),{'new'})
 
+    def test_exact_api_refresh_preserves_other_api_measurements(self):
+        untouched=self.root/'results/measurements/sparse.linalg/norm.csv.gz'
+        before=untouched.read_bytes()
+        extension={'apis':['special.erf'],'sci_commit':'new-api-original-reference'}
+        self.meta['reference_extensions']=[extension]
+        (self.root/'results/environment.json').write_text(json.dumps(self.meta))
+        self.run_report('--module','special.erf')
+        meta=self.assert_preserved({'special.erf'})
+        self.assertEqual(untouched.read_bytes(),before)
+        self.assertEqual(meta['reference_extensions'],[extension])
+        self.assertEqual(meta['sci_measurement_commits'],
+                         {'special.erf':'new','sparse.linalg.norm':'old'})
+        self.assertEqual(self.measure.call_count,1)
+        self.run_report('--check')
+
     def test_invalid_selection_is_rejected_before_measurement(self):
         for arguments in [('--module','unknown'),('--full','--module','special'),('--check','--module','special')]:
             with self.subTest(arguments=arguments), redirect_stdout(io.StringIO()), patch('sys.stderr',new_callable=io.StringIO):

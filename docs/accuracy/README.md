@@ -129,8 +129,8 @@ All reports and data belong to this repository; Sci links to them externally.
 
 ## Snapshot
 
-- Sci commit: `3fbdbf3a73bcad57fa91e30262a4e9f9d09fd57a`.
-- Harness source SHA-256: `9b806b00dd16330a3acc24ed8c2ff9399bd069fd0a2017e2d4988c55f8cd6e81`.
+- Sci commit: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998`.
+- Harness source SHA-256: `c14b0f0785743d5b2db5b424517f90d9ba22c18610b5fa112d43cfca507e5d09`.
 - Input SHA-256: `f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854`.
 - 2349606 saved cases covering 1181 recipe API names; 1142 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
