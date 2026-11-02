@@ -62,8 +62,8 @@ variants are not counted as independent implementations.
 
 ## Reproduction
 
-- Sci source: `3fbdbf3a73bcad57fa91e30262a4e9f9d09fd57a` (numerical sources clean: true).
-- Testing source SHA-256: `9b806b00dd16330a3acc24ed8c2ff9399bd069fd0a2017e2d4988c55f8cd6e81`.
+- Sci source: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998` (numerical sources clean: true).
+- Testing source SHA-256: `c14b0f0785743d5b2db5b424517f90d9ba22c18610b5fa112d43cfca507e5d09`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
 - rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.

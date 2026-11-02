@@ -824,7 +824,9 @@ def main():
     if args.module:
         selected=set()
         for module in args.module:
-            matching={api for api in cases.apis if api.startswith(module+'.')}
+            # A full public API name selects just that function; namespace
+            # prefixes retain their existing multi-function selection behavior.
+            matching={api for api in cases.apis if api == module or api.startswith(module+'.')}
             if not matching:parser.error(f'unknown or empty module: {module}')
             selected.update(matching)
     if not (args.full or args.extend):
@@ -840,6 +842,10 @@ def main():
     meta=environment(SCI)
     if not args.full:
         meta['reference_environment']=previous.get('reference_environment',previous)
+        # Append-only reference extensions document independently evaluated
+        # new APIs. A Sci-only refresh must not erase that provenance.
+        if 'reference_extensions' in previous:
+            meta['reference_extensions']=previous['reference_extensions']
         if args.module or args.extend:
             commits=previous.get('sci_measurement_commits',{api:previous['sci_commit'] for api in cases.apis}).copy()
             if args.extend:

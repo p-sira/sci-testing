@@ -31,6 +31,9 @@ namespace and can be repeated; unselected measurements remain unchanged.
 `--sci-only` explicitly selects the default mode. Use `--full` to recompute all
 references and library results, including when inputs change or no snapshot exists.
 `--module` applies only to Sci-only refreshes.
+An exact public API path such as `--module special.complex.airye` refreshes
+only that function; a namespace such as `--module special.complex` refreshes
+all its functions. Unselected measurements retain their recorded Sci revisions.
 The normal validation command, `--check`, verifies the cached inputs, measurements,
 coverage and generated tables without evaluating numerical libraries.
 Use `--render` to regenerate the coverage audit and Markdown comparison tables

@@ -770,7 +770,7 @@ special.fresnel_zeros,special.integrals.fresnel_zeros,2001,1000,1000,16,0,0,2001
 special.fresnelc_zeros,special.integrals.fresnelc_zeros,2001,1000,1000,16,0,0,2001,0,legacy_recipe_pending
 special.fresnels_zeros,special.integrals.fresnels_zeros,2001,1000,1000,16,0,0,2001,0,legacy_recipe_pending
 special.gamma,special.gamma.gamma,2087,1000,1000,2085,0,0,2087,0,legacy_recipe_pending
-special.gamma.digammainv,special.gamma.digammainv,2010,1000,1000,1998,0,0,2003,7,measured
+special.gamma.digammainv,special.gamma.digammainv,2010,1000,1000,1998,0,0,2010,0,measured
 special.gamma.gamma_ratio,special.gamma.gamma_ratio,2010,1000,1000,2010,0,0,2010,0,measured
 special.gammainc,special.gamma.gammainc,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.gammaincc,special.gamma.gammaincc,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending

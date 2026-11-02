@@ -236,12 +236,10 @@ class ComplexSpecial03Tests(unittest.TestCase):
                                                 -7.436294411632747)), 1e-12)
             self.assertGreater(abs(exact-limit), 7.)
 
-    def test_recorded_airye_negative_zero_discrepancy(self):
-        # Sci 0.3 and SciPy 1.18.1 agree on this *exact -0j input*, but the
-        # lower imaginary one-sided analytic limit of Ai(z)*exp(2z√z/3)
-        # differs. This is a documented discrepancy, never an oracle override.
-        # Actual Sci: Ai_scaled=-0.17350425503349404-0.19502321479086732j.
-        # Independent mathematical limit: 0.3101938067761736+0.41740519982220414j.
+    def test_airye_lower_cut_oracle_is_independent_of_scipy_axis_convention(self):
+        # SciPy 1.18.1 still differs from the independent lower-bank limit for
+        # the *exact* -0j input. This diagnostic must never alter the oracle
+        # or excuse a mismatch in the current Rust implementation.
         api = 'special.complex.airye'
         lower_case = {'api': api, 'args': {
             'special_complex03_case': True, 'z': [-1.25, -0.]}}
@@ -349,7 +347,11 @@ class ComplexSpecial03Tests(unittest.TestCase):
 
     @unittest.skipUnless(os.environ.get('SCI_TESTING_COMPLEX_RUNNER'),
                          'set SCI_TESTING_COMPLEX_RUNNER to the compiled Rust runner')
-    def test_actual_rust_airye_discrepancy_is_not_hidden(self):
+    def test_actual_rust_airye_matches_independent_lower_cut_reference(self):
+        # The former Sci revision returned an incorrect lower-bank result for
+        # -1.25-0j. This is now a positive regression: every component of
+        # Ai, Ai', Bi and Bi' must agree with the independent 100-digit limit
+        # on BOTH signed-zero banks. Preserve the sign through JSON transport.
         batch = [{'id': f'special.complex.airye/exact-{i}',
                   'api': 'special.complex.airye',
                   'args': {'special_complex03_case': True,
@@ -358,14 +360,17 @@ class ComplexSpecial03Tests(unittest.TestCase):
         for case, row in zip(batch, _rust_responses(batch)):
             with self.subTest(case=case['id']), mp.workdps(100):
                 self.assertNotIn('error', row)
-                actual = complex(*row['values'][:2])
-                mathematical = complex(*complex_cases.reference(case)[:2])
-                if math.copysign(1., case['args']['z'][1]) < 0:
-                    self.assertLess(abs(actual - complex(-0.17350425503349404,
-                                                         -0.19502321479086732)), 1e-12)
-                    self.assertGreater(abs(actual - mathematical), .5)
-                else:
-                    self.assertLess(abs(actual-mathematical), 1e-12)
+                mathematical = complex_cases.reference(case)
+                self.assertEqual(len(row['values']), 8)
+                self.assertEqual(len(mathematical), 8)
+                for i, label in enumerate(('Ai', "Ai'", 'Bi', "Bi'")):
+                    actual = complex(*row['values'][2*i:2*i+2])
+                    expected = complex(*mathematical[2*i:2*i+2])
+                    with self.subTest(component=label):
+                        self.assertTrue(math.isfinite(actual.real) and
+                                        math.isfinite(actual.imag))
+                        self.assertLessEqual(abs(actual-expected),
+                                             2e-12*max(1., abs(expected)))
 
 
 if __name__ == '__main__':
