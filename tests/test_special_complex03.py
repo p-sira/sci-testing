@@ -52,6 +52,15 @@ class ComplexSpecial03Tests(unittest.TestCase):
     def setUpClass(cls):
         cls.samples = list(complex_cases.cases(4, 20261102))
 
+    def test_ci_does_not_skip_compiled_complex_regressions(self):
+        # The signed-zero Airy regression was previously skipped by CI even
+        # though the workflow was green. Keep local oracle-only runs optional,
+        # but require the actual compiled Sci runner in GitHub Actions.
+        if os.environ.get('CI') == 'true':
+            self.assertTrue(os.environ.get('SCI_TESTING_COMPLEX_RUNNER'),
+                            'CI must set SCI_TESTING_COMPLEX_RUNNER to run '
+                            'the Rust-backed Airy/branch-cut regressions')
+
     def find(self, name, edge_index):
         api = 'special.complex.' + name
         return next(case for case in self.samples
