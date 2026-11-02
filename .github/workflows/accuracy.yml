@@ -42,7 +42,9 @@ jobs:
       - name: Check independent references and Rust writer interoperability
         run: |
           runner_dir="$(cargo metadata --locked --format-version 1 --no-deps | python -c 'import json,sys; print(json.load(sys.stdin)["target_directory"])')"
-          SCI_TESTING_IO_RUNNER="$runner_dir/debug/sci-testing" uv run --frozen python -m unittest -v
+          runner="$runner_dir/debug/sci-testing"
+          test -x "$runner"
+          SCI_TESTING_IO_RUNNER="$runner" SCI_TESTING_COMPLEX_RUNNER="$runner" uv run --frozen python -m unittest -v
       - name: Lint Rust adapters
         run: cargo clippy --locked --all-targets -- -D warnings
       - name: Verify Rust documentation
