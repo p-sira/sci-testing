@@ -167,6 +167,22 @@ disables GSL's abort handler and retains GSL error statuses. Versions and native
 compiler flags are recorded. See the [Boost.Math reference](https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html)
 and [GSL special-function conventions](https://www.gnu.org/software/gsl/doc/html/specfunc.html).
 
+**Competitor coverage is an observed measurement, not an exhaustion claim.**
+The generated [special](docs/accuracy/special.md) and
+[statistics](docs/accuracy/stats.md) tables inventory the Boost.Math and GSL
+comparisons actually recorded for each sampled API; the raw measurements retain
+their per-input results and errors. A dash does **not** establish that the
+competitor lacks a direct function or a mathematically equivalent composition.
+In particular, `results/coverage.csv` measures *Sci API/fixture* coverage, not
+the completeness of Boost.Math/GSL adapters. Finding further equivalents
+requires reviewing public library interfaces and supported versions, checking
+the complete Sci argument/output conventions, and validating implementations
+against saved inputs and independent mathematical references. Derived or
+mixed-library calculations must be identified as such. The small
+`tests/test_native_registration.py` guards previously successful comparisons
+against accidental disappearance; adapter-specific tests check numerical
+correctness. **Neither test can replace manual competitor research.**
+
 Tables are split by canonical **Sci 0.3 submodule**, including historical recipes
 whose old names map to the new namespaces. They contain **Function**, **Cases**,
 **Sci vs reference**, and the relevant libraries (SciPy, Boost.Math, GSL and
