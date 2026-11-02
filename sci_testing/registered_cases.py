@@ -45,9 +45,14 @@ def special_reference(case):
         if name not in removed or list(case['args']) != ['p0']:
             raise KeyError(case['api'])
         function = Function(case['api'], (('p0','f64'),), 'f64', 'legacy reference only')
-    args = [int(value) if kind in ['usize','isize','u32','i32','u64','i64'] else
-            complex(*value) if kind == 'Complex' else value
-            for value, (_, kind) in zip(args, function.arguments)]
+    # The historical SciPy assoc_laguerre(x, n, k) fixture order differs from
+    # Sci's eval_genlaguerre(n, k, x) signature.  The Rust runner adapts the
+    # argument order explicitly; casting p0 using the typed Sci signature
+    # would truncate its noninteger x input and corrupt regenerated references.
+    if name != 'assoc_laguerre':
+        args = [int(value) if kind in ['usize','isize','u32','i32','u64','i64'] else
+                complex(*value) if kind == 'Complex' else value
+                for value, (_, kind) in zip(args, function.arguments)]
     if name == 'harmonic': value = float(special.digamma(args[0]+1)+np.euler_gamma) if args[0] else 0.
     elif name == 'gen_harmonic': value = math.fsum(j**(-args[1]) for j in range(1,args[0]+1))
     elif name == 'ln_factorial': value = special.gammaln(args[0]+1)

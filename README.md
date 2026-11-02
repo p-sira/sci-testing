@@ -22,6 +22,7 @@ uv run --frozen python -m sci_testing.report
 uv run --frozen python -m sci_testing.report --module special
 uv run --frozen python -m sci_testing.report --module sparse.linalg
 uv run --frozen python -m sci_testing.report --module linalg --module interpolate
+uv run --frozen python -m sci_testing.report --comparators-only --additional-only --module special
 uv run --frozen python -m sci_testing.report --render
 uv run --frozen python -m sci_testing.report --extend
 ```
@@ -32,6 +33,10 @@ namespace and can be repeated; unselected measurements remain unchanged.
 `--sci-only` explicitly selects the default mode. Use `--full` to recompute all
 references and library results, including when inputs change or no snapshot exists.
 `--module` also applies to comparator-only backfills and selective rendering.
+`--comparators-only --additional-only` evaluates the newly added independent
+library adapters against saved inputs, keeping the original Sci, reference,
+and existing provider measurements. A module may have only partial numerical
+coverage when a competitor's public API or argument domain differs.
 An exact public API path such as `--module special.complex.airye` refreshes
 only that function; a namespace such as `--module special.complex` refreshes
 all its functions. Unselected measurements retain their recorded Sci revisions.
@@ -157,6 +162,9 @@ Original module recipes use independent mpmath references at 100 and 160 decimal
 digits; complex arithmetic uses 200/320 digits, escalating when necessary for
 subnormal branch points. Added recipes use pinned public SciPy calls, independent identities
 or quadrature; binary64 references measure agreement with that reference library.
+When mpmath is also measured as a named comparison provider, some rows share
+the mpmath backend used to construct their independent mathematical reference;
+that agreement is not a second independent confirmation of the mathematics.
 Sci and its private backends never generate expectations. Nonunique factors use
 projectors, reconstructions and ordered eigenvalues. Module pages document the
 remaining adaptations and reference accuracy limits.
@@ -166,6 +174,11 @@ Boost.Graph, Boost.Numeric.uBLAS, Boost.Units and GSL interfaces where an
 independently verified numerical comparison exists. These are distinct
 provider labels in the saved measurements; compositions are not falsely
 described as dedicated named functions in the underlying libraries.
+Additional numerical competitors use public mpmath and NumPy operations and
+the standalone `rust_oracles/` Rust bridge. Its RustFFT, nalgebra and statrs
+calculations use their own pinned dependencies and report their actual library
+names. Rust-backed results are computed separately from Sci's Rust crate;
+`results/environment.json` records the library versions used for comparison.
 It converts elliptic parameter m to modulus sqrt(m), contains native exceptions,
 disables GSL's abort handler and retains GSL error statuses. Versions and native
 compiler flags are recorded. See the [Boost.Math reference](https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html)

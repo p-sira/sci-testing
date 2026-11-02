@@ -432,6 +432,12 @@ class AccuracyTests(unittest.TestCase):
             self.assertEqual(r,mp.mpf(299792458)/mp.mpf(.1))
             self.assertNotEqual(r,mp.mpf(299792458)/mp.mpf('0.1'))
 
+    def test_historical_assoc_laguerre_reference_retains_scipy_order(self):
+        from sci_testing.registered_cases import reference
+        result=reference({'api':'special.assoc_laguerre',
+                          'args':{'p0':0.3,'p1':3,'p2':0.5}})
+        self.assertAlmostEqual(result[0],1.028,places=12)
+
     def test_independent_dft_normalization_and_order(self):
         case={'api':'fft.fft','args':{'z':[[1.,0.],[0.,0.],[0.,0.],[0.,0.]]}}
         self.assertEqual(report.high_precision(case),[1,0,1,0,1,0,1,0])
@@ -461,6 +467,29 @@ class AccuracyTests(unittest.TestCase):
                 self.assertTrue(results)
                 for result in results.values():
                     self.assertTrue('error' in result or 'values' in result)
+
+    def test_additional_comparator_refresh_preserves_saved_measurements(self):
+        cases=[{'id':'special.erf/0','api':'special.erf','args':{'x':0.5}}]
+        original={'id':'special.erf/0','reference':['0.52049987781304653768'],
+                  'libraries':{'Sci':{'values':[0.5204998778130465]},
+                               'SciPy':{'values':[0.5204998778130465]}}}
+        new={'mpmath':{'values':[0.5204998778130465]}}
+        with tempfile.TemporaryDirectory() as folder:
+            with patch('sci_testing.report.additional_competitors',return_value=new):
+                changed,libraries=report.refresh_comparators(
+                    cases,{cases[0]['id']:original},Path(folder),
+                    {'special.erf'},additional_only=True)
+            saved=read_measurements(Path(folder))[cases[0]['id']]
+            self.assertEqual(changed,{'special/erf.csv'})
+            self.assertEqual(libraries['special'],{'mpmath'})
+            self.assertEqual(saved['reference'],original['reference'])
+            self.assertEqual(saved['libraries'],{**original['libraries'],**new})
+            with patch('sci_testing.report.additional_competitors',return_value={}):
+                unchanged,libraries=report.refresh_comparators(
+                    cases,{cases[0]['id']:saved},Path(folder),
+                    {'special.erf'},additional_only=True)
+            self.assertFalse(unchanged)
+            self.assertFalse(libraries)
 
     def test_failures_are_visible(self):
         cases=[{'id':'a','api':'stats.variance','group':'ordinary','args':{'values':[1.,2.]}}]

@@ -87,6 +87,35 @@ NOTES['special'] += (
     'None of these adapters implies support for general complex-argument Bessel '
     'functions.'
 )
+NOTES['linalg'] += (
+    ' The nalgebra comparisons call a separate pinned Rust numerical crate '
+    'and preserve matrix output shape and row-major flattening. High-precision '
+    'mpmath computations offer additional bounded matrix comparisons with '
+    'distinct rounding behavior from binary64 BLAS/LAPACK solvers.'
+)
+NOTES['stats'] += (
+    ' Public mpmath calculations and the independent Rust statrs distribution '
+    'routines provide further numerical comparisons on supported fixtures. '
+    'Finite results do not imply identical tail precision or work limits; '
+    'the full results and errors remain in the saved measurements.'
+)
+NOTES['stats'] += (
+    ' Additional GSL-labelled entropy, ranks, tie corrections, mode, '
+    'Wasserstein/energy distances, Box-Cox likelihood, z-map and expectiles '
+    'are derived reductions using public GSL sorting, statistics or special '
+    'functions. These are not identically named exports from GSL.'
+)
+NOTES['special'] += (
+    ' GSL-labelled elementary information functions and trigonometric degree '
+    'conversions are similarly composed from its public real special-function '
+    'primitives, with independently validated input restrictions.'
+)
+NOTES['fft'] += (
+    ' RustFFT evaluations use a separate pinned Rust cdylib and the library\'s '
+    'complex FFT kernels, preserving the Sci fixture\'s result ordering and '
+    'forward/inverse normalization. NumPy FFT comparisons are independent '
+    'public NumPy operations on matching input shapes.'
+)
 
 NOTES['special'] += (
     ' Further native competitors are independently validated compositions, not '
@@ -198,6 +227,15 @@ NOTES['fft'] += (
     'the saved finite, one-dimensional fft/ifft profiles, including non-power-of-two '
     'lengths and inverse scaling. Real, multidimensional, cosine/sine and '
     'arbitrary-transform-option variants are not thereby covered.'
+)
+
+NOTES['special'] += (
+    ' Public mpmath numerical functions provide additional comparisons where '
+    'the saved Sci inputs admit an equivalent real or complex convention. '
+    'Some original mathematical references were also produced with mpmath; '
+    'those rows therefore share a numerical backend and must not be treated '
+    'as two independent confirmations. The saved full-precision reference '
+    'remains distinct from the binary64 comparison output.'
 )
 
 
@@ -450,6 +488,29 @@ def competitors(case):
     return results
 
 
+def additional_competitors(case):
+    """Independent libraries added after the original comparison snapshot.
+
+    These adapters may cover only part of a Sci signature or argument domain.
+    An empty result means no suitable public operation was evaluated.  The
+    original independent high-precision reference remains separately stored.
+    """
+    from . import (mpmath_special, mpmath_general, extra_python_comparisons,
+                   rust_library_comparisons)
+    results = {}
+    for adapter in (mpmath_special.evaluate, mpmath_general.evaluate,
+                    extra_python_comparisons.evaluate,
+                    rust_library_comparisons.evaluate):
+        results.update(adapter(case))
+    return results
+
+
+def all_competitors(case):
+    # Preserve the original providers' results in case a new adapter offers
+    # another implementation under the same provider label.
+    return {**additional_competitors(case), **competitors(case)}
+
+
 def native_competitors(native, case):
     """Use only matching public Boost.Math/GSL interfaces and their true ABI."""
     if native is None:
@@ -484,11 +545,13 @@ def component_error(actual, reference, *, binary64):
 
 
 def digest_sources():
-    names={'.gitmodules','Cargo.toml','Cargo.lock','pyproject.toml','uv.lock','sci-revision.txt','api_inventory.csv','README.md'}
+    names={'.gitmodules','Cargo.toml','Cargo.lock','pyproject.toml','uv.lock',
+           'sci-revision.txt','api_inventory.csv','README.md'}
     # Generated inputs already have their own logical-content digest. Keep the
     # source fingerprint focused on code and authored fixtures, including gzip.
     patterns=['*.py','sci_testing/**/*.py','tests/**/*.py','*.rs','src/*.rs',
-              'native/*.cpp','.github/workflows/*.yml',
+              'native/*.cpp','rust_oracles/Cargo.toml','rust_oracles/Cargo.lock',
+              'rust_oracles/src/*.rs','.github/workflows/*.yml',
               'cases/base/**/*.csv','cases/base/**/*.csv.gz',
               'cases/recipes/**/*.csv','cases/recipes/**/*.csv.gz']
     names.update(p.relative_to(ROOT).as_posix() for pattern in patterns for p in ROOT.glob(pattern))
@@ -501,12 +564,15 @@ def environment(sci_path):
     configs = io.StringIO()
     with redirect_stdout(configs):
         np.show_config(); scipy.show_config()
+    from .rust_library_comparisons import VERSIONS as rust_oracle_versions
     return dict(sci_commit=command('git','rev-parse','HEAD',cwd=sci_path),
                 sci_source_dirty=bool(command('git','status','--porcelain','--','src','crates','tests','Cargo.toml','Cargo.lock',cwd=sci_path)),
                 testing_sources_sha256=digest_sources(),cases_sha256=case_directory_digest(ROOT/'cases/generated'),
                 rust=command('rustc','-Vv'),cargo=command('cargo','-V'),
                 python=sys.version.split()[0],numpy=np.__version__,scipy=scipy.__version__,
-                mpmath=mp.__version__,filterpy=filterpy.__version__,platform=platform.platform(),
+                mpmath=mp.__version__,filterpy=filterpy.__version__,
+                rust_oracle_libraries=rust_oracle_versions,
+                platform=platform.platform(),
                 machine=platform.machine(),processor=next((l.split(':',1)[1].strip() for l in Path('/proc/cpuinfo').read_text().splitlines() if l.startswith('model name')),'unknown'),
                 profile='dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS',reference_decimal_digits=[100,160],
                 library_config=configs.getvalue())
@@ -588,7 +654,7 @@ def render(cases, records, meta, output, *, modules=None, cache=None):
             groups=grouped.items()
             available={lib for c in selected for lib in records[c['id']]['libraries']}
         available.discard('Sci')
-        preferred=['SciPy','Boost.Math','GSL','NumPy','FilterPy']
+        preferred=['mpmath','SciPy','Boost.Math','GSL','NumPy','FilterPy']
         libraries=sorted(available,key=lambda lib:(preferred.index(lib) if lib in preferred else len(preferred),lib))
         sections=defaultdict(list);section_cases=defaultdict(int);failed={}
         for api,batch in groups:
@@ -819,7 +885,7 @@ All reports and data belong to this repository; Sci links to them externally.
 ## Snapshot
 
 """
-    index+=f'- Sci commit: `{meta["sci_commit"]}`.\n- Harness source SHA-256: `{meta["testing_sources_sha256"]}`.\n- Input SHA-256: `{meta["cases_sha256"]}`.\n- {len(cases)} saved cases covering {len(sampled_apis)} recipe API names; {canonical} mapped canonical public functions in the inventory.\n- Native versions: {meta.get("native_libraries",{})}.\n'
+    index+=f'- Sci commit: `{meta["sci_commit"]}`.\n- Harness source SHA-256: `{meta["testing_sources_sha256"]}`.\n- Input SHA-256: `{meta["cases_sha256"]}`.\n- {len(cases)} saved cases covering {len(sampled_apis)} recipe API names; {canonical} mapped canonical public functions in the inventory.\n- Native versions: {meta.get("native_libraries",{})}.\n- Independent Rust numerical providers: {meta.get("rust_oracle_libraries",{})}.\n'
     if 'reference_environment' in meta:
         index+='\nSci-only refresh: independent references and other library outputs are retained from the saved snapshot. See `reference_environment` in `results/environment.json` for their original provenance.\n'
     if 'sci_measurement_commits' in meta:
@@ -960,7 +1026,7 @@ def extend_references(cases, added, executable, destination):
             if 'values' in result:result['values']=list(map(float,result['values']))
             high=stable_reference(case)
             with mp.workdps(METRIC_PRECISION_DPS):
-                libs={'Sci':result,**competitors(case),**native_competitors(native,case)}
+                libs={'Sci':result,**all_competitors(case),**native_competitors(native,case)}
                 for value in libs.values():validate_result(case,value,high)
                 updated[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],
                                      'libraries':libs}
@@ -1065,7 +1131,8 @@ def refresh_sci(cases, records, executable, destination, apis):
     return changed
 
 
-def refresh_comparators(cases, records, destination, apis, *, native=None):
+def refresh_comparators(cases, records, destination, apis, *, native=None,
+                        additional_only=False):
     """Add measured competitors without evaluating Sci or rewriting stored oracles."""
     from itertools import groupby
     changed=set();libraries=defaultdict(set)
@@ -1073,16 +1140,26 @@ def refresh_comparators(cases, records, destination, apis, *, native=None):
         if api not in apis:continue
         batch=list(iterator)
         print(f'Measuring comparison libraries only: {api}: {len(batch)} cases',flush=True)
-        updated={}
+        updated={};any_changed=False
         for case in batch:
             saved=records[case['id']]
-            new={**competitors(case),**native_competitors(native,case)}
+            if additional_only:
+                new=additional_competitors(case)
+                if native is not None:
+                    new.update(native.extra_native.evaluate(case))
+                    new.update(native.extra_native_stats.evaluate(case))
+            else:
+                new={**all_competitors(case),**native_competitors(native,case)}
             for library,result in new.items():
                 if library=='Sci':raise ValueError('Competitor cannot replace Sci measurement')
                 validate_result(case,result,saved['reference'])
                 libraries[api.split('.')[0]].add(library)
-            updated[case['id']]={**saved,'libraries':{**{lib:value for lib,value in saved['libraries'].items()
-                                                      if lib != 'stdlib'},**new}}
+            merged={**{lib:value for lib,value in saved['libraries'].items()
+                        if lib != 'stdlib'},**new}
+            any_changed |= merged != saved['libraries']
+            updated[case['id']]={**saved,'libraries':merged}
+        if not any_changed:
+            continue
         files=measurement_files(batch,updated)
         # A staged tree can share hard links with the source snapshot.
         for name in files:
@@ -1153,6 +1230,8 @@ def main():
     mode.add_argument('--full',action='store_true',help='recompute all Sci, reference and comparison-library results')
     mode.add_argument('--sci-only',action='store_true',help='refresh only Sci outputs (the default)')
     mode.add_argument('--comparators-only',action='store_true',help='backfill comparison libraries from verified saved inputs, preserving Sci and independent reference results')
+    parser.add_argument('--additional-only',action='store_true',
+                        help='with --comparators-only, add new independent adapter measurements without rerunning previous providers')
     mode.add_argument('--upgrade-scientific-comparisons',action='store_true',
                       help='replace cmath complex references with mpmath/NumPy and remove all stdlib comparisons, preserving Sci outputs')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
@@ -1163,6 +1242,8 @@ def main():
         parser.error('--module is available only for Sci-only, comparator and render refreshes')
     if args.comparators_only and not args.module:
         parser.error('--comparators-only requires explicit --module selection')
+    if args.additional_only and not args.comparators_only:
+        parser.error('--additional-only requires --comparators-only')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
         raise RuntimeError('Run uv sync --frozen with the pinned library versions')
     if not args.check and any(k.startswith(('RUSTFLAGS','CARGO_ENCODED_RUSTFLAGS','CARGO_PROFILE_')) or k == 'CARGO_BUILD_TARGET' for k in os.environ):
@@ -1283,8 +1364,11 @@ def main():
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
     if args.comparators_only:
-        native=NativeComparisons() if any(api.split('.',1)[0] in NATIVE_MODULES
-                                          for api in selected) else None
+        native=(NativeComparisons() if
+                any(api.split('.',1)[0] in
+                    ({'special','stats'} if args.additional_only else NATIVE_MODULES)
+                    for api in selected)
+                else None)
         meta=previous.copy()
         meta['module_libraries']={module:list(names) for module,names in previous['module_libraries'].items()}
         if meta['testing_sources_sha256']!=digest_sources():
@@ -1294,11 +1378,14 @@ def main():
             meta['native_libraries']=native.versions
             meta['cxx']=command(os.environ.get('CXX','c++'),'--version')
             meta['native_build_flags']='-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas'
+        from .rust_library_comparisons import VERSIONS as rust_oracle_versions
+        meta['rust_oracle_libraries']=rust_oracle_versions
         with tempfile.TemporaryDirectory(dir=ROOT/'results') as directory:
             workspace=Path(directory)
             staged=workspace/'measurements'
             shutil.copytree(ROOT/'results/measurements',staged,copy_function=os.link)
-            changed,libraries=refresh_comparators(cases,records,staged,selected,native=native)
+            changed,libraries=refresh_comparators(cases,records,staged,selected,
+                                                  native=native,additional_only=args.additional_only)
             staged_records=MeasurementStore(staged)
             coverage=preserved_coverage(previous,cases=cases,records=staged_records)
             meta['measurements_sha256']=directory_digest(staged)
@@ -1307,7 +1394,8 @@ def main():
                 meta['module_libraries'][module]=sorted(set(meta['module_libraries'][module])|names)
             meta.setdefault('comparison_refreshes',[]).append({
                 'apis':sorted(selected),'testing_sources_sha256':meta['testing_sources_sha256'],
-                'scipy':meta['scipy'],'native_libraries':meta.get('native_libraries',{})})
+                'scipy':meta['scipy'],'native_libraries':meta.get('native_libraries',{}),
+                'additional_only':args.additional_only})
             pages=workspace/'pages'
             with mp.workdps(METRIC_PRECISION_DPS):
                 render_cached(cases,staged_records,meta,pages,
@@ -1470,7 +1558,7 @@ def main():
                 high=stable_reference(case)
                 with mp.workdps(METRIC_PRECISION_DPS):
                     native_results=native_competitors(native,case)
-                    libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native_results}
+                    libs={'Sci':{k:v for k,v in result.items() if k!='id'},**all_competitors(case),**native_results}
                     for res in libs.values():validate_result(case,res,high)
                     records[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],'libraries':libs}
                 module_libraries[api.split('.')[0]].update(libs)

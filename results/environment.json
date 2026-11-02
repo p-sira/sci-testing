@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "8535dbaf007a8453ffc8e197c52f45adecd563696e721601d6f14e729057ab8c",
+  "testing_sources_sha256": "0e3789a9c6200ec52d96b5122f831b9690692cc3d429fe6b6284e34d72da299d",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1398,7 +1398,8 @@
       "Boost.Math",
       "GSL",
       "Sci",
-      "SciPy"
+      "SciPy",
+      "mpmath"
     ],
     "stats": [
       "Boost.Math",
@@ -1416,7 +1417,7 @@
       "SciPy"
     ]
   },
-  "measurements_sha256": "b831ce5cf0bed816f68498367a8313298f08f42d3201b9681f7f814adb3fde34",
+  "measurements_sha256": "3d8578163427cd78a34a10c9d9b0e46d4714130b0b318f0e514a8944c456b469",
   "coverage_sha256": "48cad6be78cb1605d775f556813d677b1c89bb2fc8dfea67c80133ab8b66da3d",
   "reference_extensions": [
     {
@@ -2083,6 +2084,22 @@
         "Boost.Units": "1_92",
         "GSL": "2.8"
       }
+    },
+    {
+      "apis": [
+        "special.psi"
+      ],
+      "testing_sources_sha256": "0e3789a9c6200ec52d96b5122f831b9690692cc3d429fe6b6284e34d72da299d",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "Boost.Multiprecision": "1_92",
+        "Boost.Numeric.uBLAS": "1_92",
+        "Boost.Graph": "1_92",
+        "Boost.Units": "1_92",
+        "GSL": "2.8"
+      },
+      "additional_only": true
     }
   ],
   "reference_refreshes": [
@@ -2128,5 +2145,5 @@
       "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
     }
   ],
-  "accuracy_summaries_sha256": "d5f517bb05f38e59093f8b962cf2bedf18930c3b593c8fedd310f6a785106b97"
+  "accuracy_summaries_sha256": "642bbea8c1cafc16f47a018b881af997324e3b27e2b24ab7ff9a333173f6426d"
 }
