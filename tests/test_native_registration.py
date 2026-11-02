@@ -19,7 +19,12 @@ from sci_testing.case_csv import case_paths, csv_text, decode
 from sci_testing.native_compare import NativeComparisons
 
 
-PROVIDERS = frozenset({'Boost.Math', 'GSL'})
+# These are the distinct *measured* native providers, not an unsupported-API
+# taxonomy. The saved measurement snapshot independently determines the
+# positive regression baselines for each provider/API pair.
+PROVIDERS = frozenset({'Boost.Math', 'GSL', 'Boost.Graph',
+                       'Boost.Numeric.uBLAS', 'Boost.Multiprecision',
+                       'Boost.Units'})
 
 
 def _saved_successful_samples():

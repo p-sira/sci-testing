@@ -28,58 +28,58 @@ current public namespace, with their measured recipe names preserved.
 
 ### `sci::interpolate::fitting` (7 functions, 14029 cases)
 
-| Function | Cases | Sci vs reference | SciPy |
-| --- | ---: | --- | --- |
-| `bisplrep` | 2002 | 7.6198e+16 / 4.876e+12 | 7.6198e+16 / 4.876e+12 |
-| `generate_knots` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 |
-| `make_interp_spline` | 2005 | 4.5036e+15 / 4.9901e+11 | 4.5036e+15 / 4.9901e+11 |
-| `make_lsq_spline` | 2002 | 151.94 / 3.2348 | 151.94 / 3.2348 |
-| `make_smoothing_spline` | 2004 | 4.5036e+15 / 1.0215e+11 | 4.5036e+15 / 1.0215e+11 |
-| `make_splprep` | 2007 | 2.674e+16 / 3.004e+14 | 2.674e+16 / 3.004e+14 |
-| `make_splrep` | 2005 | 4.5036e+15 / 1.2476e+11 | 4.5036e+15 / 1.2476e+11 |
+| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
+| --- | ---: | --- | --- | --- | --- |
+| `bisplrep` | 2002 | 7.6198e+16 / 4.876e+12 | 7.6198e+16 / 4.876e+12 | — | — |
+| `generate_knots` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
+| `make_interp_spline` | 2005 | 4.5036e+15 / 4.9901e+11 | 4.5036e+15 / 4.9901e+11 | — | — |
+| `make_lsq_spline` | 2002 | 151.94 / 3.2348 | 151.94 / 3.2348 | — | — |
+| `make_smoothing_spline` | 2004 | 4.5036e+15 / 1.0215e+11 | 4.5036e+15 / 1.0215e+11 | — | — |
+| `make_splprep` | 2007 | 2.674e+16 / 3.004e+14 | 2.674e+16 / 3.004e+14 | — | — |
+| `make_splrep` | 2005 | 4.5036e+15 / 1.2476e+11 | 4.5036e+15 / 1.2476e+11 | — | — |
 
 ### `sci::interpolate::multidimensional` (3 functions, 6024 cases)
 
-| Function | Cases | Sci vs reference | SciPy |
-| --- | ---: | --- | --- |
-| `bisplev` | 2003 | 3.125 / 0.049255 | 3.125 / 0.049255 |
-| `griddata` | 2007 | 11.871 / 0.4387 | 11.871 / 0.4387 |
-| `interpn` | 2014 | 0.57199 / 0.024425 | 0.57199 / 0.024425 |
+| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
+| --- | ---: | --- | --- | --- | --- |
+| `bisplev` | 2003 | 3.125 / 0.049255 | 3.125 / 0.049255 | — | — |
+| `griddata` | 2007 | 11.871 / 0.4387 | 11.871 / 0.4387 | — | — |
+| `interpn` | 2014 | 0.57199 / 0.024425 | 0.57199 / 0.024425 | — | 0.0 / 0.0 |
 
 ### `sci::interpolate::polynomial` (6 functions, 12104 cases)
 
-| Function | Cases | Sci vs reference | SciPy |
-| --- | ---: | --- | --- |
-| `approximate_taylor_polynomial` | 2004 | 2.7762e+18 / 4.9684e+14 | 2.7762e+18 / 4.9684e+14 |
-| `barycentric_interpolate` | 2050 | 23392.0 / 19.974 | 37692.0 / 28.937 |
-| `krogh_interpolate` | 2050 | 414.66 / 2.7897 | 632.8 / 4.2342 |
-| `lagrange` | 2000 | 1.3104e+6 / 338.44 | 1.3104e+6 / 338.44 |
-| `pade` | 2000 | 0.66574 / 0.051564 | 0.66574 / 0.051564 |
-| `pchip_interpolate` | 2000 | 1.7699 / 0.33489 | 1.7699 / 0.33489 |
+| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
+| --- | ---: | --- | --- | --- | --- |
+| `approximate_taylor_polynomial` | 2004 | 2.7762e+18 / 4.9684e+14 | 2.7762e+18 / 4.9684e+14 | — | — |
+| `barycentric_interpolate` | 2050 | 23392.0 / 19.974 | 37692.0 / 28.937 | 29199.0 / 19.987 | 22958.0 / 21.649 |
+| `krogh_interpolate` | 2050 | 414.66 / 2.7897 | 632.8 / 4.2342 | 2993.6 / 5.27 | 0.0 / 0.0 |
+| `lagrange` | 2000 | 1.3104e+6 / 338.44 | 1.3104e+6 / 338.44 | — | — |
+| `pade` | 2000 | 0.66574 / 0.051564 | 0.66574 / 0.051564 | — | — |
+| `pchip_interpolate` | 2000 | 1.7699 / 0.33489 | 1.7699 / 0.33489 | 2.0659 / 0.36574 | — |
 
 ### `sci::interpolate::spline` (7 functions, 14055 cases)
 
-| Function | Cases | Sci vs reference | SciPy |
-| --- | ---: | --- | --- |
-| `insert` | 2007 | 43339.0 / 6.3195 | 43339.0 / 6.3195 |
-| `spalde` | 2003 | 3.1525e+16 / 9.2356e+11 | 3.1525e+16 / 9.2356e+11 |
-| `splantider` | 2010 | 3.8791 / 0.022945 | 3.8791 / 0.022945 |
-| `splder` | 2007 | 3.8947 / 0.021381 | 3.8947 / 0.021381 |
-| `splev` | 2011 | 5.0 / 0.11639 | 5.0 / 0.11639 |
-| `splint` | 2013 | 1.0508e+16 / 5.2203e+12 | 1.0508e+16 / 5.2203e+12 |
-| `sproot` | 2004 | 12.5 / 2.601 | 12.5 / 2.601 |
+| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
+| --- | ---: | --- | --- | --- | --- |
+| `insert` | 2007 | 43339.0 / 6.3195 | 43339.0 / 6.3195 | — | — |
+| `spalde` | 2003 | 3.1525e+16 / 9.2356e+11 | 3.1525e+16 / 9.2356e+11 | — | — |
+| `splantider` | 2010 | 3.8791 / 0.022945 | 3.8791 / 0.022945 | — | — |
+| `splder` | 2007 | 3.8947 / 0.021381 | 3.8947 / 0.021381 | — | — |
+| `splev` | 2011 | 5.0 / 0.11639 | 5.0 / 0.11639 | — | — |
+| `splint` | 2013 | 1.0508e+16 / 5.2203e+12 | 1.0508e+16 / 5.2203e+12 | — | — |
+| `sproot` | 2004 | 12.5 / 2.601 | 12.5 / 2.601 | — | — |
 
 ### `sci::interpolate` (2 functions, 4012 cases)
 
-| Function | Cases | Sci vs reference | SciPy |
-| --- | ---: | --- | --- |
-| `splprep` | 2007 | 3.1662e+19 / 1.7246e+17 | 3.1662e+19 / 1.7246e+17 |
-| `splrep` | 2005 | 1.993e+16 / 5.5211e+11 | 1.993e+16 / 5.5211e+11 |
+| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL |
+| --- | ---: | --- | --- | --- | --- |
+| `splprep` | 2007 | 3.1662e+19 / 1.7246e+17 | 3.1662e+19 / 1.7246e+17 | — | — |
+| `splrep` | 2005 | 1.993e+16 / 5.5211e+11 | 1.993e+16 / 5.5211e+11 | — | — |
 
 
 ## Conventions and limitations
 
-Original barycentric/Krogh recipes sample an exactly represented quartic. Added fitting and spline recipes compare evaluation, knots, coefficients and degree in the established fixture order. Queries, boundary modes, repeated knots and work sizes remain explicit in the CSV inputs. Equivalent spline representations can differ at roundoff scale.
+Original barycentric/Krogh recipes sample an exactly represented quartic. Added fitting and spline recipes compare evaluation, knots, coefficients and degree in the established fixture order. Queries, boundary modes, repeated knots and work sizes remain explicit in the CSV inputs. Equivalent spline representations can differ at roundoff scale. Public Boost.Math PCHIP and barycentric polynomial interpolators provide independent bounded real-data comparisons. SciPy-compatible endpoint slopes must be supplied to Boost PCHIP; nontrivial extrapolation and repeated-node Krogh/Hermite derivatives are not automatically equivalent to the saved polynomial interpolation profile. GSL polynomial interpolation and public interval search provide independent saved Barycentric/Krogh and limited tensor-grid comparisons; general Sci PCHIP slope rules are not identical to GSL Steffen splines.
 
 Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
 references and the environment are stored in that repository's `results/`.

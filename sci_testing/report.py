@@ -38,6 +38,9 @@ EPS = mp.mpf(2) ** -52
 TINY = mp.mpf(2) ** -1022
 MODULES = ('cluster complex constants core differentiate fft filter integrate interpolate io '
            'linalg optimize signal sparse spatial special stats').split()
+NATIVE_MODULES = frozenset(('complex', 'constants', 'differentiate', 'fft',
+                            'integrate', 'interpolate', 'linalg', 'optimize', 'signal',
+                            'sparse', 'spatial', 'special', 'stats'))
 BOOST = 'https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/'
 NOTES = {
     'sparse':'Canonical CSR and COO arrays retain explicit zeros. Matrix outputs include dimensions; graph distances retain infinities. Eigenpairs are compared by ordered values with independent residual checks; matching cardinality, permutation validity, flow conservation and random shape/count use invariants where outputs are nonunique. Sparse LU, iterative solves and matrix functions use pinned public SciPy references. Each scalar uses (class,value): class 0 for finite data, ±1 for signed infinity and 2 for NaN, with zero nonfinite payloads. This preserves unreachable vertices; exact tags contribute to component means. RNG streams differ. Dense samples preserve graph structure, integer capacities and dependent dimensions; fixed discrete profiles may repeat. Rust signature adaptations and bounded dense fallbacks are documented in Sci sparse coverage.',
@@ -110,6 +113,91 @@ NOTES['stats'] += (
     'explicit circular/logarithmic transformations. These are mathematical '
     'compositions with independent SciPy validation, not claims that the '
     'libraries export identical named Sci statistical functions.'
+)
+
+NOTES['complex'] += (
+    ' Boost.Multiprecision cpp_complex_50 is a separate public Boost complex '
+    'arithmetic backend, not Boost.Math and not std::complex relabeled as Boost. '
+    'Its transcendental and arithmetic comparisons are deliberately bounded '
+    'around signed-zero banks, branch cuts and overflow; unavailable samples '
+    'are not silently substituted with Sci or NumPy values.'
+)
+NOTES['integrate'] += (
+    ' For the saved exponential callback only, Boost.Math and GSL independently '
+    'provide fixed 16-point Gauss-Legendre quadrature. These are distinct from '
+    'adaptive quadrature and the sampled-data trapezoid/Simpson operations.'
+)
+NOTES['differentiate'] += (
+    ' Boost.Math numerical finite differences and automatic differentiation '
+    'evaluate the saved analytic callbacks independently. Their method and '
+    'step policy differ from Sci fixed-step stencils, so agreement is numerical '
+    'rather than a claim of identical algorithms.'
+)
+NOTES['linalg'] += (
+    ' Boost.Numeric.uBLAS provides public matrix/vector arithmetic and LU '
+    'solves; GSL provides BLAS, LU, Cholesky, symmetric eigenvalue and SVD '
+    'primitives. Output order is adapted to the saved Sci contracts. '
+    'Ill-conditioned solves can disagree with SciPy rounding while still '
+    'being closer to independent high-precision mathematical references.'
+)
+NOTES['sparse'] += (
+    ' Boost.Graph comparisons use public traversal, connected-component, '
+    'shortest-path and minimum-spanning-tree algorithms on saved adjacency '
+    'matrices; Boost.Numeric.uBLAS supplies sparse matrix arithmetic. '
+    'Nonfinite distances use Sci\'s explicit (class,value) encoding, and '
+    'matrix shape metadata is preserved. These adapters are not a general '
+    'replacement for arbitrary Sci graph options or sparse formats.'
+)
+NOTES['spatial'] += (
+    ' Boost.Math public vector norms independently implement bounded L1, '
+    'L2, L-infinity and integer-p distance kernels; pairwise matrices and '
+    'weighted distance conventions are documented derived compositions. '
+    'Unsupported metric names and fractional powers remain unavailable.'
+)
+NOTES['spatial'] += (
+    ' GSL-labelled distances are explicitly derived from public GSL BLAS '
+    'norm/dot operations and sample covariance/mean statistics, with weighted '
+    'Sci conventions applied by the adapter; GSL does not provide identical '
+    'publicly named distance APIs.'
+)
+NOTES['interpolate'] += (
+    ' Public Boost.Math PCHIP and barycentric polynomial interpolators '
+    'provide independent bounded real-data comparisons. SciPy-compatible '
+    'endpoint slopes must be supplied to Boost PCHIP; nontrivial extrapolation '
+    'and repeated-node Krogh/Hermite derivatives are not automatically '
+    'equivalent to the saved polynomial interpolation profile.'
+)
+NOTES['interpolate'] += (
+    ' GSL polynomial interpolation and public interval search provide '
+    'independent saved Barycentric/Krogh and limited tensor-grid comparisons; '
+    'general Sci PCHIP slope rules are not identical to GSL Steffen splines.'
+)
+NOTES['signal'] += (
+    ' The limited GSL statistical-filter competitors compose public '
+    'GSL linear-regression, mean/variance, sorting and median primitives '
+    'for the exact saved 1-D/2-D detrend, Wiener and median-filter profiles. '
+    'These are derived DSP implementations, not GSL exports of Sci\'s named '
+    'signal-processing algorithms.'
+)
+NOTES['constants'] += (
+    ' Boost.Units adds independently typed affine temperature and SI '
+    'wavelength/frequency conversions; it is not part of Boost.Math. '
+    'The currently sampled CODATA lookup/metadata tables are not assumed '
+    'to match Boost.Units constants from other release years.'
+)
+NOTES['optimize'] += (
+    ' GSL native multidimensional simplex and BFGS optimizers provide '
+    'independent solutions of the saved convex two-dimensional quadratic '
+    'objective, with guarded convergence, iteration budgets and function '
+    'offset handling. Convergence trajectories and algorithms need not '
+    'match Sci optimizers; only the saved final position and cost are '
+    'compared.'
+)
+NOTES['fft'] += (
+    ' GSL public complex forward/inverse FFT routines independently evaluate '
+    'the saved finite, one-dimensional fft/ifft profiles, including non-power-of-two '
+    'lengths and inverse scaling. Real, multidimensional, cosine/sine and '
+    'arbitrary-transform-option variants are not thereby covered.'
 )
 
 
@@ -851,7 +939,7 @@ def selective_render_modules(output, dirty_modules):
 
 def extend_references(cases, added, executable, destination):
     """Evaluate only new cases; preserve all older reference strings and results."""
-    native=NativeComparisons() if any(api.startswith(('special.','stats.'))
+    native=NativeComparisons() if any(api.split('.',1)[0] in NATIVE_MODULES
                                       for api in added) else None
     libraries={}
     for api,batch in added.items():
@@ -1191,7 +1279,7 @@ def main():
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
     if args.comparators_only:
-        native=NativeComparisons() if any(api.startswith(('special.','stats.'))
+        native=NativeComparisons() if any(api.split('.',1)[0] in NATIVE_MODULES
                                           for api in selected) else None
         meta=previous.copy()
         meta['module_libraries']={module:list(names) for module,names in previous['module_libraries'].items()}

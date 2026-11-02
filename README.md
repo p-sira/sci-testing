@@ -161,7 +161,11 @@ Sci and its private backends never generate expectations. Nonunique factors use
 projectors, reconstructions and ordered eigenvalues. Module pages document the
 remaining adaptations and reference accuracy limits.
 
-The separate C++ bridge calls Boost.Math and GSL where matching scalar APIs exist.
+The separate C++ bridge calls public Boost.Math, Boost.Multiprecision,
+Boost.Graph, Boost.Numeric.uBLAS, Boost.Units and GSL interfaces where an
+independently verified numerical comparison exists. These are distinct
+provider labels in the saved measurements; compositions are not falsely
+described as dedicated named functions in the underlying libraries.
 It converts elliptic parameter m to modulus sqrt(m), contains native exceptions,
 disables GSL's abort handler and retains GSL error statuses. Versions and native
 compiler flags are recorded. See the [Boost.Math reference](https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html)
@@ -193,6 +197,26 @@ comparisons are limited to their independently tested saved signatures and
 guarded numerical domains; family-specific tests check the full saved-case
 arrays, including ordering and auxiliary outputs. See the notes in the special
 and statistics report pages for provenance and limitations.
+
+The non-special adapters extend comparisons to Boost.Multiprecision complex
+arithmetic, Boost.Graph sparse graph algorithms, Boost.Numeric.uBLAS dense and
+sparse operations, Boost.Units quantity conversions, and GSL/Boost.Math
+linear algebra, fixed quadrature, interpolation, differentiation, geometric
+distances and bounded signal/optimization algorithms. Saved graph traversal,
+matching, flow, derived Laplacian and one-dimensional GSL complex FFT profiles
+are included where independently verified. Full output shapes, matrix order,
+parameter restrictions and complex branch conventions are
+checked in standalone adapter suites against independent public SciPy or
+high-precision mathematical references. Some inputs are deliberately
+unavailable: a named competitor column reports a successfully evaluated
+subset, never a guarantee of complete Sci signature or domain coverage.
+Report headers show providers available somewhere in a module, not support
+for every API in that module; only populated per-function cells and successful
+saved measurements establish actual coverage. Some deliberately unsupported
+domains retain explicit native error records rather than fabricated values.
+The generated namespace directories deliberately retain dotted names such as
+`cases/generated/sparse.csgraph/` and `sparse.linalg/`; neither inputs nor
+independent references have been renamed or regenerated for this extension.
 
 Tables are split by canonical **Sci 0.3 submodule**, including historical recipes
 whose old names map to the new namespaces. They contain **Function**, **Cases**,

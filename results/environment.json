@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "107f38e5e6b61aebb209b71a177ad9f7b7a21d0644dfafa3d27cb632ef633931",
+  "testing_sources_sha256": "622f8a97780c592e7992d13b4d899ab29ef2692d37aacd65b32668ae40c852cb",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1310,6 +1310,10 @@
   },
   "native_libraries": {
     "Boost.Math": "1_92",
+    "Boost.Multiprecision": "1_92",
+    "Boost.Numeric.uBLAS": "1_92",
+    "Boost.Graph": "1_92",
+    "Boost.Units": "1_92",
     "GSL": "2.8"
   },
   "cxx": "c++ (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
@@ -1320,19 +1324,23 @@
       "SciPy"
     ],
     "complex": [
+      "Boost.Multiprecision",
       "NumPy",
       "Sci"
     ],
     "constants": [
+      "Boost.Units",
       "NumPy",
       "Sci",
       "SciPy"
     ],
     "differentiate": [
+      "Boost.Math",
       "Sci",
       "SciPy"
     ],
     "fft": [
+      "GSL",
       "NumPy",
       "Sci",
       "SciPy"
@@ -1343,33 +1351,46 @@
       "SciPy"
     ],
     "integrate": [
+      "Boost.Math",
+      "GSL",
       "NumPy",
       "Sci",
       "SciPy"
     ],
     "interpolate": [
+      "Boost.Math",
+      "GSL",
       "Sci",
       "SciPy"
     ],
     "linalg": [
+      "Boost.Numeric.uBLAS",
+      "GSL",
       "NumPy",
       "Sci",
       "SciPy"
     ],
     "optimize": [
+      "GSL",
       "Sci",
       "SciPy"
     ],
     "signal": [
+      "GSL",
       "NumPy",
       "Sci",
       "SciPy"
     ],
     "sparse": [
+      "Boost.Graph",
+      "Boost.Numeric.uBLAS",
+      "GSL",
       "Sci",
       "SciPy"
     ],
     "spatial": [
+      "Boost.Math",
+      "GSL",
       "Sci",
       "SciPy"
     ],
@@ -1395,7 +1416,7 @@
       "SciPy"
     ]
   },
-  "measurements_sha256": "a82daaeca877e25f1af1b61ff340b1d7c286d6118df775cd810ab50f0c8e045c",
+  "measurements_sha256": "b831ce5cf0bed816f68498367a8313298f08f42d3201b9681f7f814adb3fde34",
   "coverage_sha256": "48cad6be78cb1605d775f556813d677b1c89bb2fc8dfea67c80133ab8b66da3d",
   "reference_extensions": [
     {
@@ -1929,6 +1950,139 @@
         "Boost.Math": "1_92",
         "GSL": "2.8"
       }
+    },
+    {
+      "apis": [
+        "complex.abs",
+        "complex.acos",
+        "complex.acosh",
+        "complex.add",
+        "complex.arg",
+        "complex.asin",
+        "complex.asinh",
+        "complex.atan",
+        "complex.atanh",
+        "complex.cbrt",
+        "complex.conjugate",
+        "complex.cos",
+        "complex.cosh",
+        "complex.divide",
+        "complex.exp",
+        "complex.from_polar",
+        "complex.imag",
+        "complex.ln",
+        "complex.multiply",
+        "complex.negate",
+        "complex.norm_sqr",
+        "complex.powc",
+        "complex.powf",
+        "complex.powi",
+        "complex.powu",
+        "complex.real",
+        "complex.reciprocal",
+        "complex.sin",
+        "complex.sinh",
+        "complex.sqrt",
+        "complex.subtract",
+        "complex.tan",
+        "complex.tanh",
+        "complex.to_polar",
+        "constants.convert_temperature",
+        "constants.lambda2nu",
+        "constants.nu2lambda",
+        "constants.precision",
+        "constants.value",
+        "differentiate.derivative",
+        "differentiate.gradient",
+        "differentiate.hessian",
+        "differentiate.jacobian",
+        "integrate.fixed_quad",
+        "interpolate.barycentric_interpolate",
+        "interpolate.interpn",
+        "interpolate.krogh_interpolate",
+        "interpolate.pchip_interpolate",
+        "linalg.cho_solve",
+        "linalg.cholesky",
+        "linalg.det",
+        "linalg.dot",
+        "linalg.eigvalsh",
+        "linalg.inv",
+        "linalg.matmul",
+        "linalg.matvec",
+        "linalg.solve",
+        "linalg.svdvals",
+        "linalg.transpose",
+        "optimize.minimize",
+        "optimize.minimize_with_gradient",
+        "optimize.try_minimize",
+        "optimize.try_minimize_with_gradient",
+        "signal.detrend",
+        "signal.medfilt",
+        "signal.medfilt2d",
+        "signal.wiener",
+        "sparse.add",
+        "sparse.csgraph.bellman_ford",
+        "sparse.csgraph.connected_components",
+        "sparse.csgraph.dijkstra",
+        "sparse.csgraph.floyd_warshall",
+        "sparse.csgraph.johnson",
+        "sparse.csgraph.minimum_spanning_tree",
+        "sparse.csgraph.shortest_path",
+        "sparse.from_dense",
+        "sparse.matmul",
+        "sparse.matrix_transpose",
+        "sparse.matvec",
+        "sparse.multiply",
+        "sparse.to_dense",
+        "sparse.transpose",
+        "spatial.cdist",
+        "spatial.chebyshev",
+        "spatial.cityblock",
+        "spatial.correlation",
+        "spatial.cosine",
+        "spatial.distance_matrix",
+        "spatial.euclidean",
+        "spatial.hamming",
+        "spatial.minkowski",
+        "spatial.minkowski_distance",
+        "spatial.minkowski_distance_p",
+        "spatial.pdist",
+        "spatial.sqeuclidean"
+      ],
+      "testing_sources_sha256": "96da7d24c7407a53611de27efae3002e52ae52d00f6fb6a4fad4a0ef6f4e2e86",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "Boost.Multiprecision": "1_92",
+        "Boost.Numeric.uBLAS": "1_92",
+        "Boost.Graph": "1_92",
+        "Boost.Units": "1_92",
+        "GSL": "2.8"
+      }
+    },
+    {
+      "apis": [
+        "fft.fft",
+        "fft.ifft",
+        "sparse.csgraph.breadth_first_order",
+        "sparse.csgraph.breadth_first_tree",
+        "sparse.csgraph.depth_first_order",
+        "sparse.csgraph.depth_first_tree",
+        "sparse.csgraph.laplacian",
+        "sparse.csgraph.maximum_bipartite_matching",
+        "sparse.csgraph.maximum_flow",
+        "sparse.csgraph.structural_rank"
+      ],
+      "testing_sources_sha256": "57973f58c8a80db2de859bd3e03946d868ad049b98a99503ec9e4dae66984f4a",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "Boost.Multiprecision": "1_92",
+        "Boost.Numeric.uBLAS": "1_92",
+        "Boost.Graph": "1_92",
+        "Boost.Units": "1_92",
+        "GSL": "2.8"
+      }
     }
   ],
   "reference_refreshes": [
@@ -1974,5 +2128,5 @@
       "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
     }
   ],
-  "accuracy_summaries_sha256": "7a67b5e8eb72a33347168c28c7382ed93f2e3315ce4d57aa20fd7e0755e04cdc"
+  "accuracy_summaries_sha256": "d5f517bb05f38e59093f8b962cf2bedf18930c3b593c8fedd310f6a785106b97"
 }
