@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "3d1f538d12ef58c6738188ac9a526fb0459c4c5cb1023a3c7edaa3c23d5a3452",
+  "testing_sources_sha256": "4e2af78bce478470045921c727c3671c33670e79cea5bb28a95051d84d9f3492",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1312,7 +1312,7 @@
     "Boost.Math": "1_92",
     "GSL": "2.8"
   },
-  "cxx": "c++ (GCC) 16.2.1 20260810\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "cxx": "clang version 23.1.4\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin",
   "native_build_flags": "-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas",
   "module_libraries": {
     "cluster": [
@@ -1321,8 +1321,7 @@
     ],
     "complex": [
       "NumPy",
-      "Sci",
-      "stdlib"
+      "Sci"
     ],
     "constants": [
       "NumPy",
@@ -1378,16 +1377,14 @@
       "Boost.Math",
       "GSL",
       "Sci",
-      "SciPy",
-      "stdlib"
+      "SciPy"
     ],
     "stats": [
       "Boost.Math",
       "GSL",
       "NumPy",
       "Sci",
-      "SciPy",
-      "stdlib"
+      "SciPy"
     ],
     "io": [
       "Sci",
@@ -1398,7 +1395,7 @@
       "SciPy"
     ]
   },
-  "measurements_sha256": "90f26fdb3b723b1f2f018abce2c117c8cb4dbba72fa994d751493ea985583a60",
+  "measurements_sha256": "399d59d8170acdfb20ac898066987b2f597a8bbb51ee66b35aff189a3be1f239",
   "coverage_sha256": "48cad6be78cb1605d775f556813d677b1c89bb2fc8dfea67c80133ab8b66da3d",
   "reference_extensions": [
     {
@@ -1517,6 +1514,62 @@
         "Boost.Math": "1_92",
         "GSL": "2.8"
       }
+    },
+    {
+      "apis": [
+        "special.complex.digamma",
+        "special.complex.spence"
+      ],
+      "testing_sources_sha256": "877b61cd42067a458d2ccf136bdbcbcdc72a3a1e4737ad6154483891a1a604ca",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "GSL": "2.8"
+      }
     }
-  ]
+  ],
+  "reference_refreshes": [
+    {
+      "apis": [
+        "complex.abs",
+        "complex.acos",
+        "complex.acosh",
+        "complex.add",
+        "complex.arg",
+        "complex.asin",
+        "complex.asinh",
+        "complex.atan",
+        "complex.atanh",
+        "complex.cbrt",
+        "complex.conjugate",
+        "complex.cos",
+        "complex.cosh",
+        "complex.divide",
+        "complex.exp",
+        "complex.from_polar",
+        "complex.imag",
+        "complex.ln",
+        "complex.multiply",
+        "complex.negate",
+        "complex.norm_sqr",
+        "complex.powc",
+        "complex.powf",
+        "complex.powi",
+        "complex.powu",
+        "complex.real",
+        "complex.reciprocal",
+        "complex.sin",
+        "complex.sinh",
+        "complex.sqrt",
+        "complex.subtract",
+        "complex.tan",
+        "complex.tanh",
+        "complex.to_polar"
+      ],
+      "reference": "mpmath, 200/320 decimal digits; escalated to 400/600 or 650/1000 near subnormal branch points; signed-zero banks",
+      "replaced": "binary64 Python cmath and stdlib comparisons",
+      "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
+    }
+  ],
+  "accuracy_summaries_sha256": "bd32f7753dee0425cc0b3ec4819098df0738b44dd63a2a78ec71d6a680cb7944"
 }

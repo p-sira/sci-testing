@@ -1,6 +1,5 @@
 """Generate library comparison pages using measured Sci outputs as the baseline."""
 import argparse
-import cmath
 import gc
 from collections import defaultdict
 from contextlib import redirect_stdout
@@ -18,11 +17,12 @@ import tempfile
 import warnings
 
 from .native_compare import NativeComparisons
+from .accuracy_cache import AccuracyCache, FILENAME as SUMMARY_FILENAME
 
 from .generate_cases import build_cases
 from .case_csv import (case_files, case_paths, case_directory_digest, csv_text,
                       disk_files, files_digest, measurement_files,
-                      read_measurements, write_files, MeasurementStore, directory_digest, iter_case_files, write_cases,
+                      read_measurements, read_measurement_content, write_files, MeasurementStore, directory_digest, iter_case_files, write_cases,
                       csv_paths, write_measurements)
 
 import filterpy
@@ -42,7 +42,7 @@ BOOST = 'https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/'
 NOTES = {
     'sparse':'Canonical CSR and COO arrays retain explicit zeros. Matrix outputs include dimensions; graph distances retain infinities. Eigenpairs are compared by ordered values with independent residual checks; matching cardinality, permutation validity, flow conservation and random shape/count use invariants where outputs are nonunique. Sparse LU, iterative solves and matrix functions use pinned public SciPy references. Each scalar uses (class,value): class 0 for finite data, ±1 for signed infinity and 2 for NaN, with zero nonfinite payloads. This preserves unreachable vertices; exact tags contribute to component means. RNG streams differ. Dense samples preserve graph structure, integer capacities and dependent dimensions; fixed discrete profiles may repeat. Rust signature adaptations and bounded dense fallbacks are documented in Sci sparse coverage.',
     'cluster':'Vector quantization uses Euclidean distances and first-minimum ties; whitening divides by population standard deviations. Hierarchy fixtures also check counts, leaf ordering and partitions. K-means receives an explicit initial codebook. Returned discrete indices and tree metadata are recorded alongside distances.',
-    'complex':'Complex outputs flatten real then imaginary components. Functions use principal branches; powers preserve their explicit real, complex or integer exponent conventions. The original exp/sqrt recipes use high-precision mpmath references; additional complex comparisons use the Python standard library as a binary64 reference. Signed-zero and nonfinite contracts remain in the Sci API tests.',
+    'complex':'Complex outputs flatten real then imaginary components. Functions use principal branches; powers preserve their explicit real, complex or integer exponent conventions. All 34 complex APIs use high-precision mpmath mathematical references, with explicit signed-zero branch banks. NumPy provides the public binary64 complex operations; SciPy, Boost.Math and GSL do not expose equivalent general-purpose complex arithmetic. Signed-zero and nonfinite contracts remain in the Sci API tests.',
     'constants':'Vacuum conversions use metres and hertz and the exact SI value c = 299792458 m/s. Temperature recipes convert Celsius to Fahrenheit. CODATA values, uncertainties, unit strings and searches use the pinned SciPy constants table. Text metadata is encoded as UTF-8 lengths and bytes; Sci dtype f64 corresponds to NumPy float64.',
     'core':'CSR constructors, validators and conversion routines are exercised against independent SciPy sparse and explicit storage invariants. Canonical pointer arrays, index ordering, zeros and rejection behavior are retained in the per-case measurements.',
     'differentiate':'Callbacks are supplied explicitly: original sin and quadratic recipes, a quadratic Hessian and a two-output Jacobian. Fixed-step Sci stencils and adaptive SciPy differences have different work budgets. Analytic identities supply the callback references; raw inputs retain the selected steps and points.',
@@ -55,7 +55,7 @@ NOTES = {
     'optimize':'Objective helpers use their pinned Rosenbrock and finite-difference conventions. Minimizers use 3+(x-1)^2+(y+2)^2, a 512-iteration budget and tolerance 1e-8; only converged points and costs are compared. Iteration trajectories are not compared. Analytic minimizers supply the reference; SciPy runs Nelder-Mead or BFGS separately.',
     'signal':'The pinned signal fixture adapters cover waveform, filtering, design, spectral, window, peak, spline, convolution and system functions through the public Sci facade. Output tuples flatten in the documented fixture order. Parameters, modes, shapes and normalization are retained in each function CSV; original real convolution/correlation also call NumPy.',
     'spatial':'Metrics, pairwise arrays, geometry and validation helpers use explicit weights, variance/covariance data and shapes from the pinned spatial fixtures. Output ordering follows those fixtures. Near-zero distances and cancellation can amplify relative error; the CSV retains full outputs for absolute-error inspection.',
-    'special':'All public special-function implementations have typed registrations or an explicit policy recipe. Original erf/gamma recipes use high-precision mpmath; added recipes use independent public SciPy calls, identities or quadrature. Polynomial constructors return descending coefficients; sequence and tuple ordering follows the pinned fixtures. Boost.Math/GSL are called where the bridge has matching scalar APIs, converting elliptic parameter m to modulus sqrt(m).',
+    'special':'All public special-function implementations have typed registrations or an explicit policy recipe. Original erf/gamma recipes use high-precision mpmath; added recipes use independent public SciPy calls, identities or quadrature. Polynomial constructors return descending coefficients; sequence and tuple ordering follows the pinned fixtures. Boost.Math/GSL are called where the bridge has matching scalar APIs, converting elliptic parameter m to modulus sqrt(m). Public GSL provides complex digamma and complex Spence; its Spence on negative real inputs with negative imaginary zero selects the upper bank, which can disagree with the independent lower-bank reference.',
     'stats':'Distribution parameters, tail conventions, alternatives, ddof, explicit resampling draws and output ordering follow the pinned statistics fixtures. SciPy supplies binary64 references for added APIs, including documented adaptations and independently seeded probabilistic references. Weighted tau compares its statistic; its always-NaN p-value is left to the ordinary API tests. Normality, inverse and joint-tail approximations have reference and algorithm accuracy limits.',
 }
 
@@ -74,6 +74,9 @@ def binary64_reference(case):
 def high_precision(case):
     """References depend on mathematical definitions, never Sci or its backends."""
     api, a = case['api'], case['args']
+    if api.startswith('complex.'):
+        from .complex_accuracy import reference
+        return reference(case)
     if a.get('special03_case'):
         from .special03_cases import reference
         return reference(case)
@@ -91,10 +94,6 @@ def high_precision(case):
     def mat(key): return mp.matrix([[num(x) for x in r] for r in a[key]])
     def flat(m): return list(m)
     def gauss(mean, cov): return flat(mean) + flat(cov)
-    if api.startswith('complex.'):
-        z = mp.mpc(num(a['x']), num(a['y']))
-        r = mp.exp(z) if api.endswith('exp') else mp.sqrt(z)
-        return [r.real, r.imag]
     if api.startswith('constants.'): return [mp.mpf(299792458)/num(a['x'])]
     if api == 'differentiate.derivative': return [mp.cos(num(a['x']))]
     if api == 'differentiate.gradient':
@@ -174,6 +173,32 @@ def high_precision(case):
     raise ValueError(api)
 
 
+def reference_precisions(case):
+    """Escalate precision around subnormal complex branch points as needed."""
+    if not case['api'].startswith('complex.'):
+        return ((100, 160),)
+    a=case['args']
+    components=[float(v) for value in a.values()
+                for v in (value if isinstance(value,list) else [value])]
+    # Low precision can agree on a false zero when a tiny term is cancelled
+    # against a huge one (for example Im atan(1e308 i) ~ 1e-308).
+    if any(abs(v)>1e150 or 0<abs(v)<1e-150 for v in components):
+        return ((400, 600), (650, 1000))
+    return ((200, 320), (400, 600), (650, 1000))
+
+
+def stable_reference(case):
+    for low_dps,high_dps in reference_precisions(case):
+        with mp.workdps(low_dps):low=high_precision(case)
+        with mp.workdps(high_dps):
+            high=high_precision(case)
+            scale=max([TINY]+[abs(value) for value in high])
+            if len(low)==len(high) and all(abs(x-y)<=mp.mpf('1e-90')*scale
+                                           for x,y in zip(low,high)):
+                return high
+    raise ValueError(f'Unstable independent reference: {case["id"]}')
+
+
 def flatten(value):
     a = np.asarray(value)
     if np.iscomplexobj(a): return np.stack([a.real,a.imag],axis=-1).ravel().tolist()
@@ -183,6 +208,9 @@ def flatten(value):
 def competitors(case):
     """Public library APIs, or explicitly labelled elementary NumPy expressions."""
     api, a = case['api'], case['args']
+    if api.startswith('complex.'):
+        from .complex_accuracy import numpy_comparison
+        return numpy_comparison(case)
     if a.get('special_complex03_case'):
         from .special_complex03_cases import scipy_comparison
         return scipy_comparison(case)
@@ -195,7 +223,7 @@ def competitors(case):
         return {'SciPy':{'values':list(map(float,reference(case)))}}
     if 'p0' in a or 'p' in a or 'arguments' in a or 'raw' in a or a.get('explicit') or a.get('io_case'):
         from .registered_cases import reference, reference_result
-        library='stdlib' if api.startswith('complex.') else 'NumPy' if a.get('explicit') and api.startswith('linalg.') else 'SciPy'
+        library='NumPy' if a.get('explicit') and api.startswith('linalg.') else 'SciPy'
         if api in ['special.geterr','special.seterr']:return {}
         try:
             with warnings.catch_warnings(record=True) as captured:
@@ -215,10 +243,7 @@ def competitors(case):
             return {library:{'error':f'{type(error).__name__}: {error}'}}
     v = lambda key: np.asarray(a[key],dtype=float)
     calls = {}
-    if api.startswith('complex.'):
-        z = complex(a['x'],a['y']); name = api.split('.')[1]
-        calls = {'NumPy':lambda:getattr(np,name)(z),'stdlib':lambda:getattr(cmath,name)(z)}
-    elif api.startswith('constants.'):
+    if api.startswith('constants.'):
         name = api.split('.')[1]
         calls = {'SciPy':lambda:getattr(constants,name)(a['x']),'NumPy':lambda:np.divide(299792458.,a['x'])}
     elif api == 'differentiate.derivative':
@@ -262,11 +287,10 @@ def competitors(case):
     elif api.startswith('spatial.'): calls = {'SciPy':lambda:getattr(spatial.distance,api.split('.')[1])(v('u'),v('v'))}
     elif api.startswith('special.'):
         name = api.split('.')[1]
-        calls = {'SciPy':lambda:getattr(special,name)(a['x']),'stdlib':lambda:getattr(math,name)(a['x'])}
-    elif api == 'stats.normal_cdf': calls = {'SciPy':lambda:stats.norm.cdf(a['x']),'stdlib':lambda:math.erfc(-a['x']/math.sqrt(2))/2}
+        calls = {'SciPy':lambda:getattr(special,name)(a['x'])}
+    elif api == 'stats.normal_cdf': calls = {'SciPy':lambda:stats.norm.cdf(a['x'])}
     elif api == 'stats.variance':
-        import statistics
-        calls = {'SciPy':lambda:stats.describe(v('values'),ddof=1).variance,'NumPy':lambda:np.var(v('values'),ddof=1),'stdlib':lambda:statistics.variance(a['values'])}
+        calls = {'SciPy':lambda:stats.describe(v('values'),ddof=1).variance,'NumPy':lambda:np.var(v('values'),ddof=1)}
     elif api == 'cluster.vq.vq': calls = {'SciPy':lambda:np.concatenate(cluster.vq.vq(v('obs'),v('codebook')))}
     elif api == 'cluster.vq.whiten': calls = {'SciPy':lambda:cluster.vq.whiten(v('obs'))}
     else: raise ValueError(api)
@@ -283,6 +307,15 @@ def competitors(case):
         except (ValueError, ArithmeticError, np.linalg.LinAlgError) as error:
             results[library] = {'error':f'{type(error).__name__}: {error}'}
     return results
+
+
+def native_competitors(native, case):
+    """Use only matching public Boost.Math/GSL interfaces and their true ABI."""
+    if native is None or case['args'].get('special03_case'):
+        return {}
+    if case['args'].get('special_complex03_case'):
+        return native.evaluate_complex(case)
+    return native.evaluate(case)
 
 
 def symmetric_error(actual, reference):
@@ -346,11 +379,11 @@ def comparison_submodule(api, canonical):
     return path[1] if len(path)>2 else None
 
 
-def render(cases, records, meta, output):
+def render(cases, records, meta, output, *, modules=None, cache=None):
     output.mkdir(parents=True,exist_ok=True)
     from .coverage_audit import inventory
     canonical={row['api']:row['canonical'] for row in inventory()}
-    for module in MODULES:
+    for module in (MODULES if modules is None else modules):
         if hasattr(cases,'function'):
             names=[api for api in cases.apis if api.split('.')[0]==module]
             api_count,case_count=cases.module_counts(module)
@@ -364,10 +397,18 @@ def render(cases, records, meta, output):
             groups=grouped.items()
             available={lib for c in selected for lib in records[c['id']]['libraries']}
         available.discard('Sci')
-        preferred=['SciPy','Boost.Math','GSL','NumPy','stdlib','FilterPy']
+        preferred=['SciPy','Boost.Math','GSL','NumPy','FilterPy']
         libraries=sorted(available,key=lambda lib:(preferred.index(lib) if lib in preferred else len(preferred),lib))
         sections=defaultdict(list);section_cases=defaultdict(int);failed={}
         for api,batch in groups:
+            saved=cache.get(api,libraries) if cache is not None else None
+            if saved is not None:
+                for library,count,reason,identifier in saved['failures']:
+                    failed[(api,library)]=[count,reason,identifier]
+                section=comparison_submodule(api,canonical.get(api))
+                section_cases[section]+=len(batch)
+                sections[section].append(saved['row'])
+                continue
             cells=[]
             baseline_failures=0
             reference_maximum=None;reference_sum=ZERO;reference_count=0
@@ -414,7 +455,11 @@ def render(cases, records, meta, output):
                             if reference_count else '—')
             section=comparison_submodule(api,canonical.get(api))
             section_cases[section]+=len(batch)
-            sections[section].append(f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |')
+            row=f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |'
+            sections[section].append(row)
+            if cache is not None:
+                cache.put(api,libraries,{'row':row,'failures':[
+                    [lib,*failure] for (name,lib),failure in failed.items() if name==api]})
         failures=[f'- `{api}` ({lib}): {count} failed; {reason}. Example: `{identifier}`.' for (api,lib),(count,reason,identifier) in failed.items()]
         failure_section='\n## Evaluation failures\n\n'+'\n'.join(failures)+'\n' if failures else ''
         headers=['Function','Cases','Sci vs reference',*libraries]
@@ -468,19 +513,10 @@ variants are not counted as independent implementations.
 
 ## Reproduction
 
-- Sci source: `{meta['sci_commit']}` (numerical sources clean: {str(not meta['sci_source_dirty']).lower()}).
-- Testing source SHA-256: `{meta['testing_sources_sha256']}`.
-- NumPy {meta['numpy']}; SciPy {meta['scipy']}; FilterPy {meta['filterpy']}; mpmath {meta['mpmath']}.
-- Native comparison versions: {meta.get('native_libraries',{})}.
-- {meta['rust'].splitlines()[0]}; Python {meta['python']}; {meta.get('profile','Cargo dev profile')}.
-- {meta['platform']}; {meta['processor']}.
-
-See the [shared metric, provenance and reproduction instructions](README.md).
+The [shared methodology and environment](README.md) and
+`results/environment.json` record source revisions, hashes, toolchain versions,
+compiler flags and per-function measurement provenance.
 '''
-        if 'reference_environment' in meta:
-            text+='\nSci-only refresh: independent references and other library outputs are retained from the saved snapshot. Their original environment is recorded in `results/environment.json` under `reference_environment`.\n'
-        if 'sci_measurement_commits' in meta:
-            text+='\nSci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.\n'
         (output/f'{module}.md').write_text(text)
     exports=inventory();canonical=len({row['canonical'] for row in exports if row['canonical']})
     sampled_apis=set(cases.apis) if hasattr(cases,'apis') else {case['api'] for case in cases}
@@ -545,8 +581,9 @@ signed-zero and work-limit contracts.
 Tables use the measured binary64 output from the corresponding **Sci-* crate**
 as their reference. Agreement with Sci does not establish numerical accuracy.
 Independent accuracy references remain in the raw CSV `reference` field: original
-module recipes use mpmath at 100 and 160 decimal digits; additional recipes use
-pinned public SciPy/stdlib APIs, independent identities and quadrature. These
+module recipes use mpmath at 100 and 160 decimal digits, while complex facade
+operations use 200/320 digits (with higher precision around subnormal branch
+points); additional recipes use pinned public SciPy APIs, independent identities and quadrature. These
 references are independent of the table baseline. Public Sci APIs are
 called through typed Rust registrations and the pinned Sci fixture dispatchers;
 no Sci or private-backend result generates an expected value.
@@ -592,6 +629,7 @@ uv run --frozen python -m unittest -v
 cargo test --locked
 uv run --frozen python -m sci_testing.report --full
 uv run --frozen python -m sci_testing.report --check
+uv run --frozen python -m sci_testing.report --check --exhaustive
 ```
 
 `python -m sci_testing.report` refreshes Sci outputs while retaining saved independent
@@ -604,14 +642,23 @@ per-function Sci revisions under `sci_measurement_commits`. Commit the updated
 measuring a newer Sci commit.
 Use `--full` for the initial snapshot, changed inputs, or refreshing all references
 and comparison libraries. `--check` validates source/input/result digests,
-the complete coverage audit and every generated page without compiling or writing
-files. It validates the recorded platform snapshot; it does not require identical
+per-case identities, the authenticated coverage audit and cached per-function
+numerical summaries, and every generated page without compiling or writing files.
+`--check --exhaustive` independently recomputes coverage and every numerical
+summary metric from saved measurements; it is also scheduled nightly in CI.
+Content-addressed accuracy summaries live in `results/accuracy-summaries.json`.
+They are indexed by input and measurement SHA-256, comparison columns, and
+metric implementation fingerprint. A changed or missing summary is never silently
+trusted; `--render` regenerates it from verified saved measurements without
+rerunning the numerical libraries. Both check modes validate the recorded platform
+snapshot; neither requires identical
 floating-point measurements on another platform. Set `CARGO_TARGET_DIR` to reuse
 an existing build directory. The runner uses Cargo's dev profile without custom
 compiler flags. Numerical sources and fixture providers must be clean; Sci
 documentation edits are permitted.
 
-The GitHub workflow regenerates these reports and uploads inputs and measurements.
+The GitHub workflow checks the committed snapshot and uploads the rendered reports,
+coverage audit and provenance metadata (not duplicate copies of raw measurements).
 An identical run on the same platform reproduces the snapshot without timestamps.
 All reports and data belong to this repository; Sci links to them externally.
 
@@ -628,8 +675,35 @@ All reports and data belong to this repository; Sci links to them externally.
     (output/'README.md').write_text(index)
 
 
-def load_snapshot(cases, *, root=None, cached=False):
-    """Require identical inputs and intact measurements before reusing a snapshot."""
+def render_cached(cases,records,meta,output,*,modules=None,root=None,inputs=None,
+                  exhaustive=False,require_hits=False):
+    """Stage the rendered pages and their authenticated summary index together."""
+    root=ROOT if root is None else Path(root)
+    prior=root/'results'/SUMMARY_FILENAME
+    checksum=meta.get('accuracy_summaries_sha256')
+    cache=AccuracyCache(root,records.directory,Path(__file__),inputs=inputs,
+                        previous=prior if checksum else None,
+                        previous_sha256=checksum,
+                        reuse=not exhaustive,require_hits=require_hits)
+    render(cases,records,meta,output,modules=modules,cache=cache)
+    content=cache.serialize(cases.apis)
+    output.mkdir(parents=True,exist_ok=True)
+    (output/SUMMARY_FILENAME).write_bytes(content)
+    meta['accuracy_summaries_sha256']=hashlib.sha256(content).hexdigest()
+
+
+def publish_summary(pages,root=None):
+    root=ROOT if root is None else Path(root)
+    (pages/SUMMARY_FILENAME).replace(root/'results'/SUMMARY_FILENAME)
+
+
+def load_snapshot(cases, *, root=None, cached=False, verify_apis=None):
+    """Verify the complete saved digests and selected per-case identities.
+
+    Comparator refreshes can check only their selected API IDs because neither
+    the other inputs nor other Sci results change. Whole-directory digests and
+    exact file inventories are checked regardless of this selection.
+    """
     root=ROOT if root is None else root
     inputs=root/'cases/generated'
     paths=case_paths(inputs)
@@ -647,9 +721,14 @@ def load_snapshot(cases, *, root=None, cached=False):
     if meta.get('measurements_sha256') != directory_digest(root/'results/measurements'):
         raise ValueError('Raw measurement digest mismatch; rerun python -m sci_testing.report --full')
     records=MeasurementStore(root/'results/measurements')
-    from itertools import groupby
-    for api,iterator in groupby(cases,key=lambda c:c['api']):
-        batch=list(iterator)
+    if hasattr(cases,'function'):
+        batches=((api,cases.function(api)) for api in
+                 (cases.apis if verify_apis is None else sorted(verify_apis)))
+    else:
+        from itertools import groupby
+        batches=((api,list(group)) for api,group in groupby(cases,key=lambda c:c['api'])
+                 if verify_apis is None or api in verify_apis)
+    for api,batch in batches:
         records[batch[0]['id']]
         if set(records.records)!={c['id'] for c in batch}:raise ValueError('Measurement IDs differ from inputs; rerun python -m sci_testing.report --full')
     actual_names={p.relative_to(root/'results/measurements').as_posix().removesuffix('.gz') for p in csv_paths(root/'results/measurements')}
@@ -673,13 +752,39 @@ def load_stored_snapshot(*, root=None):
     return meta,MeasurementStore(root/'results/measurements'),inputs
 
 
+def preserved_coverage(previous, *, cases, records, root=None):
+    """Reuse a signed-off Sci coverage audit when Sci results and inputs are unchanged.
+
+    Call only after load_snapshot or load_stored_snapshot has verified the saved
+    input and measurement digests. Comparator-only/reference-only transformations
+    retain all Sci results and original inputs, so their coverage is invariant.
+    """
+    root=ROOT if root is None else root
+    path=root/'results/coverage.csv'
+    if not path.exists() or 'coverage_sha256' not in previous:
+        from .coverage_audit import audit
+        return audit(cases,records)
+    content=path.read_text()
+    if hashlib.sha256(content.encode()).hexdigest()!=previous['coverage_sha256']:
+        raise ValueError('Coverage audit digest mismatch; rerun a full validation')
+    return content
+
+
+def selective_render_modules(output, dirty_modules):
+    """Create missing pages on the first run; otherwise render only changed modules.
+
+    Module pages contain only module-local data; environment metadata lives in
+    the overview, which render() always regenerates.
+    """
+    existing={path.name for path in output.glob('*.md')}
+    expected={'README.md',*(f'{module}.md' for module in MODULES)}
+    return None if existing!=expected else sorted(dirty_modules)
+
+
 def extend_references(cases, added, executable, destination):
     """Evaluate only new cases; preserve all older reference strings and results."""
-    native=NativeComparisons() if any(
-        api.startswith(('special.','stats.')) and any(
-            not (case['args'].get('special03_case') or case['args'].get('special_complex03_case'))
-            for case in batch)
-        for api,batch in added.items()) else None
+    native=NativeComparisons() if any(api.startswith(('special.','stats.'))
+                                      for api in added) else None
     libraries={}
     for api,batch in added.items():
         print(f'Measuring new inputs: {api}: {len(batch)} cases',flush=True)
@@ -693,15 +798,9 @@ def extend_references(cases, added, executable, destination):
                 raise ValueError(f'{case["id"]}: runner returned neither values nor an error')
             result={k:v for k,v in result.items() if k!='id'}
             if 'values' in result:result['values']=list(map(float,result['values']))
-            with mp.workdps(100):low=high_precision(case)
+            high=stable_reference(case)
             with mp.workdps(160):
-                high=high_precision(case)
-                scale=max([TINY]+[abs(v) for v in high])
-                if len(low)!=len(high) or any(abs(x-y)>mp.mpf('1e-90')*scale for x,y in zip(low,high)):
-                    raise ValueError(f'Unstable new reference: {case["id"]}')
-                libs={'Sci':result,**competitors(case),**(native.evaluate(case) if native and
-                       not (case['args'].get('special03_case') or
-                            case['args'].get('special_complex03_case')) else {})}
+                libs={'Sci':result,**competitors(case),**native_competitors(native,case)}
                 for value in libs.values():validate_result(case,value,high)
                 updated[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],
                                      'libraries':libs}
@@ -713,26 +812,39 @@ def extend_references(cases, added, executable, destination):
     return libraries
 
 
-def check_generated(cases, output, *, root=None, cached=False):
+def check_generated(cases, output, *, root=None, cached=False, exhaustive=False):
     """Check derived inputs and pages against the source-pinned raw snapshot."""
     root=ROOT if root is None else root
     meta,records=load_snapshot(cases,root=root,cached=cached)
     if meta['testing_sources_sha256'] != digest_sources():
         raise ValueError('Testing sources changed; rerun python -m sci_testing.report')
     if 'coverage_sha256' in meta:
-        from .coverage_audit import audit
-        content=audit(cases,records)
-        if (root/'results/coverage.csv').read_text()!=content or hashlib.sha256(content.encode()).hexdigest()!=meta['coverage_sha256']:raise ValueError('Stale coverage audit; rerun python -m sci_testing.report')
+        saved=(root/'results/coverage.csv').read_text()
+        if hashlib.sha256(saved.encode()).hexdigest()!=meta['coverage_sha256']:
+            raise ValueError('Coverage audit digest mismatch')
+        if exhaustive or 'accuracy_summaries_sha256' not in meta:
+            from .coverage_audit import audit
+            if audit(cases,records)!=saved:
+                raise ValueError('Stale coverage audit; rerun python -m sci_testing.report')
     with tempfile.TemporaryDirectory() as directory, mp.workdps(160):
         expected=Path(directory)
-        render(cases,records,meta,expected)
+        original_checksum=meta.get('accuracy_summaries_sha256')
+        if original_checksum:
+            render_cached(cases,records,meta,expected,root=root,
+                          exhaustive=exhaustive,require_hits=not exhaustive)
+            if meta['accuracy_summaries_sha256']!=original_checksum or (
+                    expected/SUMMARY_FILENAME).read_bytes()!=(root/'results'/SUMMARY_FILENAME).read_bytes():
+                raise ValueError('Stale accuracy summaries; rerun python -m sci_testing.report --render')
+        else:
+            render(cases,records,meta,expected)
         names={p.name for p in expected.glob('*.md')}
         if names != {p.name for p in output.glob('*.md')}:
             raise ValueError('Generated page set differs; rerun python -m sci_testing.report')
         for name in sorted(names):
             if (output/name).read_bytes() != (expected/name).read_bytes():
                 raise ValueError(f'Stale accuracy page {name}; rerun python -m sci_testing.report')
-    print(f'Checked {len(cases)} inputs, raw measurements and {len(names)} generated pages')
+    print(f'Checked {len(cases)} inputs, raw measurements and {len(names)} generated pages'+
+          (' exhaustively' if exhaustive else ''))
 
 
 def measure_sci(cases, executable):
@@ -804,13 +916,13 @@ def refresh_comparators(cases, records, destination, apis, *, native=None):
         updated={}
         for case in batch:
             saved=records[case['id']]
-            new={**competitors(case),**(native.evaluate(case) if native and
-                not (case['args'].get('special03_case') or case['args'].get('special_complex03_case')) else {})}
+            new={**competitors(case),**native_competitors(native,case)}
             for library,result in new.items():
                 if library=='Sci':raise ValueError('Competitor cannot replace Sci measurement')
                 validate_result(case,result,saved['reference'])
                 libraries[api.split('.')[0]].add(library)
-            updated[case['id']]={**saved,'libraries':{**saved['libraries'],**new}}
+            updated[case['id']]={**saved,'libraries':{**{lib:value for lib,value in saved['libraries'].items()
+                                                      if lib != 'stdlib'},**new}}
         files=measurement_files(batch,updated)
         # A staged tree can share hard links with the source snapshot.
         for name in files:
@@ -820,20 +932,75 @@ def refresh_comparators(cases, records, destination, apis, *, native=None):
     return changed,libraries
 
 
+def upgrade_scientific_comparisons(cases, records, destination):
+    """Replace cmath-derived complex oracles and remove legacy stdlib comparisons.
+
+    Existing Sci outputs, cases, and non-stdlib library results remain pinned.
+    The caller stages files with hard links, so always unlink before writing.
+    """
+    changed=set()
+    for api in cases.apis:
+        if not api.startswith('complex.'):
+            continue
+        batch=cases.function(api)
+        print(f'Upgrading independent complex references: {api}: {len(batch)} cases',flush=True)
+        updated={}
+        for case in batch:
+            saved=records[case['id']]
+            high=stable_reference(case)
+            with mp.workdps(160):
+                libraries={lib:value for lib,value in saved['libraries'].items()
+                           if lib not in ('stdlib','NumPy')}
+                libraries.update(competitors(case))
+                for result in libraries.values(): validate_result(case,result,high)
+                updated[case['id']]={'id':case['id'],
+                                    'reference':[mp.nstr(x,165) for x in high],
+                                    'libraries':libraries}
+        files=measurement_files(batch,updated)
+        for name in files:
+            (destination/name).unlink(missing_ok=True)
+            (destination/(name+'.gz')).unlink(missing_ok=True)
+        changed.update(write_measurements(destination,files))
+
+    # Other modules already use SciPy and Boost.Math/GSL where available.
+    # Only obsolete stdlib rows need to be stripped from their saved reports.
+    for path in csv_paths(ROOT/'results/measurements'):
+        if path.parent.name not in ('special','stats'):
+            continue
+        content=csv_text(path)
+        if ',stdlib,' not in content:
+            continue
+        batch=read_measurement_content(content)
+        for record in batch.values():record['libraries'].pop('stdlib',None)
+        api=next(iter(batch)).split('/')[0]
+        files=measurement_files([{'id':id,'api':api} for id in batch],batch)
+        for name in files:
+            (destination/name).unlink(missing_ok=True)
+            (destination/(name+'.gz')).unlink(missing_ok=True)
+        changed.update(write_measurements(destination,files))
+        print(f'Removed Python stdlib comparison: {api}',flush=True)
+    return changed
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,default=ROOT/'docs/accuracy')
     mode=parser.add_mutually_exclusive_group()
     mode.add_argument('--check',action='store_true',help='validate inputs, raw results and generated pages without writing files')
+    parser.add_argument('--exhaustive',action='store_true',help='with --check, independently recompute coverage and all numerical summary metrics')
     mode.add_argument('--render',action='store_true',help='regenerate coverage and accuracy pages from verified saved measurements, without running Sci or reference libraries')
     mode.add_argument('--extend',action='store_true',help='measure only new API names and retain every historical independent reference')
     mode.add_argument('--full',action='store_true',help='recompute all Sci, reference and comparison-library results')
     mode.add_argument('--sci-only',action='store_true',help='refresh only Sci outputs (the default)')
     mode.add_argument('--comparators-only',action='store_true',help='backfill comparison libraries from verified saved inputs, preserving Sci and independent reference results')
+    mode.add_argument('--upgrade-scientific-comparisons',action='store_true',
+                      help='replace cmath complex references with mpmath/NumPy and remove all stdlib comparisons, preserving Sci outputs')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
     args=parser.parse_args()
-    if args.module and (args.full or args.check or args.render or args.extend):
-        parser.error('--module is available only for Sci-only refreshes')
+    if args.exhaustive and not args.check:
+        parser.error('--exhaustive requires --check')
+    if args.module and (args.full or args.check or args.extend or args.upgrade_scientific_comparisons):
+        parser.error('--module is available only for Sci-only, comparator and render refreshes')
     if args.comparators_only and not args.module:
         parser.error('--comparators-only requires explicit --module selection')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
@@ -867,26 +1034,76 @@ def main():
         cached=cases is not None
         if cases is None:cases=build_cases()
     if args.check:
-        check_generated(cases,args.output.resolve(),cached=cached)
+        check_generated(cases,args.output.resolve(),cached=cached,exhaustive=args.exhaustive)
         return
     if args.render:
-        from .coverage_audit import audit
-        previous,records=load_snapshot(cases,cached=cached)
+        render_apis=set(cases.apis)
+        if args.module:
+            render_apis=set()
+            for module in args.module:
+                matching={api for api in cases.apis if api==module or api.startswith(module+'.')}
+                if not matching:parser.error(f'unknown or empty module: {module}')
+                render_apis.update(matching)
+        previous,records=load_snapshot(cases,cached=cached,
+                                       verify_apis=render_apis if args.module else None)
         meta=previous.copy()
         if meta['testing_sources_sha256'] != digest_sources():
             meta['reference_environment']=meta.get('reference_environment',previous)
             meta['testing_sources_sha256']=digest_sources()
-        coverage=audit(cases,records)
+        coverage=preserved_coverage(previous,cases=cases,records=records)
         meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
         with tempfile.TemporaryDirectory(dir=ROOT/'results') as directory:
             pages=Path(directory)
-            with mp.workdps(160):render(cases,records,meta,pages)
+            modules=(selective_render_modules(args.output.resolve(),
+                                              {api.split('.')[0] for api in render_apis})
+                     if args.module else None)
+            with mp.workdps(160):render_cached(cases,records,meta,pages,modules=modules)
             (ROOT/'results/coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):
                 page.replace(args.output.resolve()/page.name)
         print(f'Rendered {len(MODULES)} module pages, {len(cases)} saved cases to {args.output}')
+        return
+    if args.upgrade_scientific_comparisons:
+        previous,records=load_snapshot(cases,cached=cached)
+        meta=previous.copy()
+        meta['reference_environment']=meta.get('reference_environment',previous)
+        meta['testing_sources_sha256']=digest_sources()
+        meta['module_libraries']={module:sorted((set(libraries)-{'stdlib'})|
+                                 ({'NumPy'} if module=='complex' else set()))
+                                  for module,libraries in previous['module_libraries'].items()}
+        meta.setdefault('reference_refreshes',[]).append({
+            'apis':[api for api in cases.apis if api.startswith('complex.')],
+            'reference':'mpmath, 200/320 decimal digits; escalated to 400/600 or 650/1000 near subnormal branch points; signed-zero banks',
+            'replaced':'binary64 Python cmath and stdlib comparisons',
+            'testing_sources_sha256':meta['testing_sources_sha256']})
+        with tempfile.TemporaryDirectory(dir=ROOT/'results') as directory:
+            workspace=Path(directory)
+            staged=workspace/'measurements'
+            shutil.copytree(ROOT/'results/measurements',staged,copy_function=os.link)
+            changed=upgrade_scientific_comparisons(cases,records,staged)
+            staged_records=MeasurementStore(staged)
+            coverage=preserved_coverage(previous,cases=cases,records=staged_records)
+            meta['measurements_sha256']=directory_digest(staged)
+            meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
+            pages=workspace/'pages'
+            with mp.workdps(160):
+                render_cached(cases,staged_records,meta,pages,
+                       modules=selective_render_modules(args.output.resolve(),
+                                                        {'complex','special','stats'}))
+            for name in sorted(changed):
+                src=staged/name;dest=ROOT/'results/measurements'/name
+                src.replace(dest)
+                alternate=dest.with_suffix('') if dest.suffix=='.gz' else dest.with_suffix('.csv.gz')
+                alternate.unlink(missing_ok=True)
+            (ROOT/'results/coverage.csv').write_text(coverage)
+            publish_summary(pages)
+            (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
+            args.output.resolve().mkdir(parents=True,exist_ok=True)
+            for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
+        print(f'Upgraded {len(changed)} saved function reports without rerunning Sci')
         return
     selected=set(cases.apis)
     if args.module:
@@ -898,16 +1115,16 @@ def main():
             if not matching:parser.error(f'unknown or empty module: {module}')
             selected.update(matching)
     if not (args.full or args.extend):
-        previous,records=load_snapshot(cases,cached=cached)
+        previous,records=load_snapshot(cases,cached=cached,
+                                       verify_apis=selected if args.comparators_only else None)
     elif args.full:
         from .generate_cases import case_signature
         write_cases(ROOT/'cases/generated',cases,signature=case_signature())
     if {api.split('.')[0] for api in cases.apis} != set(MODULES):
         raise ValueError('case identifiers must be unique and cover every module')
     if args.comparators_only:
-        from .coverage_audit import audit
         native=NativeComparisons() if any(api.startswith(('special.','stats.'))
-            and not api.startswith('special.complex.') for api in selected) else None
+                                          for api in selected) else None
         meta=previous.copy()
         meta['module_libraries']={module:list(names) for module,names in previous['module_libraries'].items()}
         if meta['testing_sources_sha256']!=digest_sources():
@@ -915,7 +1132,7 @@ def main():
             meta['testing_sources_sha256']=digest_sources()
         if native:
             meta['native_libraries']=native.versions
-            meta['cxx']=command('c++','--version')
+            meta['cxx']=command(os.environ.get('CXX','c++'),'--version')
             meta['native_build_flags']='-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas'
         with tempfile.TemporaryDirectory(dir=ROOT/'results') as directory:
             workspace=Path(directory)
@@ -923,7 +1140,7 @@ def main():
             shutil.copytree(ROOT/'results/measurements',staged,copy_function=os.link)
             changed,libraries=refresh_comparators(cases,records,staged,selected,native=native)
             staged_records=MeasurementStore(staged)
-            coverage=audit(cases,staged_records)
+            coverage=preserved_coverage(previous,cases=cases,records=staged_records)
             meta['measurements_sha256']=directory_digest(staged)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             for module,names in libraries.items():
@@ -932,7 +1149,10 @@ def main():
                 'apis':sorted(selected),'testing_sources_sha256':meta['testing_sources_sha256'],
                 'scipy':meta['scipy'],'native_libraries':meta.get('native_libraries',{})})
             pages=workspace/'pages'
-            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            with mp.workdps(160):
+                render_cached(cases,staged_records,meta,pages,
+                       modules=selective_render_modules(args.output.resolve(),
+                                                        {api.split('.')[0] for api in selected}))
             for name in sorted(changed):
                 src=staged/name;dest=ROOT/'results/measurements'/name
                 dest.parent.mkdir(parents=True,exist_ok=True)
@@ -940,6 +1160,7 @@ def main():
                 alternate=dest.with_suffix('') if dest.suffix=='.gz' else dest.with_suffix('.csv.gz')
                 alternate.unlink(missing_ok=True)
             (ROOT/'results/coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
@@ -957,6 +1178,8 @@ def main():
             meta['reference_extensions']=previous['reference_extensions']
         if 'comparison_refreshes' in previous:
             meta['comparison_refreshes']=previous['comparison_refreshes']
+        if 'reference_refreshes' in previous:
+            meta['reference_refreshes']=previous['reference_refreshes']
         if args.module or args.extend:
             commits=previous.get('sci_measurement_commits',{api:previous['sci_commit'] for api in cases.apis}).copy()
             if args.extend:
@@ -969,7 +1192,7 @@ def main():
     else:
         native=NativeComparisons()
         meta['native_libraries']=native.versions
-        meta['cxx']=command('c++','--version')
+        meta['cxx']=command(os.environ.get('CXX','c++'),'--version')
         meta['native_build_flags']='-std=c++17 -O2 -shared -fPIC -lgsl -lgslcblas'
     if meta['sci_source_dirty']: raise RuntimeError('Refusing to measure modified Sci numerical sources')
     subprocess.run(['cargo','build','--locked'],cwd=ROOT,check=True)
@@ -1014,7 +1237,7 @@ def main():
             coverage=audit(cases,staged_records,required_apis=added)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=workspace/'pages'
-            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            with mp.workdps(160):render_cached(cases,staged_records,meta,pages,inputs=staged_inputs)
             # All existing inputs were checked before preparing these files.
             old_inputs=ROOT/'cases/generated'
             backup=workspace/'previous-cases'
@@ -1034,6 +1257,7 @@ def main():
                         other=destination.with_suffix('') if destination.suffix=='.gz' else destination.with_suffix('.csv.gz')
                         other.unlink(missing_ok=True)
             (results/'coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
@@ -1053,7 +1277,7 @@ def main():
             meta['measurements_sha256']=directory_digest(staged)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=Path(directory)/'pages'
-            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            with mp.workdps(160):render_cached(cases,staged_records,meta,pages)
             # Finish all audits and page generation before publishing changes.
             for name in sorted(changed):
                 path=staged/name
@@ -1063,6 +1287,7 @@ def main():
                 alternate=destination.with_suffix('') if destination.suffix=='.gz' else destination.with_suffix('.csv.gz')
                 alternate.unlink(missing_ok=True)
             (results/'coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):
@@ -1082,15 +1307,9 @@ def main():
             if [r['id'] for r in rust] != [c['id'] for c in batch]: raise ValueError('runner lost, duplicated or reordered cases')
             records={}
             for case,result in zip(batch,rust):
-                with mp.workdps(100): low=high_precision(case)
+                high=stable_reference(case)
                 with mp.workdps(160):
-                    high=high_precision(case)
-                    if len(low) != len(high): raise ValueError('unstable reference shape')
-                    scale=max([TINY]+[abs(v) for v in high])
-                    if any(abs(x-y)>mp.mpf('1e-90')*scale for x,y in zip(low,high)):
-                        raise ValueError(f'unstable reference: {case["id"]}')
-                    native_results=({} if case['args'].get('special03_case') or
-                                    case['args'].get('special_complex03_case') else native.evaluate(case))
+                    native_results=native_competitors(native,case)
                     libs={'Sci':{k:v for k,v in result.items() if k!='id'},**competitors(case),**native_results}
                     for res in libs.values():validate_result(case,res,high)
                     records[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],'libraries':libs}
@@ -1110,8 +1329,9 @@ def main():
     coverage=audit(cases,records)
     (results/'coverage.csv').write_text(coverage)
     meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
+    with mp.workdps(160): render_cached(cases,records,meta,args.output.resolve())
+    publish_summary(args.output.resolve())
     (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
-    with mp.workdps(160): render(cases,records,meta,args.output.resolve())
     print(f'Wrote {len(MODULES)} module pages, {len(cases)} cases to {args.output}')
 
 

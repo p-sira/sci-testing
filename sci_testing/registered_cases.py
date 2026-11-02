@@ -9,6 +9,7 @@ import warnings
 import random
 import sys
 
+import mpmath as mp
 import numpy as np
 from scipy import special
 
@@ -72,31 +73,9 @@ def special_reference(case):
 
 @reference_family('complex')
 def complex_reference(case):
-    import cmath
-    name=case['api'].rsplit('.',1)[1]
-    args=[case['args'][f'p{i}'] for i in range(len(case['args']))]
-    if name=='from_polar': value=cmath.rect(*args)
-    else:
-        z=complex(*args[0])
-        w=args[1] if len(args)>1 else None
-        if name=='add':value=z+complex(*w)
-        elif name=='subtract':value=z-complex(*w)
-        elif name=='multiply':value=z*complex(*w)
-        elif name=='divide':value=z/complex(*w)
-        elif name=='negate':value=-z
-        elif name=='conjugate':value=z.conjugate()
-        elif name=='reciprocal':value=1/z
-        elif name=='real':return [z.real]
-        elif name=='imag':return [z.imag]
-        elif name=='abs':return [abs(z)]
-        elif name=='norm_sqr':return [z.real*z.real+z.imag*z.imag]
-        elif name=='arg':return [cmath.phase(z)]
-        elif name=='to_polar':return list(cmath.polar(z))
-        elif name in ['powf','powi','powu']:value=z**w
-        elif name=='powc':value=z**complex(*w)
-        elif name=='cbrt':value=cmath.rect(abs(z)**(1/3),cmath.phase(z)/3)
-        else:value=getattr(cmath, {'ln':'log'}.get(name,name))(z)
-    return [value.real,value.imag]
+    from .complex_accuracy import reference
+    with mp.workdps(160):
+        return [float(value) for value in reference(case)]
 
 
 @lru_cache(maxsize=1)

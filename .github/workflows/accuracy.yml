@@ -2,8 +2,15 @@ name: Accuracy reports
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+
+concurrency:
+  group: accuracy-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -34,6 +41,9 @@ jobs:
           rustup update stable
           rustup default stable
           uv sync --frozen
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: sci-testing
       - name: Check Rust formatting and public API evaluation
         run: |
           cargo fmt --all -- --check
@@ -50,12 +60,18 @@ jobs:
       - name: Verify Rust documentation
         run: RUSTDOCFLAGS='-D warnings' cargo doc --locked --no-deps
       - name: Validate pinned references, coverage and generated tables
-        run: uv run --frozen python -m sci_testing.report --check
+        run: |
+          if [ "${{ github.event_name }}" = schedule ]; then
+            uv run --frozen python -m sci_testing.report --check --exhaustive
+          else
+            uv run --frozen python -m sci_testing.report --check
+          fi
       - uses: actions/upload-artifact@v7
         with:
           name: accuracy-reports
           if-no-files-found: error
           path: |
             sci-testing/docs/accuracy/
-            sci-testing/cases/
-            sci-testing/results/
+            sci-testing/results/coverage.csv
+            sci-testing/results/environment.json
+            sci-testing/results/accuracy-summaries.json

@@ -17,6 +17,7 @@
 #include <gsl/gsl_sf_airy.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_psi.h>
+#include <gsl/gsl_sf_dilog.h>
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_ellint.h>
 #include <gsl/gsl_sf_expint.h>
@@ -70,6 +71,37 @@ int comparison_supported(const char* name) {
 int comparison_output_count(const char* name) {
     if (std::strcmp(name, "airy") == 0 || std::strcmp(name, "airye") == 0) return 4;
     return comparison_supported(name) ? 1 : 0;
+}
+// Public GSL complex special functions. The real scalar ABI above is kept
+// separate because complex inputs and outputs both contain two doubles.
+int comparison_complex_supported(const char* name) {
+    if (!name) return 0;
+    return (std::strcmp(name, "digamma") == 0 ||
+            std::strcmp(name, "spence") == 0) ? 2 : 0;
+}
+int comparison_complex_evaluate(int library, const char* name, const double* a, int count,
+                                double* result, int capacity) {
+    error.clear();
+    gsl_set_error_handler_off();
+    try {
+        if (library != 1) throw std::invalid_argument("complex function unavailable for this library");
+        if (!name || !a || !result) throw std::invalid_argument("null complex argument");
+        if (!comparison_complex_supported(name)) throw std::invalid_argument("unsupported complex function");
+        if (count != 2 || capacity < 2) throw std::invalid_argument("incorrect complex arity or output capacity");
+        if (!std::isfinite(a[0]) || !std::isfinite(a[1]))
+            throw std::invalid_argument("nonfinite complex input");
+        gsl_sf_result re{}, im{};
+        const int status = std::strcmp(name, "digamma") == 0
+            ? gsl_sf_complex_psi_e(a[0], a[1], &re, &im)
+            : gsl_sf_complex_spence_xy_e(a[0], a[1], &re, &im);
+        if (status != GSL_SUCCESS) { error = gsl_strerror(status); return status; }
+        if (!std::isfinite(re.val) || !std::isfinite(im.val))
+            throw std::runtime_error("nonfinite complex output");
+        result[0] = re.val;
+        result[1] = im.val;
+        return 0;
+    } catch (const std::exception& e) { error = e.what(); return -1; }
+      catch (...) { error = "unknown native exception"; return -1; }
 }
 // Multi-component real Airy comparisons. The scalar ABI remains unchanged.
 int comparison_evaluate_many(int library, const char* name, const double* a, int count,

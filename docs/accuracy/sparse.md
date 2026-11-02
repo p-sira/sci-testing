@@ -178,15 +178,6 @@ variants are not counted as independent implementations.
 
 ## Reproduction
 
-- Sci source: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998` (numerical sources clean: true).
-- Testing source SHA-256: `3d1f538d12ef58c6738188ac9a526fb0459c4c5cb1023a3c7edaa3c23d5a3452`.
-- NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
-- Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
-- rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.
-- Linux-7.2.11-arch1-1-x86_64-with-glibc2.44; AMD Ryzen 5 4600H with Radeon Graphics.
-
-See the [shared metric, provenance and reproduction instructions](README.md).
-
-Sci-only refresh: independent references and other library outputs are retained from the saved snapshot. Their original environment is recorded in `results/environment.json` under `reference_environment`.
-
-Sci results were refreshed by namespace. Per-function Sci revisions are recorded in `results/environment.json` under `sci_measurement_commits`.
+The [shared methodology and environment](README.md) and
+`results/environment.json` record source revisions, hashes, toolchain versions,
+compiler flags and per-function measurement provenance.
