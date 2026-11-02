@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "671e8afa25f0ba4b88b554a27da7e376b51c3de6c36dfb36900f52edfcc24e53",
+  "testing_sources_sha256": "f52397ff567244b7c14a90bb00f20fb07b07f1de79148ee216990de36400440a",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1395,7 +1395,7 @@
       "SciPy"
     ]
   },
-  "measurements_sha256": "42ebe0f95dbb763c7f24149cb6fa62b8af95f852eb6d04106184ae5cc8df0da7",
+  "measurements_sha256": "472bf1da8419886da992e02006e9304042559f0aa1238d40b261a78d75e21a03",
   "coverage_sha256": "48cad6be78cb1605d775f556813d677b1c89bb2fc8dfea67c80133ab8b66da3d",
   "reference_extensions": [
     {
@@ -1777,6 +1777,21 @@
         "Boost.Math": "1_92",
         "GSL": "2.8"
       }
+    },
+    {
+      "apis": [
+        "special.expit",
+        "special.logit",
+        "special.ncfdtridfd",
+        "special.ncfdtridfn",
+        "special.nctdtridf"
+      ],
+      "testing_sources_sha256": "f52397ff567244b7c14a90bb00f20fb07b07f1de79148ee216990de36400440a",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "GSL": "2.8"
+      }
     }
   ],
   "reference_refreshes": [
@@ -1822,5 +1837,5 @@
       "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
     }
   ],
-  "accuracy_summaries_sha256": "5364c2bd729cce5648650c90b7a3ba5205c45e388538577c53735b6809b24641"
+  "accuracy_summaries_sha256": "2ffd988ed2108249b2a9fd30c529b9957acfd45eceef8f527c9e44900fb2eda7"
 }

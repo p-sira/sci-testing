@@ -62,6 +62,15 @@ class ProbabilityExtraTests(unittest.TestCase):
                 self.assertEqual(bridge.probability_extra_supported(library, name.encode()), 0)
         self.assertEqual(self.comparison.evaluate(self.case("bad_name", [1])), {})
 
+    def test_degree_of_freedom_inversion_uses_portable_boost_cdf_only(self):
+        # Ubuntu's older Boost distributions do not have the newer static
+        # df inverses. Keep this a hard regression guard even when the test
+        # runner itself happens to be built with recent Boost headers.
+        source = (ROOT / "native/probability_extra.cpp").read_text()
+        for method in ("::find_v1(", "::find_v2(", "::find_degrees_of_freedom("):
+            self.assertNotIn(method, source)
+        self.assertIn("invert_degree_of_freedom", source)
+
     def test_direct_api_values_against_scipy(self):
         values = {
             "nbdtr": [(2, 5, .35), (7, 2.5, .72)],
@@ -226,16 +235,29 @@ class ProbabilityExtraTests(unittest.TestCase):
                     self.assertEqual(result, {"values": [expected]})
 
     def test_ambiguous_noncentral_f_df_inverse_is_explicit_error(self):
-        # Here CDF(5, dfd, 0, .05) crosses .01 twice. SciPy documents that
-        # degree-of-freedom inverses can have two roots and may choose either;
-        # Boost explicitly rejects this bracket instead of claiming a match.
-        args = (5, .01, 0, .05)
-        scanned_df = [0.001, 0.1, 1, 10, 100_000]
-        scanned_p = [float(special.ncfdtr(5, dfd, 0, .05)) for dfd in scanned_df]
-        self.assertLess(scanned_p[0], args[1])
-        self.assertGreater(max(scanned_p), args[1])
-        self.assertLess(scanned_p[-1], args[1])
-        result = self.comparison.evaluate(self.case("ncfdtridfd", args))
+        # SciPy documents non-monotonicity in *either* noncentral-F degree
+        # of freedom; both constructed targets cross the forward CDF twice.
+        cases = (
+            ("ncfdtridfd", (5, .01, 0, .05),
+             lambda v: special.ncfdtr(5, v, 0, .05), .01),
+            ("ncfdtridfn", (.14, 1, 3, .5),
+             lambda v: special.ncfdtr(v, 1, 3, .5), .14),
+        )
+        for name, args, forward, target in cases:
+            with self.subTest(name=name):
+                scanned = [float(forward(v)) for v in (1e-6, .01, .1, 1, 10, 1e5)]
+                signs = [v > target for v in scanned]
+                self.assertGreaterEqual(sum(a != b for a, b in zip(signs, signs[1:])), 2)
+                result = self.comparison.evaluate(self.case(name, args))
+                self.assertIn("ambiguous", result["Boost.Math"]["error"])
+
+    def test_nonidentifiable_t_df_returns_error_not_arbitrary_value(self):
+        # For nc=t=0, CDF_t(0)=.5 regardless of degrees of freedom. SciPy
+        # may return an arbitrary positive number; no unique inverse exists.
+        args = (.5, 0, 0)
+        for df in (.001, 1, 10, 1e5):
+            self.assertAlmostEqual(float(special.nctdtr(df, 0, 0)), .5)
+        result = self.comparison.evaluate(self.case("nctdtridf", args))
         self.assertIn("error", result["Boost.Math"])
 
 

@@ -32,8 +32,7 @@
 #include <boost/math/special_functions/owens_t.hpp>
 #include <boost/math/special_functions/factorials.hpp>
 #include <boost/math/special_functions/log1p.hpp>
-#include <boost/math/special_functions/logit.hpp>
-#include <boost/math/special_functions/logistic_sigmoid.hpp>
+#include <boost/math/distributions/logistic.hpp>
 #include <boost/math/special_functions/powm1.hpp>
 #include <boost/math/special_functions/expint.hpp>
 #include <boost/math/special_functions/zeta.hpp>
@@ -165,8 +164,8 @@ thread_local std::string error;
  X(lambertwm1, 1, boost::math::lambert_wm1(a[0]), gsl_sf_lambert_Wm1_e(a[0], &r)) \
  X(ellipkm1, 1, boost::math::ellint_rf(0., a[0], 1.), gsl_sf_ellint_RF_e(0., a[0], 1., GSL_PREC_DOUBLE, &r)) \
  X(log1pmx, 1, boost::math::log1pmx(a[0]), gsl_sf_log_1plusx_mx_e(a[0], &r)) \
- X(expit, 1, boost::math::logistic_sigmoid(a[0]), (r.val = gsl_cdf_logistic_P(a[0], 1.), GSL_SUCCESS)) \
- X(logit, 1, boost::math::logit(a[0]), (r.val = gsl_cdf_logistic_Pinv(a[0], 1.), GSL_SUCCESS)) \
+ X(expit, 1, boost::math::cdf(boost::math::logistic_distribution<double>(), a[0]), (r.val = gsl_cdf_logistic_P(a[0], 1.), GSL_SUCCESS)) \
+ X(logit, 1, boost::math::quantile(boost::math::logistic_distribution<double>(), a[0]), (r.val = gsl_cdf_logistic_Pinv(a[0], 1.), GSL_SUCCESS)) \
  X(chdtr, 2, boost::math::cdf(boost::math::chi_squared_distribution<double>(a[0]), a[1]), (r.val = gsl_cdf_chisq_P(a[1], a[0]), GSL_SUCCESS)) \
  X(chdtrc, 2, boost::math::cdf(boost::math::complement(boost::math::chi_squared_distribution<double>(a[0]), a[1])), (r.val = gsl_cdf_chisq_Q(a[1], a[0]), GSL_SUCCESS)) \
  X(chdtri, 2, boost::math::quantile(boost::math::complement(boost::math::chi_squared_distribution<double>(a[0]), a[1])), (r.val = gsl_cdf_chisq_Qinv(a[1], a[0]), GSL_SUCCESS)) \

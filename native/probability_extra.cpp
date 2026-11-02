@@ -54,9 +54,9 @@ void nonnegative(double x) { require(x >= 0, "parameter must be nonnegative"); }
 void probability(double p) { require(p >= 0 && p <= 1, "invalid probability"); }
 void interior(double p) { require(p > 0 && p < 1, "probability must be strictly between 0 and 1"); }
 
-// The Boost static degree-of-freedom solvers detect many ambiguous cases
-// themselves. Independently reject a returned value unless it actually
-// satisfies the requested CDF, including in the smaller probability tail.
+// Independently reject an inverse unless it satisfies the requested CDF,
+// including in the smaller probability tail. Only public Boost.Math cdf()
+// is needed, including on older Boost releases without df inverse methods.
 template <typename F>
 double verified_degree_of_freedom(double candidate, double target, F cdf) {
     positive(candidate);
@@ -65,6 +65,73 @@ double verified_degree_of_freedom(double candidate, double target, F cdf) {
     require(std::isfinite(actual) && std::abs(actual - target) <= tolerance,
             "degrees-of-freedom inverse failed CDF round trip");
     return candidate;
+}
+
+// The noncentral F CDF is *not* always monotone in either degree of freedom:
+// for some inputs two distinct positive parameters have the same CDF. Scan a
+// broad positive log-domain to locate every bracket before solving; do not
+// silently report an arbitrary branch or claim SciPy compatibility where
+// there are multiple roots. A fixed finite search range is preferable to an
+// unbounded scan because the public Boost CDF can saturate in the far tails.
+// The saved SciPy inverse fixtures have one well-conditioned positive root.
+template <typename F>
+double invert_degree_of_freedom(F cdf, double target) {
+    interior(target);
+    constexpr double lower_bound = 1e-10;
+    constexpr double upper_bound = 1e10;
+    constexpr double factor = 1.75;
+    double low = lower_bound;
+    double low_residual = cdf(low) - target;
+    require(std::isfinite(low_residual), "invalid degrees-of-freedom CDF at search bound");
+    int root_count = 0;
+    double root_low = 0, root_high = 0;
+    for (int i = 0; i < 128 && low < upper_bound; ++i) {
+        const double high = std::min(upper_bound, low * factor);
+        const double high_residual = cdf(high) - target;
+        require(std::isfinite(high_residual), "nonfinite degrees-of-freedom CDF in search");
+        // A bracket crossing is a root. A zero on a grid point is counted
+        // exactly once (not once for each adjacent interval).
+        if (low_residual == 0 ||
+            (low_residual != 0 && high_residual != 0 &&
+             (low_residual < 0) != (high_residual < 0))) {
+            ++root_count;
+            root_low = low;
+            root_high = low_residual == 0 ? low : high;
+            require(root_count == 1,
+                    "ambiguous degrees-of-freedom inverse: multiple CDF roots");
+        }
+        low = high;
+        low_residual = high_residual;
+    }
+    if (low_residual == 0) {
+        ++root_count;
+        root_low = root_high = upper_bound;
+    }
+    require(root_count == 1,
+            root_count ? "ambiguous degrees-of-freedom inverse: multiple CDF roots" :
+                         "degrees-of-freedom inverse has no bracketed root");
+
+    // Bisection is reliable in either CDF direction and never assumes
+    // monotonicity outside the verified local bracket. A tight numerical
+    // round-trip check guards against tangencies/flat-tail false matches.
+    double left = root_low, right = root_high;
+    double left_residual = cdf(left) - target;
+    for (int i = 0; i < 120 && left != right; ++i) {
+        const double middle = left + (right - left) * .5;
+        if (middle == left || middle == right) break;
+        const double residual = cdf(middle) - target;
+        require(std::isfinite(residual), "nonfinite CDF during df root solve");
+        if (residual == 0) {
+            left = right = middle;
+            break;
+        }
+        if ((left_residual < 0) != (residual < 0)) right = middle;
+        else {
+            left = middle;
+            left_residual = residual;
+        }
+    }
+    return verified_degree_of_freedom(left + (right-left)*.5, target, cdf);
 }
 
 // Invert a continuous monotone *decreasing* public-library CDF with respect to
@@ -189,24 +256,18 @@ double boost_value(const char* name, const double* a) {
         },a[2],0,2);
     }
     if (!std::strcmp(name, "ncfdtridfd")) {
-        // SciPy: ncfdtridfd(dfn, p, nc, f). Boost's find_v2 takes
-        // (f, fixed numerator df, noncentrality, target lower-tail CDF).
+        // SciPy: ncfdtridfd(dfn, p, nc, f), invert denominator df.
         positive(a[0]); interior(a[1]); nonnegative(a[2]); positive(a[3]);
-        return verified_degree_of_freedom(
-            bm::non_central_f_distribution<double>::find_v2(a[3],a[0],a[2],a[1]),
-            a[1], [&](double dfd) {
-                return bm::cdf(bm::non_central_f_distribution<double>(a[0],dfd,a[2]),a[3]);
-            });
+        return invert_degree_of_freedom([&](double dfd) {
+            return bm::cdf(bm::non_central_f_distribution<double>(a[0],dfd,a[2]),a[3]);
+        }, a[1]);
     }
     if (!std::strcmp(name, "ncfdtridfn")) {
-        // SciPy: ncfdtridfn(p, dfd, nc, f). find_v1 takes the fixed
-        // denominator df, even though the Boost parameter name is v2.
+        // SciPy: ncfdtridfn(p, dfd, nc, f), invert numerator df.
         interior(a[0]); positive(a[1]); nonnegative(a[2]); positive(a[3]);
-        return verified_degree_of_freedom(
-            bm::non_central_f_distribution<double>::find_v1(a[3],a[1],a[2],a[0]),
-            a[0], [&](double dfn) {
-                return bm::cdf(bm::non_central_f_distribution<double>(dfn,a[1],a[2]),a[3]);
-            });
+        return invert_degree_of_freedom([&](double dfn) {
+            return bm::cdf(bm::non_central_f_distribution<double>(dfn,a[1],a[2]),a[3]);
+        }, a[0]);
     }
     if (!std::strcmp(name, "nctdtr") || !std::strcmp(name, "nctdtrit")) {
         positive(a[0]);
@@ -226,13 +287,11 @@ double boost_value(const char* name, const double* a) {
         return invert_decreasing(cdf,a[1],low,high);
     }
     if (!std::strcmp(name, "nctdtridf")) {
-        // SciPy: nctdtridf(p, nc, t), Boost (nc, t, lower-tail CDF).
+        // SciPy: nctdtridf(p, nc, t), invert noncentral t df.
         interior(a[0]);
-        return verified_degree_of_freedom(
-            bm::non_central_t_distribution<double>::find_degrees_of_freedom(a[1],a[2],a[0]),
-            a[0], [&](double df) {
-                return bm::cdf(bm::non_central_t_distribution<double>(df,a[1]),a[2]);
-            });
+        return invert_degree_of_freedom([&](double df) {
+            return bm::cdf(bm::non_central_t_distribution<double>(df,a[1]),a[2]);
+        }, a[0]);
     }
     if (!std::strcmp(name, "kolmogorov") || !std::strcmp(name, "kolmogi")) {
         const auto dist = bm::kolmogorov_smirnov_distribution<double>(1);
