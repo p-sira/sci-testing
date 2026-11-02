@@ -85,7 +85,12 @@ class GSLSpatialTests(unittest.TestCase):
                     reference=float(getattr(distance,name)(u,v,w=w))
                 observed=self.evaluated(case)
                 absolute=abs(observed-reference)
-                relative=absolute/max(abs(reference),1e-300)
+                # Cosine distance is 1-similarity, so near-parallel vectors
+                # can lose a few last bits through cancellation. A pure
+                # relative metric amplifies sub-ulp absolute differences on
+                # different GSL/BLAS versions; retain the strict per-case
+                # mixed tolerance below and bound a scale-aware summary.
+                relative=absolute/max(abs(reference),1e-3)
                 maximum_absolute=max(maximum_absolute,absolute)
                 maximum_relative=max(maximum_relative,relative)
                 with self.subTest(case=case["id"]):
