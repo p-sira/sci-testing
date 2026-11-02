@@ -17,6 +17,7 @@ all domains, parameter conventions, or branch cuts.
 """
 
 import csv
+import ctypes as ct
 import hashlib
 import math
 import re
@@ -326,6 +327,58 @@ SPECIAL_EXTRA_CASES = {
     'exprel': ((.3,), frozenset((GSL,)), 1),
 }
 
+# Public Boost.Math Bessel I primitives plus independently validated series /
+# large-argument continuation, and public Boost/GSL spherical Bessel functions
+# combined into complete Riccati value-and-derivative arrays.
+BESSEL_RATIO_CASES = {
+    'iv_ratio': ({'v': 1., 'x': 2.}, frozenset((BOOST,))),
+    'iv_ratio_c': ({'v': 1., 'x': 2.}, frozenset((BOOST,))),
+    'iv_ratioinv': ({'v': 1., 'r': .5}, frozenset((BOOST,))),
+}
+BESSEL_RICCATI_CASES = {
+    'riccati_jn': ((3., .5), BOTH, 8),
+    'riccati_yn': ((3., .5), BOTH, 8),
+}
+BESSEL_ZEROS_CASES = {
+    'ai_zeros': ((3.,), frozenset((BOOST,)), 12),
+    'bi_zeros': ((3.,), frozenset((BOOST,)), 12),
+    'jnp_zeros': ((2., 3.), frozenset((BOOST,)), 3),
+    'ynp_zeros': ((2., 3.), frozenset((BOOST,)), 3),
+    'jnyn_zeros': ((1., 3.), frozenset((BOOST,)), 12),
+    'jnjnp_zeros': ((3.,), frozenset((BOOST,)), 12),
+    'y0_zeros': ((3.,), frozenset((BOOST,)), 6),
+    'y1_zeros': ((3.,), frozenset((BOOST,)), 6),
+    'y1p_zeros': ((3.,), frozenset((BOOST,)), 6),
+}
+BESSEL_HANKEL_CASES = {
+    name: ((.5, 2., 1.) if name in ('h1vp', 'h2vp') else (.5, 2.), BOTH, 2)
+    for name in ('hankel1', 'hankel1e', 'hankel2', 'hankel2e', 'h1vp', 'h2vp')
+}
+BESSEL_INTEGRAL_CASES = {
+    'besselpoly': ((2., .5, .5), BOTH, 1),
+    'it2i0k0': ((2.,), BOTH, 2),
+    'it2j0y0': ((2.,), BOTH, 2),
+    'iti0k0': ((2.,), BOTH, 2),
+    'itj0y0': ((2.,), BOTH, 2),
+}
+BESSEL_HYPERGEOM_CASES = {
+    'struve': ((.5, 2.), frozenset((BOOST,)), 1),
+    'modstruve': ((.5, 2.), frozenset((BOOST,)), 1),
+    **{name: ((.5,), frozenset((BOOST,)), 1)
+       for name in ('ber', 'bei', 'berp', 'beip')},
+    'wright_bessel': ((.5, 1.5, .5), frozenset((BOOST,)), 1),
+    'log_wright_bessel': ((.5, 1.5, .5), frozenset((BOOST,)), 1),
+}
+BESSEL_KELVIN_K_CASES = {
+    **{name: ((.5,), frozenset((GSL,)), 1)
+       for name in ('ker', 'kei', 'kerp', 'keip')},
+    'kelvin': ((.5,), frozenset((GSL,)), 8),
+}
+BESSEL_STRUVE_INTEGRAL_CASES = {
+    name: ((2.,), frozenset((BOOST,)), 1)
+    for name in ('itstruve0', 'itmodstruve0', 'it2struve0')
+}
+
 PROBABILITY_EXTRA_CASES = {
     'nbdtr': ((2., 5., .35), BOTH),
     'nbdtrc': ((2., 5., .35), BOTH),
@@ -515,6 +568,11 @@ def _known_coverage_names(module):
                 | set(SPECIAL_EXTRA_CASES) | set(PROBABILITY_EXTRA_CASES)
                 | set(VECTOR_SPECIAL_CASES) | set(COMBINATORICS_EXTRA_CASES)
                 | set(SPHERICAL_EXTRA_CASES)
+                | {'bessel.' + name for name in BESSEL_RATIO_CASES}
+                | set(BESSEL_RICCATI_CASES) | set(BESSEL_ZEROS_CASES)
+                | set(BESSEL_HANKEL_CASES) | set(BESSEL_INTEGRAL_CASES)
+                | set(BESSEL_HYPERGEOM_CASES)
+                | set(BESSEL_KELVIN_K_CASES) | set(BESSEL_STRUVE_INTEGRAL_CASES)
                 | {'complex.' + name for name in GSL_COMPLEX_CASES}
                 | {'ln_factorial'})  # historical flat recipe for canonical combinatorics.ln_factorial
     return ({name.removeprefix('stats.') for name in EQUIVALENTS
@@ -835,6 +893,91 @@ class NativeCoverageTests(unittest.TestCase):
                 if ('error' in value or len(value.get('values', ())) != count or
                         not all(math.isfinite(x) for x in value.get('values', ()))):
                     failures.append(f'special.{name} / {provider}: {value!r}')
+        self.assertFalse(failures, '\n' + '\n'.join(failures))
+
+    def test_derived_bessel_ratios_and_riccati_arrays_are_registered(self):
+        ratio = getattr(self.native, 'bessel_ratio', None)
+        riccati = getattr(self.native, 'bessel_riccati', None)
+        self.assertIsNotNone(ratio, 'missing Boost Bessel-ratio bridge')
+        self.assertIsNotNone(riccati, 'missing Boost/GSL Riccati-Bessel bridge')
+        failures = []
+        for name, (args, providers) in sorted(BESSEL_RATIO_CASES.items()):
+            for index, provider in enumerate((BOOST, GSL)):
+                arity = ratio.library.bessel_ratio_supported(index, name.encode())
+                if arity != (2 if provider in providers else 0):
+                    failures.append(f'bessel.{name}/{provider}: arity {arity}')
+            actual = self.native.evaluate({'api': 'special.bessel.' + name,
+                                           'args': args})
+            if set(actual) != providers or any(
+                'error' in value or len(value.get('values', ())) != 1 or
+                not all(math.isfinite(x) for x in value.get('values', ()))
+                for value in actual.values()
+            ):
+                failures.append(f'bessel.{name}: unexpected evaluation {actual!r}')
+        for name, (args, providers, count) in sorted(BESSEL_RICCATI_CASES.items()):
+            encoded = name.encode()
+            for index, provider in enumerate((BOOST, GSL)):
+                arity = riccati.library.bessel_riccati_supported(index, encoded)
+                if arity != (2 if provider in providers else 0):
+                    failures.append(f'{name}/{provider}: arity {arity}')
+            actual = self.native.evaluate({'api': 'special.' + name,
+                                           'args': {'p0': args[0], 'p1': args[1]}})
+            if set(actual) != providers or any(
+                'error' in value or len(value.get('values', ())) != count or
+                not all(math.isfinite(x) for x in value.get('values', ()))
+                for value in actual.values()
+            ):
+                failures.append(f'{name}: unexpected Riccati arrays {actual!r}')
+        self.assertFalse(failures, '\n' + '\n'.join(failures))
+
+    def test_derived_bessel_zeros_hankel_integral_and_hypergeom_bridges(self):
+        """A Bessel-derived comparator must remain linked and return its full shape."""
+        families = (
+            ('bessel_zeros', BESSEL_ZEROS_CASES),
+            ('bessel_hankel', BESSEL_HANKEL_CASES),
+            ('bessel_integrals', BESSEL_INTEGRAL_CASES),
+            ('bessel_hypergeom', BESSEL_HYPERGEOM_CASES),
+            ('bessel_kelvin_k', BESSEL_KELVIN_K_CASES),
+            ('bessel_struve_integrals', BESSEL_STRUVE_INTEGRAL_CASES),
+        )
+        failures = []
+        for bridge_name, cases in families:
+            bridge = getattr(self.native, bridge_name, None)
+            self.assertIsNotNone(bridge, f'missing {bridge_name} bridge')
+            for name, (args, providers, output_count) in sorted(cases.items()):
+                encoded = name.encode('ascii')
+                registered = getattr(bridge.library, bridge_name + '_supported')
+                for index, provider in enumerate((BOOST, GSL)):
+                    actual_arity = registered(index, encoded)
+                    expected_arity = (
+                        output_count if bridge_name == 'bessel_kelvin_k'
+                        else len(args)) if provider in providers else 0
+                    if actual_arity != expected_arity:
+                        failures.append(f'{name}/{provider}: arity {actual_arity}')
+                if bridge_name == 'bessel_integrals':
+                    actual_count = bridge.library.bessel_integrals_output_count(encoded)
+                elif bridge_name == 'bessel_zeros':
+                    arguments = (ct.c_double * len(args))(*args)
+                    actual_count = bridge.library.bessel_zeros_output_count(
+                        encoded, arguments, len(args))
+                elif bridge_name == 'bessel_hankel':
+                    actual_count = 2
+                elif bridge_name == 'bessel_kelvin_k':
+                    actual_count = bridge.library.bessel_kelvin_k_output_count(encoded)
+                else:
+                    actual_count = 1
+                if actual_count != output_count:
+                    failures.append(f'{name}: output size {actual_count} vs {output_count}')
+                result = self.native.evaluate({
+                    'api': 'special.' + name,
+                    'args': {f'p{i}': value for i, value in enumerate(args)},
+                })
+                if set(result) != providers or any(
+                    'error' in value or len(value.get('values', ())) != output_count or
+                    not all(math.isfinite(x) for x in value.get('values', ()))
+                    for value in result.values()
+                ):
+                    failures.append(f'{name}: unexpected evaluation {result!r}')
         self.assertFalse(failures, '\n' + '\n'.join(failures))
 
     def test_probability_extra_api_registrations_and_dispatch(self):

@@ -59,6 +59,32 @@ NOTES = {
     'stats':'Distribution parameters, tail conventions, alternatives, ddof, explicit resampling draws and output ordering follow the pinned statistics fixtures. SciPy supplies binary64 references for added APIs, including documented adaptations and independently seeded probabilistic references. Weighted tau compares its statistic; its always-NaN p-value is left to the ordinary API tests. Normality, inverse and joint-tail approximations have reference and algorithm accuracy limits.',
 }
 
+# Derived adapters are mathematical comparisons built around public numerical
+# building blocks, rather than dedicated public full-function APIs. Disclose
+# their composition, validated domains and cross-library dependencies alongside
+# the generated special-function accuracy table.
+NOTES['special'] += (
+    ' Additional Bessel comparisons are explicitly derived: real-positive-argument '
+    'Hankel functions combine public cylindrical J/Y functions, zero collections '
+    'use public Bessel/Airy zeros and bracketed derivative roots, and Riccati '
+    'arrays use spherical Bessel recurrences. Modified-Bessel I ratios use Boost '
+    'I evaluations for moderate arguments, plus independent small-argument series '
+    'and large-argument Riccati asymptotics where a direct Boost quotient would '
+    'underflow or overflow; the latter cases are not direct Boost evaluations. '
+    'Bessel integrals use Boost Gauss–Kronrod quadrature over either Boost or GSL '
+    'Bessel kernels: GSL-labelled integral results therefore share a Boost '
+    'quadrature backend, not an independent GSL integration algorithm. These '
+    'composed bridges enforce bounded real domains. Kelvin ber/bei, real Struve '
+    'and the sampled half-order Wright-Bessel functions use public Boost.Math '
+    'generalized hypergeometric pFq reductions, with their own narrower domains. '
+    'The three real Struve-integral comparisons similarly use public Boost 2F3 '
+    'identities. Kelvin ker/kei and derivative comparisons and the full Kelvin '
+    'tuple use GSL quadrature of defining complex-Bessel integral representations, '
+    'not a public complex-valued GSL Bessel function. '
+    'None of these adapters implies support for general complex-argument Bessel '
+    'functions.'
+)
+
 
 
 def command(*args, cwd=ROOT):

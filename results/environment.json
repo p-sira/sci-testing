@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "f52397ff567244b7c14a90bb00f20fb07b07f1de79148ee216990de36400440a",
+  "testing_sources_sha256": "7804c6151ad6c1c5609ff4dcf32c891ac13e94b5b7321159fe561da1067e81f1",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1395,7 +1395,7 @@
       "SciPy"
     ]
   },
-  "measurements_sha256": "472bf1da8419886da992e02006e9304042559f0aa1238d40b261a78d75e21a03",
+  "measurements_sha256": "d2b6452fa585b971547672a0fd1a41d49c4815b8a1a548fec94ffa5b7768f084",
   "coverage_sha256": "48cad6be78cb1605d775f556813d677b1c89bb2fc8dfea67c80133ab8b66da3d",
   "reference_extensions": [
     {
@@ -1792,6 +1792,67 @@
         "Boost.Math": "1_92",
         "GSL": "2.8"
       }
+    },
+    {
+      "apis": [
+        "special.ai_zeros",
+        "special.bei",
+        "special.beip",
+        "special.ber",
+        "special.berp",
+        "special.bessel.iv_ratio",
+        "special.bessel.iv_ratio_c",
+        "special.bessel.iv_ratioinv",
+        "special.besselpoly",
+        "special.bi_zeros",
+        "special.h1vp",
+        "special.h2vp",
+        "special.hankel1",
+        "special.hankel1e",
+        "special.hankel2",
+        "special.hankel2e",
+        "special.it2i0k0",
+        "special.it2j0y0",
+        "special.iti0k0",
+        "special.itj0y0",
+        "special.jnjnp_zeros",
+        "special.jnp_zeros",
+        "special.jnyn_zeros",
+        "special.log_wright_bessel",
+        "special.modstruve",
+        "special.riccati_jn",
+        "special.riccati_yn",
+        "special.struve",
+        "special.wright_bessel",
+        "special.y0_zeros",
+        "special.y1_zeros",
+        "special.y1p_zeros",
+        "special.ynp_zeros"
+      ],
+      "testing_sources_sha256": "796dbd2613c641d018bb6c6a850ce1db1cffefbedbb0aaaf335d56f234566c0b",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "GSL": "2.8"
+      }
+    },
+    {
+      "apis": [
+        "special.it2struve0",
+        "special.itmodstruve0",
+        "special.itstruve0",
+        "special.kei",
+        "special.keip",
+        "special.kelvin",
+        "special.ker",
+        "special.kerp"
+      ],
+      "testing_sources_sha256": "7804c6151ad6c1c5609ff4dcf32c891ac13e94b5b7321159fe561da1067e81f1",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "GSL": "2.8"
+      }
     }
   ],
   "reference_refreshes": [
@@ -1837,5 +1898,5 @@
       "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
     }
   ],
-  "accuracy_summaries_sha256": "2ffd988ed2108249b2a9fd30c529b9957acfd45eceef8f527c9e44900fb2eda7"
+  "accuracy_summaries_sha256": "b532d9b147c1e2c50f5aea36ee99eb68d328ea456cbb83d33a15bafea21201ce"
 }

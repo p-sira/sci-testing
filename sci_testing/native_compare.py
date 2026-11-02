@@ -22,7 +22,16 @@ def _native_library():
                         str(ROOT/'native/complex_extra.cpp'),
                         str(ROOT/'native/vector_special.cpp'),
                         str(ROOT/'native/combinatorics_extra.cpp'),
-                        str(ROOT/'native/spherical_extra.cpp'), '-lgsl', '-lgslcblas',
+                        str(ROOT/'native/spherical_extra.cpp'),
+                        str(ROOT/'native/bessel_ratio.cpp'),
+                        str(ROOT/'native/bessel_riccati.cpp'),
+                        str(ROOT/'native/bessel_zeros.cpp'),
+                        str(ROOT/'native/bessel_hankel.cpp'),
+                        str(ROOT/'native/bessel_integrals.cpp'),
+                        str(ROOT/'native/bessel_hypergeom.cpp'),
+                        str(ROOT/'native/bessel_kelvin_k.cpp'),
+                        str(ROOT/'native/bessel_struve_integrals.cpp'),
+                        '-lgsl', '-lgslcblas',
                         '-o', str(target)], check=True)
     return ct.CDLL(str(target))
 
@@ -68,6 +77,22 @@ class NativeComparisons:
         self.combinatorics_extra = CombinatoricsExtraComparisons(self.library)
         from .spherical_extra import SphericalExtraComparisons
         self.spherical_extra = SphericalExtraComparisons(self.library)
+        from .bessel_ratio import BesselRatioComparisons
+        self.bessel_ratio = BesselRatioComparisons(self.library)
+        from .bessel_riccati import BesselRiccatiComparisons
+        self.bessel_riccati = BesselRiccatiComparisons(self.library)
+        from .bessel_zeros import BesselZerosComparisons
+        self.bessel_zeros = BesselZerosComparisons(self.library)
+        from .bessel_hankel import BesselHankelComparisons
+        self.bessel_hankel = BesselHankelComparisons(self.library)
+        from .bessel_integrals import BesselIntegralComparisons
+        self.bessel_integrals = BesselIntegralComparisons(self.library)
+        from .bessel_hypergeom import BesselHypergeomComparisons
+        self.bessel_hypergeom = BesselHypergeomComparisons(self.library)
+        from .bessel_kelvin_k import BesselKelvinKComparisons
+        self.bessel_kelvin_k = BesselKelvinKComparisons(self.library)
+        from .bessel_struve_integrals import BesselStruveIntegralsComparisons
+        self.bessel_struve_integrals = BesselStruveIntegralsComparisons(self.library)
 
     def evaluate_complex(self, case):
         """Compare supported Sci complex-special inputs with public GSL functions."""
@@ -105,7 +130,11 @@ class NativeComparisons:
             if summarized:
                 return summarized
         if module == 'special' and not name.startswith('complex.'):
-            for adapter in (self.vector_special, self.combinatorics_extra, self.spherical_extra):
+            for adapter in (self.bessel_ratio, self.bessel_riccati, self.bessel_zeros,
+                            self.bessel_hankel, self.bessel_integrals,
+                            self.bessel_hypergeom, self.bessel_kelvin_k,
+                            self.bessel_struve_integrals,
+                            self.vector_special, self.combinatorics_extra, self.spherical_extra):
                 extra = adapter.evaluate(case)
                 if extra:
                     return extra
