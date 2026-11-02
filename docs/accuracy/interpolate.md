@@ -10,41 +10,68 @@ coverage is limited to the operations and inputs below.
 
 ## Agreement with Sci
 
-Each library cell is **maximum / mean difference from Sci in ε** over cases
+`Sci vs reference` is **maximum / mean difference between Sci and the saved
+independent mathematical reference in ε**. Other library cells are **maximum /
+mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means unavailable or no paired finite results.
+because Sci failed. A dash means no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
+Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
+canonical API inventory. Historical flat recipe aliases appear under their
+current public namespace, with their measured recipe names preserved.
 
-| Function | Cases | SciPy |
-| --- | ---: | --- |
-| `approximate_taylor_polynomial` | 2004 | 2.7762e+18 / 4.9684e+14 |
-| `barycentric_interpolate` | 2050 | 37692.0 / 28.937 |
-| `bisplev` | 2003 | 3.125 / 0.049255 |
-| `bisplrep` | 2002 | 7.6198e+16 / 4.876e+12 |
-| `generate_knots` | 2004 | 0.0 / 0.0 |
-| `griddata` | 2007 | 11.871 / 0.4387 |
-| `insert` | 2007 | 43339.0 / 6.3195 |
-| `interpn` | 2014 | 0.57199 / 0.024425 |
-| `krogh_interpolate` | 2050 | 632.8 / 4.2342 |
-| `lagrange` | 2000 | 1.3104e+6 / 338.44 |
-| `make_interp_spline` | 2005 | 4.5036e+15 / 4.9901e+11 |
-| `make_lsq_spline` | 2002 | 151.94 / 3.2348 |
-| `make_smoothing_spline` | 2004 | 4.5036e+15 / 1.0215e+11 |
-| `make_splprep` | 2007 | 2.674e+16 / 3.004e+14 |
-| `make_splrep` | 2005 | 4.5036e+15 / 1.2476e+11 |
-| `pade` | 2000 | 0.66574 / 0.051564 |
-| `pchip_interpolate` | 2000 | 1.7699 / 0.33489 |
-| `spalde` | 2003 | 3.1525e+16 / 9.2356e+11 |
-| `splantider` | 2010 | 3.8791 / 0.022945 |
-| `splder` | 2007 | 3.8947 / 0.021381 |
-| `splev` | 2011 | 5.0 / 0.11639 |
-| `splint` | 2013 | 1.0508e+16 / 5.2203e+12 |
-| `splprep` | 2007 | 3.1662e+19 / 1.7246e+17 |
-| `splrep` | 2005 | 1.993e+16 / 5.5211e+11 |
-| `sproot` | 2004 | 12.5 / 2.601 |
+### `sci::interpolate::fitting` (7 functions, 14029 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `bisplrep` | 2002 | 7.6198e+16 / 4.876e+12 | 7.6198e+16 / 4.876e+12 |
+| `generate_knots` | 2004 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `make_interp_spline` | 2005 | 4.5036e+15 / 4.9901e+11 | 4.5036e+15 / 4.9901e+11 |
+| `make_lsq_spline` | 2002 | 151.94 / 3.2348 | 151.94 / 3.2348 |
+| `make_smoothing_spline` | 2004 | 4.5036e+15 / 1.0215e+11 | 4.5036e+15 / 1.0215e+11 |
+| `make_splprep` | 2007 | 2.674e+16 / 3.004e+14 | 2.674e+16 / 3.004e+14 |
+| `make_splrep` | 2005 | 4.5036e+15 / 1.2476e+11 | 4.5036e+15 / 1.2476e+11 |
+
+### `sci::interpolate::multidimensional` (3 functions, 6024 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `bisplev` | 2003 | 3.125 / 0.049255 | 3.125 / 0.049255 |
+| `griddata` | 2007 | 11.871 / 0.4387 | 11.871 / 0.4387 |
+| `interpn` | 2014 | 0.57199 / 0.024425 | 0.57199 / 0.024425 |
+
+### `sci::interpolate::polynomial` (6 functions, 12104 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `approximate_taylor_polynomial` | 2004 | 2.7762e+18 / 4.9684e+14 | 2.7762e+18 / 4.9684e+14 |
+| `barycentric_interpolate` | 2050 | 23392.0 / 19.974 | 37692.0 / 28.937 |
+| `krogh_interpolate` | 2050 | 414.66 / 2.7897 | 632.8 / 4.2342 |
+| `lagrange` | 2000 | 1.3104e+6 / 338.44 | 1.3104e+6 / 338.44 |
+| `pade` | 2000 | 0.66574 / 0.051564 | 0.66574 / 0.051564 |
+| `pchip_interpolate` | 2000 | 1.7699 / 0.33489 | 1.7699 / 0.33489 |
+
+### `sci::interpolate::spline` (7 functions, 14055 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `insert` | 2007 | 43339.0 / 6.3195 | 43339.0 / 6.3195 |
+| `spalde` | 2003 | 3.1525e+16 / 9.2356e+11 | 3.1525e+16 / 9.2356e+11 |
+| `splantider` | 2010 | 3.8791 / 0.022945 | 3.8791 / 0.022945 |
+| `splder` | 2007 | 3.8947 / 0.021381 | 3.8947 / 0.021381 |
+| `splev` | 2011 | 5.0 / 0.11639 | 5.0 / 0.11639 |
+| `splint` | 2013 | 1.0508e+16 / 5.2203e+12 | 1.0508e+16 / 5.2203e+12 |
+| `sproot` | 2004 | 12.5 / 2.601 | 12.5 / 2.601 |
+
+### `sci::interpolate` (2 functions, 4012 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `splprep` | 2007 | 3.1662e+19 / 1.7246e+17 | 3.1662e+19 / 1.7246e+17 |
+| `splrep` | 2005 | 1.993e+16 / 5.5211e+11 | 1.993e+16 / 5.5211e+11 |
 
 
 ## Conventions and limitations
@@ -63,7 +90,7 @@ variants are not counted as independent implementations.
 ## Reproduction
 
 - Sci source: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998` (numerical sources clean: true).
-- Testing source SHA-256: `a9a4095493112b6b04c27596db78ecaef74ca844a93c23be4da6563ce7cbfcbe`.
+- Testing source SHA-256: `3d1f538d12ef58c6738188ac9a526fb0459c4c5cb1023a3c7edaa3c23d5a3452`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
 - rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.

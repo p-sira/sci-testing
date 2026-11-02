@@ -63,7 +63,9 @@ class AccuracyTests(unittest.TestCase):
             result=report.high_precision(complex_case)
             self.assertEqual(len(result),8)
             self.assertEqual(result[0],mp.re(mp.airyai(mp.mpc(.25,.5))))
-        self.assertEqual(report.competitors(complex_case),{})
+        compared=report.competitors(complex_case)
+        self.assertIn('SciPy',compared)
+        self.assertEqual(len(compared['SciPy']['values']),8)
         structural_case=next(iter(structural_cases(2,20261020,apis=['core.csr.from_coo'])))
         expected=report.high_precision(structural_case)
         self.assertEqual(expected,[mp.mpf(v) for v in
@@ -360,11 +362,27 @@ class AccuracyTests(unittest.TestCase):
             with self.subTest(partitioned=hasattr(batch,'function')), tempfile.TemporaryDirectory() as directory:
                 report.render(batch,records,meta,Path(directory))
                 text=(Path(directory)/'special.md').read_text()
-                self.assertIn('| Function | Cases | SciPy | Boost.Math |',text)
-                self.assertIn('| `erf` | 4; Sci failed 2/4 | 1.0 / 1.0; failed 2/4; Sci unavailable 1/4 | 0.0 / 0.0; Sci unavailable 2/4 |',text)
+                self.assertIn('### `sci::special::elementary` (1 functions, 4 cases)',text)
+                self.assertIn('| Function | Cases | Sci vs reference | SciPy | Boost.Math |',text)
+                self.assertIn('| `erf` | 4; Sci failed 2/4 | 4.5036e+15 / 4.5036e+15 | 1.0 / 1.0; failed 2/4; Sci unavailable 1/4 | 0.0 / 0.0; Sci unavailable 2/4 |',text)
                 self.assertIn('**Sci-special as the reference**',text)
                 self.assertIn('(Sci): 2 failed; baseline error',text)
                 self.assertIn('(SciPy): 2 failed; competitor error',text)
+
+    def test_complex_special_without_competitors_still_reports_accuracy(self):
+        cases=[dict(id='special.complex.hankel1/edge-0',api='special.complex.hankel1',
+                    group='edge',args={'special_complex03_case':True,'v':0.,'z':[1.,0.]})]
+        records={cases[0]['id']:dict(reference=['1.0','-1.0'],
+                  libraries={'Sci':{'values':[1.+2**-52,-1.]}})}
+        meta=dict(sci_commit='test',sci_source_dirty=False,testing_sources_sha256='test',
+                  numpy='test',scipy='test',filterpy='test',mpmath='test',rust='test',
+                  python='test',platform='test',processor='test',cases_sha256='test')
+        with tempfile.TemporaryDirectory() as directory:
+            report.render(cases,records,meta,Path(directory))
+            text=(Path(directory)/'special.md').read_text()
+        self.assertIn('### `sci::special::complex` (1 functions, 1 cases)',text)
+        self.assertIn('| `complex.hankel1` | 1 | 1.0 / 0.5 |',text)
+        self.assertIn('independent mathematical reference',text)
 
     def test_symmetric_denominator(self):
         with mp.workdps(160):

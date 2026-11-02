@@ -161,12 +161,14 @@ disables GSL's abort handler and retains GSL error statuses. Versions and native
 compiler flags are recorded. See the [Boost.Math reference](https://www.boost.org/doc/libs/latest/libs/math/doc/html/index.html)
 and [GSL special-function conventions](https://www.gnu.org/software/gsl/doc/html/specfunc.html).
 
-Tables use the corresponding **Sci-* crate as the reference**, with columns
-**Function**, **Cases**, then the relevant libraries (SciPy, Boost.Math, GSL and
-others). Cells show maximum / mean symmetric relative difference from Sci in
-epsilon over cases where both evaluations succeed. Agreement with Sci does not
-establish numerical accuracy; independent accuracy references remain in the raw
-CSV `reference` field. `failed N/T` counts each library’s own failures.
+Tables are split by canonical **Sci 0.3 submodule**, including historical recipes
+whose old names map to the new namespaces. They contain **Function**, **Cases**,
+**Sci vs reference**, and the relevant libraries (SciPy, Boost.Math, GSL and
+others). Cells show maximum / mean symmetric relative difference in epsilon.
+The reference column measures Sci against the saved independent reference;
+competitor columns measure agreement with Sci. All full-precision independent
+references remain in the raw CSV `reference` field. `failed N/T` counts each
+library’s own failures.
 `Sci failed N/T` in Cases counts baseline failures; `Sci unavailable N/T` counts
 successful library evaluations excluded because Sci failed. Full errors and outputs
 remain in CSV. Metadata and discrete ordering are also covered by the underlying
@@ -175,9 +177,12 @@ Sci fixture assertions. These samples do not establish whole-domain accuracy.
 `python -m sci_testing.report --check` verifies inputs, source and result digests, the complete
 coverage audit and all generated pages without compiling or writing files.
 Moving or editing harness sources invalidates the recorded source digest; rerun
-the report against the pinned Sci checkout to create a new snapshot. Use `--full`
-when changing reference recipes or comparison adapters; the default preserves
-their saved results.
+the report against the pinned Sci checkout to update the snapshot. Use `--render`
+to regenerate only the report from verified saved measurements; `--comparators-only
+--module special.airy --module special.airye --module special.complex` backfills
+those comparison libraries while preserving saved Sci measurements and independent
+references. Use `--full` when changing reference recipes; the default refreshes
+Sci measurements while retaining the stored reference snapshot.
 Sources, manifests, lockfiles, recipes and generated inputs are hashed; derived
 results and reports are excluded from the source digest. Each run records its
 own platform. Repeated runs on the same platform reproduce the snapshot without

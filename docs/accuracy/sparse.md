@@ -10,116 +10,153 @@ coverage is limited to the operations and inputs below.
 
 ## Agreement with Sci
 
-Each library cell is **maximum / mean difference from Sci in ε** over cases
+`Sci vs reference` is **maximum / mean difference between Sci and the saved
+independent mathematical reference in ε**. Other library cells are **maximum /
+mean difference from Sci in ε** over cases
 where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
 identifies missing baseline evaluations. `failed N/T` counts that library's own
 failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. A dash means unavailable or no paired finite results.
+because Sci failed. A dash means no saved comparison or no paired finite results.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
+Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
+canonical API inventory. Historical flat recipe aliases appear under their
+current public namespace, with their measured recipe names preserved.
 
-| Function | Cases | SciPy |
-| --- | ---: | --- |
-| `add` | 2002 | 0.0 / 0.0 |
-| `array.csr_indices_i32` | 1019 | 0.0 / 0.0 |
-| `array.csr_indices_i64` | 1019 | 0.0 / 0.0 |
-| `as_array` | 2002 | 0.0 / 0.0 |
-| `block_array` | 2002 | 0.0 / 0.0 |
-| `block_diag` | 2002 | 0.0 / 0.0 |
-| `bmat` | 2002 | 0.0 / 0.0 |
-| `csgraph.bellman_ford` | 2003 | 0.0 / 0.0 |
-| `csgraph.breadth_first_order` | 2002 | 0.0 / 0.0 |
-| `csgraph.breadth_first_tree` | 2002 | 0.0 / 0.0 |
-| `csgraph.connected_components` | 2002 | 0.0 / 0.0 |
-| `csgraph.construct_dist_matrix` | 2002 | 0.0 / 0.0 |
-| `csgraph.csgraph_from_dense` | 2002 | 0.0 / 0.0 |
-| `csgraph.csgraph_from_masked` | 2002 | 0.0 / 0.0 |
-| `csgraph.csgraph_masked_from_dense` | 2002 | 0.0 / 0.0 |
-| `csgraph.csgraph_to_dense` | 2002 | 0.0 / 0.0 |
-| `csgraph.csgraph_to_masked` | 2002 | 0.0 / 0.0 |
-| `csgraph.depth_first_order` | 2002 | 0.0 / 0.0 |
-| `csgraph.depth_first_tree` | 2002 | 0.0 / 0.0 |
-| `csgraph.dijkstra` | 2003 | 0.0 / 0.0 |
-| `csgraph.floyd_warshall` | 2003 | 0.0 / 0.0 |
-| `csgraph.johnson` | 2003 | 0.0 / 0.0 |
-| `csgraph.laplacian` | 2003 | 0.0 / 0.0 |
-| `csgraph.maximum_bipartite_matching` | 2002 | 0.0 / 0.0 |
-| `csgraph.maximum_flow` | 2002 | 0.0 / 0.0 |
-| `csgraph.min_weight_full_bipartite_matching` | 2002 | 0.0 / 0.0 |
-| `csgraph.minimum_spanning_tree` | 2002 | 0.0 / 0.0 |
-| `csgraph.reconstruct_path` | 2002 | 0.0 / 0.0 |
-| `csgraph.reverse_cuthill_mckee` | 2002 | 0.0 / 0.0 |
-| `csgraph.shortest_path` | 2003 | 0.0 / 0.0 |
-| `csgraph.structural_rank` | 2002 | 0.0 / 0.0 |
-| `csgraph.yen` | 2002 | 0.8008 / 0.067462 |
-| `diags` | 2002 | 0.0 / 0.0 |
-| `diags_array` | 2002 | 0.0 / 0.0 |
-| `eliminate_zeros` | 2002 | 0.0 / 0.0 |
-| `expand_dims` | 2002 | 0.0 / 0.0 |
-| `eye` | 2005 | 0.0 / 0.0 |
-| `eye_array` | 2005 | 0.0 / 0.0 |
-| `find` | 2002 | 0.0 / 0.0 |
-| `from_coo` | 2002 | 0.0 / 0.0 |
-| `from_csc` | 2002 | 0.0 / 0.0 |
-| `from_csr` | 2002 | 0.0 / 0.0 |
-| `from_dense` | 2002 | 0.0 / 0.0 |
-| `get_index_dtype` | 2002 | 0.0 / 0.0 |
-| `hstack` | 2002 | 0.0 / 0.0 |
-| `identity` | 2003 | 0.0 / 0.0 |
-| `issparse` | 2002 | 0.0 / 0.0 |
-| `kron` | 2002 | 0.0 / 0.0 |
-| `kronsum` | 2003 | 0.0 / 0.0 |
-| `linalg.aslinearoperator` | 2002 | 0.0 / 0.0 |
-| `linalg.bicg` | 2003 | 0.0 / 0.0 |
-| `linalg.bicgstab` | 2003 | 4.7972e+20 / 1.0563e+17 |
-| `linalg.cg` | 2002 | 1.6855e+19 / 5.4627e+15 |
-| `linalg.cgs` | 2003 | 0.0 / 0.0 |
-| `linalg.eigs` | 2003 | 2.5381 / 0.13993 |
-| `linalg.eigsh` | 2002 | 3.3846 / 0.5829 |
-| `linalg.expm` | 2002 | 40.587 / 2.8384 |
-| `linalg.expm_multiply` | 2002 | 36.57 / 4.502 |
-| `linalg.factorized` | 2002 | 7.2572 / 0.41397 |
-| `linalg.funm_multiply_krylov` | 2002 | 179.2 / 35.401 |
-| `linalg.gcrotmk` | 2004 | 3.1525e+16 / 1.9457e+15 |
-| `linalg.gmres` | 2006; Sci failed 1/2006 | 3.1525e+16 / 1.6664e+15; Sci unavailable 1/2006 |
-| `linalg.inv` | 2002 | 0.0 / 0.0 |
-| `linalg.is_sptriangular` | 2002 | 0.0 / 0.0 |
-| `linalg.lgmres` | 2004 | 3.6029e+16 / 2.1864e+15 |
-| `linalg.lobpcg` | 2002 | 3.3846 / 0.58839 |
-| `linalg.lsmr` | 2004 | 6.5625 / 0.74906 |
-| `linalg.lsqr` | 2004 | 9.375 / 0.64381 |
-| `linalg.matrix_power` | 2005 | 0.0 / 0.0 |
-| `linalg.minres` | 2002 | 5.8547e+16 / 2.0425e+15 |
-| `linalg.norm` | 2014 | 2.5383 / 0.34634 |
-| `linalg.norm_axis` | 2002 | 1.5015 / 0.16459 |
-| `linalg.onenormest` | 2002 | 0.0 / 0.0 |
-| `linalg.qmr` | 2003 | 3.1525e+16 / 7.8964e+14 |
-| `linalg.spbandwidth` | 2002 | 0.0 / 0.0 |
-| `linalg.spilu` | 2002 | 4.5045 / 0.30706 |
-| `linalg.splu` | 2002 | 7.2572 / 0.41883 |
-| `linalg.spsolve` | 2002 | 7.2572 / 0.42219 |
-| `linalg.spsolve_triangular` | 2004 | 0.75075 / 0.025823 |
-| `linalg.svds` | 2003 | 2.538 / 0.34642 |
-| `linalg.tfqmr` | 2003 | 7.6561e+16 / 1.7852e+15 |
-| `load_npz` | 2002 | 0.0 / 0.0 |
-| `matmul` | 2003 | 0.0 / 0.0 |
-| `matrix_transpose` | 2002 | 0.0 / 0.0 |
-| `matvec` | 2002 | 0.0 / 0.0 |
-| `multiply` | 2002 | 0.0 / 0.0 |
-| `permute_dims` | 2002 | 0.0 / 0.0 |
-| `random` | 2003 | 0.0 / 0.0 |
-| `random_array` | 2003 | 0.0 / 0.0 |
-| `safely_cast_index_arrays` | 2002 | 0.0 / 0.0 |
-| `save_npz` | 2002 | 0.0 / 0.0 |
-| `scale` | 2002 | 0.0 / 0.0 |
-| `spdiags` | 2002 | 0.0 / 0.0 |
-| `swapaxes` | 2002 | 0.0 / 0.0 |
-| `to_dense` | 2002 | 0.0 / 0.0 |
-| `transpose` | 2002 | 0.0 / 0.0 |
-| `tril` | 2005 | 0.0 / 0.0 |
-| `triu` | 2005 | 0.0 / 0.0 |
-| `validate` | 2002 | 0.0 / 0.0 |
-| `vstack` | 2002 | 0.0 / 0.0 |
+### `sci::sparse::array` (7 functions, 12049 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `array.csr_indices_i32` | 1019 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `array.csr_indices_i64` | 1019 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `as_array` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `expand_dims` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `permute_dims` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `random_array` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `swapaxes` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+
+### `sci::sparse::construct` (16 functions, 32038 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `block_array` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `block_diag` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `diags` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `eye` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `from_coo` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `from_csc` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `from_csr` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `from_dense` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `hstack` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `identity` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `kron` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `kronsum` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `random` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `spdiags` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `to_dense` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `vstack` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+
+### `sci::sparse::csgraph` (25 functions, 50056 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `csgraph.bellman_ford` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.breadth_first_order` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.breadth_first_tree` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.connected_components` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.construct_dist_matrix` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.csgraph_from_dense` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.csgraph_from_masked` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.csgraph_masked_from_dense` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.csgraph_to_dense` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.csgraph_to_masked` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.depth_first_order` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.depth_first_tree` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.dijkstra` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.floyd_warshall` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.johnson` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.laplacian` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.maximum_bipartite_matching` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.maximum_flow` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.min_weight_full_bipartite_matching` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.minimum_spanning_tree` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.reconstruct_path` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.reverse_cuthill_mckee` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.shortest_path` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.structural_rank` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `csgraph.yen` | 2002 | 0.8008 / 0.067462 | 0.8008 / 0.067462 |
+
+### `sci::sparse::io` (2 functions, 4004 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `load_npz` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `save_npz` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+
+### `sci::sparse::linalg` (32 functions, 64100 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `linalg.aslinearoperator` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.bicg` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.bicgstab` | 2003 | 4.7972e+20 / 1.0563e+17 | 4.7972e+20 / 1.0563e+17 |
+| `linalg.cg` | 2002 | 1.6855e+19 / 5.4627e+15 | 1.6855e+19 / 5.4627e+15 |
+| `linalg.cgs` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.eigs` | 2003 | 2.5381 / 0.13993 | 2.5381 / 0.13993 |
+| `linalg.eigsh` | 2002 | 3.3846 / 0.5829 | 3.3846 / 0.5829 |
+| `linalg.expm` | 2002 | 40.587 / 2.8384 | 40.587 / 2.8384 |
+| `linalg.expm_multiply` | 2002 | 36.57 / 4.502 | 36.57 / 4.502 |
+| `linalg.factorized` | 2002 | 7.2572 / 0.41397 | 7.2572 / 0.41397 |
+| `linalg.funm_multiply_krylov` | 2002 | 179.2 / 35.401 | 179.2 / 35.401 |
+| `linalg.gcrotmk` | 2004 | 3.1525e+16 / 1.9457e+15 | 3.1525e+16 / 1.9457e+15 |
+| `linalg.gmres` | 2006; Sci failed 1/2006 | 3.1525e+16 / 1.6664e+15 | 3.1525e+16 / 1.6664e+15; Sci unavailable 1/2006 |
+| `linalg.inv` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.is_sptriangular` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.lgmres` | 2004 | 3.6029e+16 / 2.1864e+15 | 3.6029e+16 / 2.1864e+15 |
+| `linalg.lobpcg` | 2002 | 3.3846 / 0.58839 | 3.3846 / 0.58839 |
+| `linalg.lsmr` | 2004 | 6.5625 / 0.74906 | 6.5625 / 0.74906 |
+| `linalg.lsqr` | 2004 | 9.375 / 0.64381 | 9.375 / 0.64381 |
+| `linalg.matrix_power` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.minres` | 2002 | 5.8547e+16 / 2.0425e+15 | 5.8547e+16 / 2.0425e+15 |
+| `linalg.norm` | 2014 | 2.5383 / 0.34634 | 2.5383 / 0.34634 |
+| `linalg.norm_axis` | 2002 | 1.5015 / 0.16459 | 1.5015 / 0.16459 |
+| `linalg.onenormest` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.qmr` | 2003 | 3.1525e+16 / 7.8964e+14 | 3.1525e+16 / 7.8964e+14 |
+| `linalg.spbandwidth` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `linalg.spilu` | 2002 | 4.5045 / 0.30706 | 4.5045 / 0.30706 |
+| `linalg.splu` | 2002 | 7.2572 / 0.41883 | 7.2572 / 0.41883 |
+| `linalg.spsolve` | 2002 | 7.2572 / 0.42219 | 7.2572 / 0.42219 |
+| `linalg.spsolve_triangular` | 2004 | 0.75075 / 0.025823 | 0.75075 / 0.025823 |
+| `linalg.svds` | 2003 | 2.538 / 0.34642 | 2.538 / 0.34642 |
+| `linalg.tfqmr` | 2003 | 7.6561e+16 / 1.7852e+15 | 7.6561e+16 / 1.7852e+15 |
+
+### `sci::sparse::operations` (11 functions, 22029 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `add` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `eliminate_zeros` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `find` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `matmul` | 2003 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `matvec` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `multiply` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `scale` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `transpose` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `tril` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `triu` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `validate` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+
+### `sci::sparse` (7 functions, 14017 cases)
+
+| Function | Cases | Sci vs reference | SciPy |
+| --- | ---: | --- | --- |
+| `bmat` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `diags_array` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `eye_array` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `get_index_dtype` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `issparse` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `matrix_transpose` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `safely_cast_index_arrays` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 |
 
 ## Evaluation failures
 
@@ -142,7 +179,7 @@ variants are not counted as independent implementations.
 ## Reproduction
 
 - Sci source: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998` (numerical sources clean: true).
-- Testing source SHA-256: `a9a4095493112b6b04c27596db78ecaef74ca844a93c23be4da6563ce7cbfcbe`.
+- Testing source SHA-256: `3d1f538d12ef58c6738188ac9a526fb0459c4c5cb1023a3c7edaa3c23d5a3452`.
 - NumPy 2.5.4; SciPy 1.18.1; FilterPy 1.4.5; mpmath 1.3.0.
 - Native comparison versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
 - rustc 1.99.1 (58cf8f9c3 2026-10-13); Python 3.13.3; dev; opt-level=0; debug=line-tables-only; no custom RUSTFLAGS.
