@@ -108,6 +108,7 @@ uv run --frozen python -m unittest -v
 cargo test --locked
 uv run --frozen python -m sci_testing.report --full
 uv run --frozen python -m sci_testing.report --check
+uv run --frozen python -m sci_testing.report --check --exhaustive
 ```
 
 `python -m sci_testing.report` refreshes Sci outputs while retaining saved independent
@@ -120,21 +121,30 @@ per-function Sci revisions under `sci_measurement_commits`. Commit the updated
 measuring a newer Sci commit.
 Use `--full` for the initial snapshot, changed inputs, or refreshing all references
 and comparison libraries. `--check` validates source/input/result digests,
-the complete coverage audit and every generated page without compiling or writing
-files. It validates the recorded platform snapshot; it does not require identical
+per-case identities, the authenticated coverage audit and cached per-function
+numerical summaries, and every generated page without compiling or writing files.
+`--check --exhaustive` independently recomputes coverage and every numerical
+summary metric from saved measurements; it is also scheduled nightly in CI.
+Content-addressed accuracy summaries live in `results/accuracy-summaries.json`.
+They are indexed by input and measurement SHA-256, comparison columns, and
+metric implementation fingerprint. A changed or missing summary is never silently
+trusted; `--render` regenerates it from verified saved measurements without
+rerunning the numerical libraries. Both check modes validate the recorded platform
+snapshot; neither requires identical
 floating-point measurements on another platform. Set `CARGO_TARGET_DIR` to reuse
 an existing build directory. The runner uses Cargo's dev profile without custom
 compiler flags. Numerical sources and fixture providers must be clean; Sci
 documentation edits are permitted.
 
-The GitHub workflow regenerates these reports and uploads inputs and measurements.
+The GitHub workflow checks the committed snapshot and uploads the rendered reports,
+coverage audit and provenance metadata (not duplicate copies of raw measurements).
 An identical run on the same platform reproduces the snapshot without timestamps.
 All reports and data belong to this repository; Sci links to them externally.
 
 ## Snapshot
 
 - Sci commit: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998`.
-- Harness source SHA-256: `f759ce713afda9ed3a1a63c47ce2b76b5834d1c5f70c7270a9b4ac0e5a83e037`.
+- Harness source SHA-256: `4e2af78bce478470045921c727c3671c33670e79cea5bb28a95051d84d9f3492`.
 - Input SHA-256: `f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854`.
 - 2349606 saved cases covering 1181 recipe API names; 1142 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.

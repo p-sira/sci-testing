@@ -12,6 +12,7 @@ git submodule update --init --recursive
 uv sync --frozen
 uv run --frozen python -m unittest -v
 uv run --frozen python -m sci_testing.report --check
+uv run --frozen python -m sci_testing.report --check --exhaustive
 ```
 
 After the initial full run, refresh only Sci outputs with:
@@ -30,12 +31,16 @@ including their errors and warnings. `--module` selects a module or nested
 namespace and can be repeated; unselected measurements remain unchanged.
 `--sci-only` explicitly selects the default mode. Use `--full` to recompute all
 references and library results, including when inputs change or no snapshot exists.
-`--module` applies only to Sci-only refreshes.
+`--module` also applies to comparator-only backfills and selective rendering.
 An exact public API path such as `--module special.complex.airye` refreshes
 only that function; a namespace such as `--module special.complex` refreshes
 all its functions. Unselected measurements retain their recorded Sci revisions.
-The normal validation command, `--check`, verifies the cached inputs, measurements,
-coverage and generated tables without evaluating numerical libraries.
+The normal validation command, `--check`, verifies the complete input and measurement
+digests, per-case identities, the authenticated coverage audit, content-addressed
+per-function accuracy summaries, and generated tables without evaluating numerical
+libraries. `--check --exhaustive` independently recomputes the coverage audit and
+every numerical error metric from the saved data. CI uses the fast check on PRs
+and schedules the exhaustive verification nightly.
 Use `--render` to regenerate the coverage audit and Markdown comparison tables
 from verified measurements without compiling Sci or evaluating any reference
 library. It preserves the stored numerical observations and provenance.
@@ -175,8 +180,12 @@ successful library evaluations excluded because Sci failed. Full errors and outp
 remain in CSV. Metadata and discrete ordering are also covered by the underlying
 Sci fixture assertions. These samples do not establish whole-domain accuracy.
 
-`python -m sci_testing.report --check` verifies inputs, source and result digests, the complete
-coverage audit and all generated pages without compiling or writing files.
+`python -m sci_testing.report --check` verifies inputs, source and result digests,
+all saved input/measurement identities, hashed coverage and accuracy summaries,
+and all generated pages without compiling or writing files. The cache stored in
+`results/accuracy-summaries.json` binds each API's metrics to its input and
+measurement bytes, comparison columns, and metric implementation. The nightly
+`--check --exhaustive` recomputes every metric and audits coverage independently.
 Moving or editing harness sources invalidates the recorded source digest; rerun
 the report against the pinned Sci checkout to update the snapshot. Use `--render`
 to regenerate only the report from verified saved measurements; `--comparators-only

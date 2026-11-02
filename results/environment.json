@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "f759ce713afda9ed3a1a63c47ce2b76b5834d1c5f70c7270a9b4ac0e5a83e037",
+  "testing_sources_sha256": "4e2af78bce478470045921c727c3671c33670e79cea5bb28a95051d84d9f3492",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1570,5 +1570,6 @@
       "replaced": "binary64 Python cmath and stdlib comparisons",
       "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
     }
-  ]
+  ],
+  "accuracy_summaries_sha256": "bd32f7753dee0425cc0b3ec4819098df0738b44dd63a2a78ec71d6a680cb7944"
 }

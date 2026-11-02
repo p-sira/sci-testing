@@ -224,6 +224,55 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual((self.output/'special.md').read_bytes(),untouched)
         self.run_report('--check')
 
+    def test_fast_check_reuses_metrics_but_exhaustive_check_recomputes_them(self):
+        self.run_report('--render')
+        cache=self.root/'results/accuracy-summaries.json'
+        self.assertEqual(set(json.loads(cache.read_text())['entries']),set(self.cases.apis))
+        with patch.object(report,'component_error',side_effect=AssertionError('recomputed metric')), \
+             patch('sci_testing.coverage_audit.audit',side_effect=AssertionError('recomputed coverage')):
+            self.run_report('--check')
+        with patch.object(report,'component_error',wraps=report.component_error) as metric, \
+             patch('sci_testing.coverage_audit.audit',wraps=__import__(
+                 'sci_testing.coverage_audit',fromlist=['audit']).audit) as coverage:
+            self.run_report('--check','--exhaustive')
+            self.assertGreater(metric.call_count,0)
+            coverage.assert_called_once()
+
+    def test_accuracy_summary_digest_and_per_file_keys_fail_closed(self):
+        self.run_report('--render')
+        cache=self.root/'results/accuracy-summaries.json'
+        original=cache.read_bytes()
+        cache.write_bytes(original+b'\n')
+        with self.assertRaisesRegex(ValueError,'Accuracy summary digest mismatch'):
+            self.run_report('--check')
+        cache.write_bytes(original)
+        data=json.loads(original)
+        api=self.cases.apis[0]
+        data['entries'][api]['key']['measurement']='0'*64
+        altered=(json.dumps(data,sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n').encode()
+        cache.write_bytes(altered)
+        meta=json.loads((self.root/'results/environment.json').read_text())
+        import hashlib
+        meta['accuracy_summaries_sha256']=hashlib.sha256(altered).hexdigest()
+        (self.root/'results/environment.json').write_text(json.dumps(meta))
+        with self.assertRaisesRegex(ValueError,'Stale or missing accuracy summary'):
+            self.run_report('--check')
+        cache.write_bytes(original)
+
+    def test_exhaustive_check_detects_authentic_but_falsified_summary(self):
+        self.run_report('--render')
+        cache=self.root/'results/accuracy-summaries.json'
+        saved=json.loads(cache.read_text())
+        saved['entries'][self.cases.apis[0]]['summary']['row']='| falsified |'
+        serialized=(json.dumps(saved,sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n').encode()
+        cache.write_bytes(serialized)
+        meta=json.loads((self.root/'results/environment.json').read_text())
+        import hashlib
+        meta['accuracy_summaries_sha256']=hashlib.sha256(serialized).hexdigest()
+        (self.root/'results/environment.json').write_text(json.dumps(meta))
+        with self.assertRaisesRegex(ValueError,'Stale accuracy summaries'):
+            self.run_report('--check','--exhaustive')
+
     def test_comparator_backfill_is_atomic_if_reporting_fails(self):
         before={p:p.read_bytes() for p in (self.root/'results').rglob('*') if p.is_file()}
         self.native.side_effect=None

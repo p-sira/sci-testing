@@ -17,6 +17,7 @@ import tempfile
 import warnings
 
 from .native_compare import NativeComparisons
+from .accuracy_cache import AccuracyCache, FILENAME as SUMMARY_FILENAME
 
 from .generate_cases import build_cases
 from .case_csv import (case_files, case_paths, case_directory_digest, csv_text,
@@ -378,7 +379,7 @@ def comparison_submodule(api, canonical):
     return path[1] if len(path)>2 else None
 
 
-def render(cases, records, meta, output, *, modules=None):
+def render(cases, records, meta, output, *, modules=None, cache=None):
     output.mkdir(parents=True,exist_ok=True)
     from .coverage_audit import inventory
     canonical={row['api']:row['canonical'] for row in inventory()}
@@ -400,6 +401,14 @@ def render(cases, records, meta, output, *, modules=None):
         libraries=sorted(available,key=lambda lib:(preferred.index(lib) if lib in preferred else len(preferred),lib))
         sections=defaultdict(list);section_cases=defaultdict(int);failed={}
         for api,batch in groups:
+            saved=cache.get(api,libraries) if cache is not None else None
+            if saved is not None:
+                for library,count,reason,identifier in saved['failures']:
+                    failed[(api,library)]=[count,reason,identifier]
+                section=comparison_submodule(api,canonical.get(api))
+                section_cases[section]+=len(batch)
+                sections[section].append(saved['row'])
+                continue
             cells=[]
             baseline_failures=0
             reference_maximum=None;reference_sum=ZERO;reference_count=0
@@ -446,7 +455,11 @@ def render(cases, records, meta, output, *, modules=None):
                             if reference_count else '—')
             section=comparison_submodule(api,canonical.get(api))
             section_cases[section]+=len(batch)
-            sections[section].append(f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |')
+            row=f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |'
+            sections[section].append(row)
+            if cache is not None:
+                cache.put(api,libraries,{'row':row,'failures':[
+                    [lib,*failure] for (name,lib),failure in failed.items() if name==api]})
         failures=[f'- `{api}` ({lib}): {count} failed; {reason}. Example: `{identifier}`.' for (api,lib),(count,reason,identifier) in failed.items()]
         failure_section='\n## Evaluation failures\n\n'+'\n'.join(failures)+'\n' if failures else ''
         headers=['Function','Cases','Sci vs reference',*libraries]
@@ -616,6 +629,7 @@ uv run --frozen python -m unittest -v
 cargo test --locked
 uv run --frozen python -m sci_testing.report --full
 uv run --frozen python -m sci_testing.report --check
+uv run --frozen python -m sci_testing.report --check --exhaustive
 ```
 
 `python -m sci_testing.report` refreshes Sci outputs while retaining saved independent
@@ -628,14 +642,23 @@ per-function Sci revisions under `sci_measurement_commits`. Commit the updated
 measuring a newer Sci commit.
 Use `--full` for the initial snapshot, changed inputs, or refreshing all references
 and comparison libraries. `--check` validates source/input/result digests,
-the complete coverage audit and every generated page without compiling or writing
-files. It validates the recorded platform snapshot; it does not require identical
+per-case identities, the authenticated coverage audit and cached per-function
+numerical summaries, and every generated page without compiling or writing files.
+`--check --exhaustive` independently recomputes coverage and every numerical
+summary metric from saved measurements; it is also scheduled nightly in CI.
+Content-addressed accuracy summaries live in `results/accuracy-summaries.json`.
+They are indexed by input and measurement SHA-256, comparison columns, and
+metric implementation fingerprint. A changed or missing summary is never silently
+trusted; `--render` regenerates it from verified saved measurements without
+rerunning the numerical libraries. Both check modes validate the recorded platform
+snapshot; neither requires identical
 floating-point measurements on another platform. Set `CARGO_TARGET_DIR` to reuse
 an existing build directory. The runner uses Cargo's dev profile without custom
 compiler flags. Numerical sources and fixture providers must be clean; Sci
 documentation edits are permitted.
 
-The GitHub workflow regenerates these reports and uploads inputs and measurements.
+The GitHub workflow checks the committed snapshot and uploads the rendered reports,
+coverage audit and provenance metadata (not duplicate copies of raw measurements).
 An identical run on the same platform reproduces the snapshot without timestamps.
 All reports and data belong to this repository; Sci links to them externally.
 
@@ -650,6 +673,28 @@ All reports and data belong to this repository; Sci links to them externally.
     if 'reference_extensions' in meta:
         index+='\nNew API references were evaluated separately from the historical snapshot. Their provenance is recorded in `reference_extensions` in `results/environment.json`.\n'
     (output/'README.md').write_text(index)
+
+
+def render_cached(cases,records,meta,output,*,modules=None,root=None,inputs=None,
+                  exhaustive=False,require_hits=False):
+    """Stage the rendered pages and their authenticated summary index together."""
+    root=ROOT if root is None else Path(root)
+    prior=root/'results'/SUMMARY_FILENAME
+    checksum=meta.get('accuracy_summaries_sha256')
+    cache=AccuracyCache(root,records.directory,Path(__file__),inputs=inputs,
+                        previous=prior if checksum else None,
+                        previous_sha256=checksum,
+                        reuse=not exhaustive,require_hits=require_hits)
+    render(cases,records,meta,output,modules=modules,cache=cache)
+    content=cache.serialize(cases.apis)
+    output.mkdir(parents=True,exist_ok=True)
+    (output/SUMMARY_FILENAME).write_bytes(content)
+    meta['accuracy_summaries_sha256']=hashlib.sha256(content).hexdigest()
+
+
+def publish_summary(pages,root=None):
+    root=ROOT if root is None else Path(root)
+    (pages/SUMMARY_FILENAME).replace(root/'results'/SUMMARY_FILENAME)
 
 
 def load_snapshot(cases, *, root=None, cached=False, verify_apis=None):
@@ -767,26 +812,39 @@ def extend_references(cases, added, executable, destination):
     return libraries
 
 
-def check_generated(cases, output, *, root=None, cached=False):
+def check_generated(cases, output, *, root=None, cached=False, exhaustive=False):
     """Check derived inputs and pages against the source-pinned raw snapshot."""
     root=ROOT if root is None else root
     meta,records=load_snapshot(cases,root=root,cached=cached)
     if meta['testing_sources_sha256'] != digest_sources():
         raise ValueError('Testing sources changed; rerun python -m sci_testing.report')
     if 'coverage_sha256' in meta:
-        from .coverage_audit import audit
-        content=audit(cases,records)
-        if (root/'results/coverage.csv').read_text()!=content or hashlib.sha256(content.encode()).hexdigest()!=meta['coverage_sha256']:raise ValueError('Stale coverage audit; rerun python -m sci_testing.report')
+        saved=(root/'results/coverage.csv').read_text()
+        if hashlib.sha256(saved.encode()).hexdigest()!=meta['coverage_sha256']:
+            raise ValueError('Coverage audit digest mismatch')
+        if exhaustive or 'accuracy_summaries_sha256' not in meta:
+            from .coverage_audit import audit
+            if audit(cases,records)!=saved:
+                raise ValueError('Stale coverage audit; rerun python -m sci_testing.report')
     with tempfile.TemporaryDirectory() as directory, mp.workdps(160):
         expected=Path(directory)
-        render(cases,records,meta,expected)
+        original_checksum=meta.get('accuracy_summaries_sha256')
+        if original_checksum:
+            render_cached(cases,records,meta,expected,root=root,
+                          exhaustive=exhaustive,require_hits=not exhaustive)
+            if meta['accuracy_summaries_sha256']!=original_checksum or (
+                    expected/SUMMARY_FILENAME).read_bytes()!=(root/'results'/SUMMARY_FILENAME).read_bytes():
+                raise ValueError('Stale accuracy summaries; rerun python -m sci_testing.report --render')
+        else:
+            render(cases,records,meta,expected)
         names={p.name for p in expected.glob('*.md')}
         if names != {p.name for p in output.glob('*.md')}:
             raise ValueError('Generated page set differs; rerun python -m sci_testing.report')
         for name in sorted(names):
             if (output/name).read_bytes() != (expected/name).read_bytes():
                 raise ValueError(f'Stale accuracy page {name}; rerun python -m sci_testing.report')
-    print(f'Checked {len(cases)} inputs, raw measurements and {len(names)} generated pages')
+    print(f'Checked {len(cases)} inputs, raw measurements and {len(names)} generated pages'+
+          (' exhaustively' if exhaustive else ''))
 
 
 def measure_sci(cases, executable):
@@ -929,6 +987,7 @@ def main():
     parser.add_argument('--output',type=Path,default=ROOT/'docs/accuracy')
     mode=parser.add_mutually_exclusive_group()
     mode.add_argument('--check',action='store_true',help='validate inputs, raw results and generated pages without writing files')
+    parser.add_argument('--exhaustive',action='store_true',help='with --check, independently recompute coverage and all numerical summary metrics')
     mode.add_argument('--render',action='store_true',help='regenerate coverage and accuracy pages from verified saved measurements, without running Sci or reference libraries')
     mode.add_argument('--extend',action='store_true',help='measure only new API names and retain every historical independent reference')
     mode.add_argument('--full',action='store_true',help='recompute all Sci, reference and comparison-library results')
@@ -938,6 +997,8 @@ def main():
                       help='replace cmath complex references with mpmath/NumPy and remove all stdlib comparisons, preserving Sci outputs')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
     args=parser.parse_args()
+    if args.exhaustive and not args.check:
+        parser.error('--exhaustive requires --check')
     if args.module and (args.full or args.check or args.extend or args.upgrade_scientific_comparisons):
         parser.error('--module is available only for Sci-only, comparator and render refreshes')
     if args.comparators_only and not args.module:
@@ -973,7 +1034,7 @@ def main():
         cached=cases is not None
         if cases is None:cases=build_cases()
     if args.check:
-        check_generated(cases,args.output.resolve(),cached=cached)
+        check_generated(cases,args.output.resolve(),cached=cached,exhaustive=args.exhaustive)
         return
     if args.render:
         render_apis=set(cases.apis)
@@ -996,8 +1057,9 @@ def main():
             modules=(selective_render_modules(args.output.resolve(),
                                               {api.split('.')[0] for api in render_apis})
                      if args.module else None)
-            with mp.workdps(160):render(cases,records,meta,pages,modules=modules)
+            with mp.workdps(160):render_cached(cases,records,meta,pages,modules=modules)
             (ROOT/'results/coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):
@@ -1028,7 +1090,7 @@ def main():
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=workspace/'pages'
             with mp.workdps(160):
-                render(cases,staged_records,meta,pages,
+                render_cached(cases,staged_records,meta,pages,
                        modules=selective_render_modules(args.output.resolve(),
                                                         {'complex','special','stats'}))
             for name in sorted(changed):
@@ -1037,6 +1099,7 @@ def main():
                 alternate=dest.with_suffix('') if dest.suffix=='.gz' else dest.with_suffix('.csv.gz')
                 alternate.unlink(missing_ok=True)
             (ROOT/'results/coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
@@ -1087,7 +1150,7 @@ def main():
                 'scipy':meta['scipy'],'native_libraries':meta.get('native_libraries',{})})
             pages=workspace/'pages'
             with mp.workdps(160):
-                render(cases,staged_records,meta,pages,
+                render_cached(cases,staged_records,meta,pages,
                        modules=selective_render_modules(args.output.resolve(),
                                                         {api.split('.')[0] for api in selected}))
             for name in sorted(changed):
@@ -1097,6 +1160,7 @@ def main():
                 alternate=dest.with_suffix('') if dest.suffix=='.gz' else dest.with_suffix('.csv.gz')
                 alternate.unlink(missing_ok=True)
             (ROOT/'results/coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
@@ -1173,7 +1237,7 @@ def main():
             coverage=audit(cases,staged_records,required_apis=added)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=workspace/'pages'
-            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            with mp.workdps(160):render_cached(cases,staged_records,meta,pages,inputs=staged_inputs)
             # All existing inputs were checked before preparing these files.
             old_inputs=ROOT/'cases/generated'
             backup=workspace/'previous-cases'
@@ -1193,6 +1257,7 @@ def main():
                         other=destination.with_suffix('') if destination.suffix=='.gz' else destination.with_suffix('.csv.gz')
                         other.unlink(missing_ok=True)
             (results/'coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
@@ -1212,7 +1277,7 @@ def main():
             meta['measurements_sha256']=directory_digest(staged)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=Path(directory)/'pages'
-            with mp.workdps(160):render(cases,staged_records,meta,pages)
+            with mp.workdps(160):render_cached(cases,staged_records,meta,pages)
             # Finish all audits and page generation before publishing changes.
             for name in sorted(changed):
                 path=staged/name
@@ -1222,6 +1287,7 @@ def main():
                 alternate=destination.with_suffix('') if destination.suffix=='.gz' else destination.with_suffix('.csv.gz')
                 alternate.unlink(missing_ok=True)
             (results/'coverage.csv').write_text(coverage)
+            publish_summary(pages)
             (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):
@@ -1263,8 +1329,9 @@ def main():
     coverage=audit(cases,records)
     (results/'coverage.csv').write_text(coverage)
     meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
+    with mp.workdps(160): render_cached(cases,records,meta,args.output.resolve())
+    publish_summary(args.output.resolve())
     (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
-    with mp.workdps(160): render(cases,records,meta,args.output.resolve())
     print(f'Wrote {len(MODULES)} module pages, {len(cases)} cases to {args.output}')
 
 
