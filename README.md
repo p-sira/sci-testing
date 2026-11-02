@@ -149,7 +149,8 @@ Rust only.
 ## References and failures
 
 Original module recipes use independent mpmath references at 100 and 160 decimal
-digits. Added recipes use pinned public SciPy/stdlib calls, independent identities
+digits; complex arithmetic uses 200/320 digits, escalating when necessary for
+subnormal branch points. Added recipes use pinned public SciPy calls, independent identities
 or quadrature; binary64 references measure agreement with that reference library.
 Sci and its private backends never generate expectations. Nonunique factors use
 projectors, reconstructions and ordered eigenvalues. Module pages document the

@@ -198,6 +198,32 @@ class RefreshTests(unittest.TestCase):
         self.assertIn('Boost.Math',meta['module_libraries']['special'])
         self.run_report('--check')
 
+    def test_incremental_backfill_reuses_coverage_and_untouched_report_page(self):
+        self.run_report('--render')
+        untouched=(self.output/'sparse.md').read_bytes()
+        baseline_coverage=(self.root/'results/coverage.csv').read_bytes()
+        self.native.side_effect=None
+        self.native.return_value.versions={'Boost.Math':'fresh','GSL':'fresh'}
+        self.native.return_value.evaluate.return_value={'GSL':{'values':[.5]}}
+        self.competitors.side_effect=None
+        self.competitors.return_value={'SciPy':{'values':[.5]}}
+        with patch.object(report,'render',wraps=report.render) as rendered, \
+             patch('sci_testing.coverage_audit.audit',side_effect=AssertionError('unnecessary audit')):
+            self.run_report('--comparators-only','--module','special.erf')
+            self.assertEqual(rendered.call_args.kwargs['modules'],['special'])
+        self.assertEqual((self.output/'sparse.md').read_bytes(),untouched)
+        self.assertEqual((self.root/'results/coverage.csv').read_bytes(),baseline_coverage)
+        self.run_report('--check')
+
+    def test_targeted_render_keeps_unrelated_module_page(self):
+        self.run_report('--render')
+        untouched=(self.output/'special.md').read_bytes()
+        with patch.object(report,'render',wraps=report.render) as rendered:
+            self.run_report('--render','--module','sparse.linalg.norm')
+            self.assertEqual(rendered.call_args.kwargs['modules'],['sparse'])
+        self.assertEqual((self.output/'special.md').read_bytes(),untouched)
+        self.run_report('--check')
+
     def test_comparator_backfill_is_atomic_if_reporting_fails(self):
         before={p:p.read_bytes() for p in (self.root/'results').rglob('*') if p.is_file()}
         self.native.side_effect=None

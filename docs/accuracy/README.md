@@ -60,8 +60,9 @@ signed-zero and work-limit contracts.
 Tables use the measured binary64 output from the corresponding **Sci-* crate**
 as their reference. Agreement with Sci does not establish numerical accuracy.
 Independent accuracy references remain in the raw CSV `reference` field: original
-module recipes use mpmath at 100 and 160 decimal digits; additional recipes use
-pinned public SciPy/stdlib APIs, independent identities and quadrature. These
+module recipes use mpmath at 100 and 160 decimal digits, while complex facade
+operations use 200/320 digits (with higher precision around subnormal branch
+points); additional recipes use pinned public SciPy APIs, independent identities and quadrature. These
 references are independent of the table baseline. Public Sci APIs are
 called through typed Rust registrations and the pinned Sci fixture dispatchers;
 no Sci or private-backend result generates an expected value.
@@ -133,7 +134,7 @@ All reports and data belong to this repository; Sci links to them externally.
 ## Snapshot
 
 - Sci commit: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998`.
-- Harness source SHA-256: `3d1f538d12ef58c6738188ac9a526fb0459c4c5cb1023a3c7edaa3c23d5a3452`.
+- Harness source SHA-256: `f759ce713afda9ed3a1a63c47ce2b76b5834d1c5f70c7270a9b4ac0e5a83e037`.
 - Input SHA-256: `f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854`.
 - 2349606 saved cases covering 1181 recipe API names; 1142 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Math': '1_92', 'GSL': '2.8'}.
