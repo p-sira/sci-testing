@@ -39,6 +39,8 @@ class ParallelRenderTests(unittest.TestCase):
              "args": {"x": 0.5}},
             {"id": "stats.variance/test", "api": "stats.variance", "group": "sample",
              "args": {"values": [1.0, 2.0]}},
+            {"id": "stats.variance/test2", "api": "stats.variance", "group": "sample",
+             "args": {"values": [2.0, 3.0]}},
         ])
         records = {
             "special.erf/test": {
@@ -50,6 +52,11 @@ class ParallelRenderTests(unittest.TestCase):
                 "id": "stats.variance/test", "reference": ["0.25"],
                 "libraries": {"Sci": {"values": [0.25]},
                               "SciPy": {"values": [0.25]}},
+            },
+            "stats.variance/test2": {
+                "id": "stats.variance/test2", "reference": ["0.25"],
+                "libraries": {"Sci": {"values": [0.25]},
+                              "SciPy": {"error": "deliberate failure"}},
             },
         }
         with tempfile.TemporaryDirectory() as directory:
@@ -63,25 +70,36 @@ class ParallelRenderTests(unittest.TestCase):
                 "sci_commit": "fixture", "testing_sources_sha256": "fixture",
                 "cases_sha256": "fixture", "native_libraries": {},
                 "module_libraries": {
-                    "special": ["Sci", "mpmath"],
+                    "special": ["Sci", "mpmath", "GSL"],
                     "stats": ["Sci", "SciPy"],
                 },
             }
             serial_meta = meta.copy()
             parallel_meta = meta.copy()
+            exhaustive_meta = meta.copy()
             store = MeasurementStore(measurements)
             report.render_cached(cases, store, serial_meta, root / "serial",
                                  root=root, inputs=inputs)
             report.render_cached_parallel(cases, store, parallel_meta,
                                           root / "parallel", jobs=2,
                                           root=root, inputs=inputs)
+            report.render_cached_parallel(cases, store, exhaustive_meta,
+                                          root / "exhaustive", jobs=2,
+                                          root=root, inputs=inputs,
+                                          exhaustive=True)
             serial_files = {p.name: p.read_bytes()
                             for p in (root / "serial").iterdir()}
             parallel_files = {p.name: p.read_bytes()
                               for p in (root / "parallel").iterdir()}
+            exhaustive_files = {p.name: p.read_bytes()
+                                for p in (root / "exhaustive").iterdir()}
             self.assertEqual(serial_files, parallel_files)
+            self.assertEqual(serial_files, exhaustive_files)
             self.assertEqual(serial_meta["accuracy_summaries_sha256"],
                              parallel_meta["accuracy_summaries_sha256"])
+            self.assertEqual(serial_meta["accuracy_summaries_sha256"],
+                             exhaustive_meta["accuracy_summaries_sha256"])
+            self.assertIn("deliberate failure", serial_files["stats.md"].decode())
             self.assertEqual(originals, directory_digest(measurements))
 
 

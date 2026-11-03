@@ -1,7 +1,7 @@
 {
   "sci_commit": "c781e8259b175ebeb3c7d27a522ef3f3a7e24998",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "644bc6f17c0b0efaeb5d921df0aae215ebc7a3f490bfd1bd722a2c69c7d1fe6d",
+  "testing_sources_sha256": "b57a5dd7080a5bafd93ce5eceabeecad5d7a4044a0a05169e780776baa669143",
   "cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -1435,7 +1435,7 @@
       "SciPy"
     ]
   },
-  "measurements_sha256": "063b2ed5cfdebbde1022b9f7d10b59d1442ec5a7d28d4157e8ac19106f787dd8",
+  "measurements_sha256": "d355a28ac48374ae639d50bba89f4fa181221506e7465318ea82d80594dfc825",
   "coverage_sha256": "48cad6be78cb1605d775f556813d677b1c89bb2fc8dfea67c80133ab8b66da3d",
   "reference_extensions": [
     {
@@ -3104,6 +3104,39 @@
         "GSL": "2.8"
       },
       "additional_only": true
+    },
+    {
+      "apis": [
+        "stats.pdf",
+        "stats.ppf"
+      ],
+      "testing_sources_sha256": "cb4b000beefc3fd87d71a17b8093297e98c5cb73362acd7e16eb419e5a4f02d2",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "Boost.Multiprecision": "1_92",
+        "Boost.Numeric.uBLAS": "1_92",
+        "Boost.Graph": "1_92",
+        "Boost.Units": "1_92",
+        "GSL": "2.8"
+      },
+      "additional_only": true
+    },
+    {
+      "apis": [
+        "stats.ppf"
+      ],
+      "testing_sources_sha256": "b57a5dd7080a5bafd93ce5eceabeecad5d7a4044a0a05169e780776baa669143",
+      "scipy": "1.18.1",
+      "native_libraries": {
+        "Boost.Math": "1_92",
+        "Boost.Multiprecision": "1_92",
+        "Boost.Numeric.uBLAS": "1_92",
+        "Boost.Graph": "1_92",
+        "Boost.Units": "1_92",
+        "GSL": "2.8"
+      },
+      "additional_only": true
     }
   ],
   "reference_refreshes": [
@@ -3149,7 +3182,7 @@
       "testing_sources_sha256": "047f72e1b48f36b1493931be5157ab5221e6d15496155d5cd661a9b5225c1f2f"
     }
   ],
-  "accuracy_summaries_sha256": "c049ecb43650c6de9c75df2425f52be9a28c100712ce07ac3f03342fe321f1a6",
+  "accuracy_summaries_sha256": "1e7f1211dfccf1e59f806d614a7a285846df029a68b36e6b872af64557b97c05",
   "rust_oracle_libraries": {
     "RustFFT": "6.4.0",
     "nalgebra": "0.35.0",

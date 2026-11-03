@@ -13,6 +13,7 @@ uv sync --frozen
 uv run --frozen python -m unittest -v
 uv run --frozen python -m sci_testing.report --check
 uv run --frozen python -m sci_testing.report --check --exhaustive
+uv run --frozen python -m sci_testing.report --check --exhaustive --jobs 8
 ```
 
 After the initial full run, refresh only Sci outputs with:
@@ -41,8 +42,11 @@ Use `--jobs N` on this refresh to evaluate distinct function CSVs in parallel;
 the worker queue is bounded, and the combined measurements are published only
 after every selected function succeeds.
 For a full `--render`, `--jobs N` computes authenticated per-function error
-summaries across modules in separate processes and publishes the final pages
-only after all summaries are verified against their input and measurement files.
+summaries across modules in separate processes, splitting large modules into
+disjoint size-balanced batches, and publishes the final pages only after all
+summaries are verified against their input and measurement files. The same
+parallel aggregation is available with `--check --exhaustive --jobs N`, which
+recomputes all metrics rather than trusting cached values.
 An exact public API path such as `--module special.complex.airye` refreshes
 only that function; a namespace such as `--module special.complex` refreshes
 all its functions. Unselected measurements retain their recorded Sci revisions.

@@ -433,7 +433,42 @@ def _distribution(name, args):
     else:
         x = _number(xs[0])
     if name == "ppf":
-        if not 0 < x < 1:
+        if not 0 <= x <= 1:
+            return None
+        # Quantiles at exactly 0 or 1 have finite support endpoints for
+        # bounded distributions.  The discrete distributions follow Sci's
+        # integer inverse-CDF convention at q=0 (one below their minimum).
+        # Unbounded quantiles are nonfinite and remain unavailable.
+        if x == 0:
+            if kind in {"Beta", "Gamma", "ChiSquared", "Chi", "F",
+                        "Exponential", "LogNormal", "Weibull",
+                        "InverseGamma", "Erlang"}:
+                return [mp.mpf(0)]
+            if kind in {"Uniform", "Triangular", "Pareto", "Levy"}:
+                return [p[0]]
+            if kind == "Geometric":
+                return [mp.mpf(0)]
+            if kind == "DiscreteUniform":
+                return [p[0]-1]
+            if kind == "Hypergeometric":
+                return [max(0, p[2]-p[0]+p[1])-1]
+            if kind in {"Bernoulli", "Binomial", "Poisson",
+                        "NegativeBinomial"}:
+                return [mp.mpf(-1)]
+            return None
+        if x == 1:
+            if kind == "Beta":
+                return [mp.mpf(1)]
+            if kind in {"Uniform", "Triangular"}:
+                return [p[1]]
+            if kind == "Bernoulli":
+                return [mp.mpf(1)]
+            if kind == "Binomial":
+                return [p[0]]
+            if kind == "Hypergeometric":
+                return [min(p[1], p[2])]
+            if kind == "DiscreteUniform":
+                return [p[1]-1]
             return None
         if kind == "Normal":
             return [p[0]+p[1]*mp.sqrt(2)*mp.erfinv(2*x-1)]
@@ -461,6 +496,45 @@ def _distribution(name, args):
                     high-mp.sqrt((1-x)*(high-low)*(high-mode))]
         if kind == "Levy":
             return [p[0]+p[1]/(2*mp.erfinv(1-x)**2)]
+        if kind == "Chi" and p[0] == 1:
+            # Chi(1) is |N(0,1)|.  Bisection on [0,1] has an absolute
+            # resolution floor and cannot resolve quantiles near 1e-100.
+            return [mp.sqrt(2)*mp.erfinv(x)]
+        if kind == "StudentT" and x == mp.mpf('0.5'):
+            return [mp.mpf(0)]
+        if kind == "InverseGamma":
+            # Invert in z = scale / value, not in value: a scale of 1e-200
+            # otherwise falls far below the absolute bisection resolution.
+            # Q(a,z) is the regularized *upper* incomplete gamma, decreasing
+            # from 1 to 0.  For a=1, Q(1,z)=exp(-z) exactly.
+            if p[0] == 1:
+                return [-p[1]/mp.log(x)]
+            low = mp.mpf(0)
+            if x > mp.mpf('0.5'):
+                # P(a,z) ~ z**a/Gamma(a+1) as z->0.  For small shape
+                # and x~1, z can be below 1e-150; a fixed [0,1] bracket
+                # would need hundreds of iterations merely to reach it.
+                target = 1-x
+                high = (target*mp.gamma(p[0]+1))**(1/p[0])
+                while mp.gammainc(p[0], 0, high, regularized=True) < target:
+                    high *= 2
+                for _ in range(140):
+                    mid = (low+high)/2
+                    if mp.gammainc(p[0], 0, mid, regularized=True) < target:
+                        low = mid
+                    else:
+                        high = mid
+            else:
+                high = max(mp.mpf(1), p[0])
+                while mp.gammainc(p[0], high, mp.inf, regularized=True) > x:
+                    high *= 2
+                for _ in range(140):
+                    mid = (low+high)/2
+                    if mp.gammainc(p[0], mid, mp.inf, regularized=True) > x:
+                        low = mid
+                    else:
+                        high = mid
+            return [p[1]/((low+high)/2)]
         if kind in {"Bernoulli", "Binomial", "Poisson", "Geometric",
                     "NegativeBinomial", "Hypergeometric", "DiscreteUniform"}:
             if kind == "Bernoulli":
@@ -583,16 +657,36 @@ def _continuous_pdf(kind, x, p):
         z=(x-p[0])/p[1]
         return mp.exp(-z*z/2)/(p[1]*mp.sqrt(2*mp.pi))
     if kind == "Beta":
-        return x**(p[0]-1)*(1-x)**(p[1]-1)/mp.beta(p[0],p[1]) if 0<x<1 else mp.mpf(0)
+        # At either support endpoint, the density has a finite, nonzero
+        # limit when the corresponding shape is exactly one.  Shapes below
+        # one have an infinite limit (not a finite comparison).
+        if x == 0:
+            return (p[1] if p[0] == 1 else
+                    mp.inf if p[0] < 1 else mp.mpf(0))
+        if x == 1:
+            return (p[0] if p[1] == 1 else
+                    mp.inf if p[1] < 1 else mp.mpf(0))
+        return (x**(p[0]-1)*(1-x)**(p[1]-1)/mp.beta(p[0],p[1])
+                if 0 < x < 1 else mp.mpf(0))
     if kind in ("Gamma", "Erlang"):
-        return x**(p[0]-1)*mp.exp(-x/p[1])/(mp.gamma(p[0])*p[1]**p[0]) if x>0 else mp.mpf(0)
+        if x == 0:
+            return (1/p[1] if p[0] == 1 else
+                    mp.inf if p[0] < 1 else mp.mpf(0))
+        return (x**(p[0]-1)*mp.exp(-x/p[1])/(mp.gamma(p[0])*p[1]**p[0])
+                if x > 0 else mp.mpf(0))
     if kind == "ChiSquared":
         return _continuous_pdf("Gamma",x,[p[0]/2,mp.mpf(2)])
     if kind == "Chi":
+        if x == 0:
+            return (mp.sqrt(2/mp.pi) if p[0] == 1 else
+                    mp.inf if p[0] < 1 else mp.mpf(0))
         return x**(p[0]-1)*mp.exp(-x*x/2)/(2**(p[0]/2-1)*mp.gamma(p[0]/2)) if x>0 else mp.mpf(0)
     if kind == "StudentT":
         return mp.gamma((p[0]+1)/2)/(mp.sqrt(p[0]*mp.pi)*mp.gamma(p[0]/2))*(1+x*x/p[0])**(-(p[0]+1)/2)
     if kind == "F":
+        if x == 0:
+            return (1 if p[0] == 2 else
+                    mp.inf if p[0] < 2 else mp.mpf(0))
         return (p[0]/p[1])**(p[0]/2)*x**(p[0]/2-1)/(mp.beta(p[0]/2,p[1]/2)*
                 (1+p[0]*x/p[1])**((p[0]+p[1])/2)) if x>0 else mp.mpf(0)
     if kind == "Exponential":
@@ -607,6 +701,9 @@ def _continuous_pdf(kind, x, p):
     if kind == "Uniform":
         return 1/(p[1]-p[0]) if p[0] <= x <= p[1] else mp.mpf(0)
     if kind == "Weibull":
+        if x == 0:
+            return (1/p[1] if p[0] == 1 else
+                    mp.inf if p[0] < 1 else mp.mpf(0))
         z=x/p[1]
         return p[0]/p[1]*z**(p[0]-1)*mp.exp(-z**p[0]) if x>0 else mp.mpf(0)
     if kind == "Pareto":
@@ -618,6 +715,10 @@ def _continuous_pdf(kind, x, p):
         return mp.exp(-z-mp.exp(-z))/p[1]
     if kind == "Triangular":
         low, high, mode = p
+        if x == low and mode == low:
+            return 2/(high-low)
+        if x == high and mode == high:
+            return 2/(high-low)
         if low < x <= mode:
             return 2*(x-low)/((high-low)*(mode-low))
         if mode < x < high:

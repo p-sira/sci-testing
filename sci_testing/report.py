@@ -921,16 +921,17 @@ def render_cached(cases,records,meta,output,*,modules=None,root=None,inputs=None
 
 
 def _parallel_summary_job(module, cases, measurement_directory, root, inputs,
-                          module_libraries, previous, previous_sha256):
-    """Calculate one module's authenticated accuracy rows in its own process."""
+                          module_libraries, previous, previous_sha256, names,
+                          exhaustive):
+    """Calculate a disjoint subset of a module's authenticated accuracy rows."""
     cache=AccuracyCache(root,measurement_directory,Path(__file__),inputs=inputs,
-                        previous=previous,previous_sha256=previous_sha256)
+                        previous=previous,previous_sha256=previous_sha256,
+                        reuse=not exhaustive)
     records=MeasurementStore(measurement_directory)
     available=set(module_libraries.get(module,[]))-{'Sci'}
     preferred=['mpmath','SciPy','Boost.Math','GSL','NumPy','FilterPy']
     libraries=sorted(available,key=lambda lib:(preferred.index(lib) if lib in preferred
                                                  else len(preferred),lib))
-    names=[api for api in cases.apis if api.split('.')[0]==module]
     with mp.workdps(METRIC_PRECISION_DPS):
         for api in names:
             if cache.get(api,libraries) is not None:
@@ -942,7 +943,8 @@ def _parallel_summary_job(module, cases, measurement_directory, root, inputs,
     return {api:cache.entries[api] for api in names}
 
 
-def render_cached_parallel(cases,records,meta,output,*,jobs,root=None,inputs=None):
+def render_cached_parallel(cases,records,meta,output,*,jobs,root=None,inputs=None,
+                           exhaustive=False):
     """Compute costly numerical rows by module and render from verified hits.
 
     Workers never modify the output directory or saved measurements. The final
@@ -958,21 +960,46 @@ def render_cached_parallel(cases,records,meta,output,*,jobs,root=None,inputs=Non
                str(inputs if inputs is not None else root/'cases/generated'),
                meta.get('module_libraries',{}),str(previous) if checksum else None,
                checksum)
+    # A single large module (notably signal) must not leave all other workers
+    # idle. Use compressed measurement bytes as a deterministic, inexpensive
+    # proxy for aggregation work, retaining one task for small modules.
+    tasks=[]
+    target_bytes=20*1024*1024
+    for module in MODULES:
+        names=[api for api in cases.apis if api.split('.')[0]==module]
+        sizes=[]
+        for api in names:
+            directory,function=api.rsplit('.',1)
+            path=Path(records.directory)/directory/(function+'.csv')
+            if not path.exists():path=path.with_suffix('.csv.gz')
+            sizes.append((path.stat().st_size,api))
+        total=sum(size for size,_ in sizes)
+        shards=min(jobs,max(1,len(names)),max(1,(total+target_bytes-1)//target_bytes))
+        bins=[([],0) for _ in range(shards)]
+        for size,api in sorted(sizes,reverse=True):
+            index=min(range(shards),key=lambda i:bins[i][1])
+            names_in_bin,weight=bins[index]
+            bins[index]=(names_in_bin+[api],weight+size)
+        for index,(subset,weight) in enumerate(bins):
+            label=f'{module} {index+1}/{shards}' if shards>1 else module
+            tasks.append((weight,label,module,sorted(subset)))
+    tasks.sort(key=lambda item:(-item[0],item[1]))
     entries={}
     with ProcessPoolExecutor(max_workers=jobs,
                              mp_context=multiprocessing.get_context('spawn')) as pool:
-        futures={pool.submit(_parallel_summary_job,module,*arguments):module
-                 for module in MODULES}
+        futures={pool.submit(_parallel_summary_job,module,*arguments,subset,
+                             exhaustive):label
+                 for _,label,module,subset in tasks}
         for future in as_completed(futures):
-            module=futures[future]
+            label=futures[future]
             try:
                 result=future.result()
             except Exception as error:
                 for pending in futures:
                     pending.cancel()
-                raise RuntimeError(f'Parallel accuracy summary failed for {module}') from error
+                raise RuntimeError(f'Parallel accuracy summary failed for {label}') from error
             entries.update(result)
-            print(f'Summarized {module}: {len(result)} API rows',flush=True)
+            print(f'Summarized {label}: {len(result)} API rows',flush=True)
     cache=AccuracyCache(root,records.directory,Path(__file__),inputs=inputs,
                         previous=previous if checksum else None,
                         previous_sha256=checksum,require_hits=True)
@@ -1105,7 +1132,8 @@ def extend_references(cases, added, executable, destination):
     return libraries
 
 
-def check_generated(cases, output, *, root=None, cached=False, exhaustive=False):
+def check_generated(cases, output, *, root=None, cached=False, exhaustive=False,
+                    jobs=1):
     """Check derived inputs and pages against the source-pinned raw snapshot."""
     root=ROOT if root is None else root
     meta,records=load_snapshot(cases,root=root,cached=cached)
@@ -1123,8 +1151,12 @@ def check_generated(cases, output, *, root=None, cached=False, exhaustive=False)
         expected=Path(directory)
         original_checksum=meta.get('accuracy_summaries_sha256')
         if original_checksum:
-            render_cached(cases,records,meta,expected,root=root,
-                          exhaustive=exhaustive,require_hits=not exhaustive)
+            if exhaustive and jobs>1:
+                render_cached_parallel(cases,records,meta,expected,jobs=jobs,
+                                       root=root,exhaustive=True)
+            else:
+                render_cached(cases,records,meta,expected,root=root,
+                              exhaustive=exhaustive,require_hits=not exhaustive)
             if meta['accuracy_summaries_sha256']!=original_checksum or (
                     expected/SUMMARY_FILENAME).read_bytes()!=(root/'results'/SUMMARY_FILENAME).read_bytes():
                 raise ValueError('Stale accuracy summaries; rerun python -m sci_testing.report --render')
@@ -1362,7 +1394,7 @@ def main():
     parser.add_argument('--additional-only',action='store_true',
                         help='with --comparators-only, add new independent adapter measurements without rerunning previous providers')
     parser.add_argument('--jobs',type=int,default=1,metavar='N',
-                        help='independent workers for --render or --comparators-only --additional-only (default: 1)')
+                        help='workers for --render, --check --exhaustive, or --comparators-only --additional-only (default: 1)')
     mode.add_argument('--upgrade-scientific-comparisons',action='store_true',
                       help='replace cmath complex references with mpmath/NumPy and remove all stdlib comparisons, preserving Sci outputs')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
@@ -1376,8 +1408,9 @@ def main():
     if args.additional_only and not args.comparators_only:
         parser.error('--additional-only requires --comparators-only')
     if args.jobs < 1 or (args.jobs > 1 and not (args.render or
+                                                (args.check and args.exhaustive) or
                                                 (args.comparators_only and args.additional_only))):
-        parser.error('--jobs requires a positive integer and --render or --comparators-only --additional-only')
+        parser.error('--jobs requires a positive integer and --render, --check --exhaustive, or --comparators-only --additional-only')
     if args.render and args.jobs > 1 and args.module:
         parser.error('parallel --render requires the full module set')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
@@ -1411,7 +1444,8 @@ def main():
         cached=cases is not None
         if cases is None:cases=build_cases()
     if args.check:
-        check_generated(cases,args.output.resolve(),cached=cached,exhaustive=args.exhaustive)
+        check_generated(cases,args.output.resolve(),cached=cached,
+                        exhaustive=args.exhaustive,jobs=args.jobs)
         return
     if args.render:
         render_apis=set(cases.apis)
