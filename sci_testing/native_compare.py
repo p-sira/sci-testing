@@ -34,6 +34,7 @@ _NATIVE_SOURCES = (
     'boost_spatial.cpp', 'gsl_spatial.cpp', 'boost_interpolation.cpp',
     'boost_units.cpp', 'gsl_sparse.cpp', 'gsl_signal_stats.cpp',
     'gsl_interpolation.cpp', 'gsl_optimize.cpp', 'gsl_fft_simple.cpp',
+    'extra_special_scalar.cpp', 'extra_stats_scalar.cpp',
 )
 _NATIVE_FLAGS = ('-std=c++17', '-O2', '-shared', '-fPIC')
 _NATIVE_LIBS = ('-lgsl', '-lgslcblas')
@@ -301,6 +302,10 @@ class NativeComparisons:
         self.gsl_optimize = GSLOptimizeComparisons(self.library)
         from .gsl_fft_simple import GSLFFTSimpleComparisons
         self.gsl_fft_simple = GSLFFTSimpleComparisons(self.library)
+        from .extra_native_comparisons import ExtraNativeComparisons
+        self.extra_native = ExtraNativeComparisons(self.library)
+        from .extra_native_stats import ExtraNativeStatsComparisons
+        self.extra_native_stats = ExtraNativeStatsComparisons(self.library)
 
     def evaluate_complex(self, case):
         """Compare supported Sci complex-special inputs with public GSL functions."""
@@ -330,7 +335,8 @@ class NativeComparisons:
         # native primitives. Preserve existing dispatch precedence within a
         # provider, while retaining supplementary library comparisons.
         supplemental = {}
-        for adapter in (self.gsl_bessel_zeros, self.boost_stats_more,
+        for adapter in (self.extra_native, self.extra_native_stats,
+                        self.gsl_bessel_zeros, self.boost_stats_more,
                         self.boost_special_transforms, self.gsl_special_derived,
                         self.gsl_stats_more, self.gsl_quadrature_roots,
                         self.boost_special_arrays, self.gsl_kelvin_ber,

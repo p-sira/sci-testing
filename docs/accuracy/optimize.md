@@ -30,25 +30,25 @@ current public namespace, with their measured recipe names preserved.
 
 6 functions · 12152 cases
 
-| Function | Cases | Sci vs reference | SciPy | GSL |
-| --- | ---: | --- | --- | --- |
-| `approx_fprime` | 2012 | 32000.0 / 2851.2 | 32000.0 / 2851.2 | — |
-| `check_grad` | 2008 | 6.0541e+6 / 1.3246e+6 | 6.0541e+6 / 1.3246e+6 | — |
-| `rosen` | 2060 | 3.7821e+7 / 47584.0 | 2.5376 / 0.23879 | — |
-| `rosen_der` | 2060 | 4.5036e+15 / 8.5513e+11 | 45.844 / 0.2412 | — |
-| `rosen_hess` | 2006 | 1.28 / 0.098842 | 1.28 / 0.098842 | — |
-| `rosen_hess_prod` | 2006 | 1.2806 / 0.097823 | 1.2806 / 0.097823 | — |
+| Function | Cases | Sci vs reference | mpmath | SciPy | GSL |
+| --- | ---: | --- | --- | --- | --- |
+| `approx_fprime` | 2012 | 32000.0 / 2851.2 | — | 32000.0 / 2851.2 | — |
+| `check_grad` | 2008 | 6.0541e+6 / 1.3246e+6 | — | 6.0541e+6 / 1.3246e+6 | — |
+| `rosen` | 2060 | 3.7821e+7 / 47584.0 | 3.7821e+7 / 47584.0 | 2.5376 / 0.23879 | — |
+| `rosen_der` | 2060 | 4.5036e+15 / 8.5513e+11 | 4.5036e+15 / 8.5513e+11 | 45.844 / 0.2412 | — |
+| `rosen_hess` | 2006 | 1.28 / 0.098842 | — | 1.28 / 0.098842 | — |
+| `rosen_hess_prod` | 2006 | 1.2806 / 0.097823 | — | 1.2806 / 0.097823 | — |
 
 ### `sci::optimize::minimize`
 
 4 functions · 8000 cases
 
-| Function | Cases | Sci vs reference | SciPy | GSL |
-| --- | ---: | --- | --- | --- |
-| `minimize` | 2000 | 6.7039e+7 / 1.8008e+7 | 91936.0 / 95.782 | 2.6245e+8 / 2.0693e+7 |
-| `minimize_with_gradient` | 2000 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 |
-| `try_minimize` | 2000 | 6.7098e+7 / 1.7947e+7 | 95031.0 / 108.9 | 2.5491e+8 / 2.0422e+7 |
-| `try_minimize_with_gradient` | 2000 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 |
+| Function | Cases | Sci vs reference | mpmath | SciPy | GSL |
+| --- | ---: | --- | --- | --- | --- |
+| `minimize` | 2000 | 6.7039e+7 / 1.8008e+7 | 6.7039e+7 / 1.8008e+7 | 91936.0 / 95.782 | 2.6245e+8 / 2.0693e+7 |
+| `minimize_with_gradient` | 2000 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 | 1.6777e+7 / 4.403e+6 |
+| `try_minimize` | 2000 | 6.7098e+7 / 1.7947e+7 | 6.7098e+7 / 1.7947e+7 | 95031.0 / 108.9 | 2.5491e+8 / 2.0422e+7 |
+| `try_minimize_with_gradient` | 2000 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 | 1.6777e+7 / 4.4e+6 |
 
 
 ## Conventions and limitations

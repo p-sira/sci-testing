@@ -30,15 +30,15 @@ current public namespace, with their measured recipe names preserved.
 
 7 functions · 14252 cases
 
-| Function | Cases | Sci vs reference | SciPy | NumPy | Boost.Units |
-| --- | ---: | --- | --- | --- | --- |
-| `convert_temperature` | 2000 | 0.9076 / 0.031167 | 0.9076 / 0.031167 | — | 13.309 / 3.8308 |
-| `find` | 2000 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `lambda2nu` | 2126 | 0.48442 / 0.18108 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 |
-| `nu2lambda` | 2126 | 0.48156 / 0.18018 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 |
-| `precision` | 2000 | 0.0 / 0.0 | 0.0 / 0.0 | — | 0.0 / 0.0; unavailable 1998/2000 |
-| `unit` | 2000 | 0.0 / 0.0 | 0.0 / 0.0 | — | — |
-| `value` | 2000 | 0.0 / 0.0 | 0.0 / 0.0 | — | 0.0 / 0.0; unavailable 1996/2000 |
+| Function | Cases | Sci vs reference | mpmath | SciPy | NumPy | Boost.Units |
+| --- | ---: | --- | --- | --- | --- | --- |
+| `convert_temperature` | 2000 | 0.9076 / 0.031167 | 13.191 / 3.8356 | 0.9076 / 0.031167 | — | 13.309 / 3.8308 |
+| `find` | 2000 | 0.0 / 0.0 | — | 0.0 / 0.0 | — | — |
+| `lambda2nu` | 2126 | 0.48442 / 0.18108 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `nu2lambda` | 2126 | 0.48156 / 0.18018 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 |
+| `precision` | 2000 | 0.0 / 0.0 | — | 0.0 / 0.0 | — | 0.0 / 0.0; unavailable 1998/2000 |
+| `unit` | 2000 | 0.0 / 0.0 | — | 0.0 / 0.0 | — | — |
+| `value` | 2000 | 0.0 / 0.0 | — | 0.0 / 0.0 | — | 0.0 / 0.0; unavailable 1996/2000 |
 
 
 ## Conventions and limitations

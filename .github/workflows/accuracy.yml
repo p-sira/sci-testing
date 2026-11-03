@@ -62,7 +62,7 @@ jobs:
       - name: Validate pinned references, coverage and generated tables
         run: |
           if [ "${{ github.event_name }}" = schedule ]; then
-            uv run --frozen python -m sci_testing.report --check --exhaustive
+            uv run --frozen python -m sci_testing.report --check --exhaustive --jobs 4
           else
             uv run --frozen python -m sci_testing.report --check
           fi

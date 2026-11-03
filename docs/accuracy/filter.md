@@ -30,25 +30,25 @@ current public namespace, with their measured recipe names preserved.
 
 5 functions · 10156 cases
 
-| Function | Cases | Sci vs reference | SciPy | FilterPy |
-| --- | ---: | --- | --- | --- |
-| `extended_kalman_predict` | 2003 | 0.70621 / 1.7611e-4 | 0.70621 / 1.7611e-4 | — |
-| `extended_kalman_update` | 2003 | 20.883 / 0.090124 | 20.883 / 0.090124 | — |
-| `kalman_predict` | 2067 | 62.462 / 0.34381 | — | 62.501 / 0.18821 |
-| `kalman_update` | 2067 | 592.4 / 1.4033 | — | 536.75 / 1.1847 |
-| `unscented_kalman_step` | 2016 | 160.0 / 0.18685 | 160.0 / 0.18685 | — |
+| Function | Cases | Sci vs reference | mpmath | SciPy | FilterPy |
+| --- | ---: | --- | --- | --- | --- |
+| `extended_kalman_predict` | 2003 | 0.70621 / 1.7611e-4 | — | 0.70621 / 1.7611e-4 | — |
+| `extended_kalman_update` | 2003 | 20.883 / 0.090124 | — | 20.883 / 0.090124 | — |
+| `kalman_predict` | 2067 | 62.462 / 0.34381 | 62.501 / 0.26713 | — | 62.501 / 0.18821 |
+| `kalman_update` | 2067 | 592.4 / 1.4033 | 592.25 / 1.3452 | — | 536.75 / 1.1847 |
+| `unscented_kalman_step` | 2016 | 160.0 / 0.18685 | — | 160.0 / 0.18685 | — |
 
 ### `sci::filter::particle`
 
 5 functions · 10070 cases
 
-| Function | Cases | Sci vs reference | SciPy | FilterPy |
-| --- | ---: | --- | --- | --- |
-| `effective_sample_size` | 2006 | 0.0 / 0.0 | 0.0 / 0.0 | — |
-| `particle_estimate` | 2006 | 0.61728 / 1.5371e-4 | 0.61728 / 1.5371e-4 | — |
-| `particle_predict` | 2012 | 0.0 / 0.0 | 0.0 / 0.0 | — |
-| `particle_update` | 2028 | 1.8851 / 5.6209e-3 | 1.8851 / 5.6209e-3 | — |
-| `systematic_resample` | 2018 | 0.0 / 0.0 | 0.0 / 0.0 | — |
+| Function | Cases | Sci vs reference | mpmath | SciPy | FilterPy |
+| --- | ---: | --- | --- | --- | --- |
+| `effective_sample_size` | 2006 | 0.0 / 0.0 | — | 0.0 / 0.0 | — |
+| `particle_estimate` | 2006 | 0.61728 / 1.5371e-4 | — | 0.61728 / 1.5371e-4 | — |
+| `particle_predict` | 2012 | 0.0 / 0.0 | — | 0.0 / 0.0 | — |
+| `particle_update` | 2028 | 1.8851 / 5.6209e-3 | — | 1.8851 / 5.6209e-3 | — |
+| `systematic_resample` | 2018 | 0.0 / 0.0 | — | 0.0 / 0.0 | — |
 
 
 ## Conventions and limitations

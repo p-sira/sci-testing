@@ -1,0 +1,15 @@
+[package]
+name = "sci-testing-rust-oracles"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+# Versions already used in Sci's dependency graph. These libraries are invoked
+# directly and never call Sci implementations or saved Sci outputs.
+[dependencies]
+rustfft = "=6.4.0"
+nalgebra = { version = "=0.35.0", default-features = false, features = ["std"] }
+statrs = { version = "=0.19.1", default-features = false, features = ["std", "nalgebra"] }
