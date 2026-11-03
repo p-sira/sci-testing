@@ -9,7 +9,6 @@ can coexist without changes to their entry points.
 import ctypes as ct
 import math
 
-
 STATS_NAMES = frozenset((
     "entropy", "rankdata", "tiecorrect", "mode",
     "wasserstein_distance", "energy_distance", "boxcox_llf",

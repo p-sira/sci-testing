@@ -30,22 +30,22 @@ current public namespace, with their measured recipe names preserved.
 
 2 functions · 4068 cases
 
-| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
-| --- | ---: | --- | --- | --- | --- | --- |
-| `fixed_quad` | 2068 | 21.656 / 2.9595 | 41.586 / 5.142 | 18.905 / 3.0513 | 18.598 / 2.976 | — |
-| `newton_cotes` | 2000 | 1.1988e+7 / 8920.3 | 1.1988e+7 / 8920.3 | — | — | — |
+| Function | Cases | Sci vs reference | mpmath | SciPy | Boost.Math | GSL | NumPy |
+| --- | ---: | --- | --- | --- | --- | --- | --- |
+| `fixed_quad` | 2068 | 21.656 / 2.9595 | 21.46 / 2.9638 | 41.586 / 5.142 | 18.905 / 3.0513 | 18.598 / 2.976 | 24.526 / 3.0109 |
+| `newton_cotes` | 2000 | 1.1988e+7 / 8920.3 | — | 1.1988e+7 / 8920.3 | — | — | — |
 
 ### `sci::integrate::sampled`
 
 5 functions · 10067 cases
 
-| Function | Cases | Sci vs reference | SciPy | Boost.Math | GSL | NumPy |
-| --- | ---: | --- | --- | --- | --- | --- |
-| `cumulative_simpson` | 2000 | 499.5 / 0.48561 | 499.5 / 0.48561 | — | — | — |
-| `cumulative_trapezoid` | 2000 | 666.0 / 0.18511 | 666.0 / 0.18511 | — | — | — |
-| `romb` | 2000 | 1.984 / 0.1853 | 1.984 / 0.1853 | — | — | — |
-| `simpson` | 2000 | 1.9521 / 0.361 | 1.9521 / 0.361 | — | — | — |
-| `trapezoid` | 2067 | 130.12 / 0.43205 | 102.39 / 0.34064 | — | — | 102.39 / 0.34064 |
+| Function | Cases | Sci vs reference | mpmath | SciPy | Boost.Math | GSL | NumPy |
+| --- | ---: | --- | --- | --- | --- | --- | --- |
+| `cumulative_simpson` | 2000 | 499.5 / 0.48561 | 386.38 / 0.36181 | 499.5 / 0.48561 | — | — | — |
+| `cumulative_trapezoid` | 2000 | 666.0 / 0.18511 | 553.27 / 0.16959 | 666.0 / 0.18511 | — | — | 666.0 / 0.18511 |
+| `romb` | 2000 | 1.984 / 0.1853 | 1.0035 / 0.20654 | 1.984 / 0.1853 | — | — | — |
+| `simpson` | 2000 | 1.9521 / 0.361 | 0.9994 / 0.15247 | 1.9521 / 0.361 | — | — | 1.5799 / 0.32696 |
+| `trapezoid` | 2067 | 130.12 / 0.43205 | 129.74 / 0.33265 | 102.39 / 0.34064 | — | — | 102.39 / 0.34064 |
 
 
 ## Conventions and limitations

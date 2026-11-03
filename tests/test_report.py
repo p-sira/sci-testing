@@ -491,6 +491,37 @@ class AccuracyTests(unittest.TestCase):
             self.assertFalse(unchanged)
             self.assertFalse(libraries)
 
+    def test_parallel_additional_refresh_preserves_source_snapshot(self):
+        from sci_testing.case_csv import MeasurementStore, write_measurements
+
+        case={'id':'constants.lambda2nu/smoke','api':'constants.lambda2nu',
+              'args':{'x':0.5}}
+        original={'id':case['id'],'reference':['599584916'],
+                  'libraries':{'Sci':{'values':[599584916.]},
+                               'SciPy':{'values':[599584916.]}}}
+
+        class CachedCases:
+            def function(self, api):
+                assert api == case['api']
+                return [case]
+
+        with tempfile.TemporaryDirectory() as folder:
+            source=Path(folder)/'source'
+            source.mkdir()
+            staged=Path(folder)/'staged'
+            write_measurements(source,measurement_files([case],{case['id']:original}))
+            changed,libraries=report.refresh_comparators(
+                CachedCases(),MeasurementStore(source),staged,{case['api']},
+                additional_only=True,jobs=2)
+            saved=read_measurements(staged)[case['id']]
+            self.assertEqual(changed,{'constants/lambda2nu.csv'})
+            self.assertEqual(libraries['constants'],{'mpmath'})
+            self.assertEqual(saved['reference'],original['reference'])
+            self.assertEqual(saved['libraries']['Sci'],original['libraries']['Sci'])
+            self.assertEqual(saved['libraries']['SciPy'],original['libraries']['SciPy'])
+            self.assertEqual(saved['libraries']['mpmath']['values'],[599584916.])
+            self.assertEqual(read_measurements(source)[case['id']],original)
+
     def test_failures_are_visible(self):
         cases=[{'id':'a','api':'stats.variance','group':'ordinary','args':{'values':[1.,2.]}}]
         records={'a':{'reference':['.5'],'libraries':{'Sci':{'error':'failed'},'SciPy':{'values':[.5]},'Additional library':{'values':[.5]}}}}

@@ -22,8 +22,8 @@ uv run --frozen python -m sci_testing.report
 uv run --frozen python -m sci_testing.report --module special
 uv run --frozen python -m sci_testing.report --module sparse.linalg
 uv run --frozen python -m sci_testing.report --module linalg --module interpolate
-uv run --frozen python -m sci_testing.report --comparators-only --additional-only --module special
-uv run --frozen python -m sci_testing.report --render
+uv run --frozen python -m sci_testing.report --comparators-only --additional-only --module special --jobs 8
+uv run --frozen python -m sci_testing.report --render --jobs 8
 uv run --frozen python -m sci_testing.report --extend
 ```
 
@@ -37,6 +37,12 @@ references and library results, including when inputs change or no snapshot exis
 library adapters against saved inputs, keeping the original Sci, reference,
 and existing provider measurements. A module may have only partial numerical
 coverage when a competitor's public API or argument domain differs.
+Use `--jobs N` on this refresh to evaluate distinct function CSVs in parallel;
+the worker queue is bounded, and the combined measurements are published only
+after every selected function succeeds.
+For a full `--render`, `--jobs N` computes authenticated per-function error
+summaries across modules in separate processes and publishes the final pages
+only after all summaries are verified against their input and measurement files.
 An exact public API path such as `--module special.complex.airye` refreshes
 only that function; a namespace such as `--module special.complex` refreshes
 all its functions. Unselected measurements retain their recorded Sci revisions.

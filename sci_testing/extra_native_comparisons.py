@@ -8,7 +8,6 @@ Only actual native library calls are attributed to Boost.Math and GSL.
 import ctypes as ct
 import math
 
-
 ARITIES = {
     "special.psi": 1,
     "special.assoc_laguerre": 3,

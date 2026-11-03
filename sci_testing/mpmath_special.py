@@ -11,9 +11,9 @@ and Sci-specific multi-output zero searches are intentionally not claimed.
 """
 
 import math
+from functools import lru_cache
 
 import mpmath as mp
-
 
 PROVIDER = 'mpmath'
 PRECISION = 80
@@ -134,9 +134,25 @@ def _ellipdinc(phi, m):
 
 
 def _bessel_derivative(name, order, x, n):
+    """Derivative from the public Bessel order-shift identities.
+
+    A numeric mp.diff evaluates a large number of neighboring arguments,
+    especially for complex Hankel functions.  At 80 dps the finite
+    difference-in-order identity is exact for each supported family.
+    """
     funcs = {'ivp': mp.besseli, 'jvp': mp.besselj, 'kvp': mp.besselk,
              'yvp': mp.bessely, 'h1vp': mp.hankel1, 'h2vp': mp.hankel2}
-    return mp.diff(lambda t: funcs[name](order, t), x, int(n))
+    n = int(n)
+    if n > 24:
+        return mp.diff(lambda t: funcs[name](order, t), x, n)
+    sign = -1 if name in ('kvp',) and n % 2 else 1
+    alternating = name in ('jvp', 'yvp', 'h1vp', 'h2vp')
+    with mp.extradps(15 + n):
+        result = mp.fsum(((-1 if alternating and k % 2 else 1)
+                          * mp.binomial(n, k)
+                          * funcs[name](order - n + 2*k, x))
+                         for k in range(n+1))
+        return +(sign*result / 2**n)
 
 
 def _spherical(name, n, x):
@@ -153,6 +169,102 @@ def _legendre_q(n, m, x):
     # [-1,1].  Sci's real Q sequences use the real type=3 continuation,
     # with the associated-order parity on the negative outer interval.
     return (-1 if x<0 and m%2 else 1)*mp.re(mp.legenq(n,m,x,type=3))
+
+
+def _legendre_degrees(n, x, *, second_kind=False):
+    """Base P_l or real Q_l values from the three-term degree recurrence."""
+    if second_kind:
+        q0 = mp.log((1+x)/(1-x))/2 if abs(x)<1 else mp.log((x+1)/(x-1))/2
+        result = [q0]
+        if n:
+            result.append(x*q0-1)
+    else:
+        result = [mp.mpf(1)]
+        if n:
+            result.append(x)
+    for l in range(1, n):
+        result.append(((2*l+1)*x*result[l] - l*result[l-1])/(l+1))
+    return result
+
+
+def _associated_legendre_p_all(n, m, x):
+    """Ferrers P through degree n and orders 0..m, -m..-1.
+
+    Every positive order is generated from the previous two orders in
+    O(n*m) arithmetic, avoiding the hypergeometric call in every legenp.
+    """
+    n, m = int(n), int(m)
+    if not -1 < x < 1:
+        # Near/at the branch boundary preserve public mpmath conventions.
+        orders = [*range(m+1), *range(-m, 0)]
+        return [[mp.legenp(k,j,x) if abs(j)<=k else mp.mpf(0)
+                 for j in orders] for k in range(n+1)]
+    with mp.extradps(20):
+        s = mp.sqrt((1-x)*(1+x))
+        positives = [_legendre_degrees(n, x)]
+        if m:
+            positives.append([mp.mpf(0)] + [
+                -l*(positives[0][l-1]-x*positives[0][l])/s
+                for l in range(1,n+1)])
+        for j in range(1,m):
+            positives.append([
+                -2*j*x*positives[j][l]/s
+                -(l+j)*(l-j+1)*positives[j-1][l]
+                if l>j else mp.mpf(0)
+                for l in range(n+1)])
+        result = []
+        for l in range(n+1):
+            row = [+(positives[j][l]) for j in range(m+1)]
+            negative = []
+            ratio = mp.mpf(1)
+            for j in range(1,min(l,m)+1):
+                ratio = -ratio/((l+j)*(l-j+1))
+                negative.append(+(ratio*positives[j][l]))
+            row.extend([mp.mpf(0)]*(m-l) + negative[::-1])
+            result.append(row)
+        return result
+
+
+def _associated_legendre_q_all(m, n, x):
+    """Real associated Legendre Q and x-derivatives, order-major.
+
+    The two-order recurrence computes all Q_l^j in O(n*m) at high
+    precision.  The raising identity supplies derivatives algebraically:
+    Q'_l^j = (j*x*Q_l^j/s + Q_l^(j+1))/s times -1 (inside)
+    or +1 (outside), with s = sqrt(abs(1-x*x)).
+    """
+    m, n = int(m), int(n)
+    if abs(x)==1:
+        # Singular endpoints are outside the saved finite measurement domain.
+        raise ValueError('Legendre Q singular at x=+/-1')
+    extra = 20 + max(m,n)//2
+    if abs(x)>1:
+        # The degree recurrence has a growing and a decaying solution.
+        # When computing Q_n, roundoff in the growing solution is amplified
+        # by (|x|+sqrt(x*x-1))**(2*n).  Supply those extra decimal digits
+        # before the recurrence, then round back to the caller's 80 dps.
+        growth = abs(x)+mp.sqrt(x*x-1)
+        extra += math.ceil((2*n+2)*float(mp.log10(growth))) + 2*m
+    with mp.extradps(extra):
+        inside = abs(x) < 1
+        s = mp.sqrt((1-x)*(1+x) if inside else (x-1)*(x+1))
+        orders = [_legendre_degrees(n,x,second_kind=True)]
+        orders.append([-1/s] + [
+            -l*(orders[0][l-1]-x*orders[0][l])/s
+            for l in range(1,n+1)])
+        for j in range(1,m+1):
+            coefficient = -1 if inside else 1
+            orders.append([
+                -2*j*x*orders[j][l]/s
+                +coefficient*(l+j)*(l-j+1)*orders[j-1][l]
+                for l in range(n+1)])
+        derivatives = [[
+            (-1 if inside else 1) *
+            (orders[j+1][l]+j*x*orders[j][l]/s)/s
+            for l in range(n+1)]
+            for j in range(m+1)]
+        return ([[+v for v in row] for row in orders[:m+1]],
+                [[+v for v in row] for row in derivatives])
 
 
 def _quadrature(name, values):
@@ -261,12 +373,10 @@ def _historic(name, v):
         return [sn, mp.ellipfun('cn',u,m), mp.ellipfun('dn',u,m),amplitude]
     if name == 'legendre_p_all':
         n,x=v
-        return [mp.legendre(k,x) for k in range(int(n)+1)]
+        return _legendre_degrees(int(n),x)
     if name == 'assoc_legendre_p_all':
         n,m,x=v
-        orders=[*range(int(m)+1),*range(-int(m),0)]
-        return [[mp.legenp(k,j,x) if abs(j)<=k else mp.mpf(0)
-                 for j in orders] for k in range(int(n)+1)]
+        return _associated_legendre_p_all(n,m,x)
     if name == 'sph_harm_y_all':
         n,m,theta,phi=v
         orders=[*range(int(m)+1),*range(-int(m),0)]
@@ -274,14 +384,11 @@ def _historic(name, v):
                  for j in orders] for k in range(int(n)+1)]
     if name == 'lqn':
         n,x=v
-        terms=[lambda t,k=k: _legendre_q(k,0,t) for k in range(int(n)+1)]
-        return [[term(x) for term in terms], [mp.diff(term,x) for term in terms]]
+        q,dq=_associated_legendre_q_all(0,n,x)
+        return [q[0],dq[0]]
     if name == 'lqmn':
         m,n,x=v
-        terms=[[lambda t,k=k,j=j: _legendre_q(k,j,t)
-                for k in range(int(n)+1)] for j in range(int(m)+1)]
-        return [[[term(x) for term in row] for row in terms],
-                [[mp.diff(term,x) for term in row] for row in terms]]
+        return _associated_legendre_q_all(m,n,x)
     if name == 'betainc': return mp.betainc(v[0],v[1],0,v[2],regularized=True)
     if name == 'betaincc': return mp.betainc(v[0],v[1],v[2],1,regularized=True)
     if name == 'gammainc': return mp.gammainc(v[0],0,v[1],regularized=True)
@@ -357,6 +464,25 @@ def _historic(name, v):
     raise LookupError(name)
 
 
+@lru_cache(maxsize=512)
+def _discrete_sequence(name, values):
+    """Reuse expensive high-precision roots for repeated saved integer inputs.
+
+    All calls originate inside evaluate()'s fixed 80-digit precision context.
+    A bounded cache keeps the results stable and avoids repeated root searches
+    when 2,000 saved cases contain only a few distinct counts and orders.
+    """
+    return _historic(name, list(values))
+
+
+def _historic_evaluation(name, values):
+    if (name in {'ai_zeros', 'bi_zeros', 'jn_zeros', 'jnp_zeros',
+                 'yn_zeros', 'ynp_zeros', 'jnyn_zeros', 'euler'} or
+            name.startswith('roots_')):
+        return _discrete_sequence(name, tuple(values))
+    return _historic(name, values)
+
+
 # These are additional historical signatures with verified formulas above.
 _COMPOSITE = frozenset({
     'airy','airye','ellipke','ellipd','ellipdinc','ellipj',
@@ -391,6 +517,7 @@ def _number(value):
 
 _HISTORICAL_COMPLEX = frozenset({
     'hankel1','hankel2','hankel1e','hankel2e',
+    'h1vp','h2vp',
     'sph_harm_y','sph_harm_y_all','wofz','kelvin',
 })
 
@@ -431,6 +558,11 @@ def evaluate(case):
                 from .special_complex03_cases import APIS, reference
                 if api not in APIS: return {}
                 result = reference(case)
+            elif api in ('special.erf', 'special.gamma') and set(args)=={'x'}:
+                # The original dense Sci 0.1 recipes have named input x.
+                # Later historical registrations use positional p0.
+                result = (mp.erf if api=='special.erf' else mp.gamma)(
+                    mp.mpf(args['x']))
             else:
                 name = api.rsplit('.',1)[-1]
                 if name not in SUPPORTED_NAMES or set(args) != {
@@ -449,7 +581,7 @@ def evaluate(case):
                 if name=='zeta' and len(v)==2:
                     result=mp.zeta(*v)
                 else:
-                    result=_historic(name,v)
+                    result=_historic_evaluation(name,v)
             values=_flatten(result,complex_output=(not args.get('special03_case')
                                                   and not args.get('special_complex03_case')
                                                   and api.rsplit('.',1)[-1] in _HISTORICAL_COMPLEX))

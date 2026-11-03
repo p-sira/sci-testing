@@ -126,6 +126,93 @@ class MpmathSpecialTests(unittest.TestCase):
         self.assertEqual(len(values(historical('fresnel',.5))),2)
         self.assertEqual(len(values(historical('wofz',[.5,-.25]))),2)
 
+    def test_associated_legendre_recurrences_at_80_digits(self):
+        """Every matrix cell agrees with the public Ferrers P / real Q."""
+        from sci_testing.mpmath_special import (
+            _associated_legendre_p_all,
+            _associated_legendre_q_all,
+        )
+        with mp.workdps(80):
+            for n, m, x in ((3, 2, .3), (4, 3, -.3),
+                            (5, 4, .999), (3, 3, .02)):
+                t=mp.mpf(x)
+                actual=_associated_legendre_p_all(n,m,t)
+                orders=[*range(m+1), *range(-m,0)]
+                self.assertEqual(len(actual), n+1)
+                for degree, row in enumerate(actual):
+                    self.assertEqual(len(row),2*m+1)
+                    for order, value in zip(orders,row):
+                        expected=(mp.legenp(degree,order,t)
+                                  if abs(order)<=degree else mp.mpf(0))
+                        self.assertLess(abs(value-expected),
+                                        mp.mpf('1e-68')*max(1,abs(expected)))
+                self.assertEqual(len(values(historical('assoc_legendre_p_all',
+                                                       n,m,x))), (n+1)*(2*m+1))
+            self.assertEqual(len(values(historical('assoc_legendre_p_all',
+                                                   3,3,0.))), 28)
+            for m,n,x in ((2,3,.3),(2,3,-.3),(2,3,2.),(2,3,-2.)):
+                t=mp.mpf(x)
+                q,dq=_associated_legendre_q_all(m,n,t)
+                self.assertEqual([len(row) for row in q],[n+1]*(m+1))
+                self.assertEqual([len(row) for row in dq],[n+1]*(m+1))
+                for order in range(m+1):
+                    for degree in range(n+1):
+                        expected=(mp.legenq(degree,order,t,type=2) if abs(t)<1
+                                  else (-1 if t<0 and order%2 else 1)
+                                  *mp.re(mp.legenq(degree,order,t,type=3)))
+                        self.assertLess(abs(q[order][degree]-expected),
+                                        mp.mpf('1e-68')*max(1,abs(expected)))
+                # Derivatives are checked against independent public
+                # mpmath differentiation for both inner and outer domains.
+                for order,degree in ((0,0),(1,2),(2,3)):
+                    f=lambda u,degree=degree,order=order: (mp.legenq(degree,order,u,type=2)
+                                 if abs(u)<1 else
+                                 (-1 if u<0 and order%2 else 1)
+                                 *mp.re(mp.legenq(degree,order,u,type=3)))
+                    expected=mp.diff(f,t)
+                    self.assertLess(abs(dq[order][degree]-expected),
+                                    mp.mpf('1e-68')*max(1,abs(expected)))
+                self.assertEqual(len(values(historical('lqmn',m,n,x))),
+                                 2*(n+1)*(m+1))
+            # Forward degree recurrences outside [-1,1] require guard
+            # digits: Q_l is the decaying solution, but rounding also
+            # excites a growing one.  Degree 50 at x=10 exposes this.
+            q,_=_associated_legendre_q_all(1,50,mp.mpf(10))
+            expected=mp.re(mp.legenq(50,0,10,type=3))
+            self.assertLess(abs(q[0][50]-expected),
+                            mp.mpf('1e-68')*abs(expected))
+
+    def test_bessel_derivative_order_shift_at_80_digits(self):
+        from sci_testing.mpmath_special import _bessel_derivative
+        funcs={'jvp':mp.besselj,'yvp':mp.bessely,'ivp':mp.besseli,
+               'kvp':mp.besselk,'h1vp':mp.hankel1,'h2vp':mp.hankel2}
+        with mp.workdps(80):
+            order=mp.mpf('.5')
+            x=mp.mpf('2')
+            for name,fn in funcs.items():
+                for derivative_order in (0,1,2,3):
+                    expected=mp.diff(lambda t,fn=fn:fn(order,t),x,derivative_order)
+                    actual=_bessel_derivative(name,order,x,derivative_order)
+                    self.assertLess(abs(actual-expected),
+                                    mp.mpf('1e-68')*max(1,abs(expected)))
+                actual=values(historical(name,.5,2.,2))
+                self.assertEqual(len(actual),2 if name in ('h1vp','h2vp') else 1)
+                self.assertVectorClose(actual,
+                    ([mp.re(_bessel_derivative(name,order,x,2)),
+                      mp.im(_bessel_derivative(name,order,x,2))]
+                     if name in ('h1vp','h2vp') else
+                     [_bessel_derivative(name,order,x,2)]))
+
+    def test_legacy_named_special_inputs(self):
+        self.assertVectorClose(values({'api':'special.gamma','args':{'x':2.5}}),
+                               [math.gamma(2.5)])
+        self.assertVectorClose(values({'api':'special.erf','args':{'x':-.1}}),
+                               [math.erf(-.1)])
+        self.assertEqual(adapter.evaluate({'api':'special.geterr',
+                                           'args':{'explicit':True}}),{})
+        self.assertEqual(adapter.evaluate({'api':'special.gamma',
+                                           'args':{'x':2.5,'p0':2.5}}),{})
+
     def test_public_mpmath_numeric_identities(self):
         self.assertVectorClose(values(historical('erfi',.5)),[mp.erfi(.5)])
         self.assertVectorClose(values(historical('jvp',1,2,1)),
@@ -168,6 +255,14 @@ class MpmathSpecialTests(unittest.TestCase):
                                [-2.338107410459767,-1.018792971647471])
         self.assertVectorClose(values(historical('euler',4)),[1,0,-1,0,5])
         self.assertVectorClose(values(historical('stirling2',8,3)),[966])
+
+    def test_repeated_root_sequences_reuse_fixed_precision_results(self):
+        from sci_testing.mpmath_special import _discrete_sequence
+        previous = _discrete_sequence.cache_info().hits
+        first = values(historical('ai_zeros', 2))
+        second = values(historical('ai_zeros', 2))
+        self.assertEqual(first, second)
+        self.assertGreater(_discrete_sequence.cache_info().hits, previous)
 
     def test_kelvin_values_are_bessel_components(self):
         with mp.workdps(50):

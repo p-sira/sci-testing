@@ -7,16 +7,14 @@ return {} without creating a misleading comparison value.
 """
 
 import ctypes as ct
-from functools import lru_cache
 import math
 import os
-from pathlib import Path
 import shutil
 import subprocess
 import sys
+from functools import lru_cache
 
 from . import ROOT
-
 
 VERSIONS = {"RustFFT": "6.4.0", "nalgebra": "0.35.0", "statrs": "0.19.1"}
 _RAW_FFT = {
@@ -71,7 +69,8 @@ def _library():
     env = os.environ.copy()
     env["CARGO_TARGET_DIR"] = str(target)
     command = ("cargo", "build", "--release", "--locked", "--manifest-path", str(manifest))
-    result = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True)
+    result = subprocess.run(command, cwd=ROOT, env=env, capture_output=True,
+                            text=True, check=False)
     if result.returncode:
         raise RuntimeError(f"Rust oracle build failed: {result.stderr.strip()}")
     if sys.platform == "darwin":
@@ -163,7 +162,7 @@ def _raw_fft(api, op, args):
     elif len(real) != size:
         return None
     count = (math.prod(shape if op in _REAL_INVERSE else
-                       [shape[i] // 2 + 1 if i == axes[-1] else dim
+                       [dim // 2 + 1 if i == axes[-1] else dim
                         for i, dim in enumerate(shape)]
                        if op in _REAL_FORWARD else shape)) * 2
     return ("RustFFT", op, data, len(shape), len(axes),

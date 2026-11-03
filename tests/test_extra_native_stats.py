@@ -3,12 +3,11 @@
 import csv
 import ctypes as ct
 import gzip
-import math
 import os
-from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 from mpmath import mp
@@ -16,9 +15,10 @@ from scipy import special, stats
 
 from sci_testing.case_csv import decode
 from sci_testing.extra_native_stats import (
-    ExtraNativeStatsComparisons, SPECIAL_ARITIES, STATS_NAMES, SUPPORTED,
+    SPECIAL_ARITIES,
+    SUPPORTED,
+    ExtraNativeStatsComparisons,
 )
-
 
 ROOT = Path(__file__).resolve().parents[1]
 

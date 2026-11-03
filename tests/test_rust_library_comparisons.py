@@ -4,15 +4,14 @@ import csv
 import gzip
 import json
 import math
-from pathlib import Path
 import unittest
+from pathlib import Path
 
 import numpy as np
 from scipy import stats
 
 from sci_testing.case_csv import read_case_file
 from sci_testing.rust_library_comparisons import VERSIONS, evaluate
-
 
 ROOT = Path(__file__).resolve().parents[1]
 

@@ -109,7 +109,10 @@ class RefreshTests(unittest.TestCase):
         actual=read_measurements(self.root/'results/measurements')
         for record in actual.values():
             self.assertEqual(record['reference'],['0.5'])
-            self.assertEqual(record['libraries'],{'Sci':{'values':[.75]},'SciPy':{'values':[.25]}})
+            expected={'Sci':{'values':[.75]},'SciPy':{'values':[.25]}}
+            if record['id'].startswith('special.erf/'):
+                expected['mpmath']={'values':[0.5204998778130465]}
+            self.assertEqual(record['libraries'],expected)
         self.assertEqual(self.reference.call_count,2*len(self.cases))
         self.assertEqual(self.competitors.call_count,len(self.cases))
         meta=json.loads((self.root/'results/environment.json').read_text())

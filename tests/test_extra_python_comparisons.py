@@ -1,9 +1,9 @@
 """Public NumPy competitors must reproduce every saved output component."""
 
 import math
-from pathlib import Path
 import unittest
 import warnings
+from pathlib import Path
 
 import numpy as np
 
@@ -11,7 +11,6 @@ from sci_testing.case_csv import case_paths, read_case_file
 from sci_testing.extra_python_comparisons import evaluate
 from sci_testing.registered_cases import reference
 from sci_testing.report import competitors
-
 
 ROOT = Path(__file__).resolve().parents[1]
 

@@ -4,16 +4,15 @@ import csv
 import ctypes as ct
 import math
 import os
-from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 from scipy import special
 
 from sci_testing.extra_native_comparisons import ARITIES, ExtraNativeComparisons
-
 
 ROOT = Path(__file__).resolve().parents[1]
 

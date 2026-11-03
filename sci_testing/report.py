@@ -1,5 +1,6 @@
 """Generate library comparison pages using measured Sci outputs as the baseline."""
 import argparse
+from concurrent.futures import ProcessPoolExecutor, as_completed
 import gc
 from collections import defaultdict
 from contextlib import redirect_stdout
@@ -7,6 +8,7 @@ import hashlib
 import io
 import json
 import math
+import multiprocessing
 import os
 from pathlib import Path
 import platform
@@ -918,6 +920,71 @@ def render_cached(cases,records,meta,output,*,modules=None,root=None,inputs=None
     meta['accuracy_summaries_sha256']=hashlib.sha256(content).hexdigest()
 
 
+def _parallel_summary_job(module, cases, measurement_directory, root, inputs,
+                          module_libraries, previous, previous_sha256):
+    """Calculate one module's authenticated accuracy rows in its own process."""
+    cache=AccuracyCache(root,measurement_directory,Path(__file__),inputs=inputs,
+                        previous=previous,previous_sha256=previous_sha256)
+    records=MeasurementStore(measurement_directory)
+    available=set(module_libraries.get(module,[]))-{'Sci'}
+    preferred=['mpmath','SciPy','Boost.Math','GSL','NumPy','FilterPy']
+    libraries=sorted(available,key=lambda lib:(preferred.index(lib) if lib in preferred
+                                                 else len(preferred),lib))
+    names=[api for api in cases.apis if api.split('.')[0]==module]
+    with mp.workdps(METRIC_PRECISION_DPS):
+        for api in names:
+            if cache.get(api,libraries) is not None:
+                continue
+            failures={}
+            row=summarize_api(api,cases.function(api),records,libraries,failures)
+            cache.put(api,libraries,{'row':row,'failures':[
+                [library,*failure] for (_,library),failure in failures.items()]})
+    return {api:cache.entries[api] for api in names}
+
+
+def render_cached_parallel(cases,records,meta,output,*,jobs,root=None,inputs=None):
+    """Compute costly numerical rows by module and render from verified hits.
+
+    Workers never modify the output directory or saved measurements. The final
+    page render verifies every per-API input/measurement hash against each
+    returned cache entry before publishing one authenticated summary file.
+    """
+    if jobs < 2:
+        raise ValueError('parallel renderer requires at least two jobs')
+    root=ROOT if root is None else Path(root)
+    previous=root/'results'/SUMMARY_FILENAME
+    checksum=meta.get('accuracy_summaries_sha256')
+    arguments=(cases,str(records.directory),str(root),
+               str(inputs if inputs is not None else root/'cases/generated'),
+               meta.get('module_libraries',{}),str(previous) if checksum else None,
+               checksum)
+    entries={}
+    with ProcessPoolExecutor(max_workers=jobs,
+                             mp_context=multiprocessing.get_context('spawn')) as pool:
+        futures={pool.submit(_parallel_summary_job,module,*arguments):module
+                 for module in MODULES}
+        for future in as_completed(futures):
+            module=futures[future]
+            try:
+                result=future.result()
+            except Exception as error:
+                for pending in futures:
+                    pending.cancel()
+                raise RuntimeError(f'Parallel accuracy summary failed for {module}') from error
+            entries.update(result)
+            print(f'Summarized {module}: {len(result)} API rows',flush=True)
+    cache=AccuracyCache(root,records.directory,Path(__file__),inputs=inputs,
+                        previous=previous if checksum else None,
+                        previous_sha256=checksum,require_hits=True)
+    cache.entries=entries
+    with mp.workdps(METRIC_PRECISION_DPS):
+        render(cases,records,meta,output,cache=cache)
+    content=cache.serialize(cases.apis)
+    output.mkdir(parents=True,exist_ok=True)
+    (output/SUMMARY_FILENAME).write_bytes(content)
+    meta['accuracy_summaries_sha256']=hashlib.sha256(content).hexdigest()
+
+
 def publish_summary(pages,root=None):
     root=ROOT if root is None else Path(root)
     (pages/SUMMARY_FILENAME).replace(root/'results'/SUMMARY_FILENAME)
@@ -1132,8 +1199,13 @@ def refresh_sci(cases, records, executable, destination, apis):
 
 
 def refresh_comparators(cases, records, destination, apis, *, native=None,
-                        additional_only=False):
+                        additional_only=False, jobs=1):
     """Add measured competitors without evaluating Sci or rewriting stored oracles."""
+    if jobs > 1:
+        if not additional_only or not hasattr(cases, 'function'):
+            raise ValueError('Parallel refresh requires cached cases and --additional-only')
+        return parallel_refresh_comparators(cases, records.directory,
+                                            destination, apis, jobs)
     from itertools import groupby
     changed=set();libraries=defaultdict(set)
     for api,iterator in groupby(cases,key=lambda c:c['api']):
@@ -1167,6 +1239,63 @@ def refresh_comparators(cases, records, destination, apis, *, native=None,
             (destination/(name+'.gz')).unlink(missing_ok=True)
         changed.update(write_measurements(destination,files))
     return changed,libraries
+
+
+_WORKER_NATIVE = None
+
+
+def refresh_additional_api_job(api, batch, source_directory, destination):
+    """Evaluate one function in an independent process and write its CSV.
+
+    The source measurements are read-only throughout the refresh; each worker
+    owns a distinct destination filename. The original provider results and
+    independent references remain byte-for-byte unchanged in each record.
+    """
+    global _WORKER_NATIVE
+    if api.split('.')[0] in {'special', 'stats'} and _WORKER_NATIVE is None:
+        _WORKER_NATIVE = NativeComparisons()
+    return refresh_comparators(batch, MeasurementStore(Path(source_directory)),
+                               Path(destination), {api}, native=_WORKER_NATIVE,
+                               additional_only=True)
+
+
+def parallel_refresh_comparators(cases, source_directory, destination, apis, jobs):
+    """Bound queued batches to two per worker to retain streaming memory use."""
+    changed = set()
+    libraries = defaultdict(set)
+    remaining = iter(sorted(apis))
+    with ProcessPoolExecutor(max_workers=jobs,
+                             mp_context=multiprocessing.get_context('spawn')) as pool:
+        pending = {}
+
+        def submit_next():
+            try:
+                api = next(remaining)
+            except StopIteration:
+                return False
+            future = pool.submit(refresh_additional_api_job, api, cases.function(api),
+                                 str(source_directory), str(destination))
+            pending[future] = api
+            return True
+
+        for _ in range(jobs * 2):
+            if not submit_next():
+                break
+        while pending:
+            for future in as_completed(pending):
+                api = pending.pop(future)
+                try:
+                    updated, providers = future.result()
+                except Exception as error:
+                    for waiting in pending:
+                        waiting.cancel()
+                    raise RuntimeError(f'Additional comparator refresh failed for {api}') from error
+                changed.update(updated)
+                for module, names in providers.items():
+                    libraries[module].update(names)
+                submit_next()
+                break
+    return changed, libraries
 
 
 def upgrade_scientific_comparisons(cases, records, destination):
@@ -1232,6 +1361,8 @@ def main():
     mode.add_argument('--comparators-only',action='store_true',help='backfill comparison libraries from verified saved inputs, preserving Sci and independent reference results')
     parser.add_argument('--additional-only',action='store_true',
                         help='with --comparators-only, add new independent adapter measurements without rerunning previous providers')
+    parser.add_argument('--jobs',type=int,default=1,metavar='N',
+                        help='independent workers for --render or --comparators-only --additional-only (default: 1)')
     mode.add_argument('--upgrade-scientific-comparisons',action='store_true',
                       help='replace cmath complex references with mpmath/NumPy and remove all stdlib comparisons, preserving Sci outputs')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
@@ -1244,6 +1375,11 @@ def main():
         parser.error('--comparators-only requires explicit --module selection')
     if args.additional_only and not args.comparators_only:
         parser.error('--additional-only requires --comparators-only')
+    if args.jobs < 1 or (args.jobs > 1 and not (args.render or
+                                                (args.comparators_only and args.additional_only))):
+        parser.error('--jobs requires a positive integer and --render or --comparators-only --additional-only')
+    if args.render and args.jobs > 1 and args.module:
+        parser.error('parallel --render requires the full module set')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
         raise RuntimeError('Run uv sync --frozen with the pinned library versions')
     if not args.check and any(k.startswith(('RUSTFLAGS','CARGO_ENCODED_RUSTFLAGS','CARGO_PROFILE_')) or k == 'CARGO_BUILD_TARGET' for k in os.environ):
@@ -1298,7 +1434,11 @@ def main():
             modules=(selective_render_modules(args.output.resolve(),
                                               {api.split('.')[0] for api in render_apis})
                      if args.module else None)
-            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,records,meta,pages,modules=modules)
+            if args.jobs > 1:
+                render_cached_parallel(cases,records,meta,pages,jobs=args.jobs)
+            else:
+                with mp.workdps(METRIC_PRECISION_DPS):
+                    render_cached(cases,records,meta,pages,modules=modules)
             (ROOT/'results/coverage.csv').write_text(coverage)
             publish_summary(pages)
             (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
@@ -1385,7 +1525,8 @@ def main():
             staged=workspace/'measurements'
             shutil.copytree(ROOT/'results/measurements',staged,copy_function=os.link)
             changed,libraries=refresh_comparators(cases,records,staged,selected,
-                                                  native=native,additional_only=args.additional_only)
+                                                  native=native,additional_only=args.additional_only,
+                                                  jobs=args.jobs)
             staged_records=MeasurementStore(staged)
             coverage=preserved_coverage(previous,cases=cases,records=staged_records)
             meta['measurements_sha256']=directory_digest(staged)

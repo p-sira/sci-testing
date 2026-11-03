@@ -10,7 +10,6 @@ import math
 
 import numpy as np
 
-
 _FFT_ONE_DIMENSION = {
     "fft", "ifft", "rfft", "irfft", "hfft", "ihfft",
     "fftshift", "ifftshift", "fftfreq", "rfftfreq",
