@@ -6320,10 +6320,12 @@
     "special.ellipf": [
       {
         "cases": 2001,
-        "precision": "binary64",
-        "provider": "SciPy/NumPy plus independent fixture recipes",
-        "recipe": "sci_testing.registered_cases.reference",
-        "status": "historical_source_path_inferred"
+        "documentation": "https://reference.wolfram.com/language/guide/EllipticIntegrals.html",
+        "expression_template": "EllipticF[{0},{1}]",
+        "precision": "160 decimal digits",
+        "provider": "WolframEngine",
+        "recipe": "sci_testing.wolfram_reference.references",
+        "status": "regenerated"
       }
     ],
     "special.ellipj": [
@@ -6358,10 +6360,12 @@
     "special.ellipkinc": [
       {
         "cases": 2001,
-        "precision": "binary64",
-        "provider": "SciPy/NumPy plus independent fixture recipes",
-        "recipe": "sci_testing.registered_cases.reference",
-        "status": "historical_source_path_inferred"
+        "documentation": "https://reference.wolfram.com/language/guide/EllipticIntegrals.html",
+        "expression_template": "EllipticF[{0},{1}]",
+        "precision": "160 decimal digits",
+        "provider": "WolframEngine",
+        "recipe": "sci_testing.wolfram_reference.references",
+        "status": "regenerated"
       }
     ],
     "special.ellipkm1": [
@@ -10499,7 +10503,7 @@
     ]
   },
   "cases_sha256": "096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533",
-  "measurements_sha256": "87daa8ce87f30b2cbbdd8bf3ab51c7892b714a8f4ab75ab410c8728aa3d6b466",
+  "measurements_sha256": "3f2ae498e8bcc4c5b62a8d31217173123235259776dc60bbc68a07f2c68175e7",
   "reference_sha256": {
     "cluster.hierarchy.average": "b4d494e0356fa03d2832d58a47cfd91ba6b9df8af25095ac33541dddf5163929",
     "cluster.hierarchy.centroid": "0d06dae3a4007854eb75738ac1ec933dfc71c7b4b6a8963d0d3b50c3d5c0e296",
@@ -11202,11 +11206,11 @@
     "special.ellipdinc": "d163a426dcde8c9dc89d748933c0cff79a2cd22c85f15ffec8697b1371f6c63e",
     "special.ellipe": "662b404e9cc7e10ad21e11e54e65719915add3f5d69b755d409c77f78801d231",
     "special.ellipeinc": "59864995fcee1d2cc81788ad135f96af24d7d3384ded7e969ca616311ec15a3c",
-    "special.ellipf": "253740f56d88e740a5b0d24dc0ebbd680c4a04c4bc2ac1e8d1ad29318059808e",
+    "special.ellipf": "392ef9cde9f59d24e85b1f36de5a8fae1e66211dd21a79e2adcf00849eb984f5",
     "special.ellipj": "531a921181ac0b6d145971a7b0bd8af1966fd1e960fb37c79d0a72860563c048",
     "special.ellipk": "742e65d8cf9f948612917731dbd53ae44497b701ef69c6761d6f8332dcfa7b52",
     "special.ellipke": "93ddb7a23e0cb91ab9a979236269f97f320c5d998ceaa04bb92979e3a0e4f829",
-    "special.ellipkinc": "e7ff5dd96c99ec701e53b9eb6d726a7f78bab8c4dde1ea4bb524e09fe11a6029",
+    "special.ellipkinc": "63ecf19032bcf33a371f8fb4680f03b236c193c8b6fea4a590148cf317f2b8c1",
     "special.ellipkm1": "690c9eec9f594b808e42222db9f678c0c602417fb8328f00ed481c5bf53734fe",
     "special.ellippi": "8d528f454efbe5a9c439232ecfc2c86ce15b1fb62f6d42f55fc649c3a200d20a",
     "special.ellippiinc": "5ecafd163867d2e0cc7ebb9b41c6518243eca33aca8d7694ddc69b5a32a1396c",

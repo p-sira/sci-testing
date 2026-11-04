@@ -19,6 +19,7 @@ from sci_testing.extra_native_stats import (
     SUPPORTED,
     ExtraNativeStatsComparisons,
 )
+from tests.pruned_fixtures import removed_apis
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -99,7 +100,14 @@ class ExtraNativeStatsTests(unittest.TestCase):
 
     def test_all_saved_cases(self):
         counts = {}
+        removed = removed_apis()
         for api in sorted(SUPPORTED):
+            if api in removed:
+                folder, name = api.rsplit(".", 1)
+                path = ROOT / "cases/generated" / folder / f"{name}.csv"
+                self.assertFalse(path.exists() or Path(str(path) + ".gz").exists(),
+                                 f"removed fixture restored: {api}")
+                continue
             count = 0
             for case_id, case in saved(api):
                 with self.subTest(id=case_id):
@@ -111,7 +119,7 @@ class ExtraNativeStatsTests(unittest.TestCase):
                 count += 1
             counts[api] = count
             self.assertGreaterEqual(count, 2000, api)
-        self.assertEqual(set(counts), SUPPORTED)
+        self.assertEqual(set(counts), SUPPORTED - removed)
 
     def test_extended_statistical_domains(self):
         examples = [

@@ -291,8 +291,8 @@ linalg.basic.bandwidth,linalg.basic.bandwidth,crates/sci-linalg/src/structure.rs
 linalg.basic.det,linalg.basic.det,crates/sci-linalg/src/dense.rs,419,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.basic.dot,linalg.basic.dot,crates/sci-linalg/src/mod.rs,115,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.basic.inv,linalg.basic.inv,crates/sci-linalg/src/dense.rs,380,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
-linalg.basic.ishermitian,linalg.basic.ishermitian,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
-linalg.basic.issymmetric,linalg.basic.ishermitian,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
+linalg.basic.ishermitian,linalg.basic.issymmetric,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
+linalg.basic.issymmetric,linalg.basic.issymmetric,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.basic.khatri_rao,linalg.basic.khatri_rao,crates/sci-linalg/src/qr.rs,53,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.basic.matmul,linalg.basic.matmul,crates/sci-linalg/src/mod.rs,206,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.basic.matvec,linalg.basic.matvec,crates/sci-linalg/src/mod.rs,147,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
@@ -325,12 +325,6 @@ linalg.decompositions.lu_factor,linalg.decompositions.lu_factor,crates/sci-linal
 linalg.decompositions.matrix_balance,linalg.decompositions.matrix_balance,crates/sci-linalg/src/advanced.rs,367,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.decompositions.polar,linalg.decompositions.polar,crates/sci-linalg/src/dense.rs,1242,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.decompositions.qr,linalg.decompositions.qr,crates/sci-linalg/src/dense.rs,919,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
-linalg.decompositions.qr.khatri_rao,linalg.basic.khatri_rao,crates/sci-linalg/src/qr.rs,53,legacy_recipe_pending,same compiler item as mapped historical recipe; 0.3 comparison pending,public_export
-linalg.decompositions.qr.qr_delete,linalg.decompositions.qr_delete,crates/sci-linalg/src/qr.rs,335,legacy_recipe_pending,same compiler item as mapped historical recipe; 0.3 comparison pending,public_export
-linalg.decompositions.qr.qr_insert,linalg.decompositions.qr_insert,crates/sci-linalg/src/qr.rs,259,legacy_recipe_pending,same compiler item as mapped historical recipe; 0.3 comparison pending,public_export
-linalg.decompositions.qr.qr_multiply,linalg.decompositions.qr_multiply,crates/sci-linalg/src/qr.rs,149,legacy_recipe_pending,same compiler item as mapped historical recipe; 0.3 comparison pending,public_export
-linalg.decompositions.qr.qr_update,linalg.decompositions.qr_update,crates/sci-linalg/src/qr.rs,203,legacy_recipe_pending,same compiler item as mapped historical recipe; 0.3 comparison pending,public_export
-linalg.decompositions.qr.rq,linalg.decompositions.rq,crates/sci-linalg/src/qr.rs,103,legacy_recipe_pending,same compiler item as mapped historical recipe; 0.3 comparison pending,public_export
 linalg.decompositions.qr_delete,linalg.decompositions.qr_delete,crates/sci-linalg/src/qr.rs,335,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.decompositions.qr_insert,linalg.decompositions.qr_insert,crates/sci-linalg/src/qr.rs,259,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 linalg.decompositions.qr_multiply,linalg.decompositions.qr_multiply,crates/sci-linalg/src/qr.rs,149,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
@@ -387,8 +381,8 @@ linalg.interpolative.svd,linalg.interpolative.svd,crates/sci-linalg/src/interpol
 linalg.inv,linalg.basic.inv,crates/sci-linalg/src/dense.rs,380,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 linalg.invhilbert,linalg.structured.invhilbert,crates/sci-linalg/src/structured.rs,252,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 linalg.invpascal,linalg.structured.invpascal,crates/sci-linalg/src/structured.rs,366,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
-linalg.ishermitian,linalg.basic.ishermitian,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
-linalg.issymmetric,linalg.basic.ishermitian,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
+linalg.ishermitian,linalg.basic.issymmetric,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
+linalg.issymmetric,linalg.basic.issymmetric,crates/sci-linalg/src/structure.rs,85,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 linalg.khatri_rao,linalg.basic.khatri_rao,crates/sci-linalg/src/qr.rs,53,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 linalg.ldl,linalg.decompositions.ldl,crates/sci-linalg/src/advanced.rs,130,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 linalg.leslie,linalg.structured.leslie,crates/sci-linalg/src/structured.rs,700,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
@@ -1269,11 +1263,11 @@ special.ellipd,special.elliptic.ellipd,crates/sci-special/src/elliptic.rs,253,le
 special.ellipdinc,special.elliptic.ellipdinc,crates/sci-special/src/elliptic.rs,494,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellipe,special.elliptic.ellipe,crates/sci-special/src/elliptic.rs,141,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellipeinc,special.elliptic.ellipeinc,crates/sci-special/src/elliptic.rs,376,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
-special.ellipf,special.elliptic.ellipf,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
+special.ellipf,special.elliptic.ellipkinc,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellipj,special.elliptic.ellipj,crates/sci-special/src/scipy.rs,169,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellipk,special.elliptic.ellipk,crates/sci-special/src/elliptic.rs,86,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellipke,special.elliptic.ellipke,crates/sci-special/src/elliptic.rs,859,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
-special.ellipkinc,special.elliptic.ellipf,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
+special.ellipkinc,special.elliptic.ellipkinc,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellipkm1,special.elliptic.ellipkm1,crates/sci-special/src/elliptic.rs,1500,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellippi,special.elliptic.ellippi,crates/sci-special/src/elliptic.rs,198,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
 special.ellippiinc,special.elliptic.ellippiinc,crates/sci-special/src/elliptic.rs,436,legacy_recipe_pending,name/path match; signature and independent 0.3 comparison pending,legacy_alias
@@ -1294,11 +1288,11 @@ special.elliptic.ellipd,special.elliptic.ellipd,crates/sci-special/src/elliptic.
 special.elliptic.ellipdinc,special.elliptic.ellipdinc,crates/sci-special/src/elliptic.rs,494,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellipe,special.elliptic.ellipe,crates/sci-special/src/elliptic.rs,141,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellipeinc,special.elliptic.ellipeinc,crates/sci-special/src/elliptic.rs,376,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
-special.elliptic.ellipf,special.elliptic.ellipf,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
+special.elliptic.ellipf,special.elliptic.ellipkinc,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellipj,special.elliptic.ellipj,crates/sci-special/src/scipy.rs,184,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellipk,special.elliptic.ellipk,crates/sci-special/src/elliptic.rs,86,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellipke,special.elliptic.ellipke,crates/sci-special/src/elliptic.rs,859,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
-special.elliptic.ellipkinc,special.elliptic.ellipf,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
+special.elliptic.ellipkinc,special.elliptic.ellipkinc,crates/sci-special/src/elliptic.rs,314,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellipkm1,special.elliptic.ellipkm1,crates/sci-special/src/elliptic.rs,1500,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellippi,special.elliptic.ellippi,crates/sci-special/src/elliptic.rs,198,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export
 special.elliptic.ellippiinc,special.elliptic.ellippiinc,crates/sci-special/src/elliptic.rs,436,legacy_recipe_pending,historical recipe mapped; 0.3 comparison pending,public_export

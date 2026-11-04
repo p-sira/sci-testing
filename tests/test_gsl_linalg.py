@@ -4,17 +4,16 @@ import ctypes as ct
 import gzip
 import json
 import os
-from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from pathlib import Path
 
 import mpmath as mp
 import numpy as np
 from scipy import linalg
 
-from sci_testing.gsl_linalg import GslLinalgComparisons, NAMES
-
+from sci_testing.gsl_linalg import NAMES, GslLinalgComparisons
 
 ROOT = Path(__file__).resolve().parents[1]
 COUNTS = {
@@ -124,8 +123,11 @@ class GslLinalgTests(unittest.TestCase):
                                                 for v in case["args"]["b"]])
                             reference = np.array([float(v) for v in
                                                   mp.lu_solve(high_a, high_b)])
+                        # This Hilbert solve has condition number ~1.5e10.
+                        # GSL's binary64 LU differs by ~1e-7 relative across
+                        # platforms even with a ~1e-17 backward residual.
                         if actual.shape != reference.shape or not np.allclose(
-                                actual, reference, atol=2e-11, rtol=3e-8):
+                                actual, reference, atol=2e-11, rtol=2e-7):
                             failures.append((identifier, actual.tolist(),
                                              reference.tolist(), "high-precision LU"))
                         continue

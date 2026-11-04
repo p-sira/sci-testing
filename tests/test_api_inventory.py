@@ -16,6 +16,7 @@ from sci_testing.api_registry import (
     typed_manifest,
 )
 from sci_testing.inventory import (
+    REVIEWED_PRIVATE_MODULE_GHOSTS,
     inventory,
     reconcile,
     refresh_inventory,
@@ -44,6 +45,35 @@ AUDITED_LEGACY_ALIASES = {
 
 
 class InventoryTests(unittest.TestCase):
+    def test_every_public_export_has_a_saved_reference_mapping(self):
+        # Public aliases can share a compiler item and a saved historical
+        # reference. They do not need duplicate case or measurement files.
+        with (ROOT / 'api_inventory.csv').open(newline='') as stream:
+            rows = list(csv.DictReader(stream))
+        with (ROOT / 'results/coverage.csv').open(newline='') as stream:
+            measured = {row['api'] for row in csv.DictReader(stream)
+                        if int(row['cases']) > 0 and int(row['sci_successes']) > 0}
+        mapped = {row['canonical'] for row in rows
+                  if row['api'] in measured and row['canonical']}
+        missing = [row['api'] for row in rows
+                   if row['kind'] == 'public_export' and row['canonical'] not in mapped]
+        self.assertEqual(missing, [])
+        for name in REVIEWED_PRIVATE_MODULE_GHOSTS:
+            self.assertNotIn(name, {row['api'] for row in rows})
+
+        aliases = {
+            'linalg.basic.ishermitian': 'linalg.basic.issymmetric',
+            'linalg.issymmetric': 'linalg.basic.issymmetric',
+            'linalg.ishermitian': 'linalg.basic.issymmetric',
+            'special.elliptic.ellipf': 'special.elliptic.ellipkinc',
+            'special.ellipf': 'special.elliptic.ellipkinc',
+            'special.ellipkinc': 'special.elliptic.ellipkinc',
+        }
+        canonical = {row['api']: row['canonical'] for row in rows}
+        for name, target in aliases.items():
+            with self.subTest(name=name):
+                self.assertEqual(canonical[name], target)
+
     def test_audited_legacy_aliases_target_current_public_exports_and_keep_case_ids(self):
         with (ROOT / 'api_inventory.csv').open(newline='') as stream:
             rows = {row['api']: row for row in csv.DictReader(stream)}
@@ -63,9 +93,8 @@ class InventoryTests(unittest.TestCase):
                 plain = ROOT / 'cases/generated' / namespace / f'{name}.csv'
                 compressed = plain.with_suffix('.csv.gz')
                 self.assertTrue(plain.is_file() or compressed.is_file())
-                stream = (gzip.open(compressed, 'rt', newline='') if compressed.is_file()
-                          else plain.open(newline=''))
-                with stream:
+                with (gzip.open(compressed, 'rt', newline='') if compressed.is_file()
+                      else plain.open(newline='')) as stream:
                     ids = [row['id'] for row in csv.DictReader(stream)]
                 self.assertEqual(len(ids), expected_count)
                 self.assertTrue(all(isinstance(case_id, str)
@@ -105,11 +134,12 @@ class InventoryTests(unittest.TestCase):
         self.assertTrue((sci_target()/'tests/fft_extended.rs').is_file())
 
     def test_rustdoc_resolves_public_reexports_through_private_modules(self):
-        def item(name, visibility, inner, crate=0, span=None):
-            return dict(name=name, visibility=visibility, crate_id=crate, inner=inner,
-                        span=span)
+        def item(name: str | None, visibility: str, inner: dict[str, object],
+                 crate: int = 0, span: dict[str, object] | None = None) -> dict[str, object]:
+            return {'name': name, 'visibility': visibility, 'crate_id': crate, 'inner': inner,
+                        'span': span}
 
-        data = dict(root='0', index={
+        data: dict[str, object] = {'root': '0', 'index': {
             '0': item('special', 'public', {'module': {'items': ['1', '2', '3', '4']}}),
             '1': item('implementation', 'private', {'module': {'items': ['5', '6']}}),
             '2': item('family', 'public', {'module': {'items': ['7', '8', '9']}}),
@@ -122,7 +152,7 @@ class InventoryTests(unittest.TestCase):
             '8': item('all', 'public', {'use': {'id': '1', 'is_glob': True}}),
             '9': item('internal', 'private', {'function': {}}),
             '10': item('external', 'public', {'function': {}}, crate=1),
-        })
+        }}
         with tempfile.TemporaryDirectory() as directory:
             (Path(directory) / 'sci_special.json').write_text(json.dumps(data))
             rows = inventory(directory)
@@ -131,9 +161,59 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(rows[0][1:], ['special.family.gamma',
                                         'crates/sci-special/src/mod.rs', 42])
 
+    def test_rustdoc_preferred_names_are_canonical_for_shared_items(self):
+        def item(name: str | None, visibility: str,
+                 inner: dict[str, object]) -> dict[str, object]:
+            return {'name': name, 'visibility': visibility, 'crate_id': 0, 'inner': inner}
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for family, module, names in (
+                    ('special', 'elliptic', ('ellipf', 'ellipkinc')),
+                    ('linalg', 'basic', ('ishermitian', 'issymmetric'))):
+                contents = {'root': '0', 'index': {
+                    '0': item(family, 'public', {'module': {'items': ['1']}}),
+                    '1': item(module, 'public', {'module': {'items': ['2', '3']}}),
+                    '2': item(None, 'public', {'use': {
+                        'id': '4', 'name': names[0], 'is_glob': False}}),
+                    '3': item(None, 'public', {'use': {
+                        'id': '4', 'name': names[1], 'is_glob': False}}),
+                    '4': item(names[0], 'public', {'function': {}}),
+                }}
+                _ = (root / f'sci_{family}.json').write_text(json.dumps(contents))
+            rendered = cast(list[list[object]], inventory(root))
+            rows = {str(row[0]): row for row in rendered}
+        for family, module, names in (
+                ('special', 'elliptic', ('ellipf', 'ellipkinc')),
+                ('linalg', 'basic', ('ishermitian', 'issymmetric'))):
+            expected = f'{family}.{module}.{names[1]}'
+            for name in names:
+                self.assertEqual(rows[f'{family}.{module}.{name}'][1], expected)
+
+    def test_named_private_module_is_not_a_public_callable_namespace(self):
+        def item(name: str | None, visibility: str,
+                 inner: dict[str, object]) -> dict[str, object]:
+            return {'name': name, 'visibility': visibility, 'crate_id': 0, 'inner': inner}
+
+        data = {'root': '0', 'index': {
+            '0': item('linalg', 'public', {'module': {'items': ['1', '2']}}),
+            '1': item('qr', 'private', {'module': {'items': ['3']}}),
+            '2': item('decompositions', 'public', {'module': {'items': ['4', '5']}}),
+            '3': item('qr_delete', 'public', {'function': {}}),
+            '4': item(None, 'public', {'use': {
+                'id': '1', 'name': 'qr', 'is_glob': False}}),
+            '5': item(None, 'public', {'use': {
+                'id': '3', 'name': 'qr_delete', 'is_glob': False}}),
+        }}
+        with tempfile.TemporaryDirectory() as directory:
+            _ = (Path(directory) / 'sci_linalg.json').write_text(json.dumps(data))
+            rows = cast(list[list[object]], inventory(directory))
+        self.assertEqual([str(row[0]) for row in rows],
+                         ['linalg.decompositions.qr_delete'])
+
     def test_legacy_aliases_keep_pending_status_and_new_exports_are_untested(self):
-        old = [dict(api='special.gamma', source='crates/sci-special/src/mod.rs'),
-               dict(api='special.removed', source='crates/sci-special/src/old.rs')]
+        old = [{'api': 'special.gamma', 'source': 'crates/sci-special/src/mod.rs'},
+               {'api': 'special.removed', 'source': 'crates/sci-special/src/old.rs'}]
         new = [['special.gamma.gamma', 'special.gamma.gamma',
                 'crates/sci-special/src/mod.rs', 42],
                ['special.wave.brand_new', 'special.wave.brand_new',
@@ -150,18 +230,18 @@ class InventoryTests(unittest.TestCase):
 
     def test_refresh_moves_graph_exports_and_preserves_fixture_aliases(self):
         previous = [
-            dict(api='sparse.csgraph.dijkstra', canonical='sparse.csgraph.dijkstra',
-                 source='sci-sparse/src/csgraph.rs', line='10',
-                 status='legacy_recipe_pending', evidence='historical graph fixture',
-                 kind='public_export'),
-            dict(api='special.erf', canonical='special.elementary.erf',
-                 source='sci-special/src/mod.rs', line='2',
-                 status='legacy_recipe_pending', evidence='historical scalar fixture',
-                 kind='legacy_alias'),
-            dict(api='special.elementary.erf', canonical='special.elementary.erf',
-                 source='sci-special/src/mod.rs', line='20',
-                 status='legacy_recipe_pending', evidence='historical scalar fixture',
-                 kind='public_export'),
+            {'api': 'sparse.csgraph.dijkstra', 'canonical': 'sparse.csgraph.dijkstra',
+                 'source': 'sci-sparse/src/csgraph.rs', 'line': '10',
+                 'status': 'legacy_recipe_pending', 'evidence': 'historical graph fixture',
+                 'kind': 'public_export'},
+            {'api': 'special.erf', 'canonical': 'special.elementary.erf',
+                 'source': 'sci-special/src/mod.rs', 'line': '2',
+                 'status': 'legacy_recipe_pending', 'evidence': 'historical scalar fixture',
+                 'kind': 'legacy_alias'},
+            {'api': 'special.elementary.erf', 'canonical': 'special.elementary.erf',
+                 'source': 'sci-special/src/mod.rs', 'line': '20',
+                 'status': 'legacy_recipe_pending', 'evidence': 'historical scalar fixture',
+                 'kind': 'public_export'},
         ]
         current = [
             ['graph.dijkstra', 'graph.dijkstra', 'sci-graph/src/algorithms.rs', 12],
@@ -189,16 +269,44 @@ class InventoryTests(unittest.TestCase):
         self.assertIsNone(resolve_legacy_api('special.no_such_function', current))
 
     def test_duplicate_public_reexports_resolve_by_compiler_identity(self):
-        source = 'crates/sci-linalg/src/qr.rs'
-        current = [['linalg.decompositions.qr.qr_delete',
-                    'linalg.decompositions.qr_delete', source, 335],
-                   ['linalg.decompositions.qr_delete',
-                    'linalg.decompositions.qr_delete', source, 335]]
-        self.assertEqual(resolve_legacy_api('linalg.qr_delete', current), current[1])
-        old = [{'api':'linalg.qr_delete','source':'crates/sci-linalg/src/old.rs'}]
+        source = 'crates/sci-linalg/src/structure.rs'
+        current = [['linalg.basic.ishermitian',
+                    'linalg.basic.issymmetric', source, 85],
+                   ['linalg.basic.issymmetric',
+                    'linalg.basic.issymmetric', source, 85]]
+        self.assertEqual(resolve_legacy_api('linalg.issymmetric', current), current[1])
+        old = [{'api':'linalg.issymmetric','source':source}]
         reconciled={row[0]:row for row in reconcile(old,current)}
         self.assertEqual(reconciled[current[0][0]][4],'legacy_recipe_pending')
         self.assertEqual(reconciled[current[1][0]][4],'legacy_recipe_pending')
+
+    def test_refresh_rebinds_preferred_canonical_and_drops_reviewed_ghosts(self):
+        source = 'crates/sci-special/src/elliptic.rs'
+        old = [{'api': name, 'canonical': 'special.elliptic.ellipf',
+                'source': source, 'line': '314', 'status': 'legacy_recipe_pending',
+                'evidence': 'historical', 'kind': kind}
+               for name, kind in (
+                   ('special.elliptic.ellipf', 'public_export'),
+                   ('special.elliptic.ellipkinc', 'public_export'),
+                   ('special.ellipkinc', 'legacy_alias'))]
+        new = [[name, 'special.elliptic.ellipkinc', source, 314]
+               for name in ('special.elliptic.ellipf', 'special.elliptic.ellipkinc')]
+        rows = {str(row[0]): row for row in cast(list[list[object]],
+                                               refresh_inventory(old, new))}
+        self.assertEqual(rows['special.ellipkinc'][1], 'special.elliptic.ellipkinc')
+        self.assertEqual(rows['special.elliptic.ellipf'][1], 'special.elliptic.ellipkinc')
+        self.assertEqual(rows['special.ellipkinc'][6], 'legacy_alias')
+
+        ghost, canonical = next(iter(REVIEWED_PRIVATE_MODULE_GHOSTS.items()))
+        qr = 'crates/sci-linalg/src/qr.rs'
+        old = [{'api': ghost, 'canonical': canonical, 'source': qr,
+                'line': '53', 'status': 'legacy_recipe_pending',
+                'evidence': 'ghost', 'kind': 'public_export'}]
+        new = [[canonical, canonical, qr, 53]]
+        rows = {str(row[0]): row for row in cast(list[list[object]],
+                                               refresh_inventory(old, new))}
+        self.assertNotIn(ghost, rows)
+        self.assertIn(canonical, rows)
 
     def test_dispatch_uses_new_path_but_retains_historical_case_id(self):
         f = Function('special.erf', (('x', 'f64'),), 'f64', 'src/old.rs')

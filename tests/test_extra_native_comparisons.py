@@ -13,6 +13,7 @@ import numpy as np
 from scipy import special
 
 from sci_testing.extra_native_comparisons import ARITIES, ExtraNativeComparisons
+from tests.pruned_fixtures import removed_apis
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -51,19 +52,26 @@ class ExtraNativeComparisonTests(unittest.TestCase):
                 np.testing.assert_allclose(actual[provider]["values"][0], expected,
                                            rtol=rtol, atol=atol)
 
-    def test_all_10005_saved_fixtures(self):
+    def test_all_retained_saved_fixtures(self):
+        removed = removed_apis()
+        measured: set[str] = set()
         for api, count in ARITIES.items():
             name = api.rsplit(".", 1)[-1]
-            with (ROOT / "cases/generated/special" / (name + ".csv")).open(
-                    newline="") as stream:
+            path = ROOT / "cases/generated/special" / (name + ".csv")
+            if api in removed:
+                self.assertFalse(path.exists(), f"removed fixture restored: {api}")
+                continue
+            with path.open(newline="") as stream:
                 cases = list(csv.DictReader(stream))
             self.assertEqual(len(cases), 2001)
+            measured.add(api)
             for row in cases:
-                args = []
+                args: list[int | float] = []
                 for i in range(count):
                     kind, number = row[f"p{i}"].split(":", 1)
                     args.append(int(number) if kind == "i" else float(number))
                 self.check_scalar(name, args)
+        self.assertEqual(measured, set(ARITIES) - removed)
 
     def test_distinct_domains_and_function_identities(self):
         for x in (-13., -1.25, -.001, 0., 1e-12, .75, 12.):

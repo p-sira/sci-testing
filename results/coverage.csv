@@ -226,8 +226,8 @@ linalg.interpolative.svd,linalg.interpolative.svd,2008,1000,1000,2008,0,0,2008,0
 linalg.inv,linalg.basic.inv,2003,1000,1000,2003,0,0,2003,0,legacy_recipe_pending
 linalg.invhilbert,linalg.structured.invhilbert,2004,1000,1000,17,0,0,2004,0,legacy_recipe_pending
 linalg.invpascal,linalg.structured.invpascal,2009,1000,1000,23,0,0,2009,0,legacy_recipe_pending
-linalg.ishermitian,linalg.basic.ishermitian,2004,1000,1000,2004,0,0,2004,0,legacy_recipe_pending
-linalg.issymmetric,linalg.basic.ishermitian,2004,1000,1000,2004,0,0,2004,0,legacy_recipe_pending
+linalg.ishermitian,linalg.basic.issymmetric,2004,1000,1000,2004,0,0,2004,0,legacy_recipe_pending
+linalg.issymmetric,linalg.basic.issymmetric,2004,1000,1000,2004,0,0,2004,0,legacy_recipe_pending
 linalg.khatri_rao,linalg.basic.khatri_rao,2002,1000,1000,2002,0,0,2002,0,legacy_recipe_pending
 linalg.ldl,linalg.decompositions.ldl,2008,1000,1000,2008,0,0,2008,0,legacy_recipe_pending
 linalg.leslie,linalg.structured.leslie,2002,1000,1000,2002,0,0,2002,0,legacy_recipe_pending
@@ -700,11 +700,11 @@ special.ellipd,special.elliptic.ellipd,2001,1000,1000,2001,0,0,2001,0,legacy_rec
 special.ellipdinc,special.elliptic.ellipdinc,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellipe,special.elliptic.ellipe,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellipeinc,special.elliptic.ellipeinc,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
-special.ellipf,special.elliptic.ellipf,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
+special.ellipf,special.elliptic.ellipkinc,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellipj,special.elliptic.ellipj,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellipk,special.elliptic.ellipk,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellipke,special.elliptic.ellipke,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
-special.ellipkinc,special.elliptic.ellipf,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
+special.ellipkinc,special.elliptic.ellipkinc,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellipkm1,special.elliptic.ellipkm1,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellippi,special.elliptic.ellippi,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending
 special.ellippiinc,special.elliptic.ellippiinc,2001,1000,1000,2001,0,0,2001,0,legacy_recipe_pending

@@ -2,8 +2,11 @@
 
 Historical and newly measured comparisons use saved per-case references for
 every implementation on the same inputs. The compiler inventory lists 1142 mapped canonical
-names across 17 modules and 2102 exported names; these are not
-all independently verified against Sci 0.3. There are 0 currently
+names across 17 modules and 1144 callable exported names.
+Of these, 1144 exported names have a saved reference through their
+canonical implementation and 0 lack one. Public aliases share
+the original case/reference data; they are not counted as independent numerical
+measurements or independently verified against Sci 0.3. There are 0 currently
 unmeasured new API names, 0 other untested exports and
 0 unresolved legacy mappings.
 The [coverage audit](../../results/coverage.csv) explicitly marks pending names
@@ -145,7 +148,7 @@ All reports and data belong to this repository; Sci links to them externally.
 ## Snapshot
 
 - Sci commit: `ddf4b06e7533a33079c8bf9d75650a5bf8df33bd`.
-- Harness source SHA-256: `1c94f3e62adf93ee5aff55d6c1e09d287764132787f9621dcc8451c4a32db222`.
+- Harness source SHA-256: `85657f37167b5eef404a33cd9715f1be01e400023e2a73ad1f4e8305dc8e8d67`.
 - Input SHA-256: `096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533`.
 - 2305544 saved cases covering 1159 recipe API names; 1142 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Graph': '1_92', 'Boost.Math': '1_92', 'Boost.Multiprecision': '1_92', 'Boost.Numeric.uBLAS': '1_92', 'Boost.Units': '1_92', 'GSL': '2.8'}.

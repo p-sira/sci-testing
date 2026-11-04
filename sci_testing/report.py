@@ -756,8 +756,16 @@ The [shared methodology and environment](README.md) and
 compiler flags and per-function measurement provenance.
 '''
         (output/f'{module}.md').write_text(text)
-    exports=inventory();canonical=len({row['canonical'] for row in exports if row['canonical']})
+    exports=inventory()
+    # Older miniature regression fixtures omit `kind`. In that legacy schema
+    # every inventory row represented a public export.
+    public_exports=[row for row in exports if row.get('kind','public_export')=='public_export']
+    canonical=len({row['canonical'] for row in public_exports if row['canonical']})
     sampled_apis=set(cases.apis) if hasattr(cases,'apis') else {case['api'] for case in cases}
+    mapped_canonicals={row['canonical'] for row in exports
+                       if row['api'] in sampled_apis and row['canonical']}
+    mapped_exports=sum(row['canonical'] in mapped_canonicals for row in public_exports)
+    unmapped_exports=len(public_exports)-mapped_exports
     new_apis={row['api'] for row in exports if row.get('status')=='new_api_untested'}
     try:
         from .special_complex03_cases import APIS as complex_apis
@@ -772,8 +780,11 @@ compiler flags and per-function measurement provenance.
 
 Historical and newly measured comparisons use saved per-case references for
 every implementation on the same inputs. The compiler inventory lists {canonical} mapped canonical
-names across {len(MODULES)} modules and {len(exports)} exported names; these are not
-all independently verified against Sci 0.3. There are {pending_new} currently
+names across {len(MODULES)} modules and {len(public_exports)} callable exported names.
+Of these, {mapped_exports} exported names have a saved reference through their
+canonical implementation and {unmapped_exports} lack one. Public aliases share
+the original case/reference data; they are not counted as independent numerical
+measurements or independently verified against Sci 0.3. There are {pending_new} currently
 unmeasured new API names, {pending_other} other untested exports and
 {unresolved} unresolved legacy mappings.
 The [coverage audit](../../results/coverage.csv) explicitly marks pending names
