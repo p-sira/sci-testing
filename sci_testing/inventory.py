@@ -149,6 +149,57 @@ def reconcile(legacy_rows, current_rows):
     return [entries[key] for key in sorted(entries)]
 
 
+def refresh_inventory(previous_rows, current_rows):
+    """Refresh compiler exports while retaining audited historical recipe IDs.
+
+    The Sci 0.3 graph extraction moves the former ``sparse.csgraph`` functions
+    into ``sci::graph``. Their saved input IDs remain stable, but they are no
+    longer public exports at their historical paths.
+    """
+    previous = {row['api']: row for row in previous_rows}
+    if len(previous) != len(previous_rows):
+        raise ValueError('duplicate previous inventory names')
+    current = {row[0]: row for row in current_rows}
+    if len(current) != len(current_rows):
+        raise ValueError('duplicate compiler-resolved export names')
+
+    previous_exports = {name for name, row in previous.items()
+                        if row['kind'] == 'public_export'}
+    moved = {name: f'graph.{name.rsplit(".", 1)[-1]}'
+             for name in previous_exports - current.keys()
+             if name.startswith('sparse.csgraph.')}
+    if any(destination not in current for destination in moved.values()):
+        raise ValueError('graph extraction has unresolved public exports')
+    missing = previous_exports - current.keys() - moved.keys()
+    if missing:
+        raise ValueError(f'public exports disappeared without reviewed mapping: {sorted(missing)}')
+    reverse_moved = {new: old for old, new in moved.items()}
+    if len(reverse_moved) != len(moved):
+        raise ValueError('ambiguous moved graph exports')
+
+    updated = {}
+    for name, (api, canonical, source, line) in current.items():
+        prior = previous.get(name) or previous.get(reverse_moved.get(name, ''))
+        if prior is None:
+            status = 'new_api_untested'
+            evidence = 'new compiler export; independent reference not validated'
+        else:
+            status, evidence = prior['status'], prior['evidence']
+        updated[name] = [api, canonical, source, line, status, evidence, 'public_export']
+
+    for name, prior in previous.items():
+        if name in current:
+            continue
+        canonical = moved.get(prior['canonical'], prior['canonical'])
+        if name in moved:
+            canonical = current[moved[name]][1]
+        if canonical and canonical not in current:
+            raise ValueError(f'{name}: historical alias target is no longer exported: {canonical}')
+        updated[name] = [name, canonical, prior['source'], prior['line'],
+                         prior['status'], prior['evidence'], 'legacy_alias']
+    return [updated[name] for name in sorted(updated)]
+
+
 def migration_summary(rows):
     """Separate namespace moves, truly new names and unverified comparisons."""
     from collections import Counter
@@ -169,13 +220,24 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=Path, default=ROOT / 'api_inventory.csv')
     parser.add_argument('--reconcile', action='store_true',
                         help='map old case IDs to the current exports and record untested APIs')
+    parser.add_argument('--refresh', action='store_true',
+                        help='refresh an existing reconciled inventory against compiler exports')
     parser.add_argument('--legacy', type=Path,
                         help='original pre-migration API registry, when reconciling')
     arguments = parser.parse_args()
     rows = inventory(arguments.doc_root)
     if not rows:
         parser.error(f'no sci_*.json Rustdoc inventories in {arguments.doc_root}')
-    if arguments.reconcile:
+    if arguments.reconcile and arguments.refresh:
+        parser.error('--reconcile and --refresh are mutually exclusive')
+    if arguments.refresh:
+        with arguments.output.open(newline='') as stream:
+            previous = list(csv.DictReader(stream))
+        if not previous or 'kind' not in previous[0]:
+            parser.error('--refresh requires an existing reconciled inventory')
+        rows = refresh_inventory(previous, rows)
+        headers = HEADERS
+    elif arguments.reconcile:
         if arguments.legacy is None:
             parser.error('--reconcile requires --legacy pointing to the original pre-migration CSV')
         with arguments.legacy.open(newline='') as stream:

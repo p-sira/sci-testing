@@ -868,10 +868,6 @@
       "count": 2006,
       "sha256": "bc16f6870b5303336bd9581ddcd24836d578b10307a0e700e56a66ccb46d4bae"
     },
-    "linalg/find_best_blas_type.csv": {
-      "count": 2002,
-      "sha256": "f73c169aed96ced1d4875b6726fcd8514e012d582991486b8e1321c34b71ba93"
-    },
     "linalg/fractional_matrix_power.csv": {
       "count": 2027,
       "sha256": "e404bcbcf0f697ce2d63ae6f292567bb76543450c31e555cc728f8d587b42269"
@@ -879,14 +875,6 @@
     "linalg/funm.csv": {
       "count": 2009,
       "sha256": "3172f0d06f0f85b626a29287616f52edf9d576b4bc199b84802eb78f5bd710c9"
-    },
-    "linalg/get_blas_funcs.csv": {
-      "count": 2005,
-      "sha256": "89fcddf89b273fb5d6ca04dd7444a8ab8e4e956d49f186479aa75df0eaac2d59"
-    },
-    "linalg/get_lapack_funcs.csv": {
-      "count": 2004,
-      "sha256": "7e089017ee256e6f9f8683e71ea4b9055a9909ec55d7cc593e28a3233f0bd004"
     },
     "linalg/hadamard.csv": {
       "count": 2003,
@@ -1384,10 +1372,6 @@
       "count": 2016,
       "sha256": "5edbb07c19c112bc9876bfe2ab58a894aaf09d8472aa40f5f5b3b11a90c81601"
     },
-    "signal/choose_conv_method.csv": {
-      "count": 2012,
-      "sha256": "9b37e1b16470a77a5d8107c86e964a1138aadc85a2a6228b1f5b43d441f69c2e"
-    },
     "signal/closest_STFT_dual_window.csv": {
       "count": 2008,
       "sha256": "631fa5aa9de51e0f0dd8463bbe57c3c8bce16b329b3acee6f588651897f94a99"
@@ -1460,10 +1444,6 @@
       "count": 2006,
       "sha256": "d03111497cb3d6a215940759d58ccd7e119984ff1417d6199b762c7795d077c2"
     },
-    "signal/dfreqresp.csv": {
-      "count": 2003,
-      "sha256": "d26f06d89f08eb9097266ff80a4e23ec1b27252e05d1bb71a88e4d7136aeb355"
-    },
     "signal/dimpulse.csv": {
       "count": 2004,
       "sha256": "a4475f685dea3b7d68c53f524df57ab0b0b338c8435b1b7aa8e3498239978c52"
@@ -1527,10 +1507,6 @@
     "signal/firwin_2d.csv": {
       "count": 2002,
       "sha256": "01a0c4daa9c00f30adefd94e25ed85659239fe370dccfe2edd205f26c7b339c9"
-    },
-    "signal/freqresp.csv": {
-      "count": 2003,
-      "sha256": "e3b4088805b4da1e08b4bf718fe71e78726405f8807dabea7f94c8cf9e82fbea"
     },
     "signal/freqs.csv": {
       "count": 2002,
@@ -2004,10 +1980,6 @@
       "count": 2002,
       "sha256": "c92a5a0f7936465dc9b69b909c146230d4516d0081d7bda0b8f6531d23c83653"
     },
-    "sparse.linalg/aslinearoperator.csv": {
-      "count": 2002,
-      "sha256": "53ab0a1d01d519ad8690eb14f32dec456446e501688240ffd12b920295ae0f2b"
-    },
     "sparse.linalg/bicg.csv": {
       "count": 2003,
       "sha256": "d0215a1800f5bde316f241414061ca51181954aaa273574c0a41878a901f7837"
@@ -2039,10 +2011,6 @@
     "sparse.linalg/expm_multiply.csv": {
       "count": 2002,
       "sha256": "ae2f855527fbb5c94b05373de550ec3e2f51c98c05aaa3021076a1ce1be36780"
-    },
-    "sparse.linalg/factorized.csv": {
-      "count": 2002,
-      "sha256": "b7ac00cb47f236fa1ddbd974bbfd56a46138d61ace0addc7c759c7c68492a5b7"
     },
     "sparse.linalg/funm_multiply_krylov.csv": {
       "count": 2002,
@@ -2196,10 +2164,6 @@
       "count": 2002,
       "sha256": "8b67e07400781b7c22526b17c71f2fb9a06ae8d08cd048c6627dce68003942fe"
     },
-    "sparse/get_index_dtype.csv": {
-      "count": 2002,
-      "sha256": "6cfaa3859d671dba6f6627140de12f66017bfbb68c18310daf6e3d5c22be4727"
-    },
     "sparse/hstack.csv": {
       "count": 2002,
       "sha256": "11f29b795997d92b171b0a0408e7e8b08c054b87481acfa7bd79472527d7fc4b"
@@ -2207,10 +2171,6 @@
     "sparse/identity.csv": {
       "count": 2003,
       "sha256": "a59de318188805aea5a812d8bf75612ce8ecefdf7770b11f1f759cb7e8e8b559"
-    },
-    "sparse/issparse.csv": {
-      "count": 2002,
-      "sha256": "149f916807c26c79cc9067e6a4ae398cb4d64196d4444375d5b50b7b7a23bd0b"
     },
     "sparse/kron.csv": {
       "count": 2002,
@@ -2251,10 +2211,6 @@
     "sparse/random_array.csv": {
       "count": 2003,
       "sha256": "51891f6d51e50532af8ecc3e30e2dc14c50180a0317fec2af52508b2c1ea0465"
-    },
-    "sparse/safely_cast_index_arrays.csv": {
-      "count": 2002,
-      "sha256": "8cca658b1233194efeecdc7d584b3f6cd11e17a5f39d47351071eb97b3c6e775"
     },
     "sparse/save_npz.csv": {
       "count": 2002,
@@ -2728,10 +2684,6 @@
       "count": 2001,
       "sha256": "28d81e90f39f02e82452575c5ea96feff9bf83a7406d9757fad30c4d4149e22b"
     },
-    "special/cbrt.csv": {
-      "count": 2001,
-      "sha256": "b8cfeef5f6c227079d9bdde859d039c402a7dad8da2c6b245987f223e8242413"
-    },
     "special/cel.csv": {
       "count": 2001,
       "sha256": "ce2446dd8ec695c7c139ae68a46310c7d1e1486db2e44b1ebb7e46ac7a2b9d58"
@@ -3020,14 +2972,6 @@
       "count": 2001,
       "sha256": "b3613d89e41f9a60686ca5a47ee0c9a3191a740f39bd68157d134a6fce0deec9"
     },
-    "special/exp10.csv": {
-      "count": 2001,
-      "sha256": "4492e494112f8b7d18db4296c681a41b219c0ca6ee7a1ec641e08d17b4453260"
-    },
-    "special/exp2.csv": {
-      "count": 2001,
-      "sha256": "903f8960f0b6ec2b58eb7e6ac39bd5a321baa55c9614a7f8304a6886abf87f68"
-    },
     "special/expi.csv": {
       "count": 2001,
       "sha256": "e43cdc9ff56be0fa2b02ed7f518c416c624dc2674d76f31aa4ce4737dd336c9f"
@@ -3035,10 +2979,6 @@
     "special/expit.csv": {
       "count": 2001,
       "sha256": "ddbebe9dac01c5112add6e0fc524d835a0f7e225bc8a00fb86b2184f65d1d3a2"
-    },
-    "special/expm1.csv": {
-      "count": 2001,
-      "sha256": "ed788b8503f4bfb8c5bcaedcb74d5b5e0b5dd0e8fa7957737cc9922d748cd129"
     },
     "special/expn.csv": {
       "count": 2001,
@@ -3151,10 +3091,6 @@
     "special/genlaguerre.csv": {
       "count": 2003,
       "sha256": "69ba2c23bd003df02e196a502740d044bd99184f89057a47a19d35164326318d"
-    },
-    "special/geterr.csv": {
-      "count": 2000,
-      "sha256": "15afcb2df47be87a27647bd5dad6d1abdfa29d8d73b5d71beeaec8c4c7673d38"
     },
     "special/h1vp.csv": {
       "count": 2001,
@@ -3455,10 +3391,6 @@
     "special/ln_multinomial.csv": {
       "count": 2006,
       "sha256": "bbdb3f5a7f685ced4fe9ed655d86875309fc7e9987faf62ccb028a3192f6abb8"
-    },
-    "special/log1p.csv": {
-      "count": 2001,
-      "sha256": "aeae32bbfd4c3bd6f13591cf836095693853763619bb0d3d5579eba7a77a2241"
     },
     "special/log_expit.csv": {
       "count": 2001,
@@ -3848,14 +3780,6 @@
       "count": 2001,
       "sha256": "621400aad6e13212055df21d7040e02000cb88028bc441178b39c8d54c0b7a89"
     },
-    "special/round.csv": {
-      "count": 2001,
-      "sha256": "854efb38e370da50f5680b257b2a08d76d8776ebcd29c3f9f18f203b68439c36"
-    },
-    "special/seterr.csv": {
-      "count": 2001,
-      "sha256": "414f0cbed930bd75d04a1687035c4f9ac60622b75213df11e341559745cc428b"
-    },
     "special/sh_chebyt.csv": {
       "count": 2003,
       "sha256": "00ec098b589686a24139ad7f55ced4c1557fc4aa6f46815b33316dfe732ef1f2"
@@ -4088,10 +4012,6 @@
       "count": 2003,
       "sha256": "7d6ff907d1b3e11b56344d260023c58785edeefef940ef12543202c2c2cb1433"
     },
-    "stats/abs.csv": {
-      "count": 2006,
-      "sha256": "ed55ee070b0b9481fa96fff4b6654cbdaf971b734a9c1d9608a2db5d12e63095"
-    },
     "stats/alexandergovern.csv": {
       "count": 2005,
       "sha256": "a95b7e000c41a0de8a2ecb8f466283b0ae4cc66c0776bc9cd66d3a040b4e30c6"
@@ -4264,10 +4184,6 @@
       "count": 2224,
       "sha256": "b5fe8cfafd437725a3401d6c2affe84cbfef6279053cbd73ce75c291ecb8a857"
     },
-    "stats/exp.csv": {
-      "count": 2007,
-      "sha256": "e31b8e1301108a332ab72505c7a45499787e786c0922d120f4930ee3264f1d0b"
-    },
     "stats/expectile.csv": {
       "count": 2015,
       "sha256": "8716b930822565aae9fc4d77151dac82e5239947188bda0452308cfb0cc6a562"
@@ -4371,10 +4287,6 @@
     "stats/lmoment.csv": {
       "count": 2020,
       "sha256": "5b5a54c1d5c4713d5a396767a48fb4a8a60f4abfdaa88b16d7627eb6a209199c"
-    },
-    "stats/log.csv": {
-      "count": 2003,
-      "sha256": "b11302e98c2f61fc5733bfde1429f877f7ff1abda0fcd543569296fa7cd2a263"
     },
     "stats/logpdf.csv": {
       "count": 2163,
@@ -4728,11 +4640,11 @@
   "format": 2,
   "provenance": {
     "generator_equivalence_verified": false,
-    "historical_cases_sha256": "c5885448a2609ed08864f7977b3ee900e52a39ab3a38a9e5af66cf3ad3ff6ba3",
-    "historical_file_count": 1124,
-    "historical_measurements_sha256": "5ac98dfbe1eabb0bcbee22d4eff9419be159a726c66432d15a739b48798ab896",
-    "kind": "historical_snapshot_extension",
-    "new_file_count": 57
+    "historical_cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
+    "historical_file_count": 1181,
+    "historical_measurements_sha256": "273f2e3654b2f9f5728a89307d0a56266afe2810b5c66966eb42fa6544dc3070",
+    "kind": "reviewed_legacy_prune",
+    "removed_file_count": 22
   },
   "recipe_sha256": "54fb5976327d219e45c0c254c025a0982eb274909cfc3f3a8bee6be65d14d0e4"
 }

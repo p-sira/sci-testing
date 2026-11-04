@@ -1,4 +1,4 @@
-"""Generate library comparison pages using measured Sci outputs as the baseline."""
+"""Generate library comparison pages against saved per-case references."""
 import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import gc
@@ -45,7 +45,7 @@ NATIVE_MODULES = frozenset(('complex', 'constants', 'differentiate', 'fft',
                             'sparse', 'spatial', 'special', 'stats'))
 BOOST = 'https://www.boost.org/doc/libs/latest/libs/math/doc/html/math_toolkit/'
 NOTES = {
-    'sparse':'Canonical CSR and COO arrays retain explicit zeros. Matrix outputs include dimensions; graph distances retain infinities. Eigenpairs are compared by ordered values with independent residual checks; matching cardinality, permutation validity, flow conservation and random shape/count use invariants where outputs are nonunique. Sparse LU, iterative solves and matrix functions use pinned public SciPy references. Each scalar uses (class,value): class 0 for finite data, ±1 for signed infinity and 2 for NaN, with zero nonfinite payloads. This preserves unreachable vertices; exact tags contribute to component means. RNG streams differ. Dense samples preserve graph structure, integer capacities and dependent dimensions; fixed discrete profiles may repeat. Rust signature adaptations and bounded dense fallbacks are documented in Sci sparse coverage.',
+    'sparse':'Canonical CSR and COO arrays retain explicit zeros. Matrix outputs include dimensions; graph algorithms now live in sci::graph (sci-graph), while their historical sparse.csgraph case IDs and files remain stable. Graph distances retain infinities. Eigenpairs are compared by ordered values with independent residual checks; matching cardinality, permutation validity, flow conservation and random shape/count use invariants where outputs are nonunique. Sparse LU, iterative solves and matrix functions use pinned public SciPy references. Each scalar uses (class,value): class 0 for finite data, ±1 for signed infinity and 2 for NaN, with zero nonfinite payloads. This preserves unreachable vertices; exact tags contribute to component means. RNG streams differ. Dense samples preserve graph structure, integer capacities and dependent dimensions; fixed discrete profiles may repeat. Rust signature adaptations and bounded dense fallbacks are documented in Sci sparse coverage.',
     'cluster':'Vector quantization uses Euclidean distances and first-minimum ties; whitening divides by population standard deviations. Hierarchy fixtures also check counts, leaf ordering and partitions. K-means receives an explicit initial codebook. Returned discrete indices and tree metadata are recorded alongside distances.',
     'complex':'Complex outputs flatten real then imaginary components. Functions use principal branches; powers preserve their explicit real, complex or integer exponent conventions. All 34 complex APIs use high-precision mpmath mathematical references, with explicit signed-zero branch banks. NumPy provides the public binary64 complex operations; SciPy, Boost.Math and GSL do not expose equivalent general-purpose complex arithmetic. Signed-zero and nonfinite contracts remain in the Sci API tests.',
     'constants':'Vacuum conversions use metres and hertz and the exact SI value c = 299792458 m/s. Temperature recipes convert Celsius to Fahrenheit. CODATA values, uncertainties, unit strings and searches use the pinned SciPy constants table. Text metadata is encoded as UTF-8 lengths and bytes; Sci dtype f64 corresponds to NumPy float64.',
@@ -405,7 +405,6 @@ def competitors(case):
     if 'p0' in a or 'p' in a or 'arguments' in a or 'raw' in a or a.get('explicit') or a.get('io_case'):
         from .registered_cases import reference, reference_result
         library='NumPy' if a.get('explicit') and api.startswith('linalg.') else 'SciPy'
-        if api in ['special.geterr','special.seterr']:return {}
         try:
             with warnings.catch_warnings(record=True) as captured:
                 warnings.simplefilter('always')
@@ -539,11 +538,10 @@ ZERO=mp.mpf(0)
 METRIC_PRECISION_DPS = 160
 
 
-def component_error(actual, reference, *, binary64):
-    # Equality of two binary64 values proves exact agreement with a binary64
-    # oracle. Every unequal value and every high-precision oracle still uses mp.
-    if binary64 and math.isfinite(actual) and actual==float(reference):return ZERO
-    return symmetric_error(actual,mp.mpf(reference))
+def component_error(actual, reference):
+    # Compare with the full decimal reference, even when its binary64 rounding
+    # equals the implementation's output.
+    return symmetric_error(actual,reference)
 
 
 def digest_sources():
@@ -585,57 +583,68 @@ def number(x): return mp.nstr(x,5,min_fixed=-3,max_fixed=5)
 
 def comparison_submodule(api, canonical):
     """Group historical aliases under their Sci 0.3 public namespace."""
+    if canonical and canonical.startswith('graph.'):
+        return 'graph'
     path=(canonical or api).split('.')
     return path[1] if len(path)>2 else None
 
 
 def summarize_api(api, batch, records, libraries, failed):
-    """Produce the authenticated numerical row without page presentation prose."""
-    cells=[]
-    baseline_failures=0
-    reference_maximum=None;reference_sum=ZERO;reference_count=0
-    for case in batch:
-        record=records[case['id']]
-        baseline=record['libraries']['Sci']
-        if 'error' in baseline:
-            baseline_failures+=1
-            entry=failed.setdefault((api,'Sci'),[0,baseline['error'],case['id']]);entry[0]+=1
-        elif len(baseline['values'])!=len(record['reference']):
-            raise ValueError(f'{case["id"]}: shape mismatch in Sci')
-        else:
-            errors=[component_error(actual,reference,binary64=False)
-                    for actual,reference in zip(baseline['values'],record['reference'])]
-            if errors:
-                current=max(errors)
-                reference_maximum=current if reference_maximum is None else max(reference_maximum,current)
-                reference_sum+=mp.fsum(errors)
-                reference_count+=len(errors)
-    for lib in libraries:
-        sums=[];maximum=None;scalar_count=0;failures=0;unavailable=0;baseline_missing=0
+    """Compare each implementation against its saved high-precision reference."""
+    # Parse decimal-string references under the intended metric precision even
+    # when the caller renders a small in-memory batch outside the CLI context.
+    with mp.workdps(METRIC_PRECISION_DPS):
+        cells=[]
+        baseline_failures=0
+        baseline_unavailable=0
+        reference_maximum=None;reference_sum=ZERO;reference_count=0
         for case in batch:
-            record=records[case['id']];result=record['libraries'].get(lib)
-            if result is None:unavailable+=1;continue
-            if 'error' in result:
-                failures+=1
-                entry=failed.setdefault((api,lib),[0,result['error'],case['id']]);entry[0]+=1
+            record=records[case['id']]
+            baseline=record['libraries'].get('Sci')
+            if baseline is None:
+                baseline_unavailable+=1
+            elif 'error' in baseline:
+                baseline_failures+=1
+                entry=failed.setdefault((api,'Sci'),[0,baseline['error'],case['id']]);entry[0]+=1
+            elif len(baseline['values'])!=len(record['reference']):
+                raise ValueError(f'{case["id"]}: shape mismatch in Sci')
+            else:
+                skip=len(case['args']['obs']) if api=='cluster.vq.vq' else 0
+                errors=[component_error(actual,reference)
+                        for actual,reference in zip(baseline['values'][skip:],record['reference'][skip:])]
+                if errors:
+                    current=max(errors)
+                    reference_maximum=current if reference_maximum is None else max(reference_maximum,current)
+                    reference_sum+=mp.fsum(errors)
+                    reference_count+=len(errors)
+        for lib in libraries:
+            sums=[];maximum=None;scalar_count=0;failures=0;unavailable=0
+            for case in batch:
+                record=records[case['id']];result=record['libraries'].get(lib)
+                if result is None:unavailable+=1;continue
+                if 'error' in result:
+                    failures+=1
+                    entry=failed.setdefault((api,lib),[0,result['error'],case['id']]);entry[0]+=1
+                    continue
+                if len(result['values'])!=len(record['reference']):raise ValueError(f'{case["id"]}: shape mismatch in {lib}')
+                skip=len(case['args']['obs']) if api=='cluster.vq.vq' else 0
+                errors=[component_error(actual,ref)
+                        for actual,ref in zip(result['values'][skip:],record['reference'][skip:])]
+                if errors:
+                    current=max(errors);maximum=current if maximum is None else max(maximum,current)
+                    sums.append(mp.fsum(errors));scalar_count+=len(errors)
+            if unavailable==len(batch):
+                cells.append(f'—; unavailable {unavailable}/{len(batch)}')
                 continue
-            if len(result['values'])!=len(record['reference']):raise ValueError(f'{case["id"]}: shape mismatch in {lib}')
-            baseline=record['libraries']['Sci']
-            if 'error' in baseline:baseline_missing+=1;continue
-            skip=len(case['args']['obs']) if api=='cluster.vq.vq' else 0
-            errors=[component_error(actual,ref,binary64=True) for actual,ref in zip(result['values'][skip:],baseline['values'][skip:])]
-            if errors:
-                current=max(errors);maximum=current if maximum is None else max(maximum,current)
-                sums.append(mp.fsum(errors));scalar_count+=len(errors)
-        if unavailable==len(batch):cells.append('—');continue
-        text=f'{number(maximum)} / {number(mp.fsum(sums)/scalar_count)}' if scalar_count else '—'
-        cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
-                     (f'; unavailable {unavailable}/{len(batch)}' if unavailable else '')+
-                     (f'; Sci unavailable {baseline_missing}/{len(batch)}' if baseline_missing else ''))
-    count=str(len(batch))+(f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')
-    reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
-                    if reference_count else '—')
-    return f'| `{api.split(".",1)[1]}` | {count} | {reference_cell} | '+' | '.join(cells)+' |'
+            text=f'{number(maximum)} / {number(mp.fsum(sums)/scalar_count)}' if scalar_count else '—'
+            cells.append(text+(f'; failed {failures}/{len(batch)}' if failures else '')+
+                         (f'; unavailable {unavailable}/{len(batch)}' if unavailable else ''))
+        count=(str(len(batch))+
+               (f'; Sci failed {baseline_failures}/{len(batch)}' if baseline_failures else '')+
+               (f'; Sci unavailable {baseline_unavailable}/{len(batch)}' if baseline_unavailable else ''))
+        reference_cell=(f'{number(reference_maximum)} / {number(reference_sum/reference_count)}'
+                        if reference_count else '—')
+        return '| '+' | '.join([f'`{api.split(".",1)[1]}`',count,reference_cell,*cells])+' |'
 
 
 def render(cases, records, meta, output, *, modules=None, cache=None):
@@ -677,11 +686,12 @@ def render(cases, records, meta, output, *, modules=None, cache=None):
                     [lib,*failure] for (name,lib),failure in failed.items() if name==api]})
         failures=[f'- `{api}` ({lib}): {count} failed; {reason}. Example: `{identifier}`.' for (api,lib),(count,reason,identifier) in failed.items()]
         failure_section='\n## Evaluation failures\n\n'+'\n'.join(failures)+'\n' if failures else ''
-        headers=['Function','Cases','Sci vs reference',*libraries]
+        headers=['Function','Cases','Sci',*libraries]
         table_header='| '+' | '.join(headers)+' |\n| '+' | '.join(['---','---:',*('---' for _ in headers[2:])])+' |\n'
         tables=[]
         for section in sorted(sections,key=lambda name:(name is None,name or '')):
-            namespace=f'sci::{module}'+(f'::{section}' if section else '')
+            namespace=('sci::graph' if module=='sparse' and section=='graph' else
+                       f'sci::{module}'+(f'::{section}' if section else ''))
             title=f'### `{namespace}`'
             count=len(sections[section])
             section_case_count=section_cases[section]
@@ -693,24 +703,27 @@ def render(cases, records, meta, output, *, modules=None, cache=None):
 
 [All modules and methodology](README.md) · [Public API](https://docs.rs/sci-{module})
 
-Measured binary64 (`f64`) results using **Sci-{module} as the reference**.
-Each library is compared with Sci on the same inputs. These differences measure
-agreement with Sci; independent accuracy references remain in the raw CSVs. This page
+Measured binary64 (`f64`) results compared against the **saved per-case reference**.
+Each implementation, including Sci-{module}, is evaluated against the same
+reference values stored in the raw CSVs. This page
 covers {case_count} cases and {api_count} public API names;
 coverage is limited to the operations and inputs below.
 
-## Agreement with Sci
+## Differences from saved references
 
-`Sci vs reference` is **maximum / mean difference between Sci and the saved
-independent mathematical reference in ε**. Other library cells are **maximum /
-mean difference from Sci in ε** over cases
-where both evaluations succeed. `Cases` counts input cases; `Sci failed N/T`
-identifies missing baseline evaluations. `failed N/T` counts that library's own
-failures; `Sci unavailable N/T` counts its successful evaluations excluded
-because Sci failed. `unavailable N/T` means the library has no compatible
+Every implementation column reports **maximum / mean symmetric relative
+difference from the saved reference in ε**, over successful evaluations.
+Reference source and precision vary by function. In particular, binary64
+reference values measure agreement with their generating method; these
+tables do not presume that any provider represents mathematical ground truth.
+`Cases` counts input cases; `Sci failed N/T` identifies Sci failures and
+`Sci unavailable N/T` identifies absent Sci measurements, while
+`failed N/T` counts other libraries' failures. A Sci failure does not exclude
+the same input from other libraries' measurements.
+`unavailable N/T` means the library has no compatible
 public operation for those inputs or distribution families; they are excluded
 from the reported mean and are not counted as numerical failures. A dash means
-no saved comparison or no paired finite results.
+no saved evaluation or no successful scalar comparisons.
 Means include all compared scalar components, including exact zeros.
 Full outputs, references, warnings and errors remain in the per-function CSVs.
 Tables are grouped by Sci 0.3 public submodule using the compiler-resolved
@@ -724,8 +737,11 @@ current public namespace, with their measured recipe names preserved.
 
 {NOTES[module]}
 
-Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, high-precision
-references and the environment are stored in that repository's `results/`.
+Inputs are generated deterministically into `sci-testing/cases/generated/<module>/<function>.csv` (optionally `.gz`); raw outputs, reference
+values and the environment are stored in that repository's `results/`.
+Reference provenance is recorded in `results/reference-provenance.json` when
+generated with the curated reference provider; historical sources are described
+by `results/environment.json` and the documented recipe definitions.
 NaN, infinity, signed-zero contracts, invalid domains and work-limit enforcement
 are outside this finite-input accuracy sample. Existing Sci API tests cover
 additional behavior. The [coverage audit](../../results/coverage.csv) checks every public function
@@ -754,8 +770,8 @@ compiler flags and per-function measurement provenance.
     unresolved=sum(row.get('status')=='unresolved_legacy' for row in exports)
     index=f"""# Sci library comparisons
 
-Historical and newly measured comparisons use each Sci module as the reference on
-the same saved inputs. The compiler inventory lists {canonical} mapped canonical
+Historical and newly measured comparisons use saved per-case references for
+every implementation on the same inputs. The compiler inventory lists {canonical} mapped canonical
 names across {len(MODULES)} modules and {len(exports)} exported names; these are not
 all independently verified against Sci 0.3. There are {pending_new} currently
 unmeasured new API names, {pending_other} other untested exports and
@@ -764,14 +780,13 @@ The [coverage audit](../../results/coverage.csv) explicitly marks pending names
 alongside measured sample counts, unique inputs, successes and failures.
 
 Tables are grouped by Sci 0.3 public submodule (including historical aliases)
-and list **Function**, **Cases**, **Sci vs reference**, then relevant libraries
-(SciPy, Boost.Math, GSL and others). The reference column compares Sci with
-the saved independent mathematical oracle; library columns compare each
-competitor with Sci. Each cell is **maximum / mean symmetric relative
-difference in machine epsilon**, over cases where both evaluations
-succeed. `failed N/T` counts that library's failures; `Sci failed N/T` in Cases
-counts baseline failures, and `Sci unavailable N/T` marks otherwise successful
-evaluations excluded from comparison. Unavailable comparisons use a dash. The per-function
+and list **Function**, **Cases**, **Sci**, then relevant libraries
+(mpmath, SciPy, Boost.Math, GSL and others). Every implementation column uses
+the same saved reference, with **maximum / mean symmetric relative
+difference in machine epsilon** over successful evaluations.
+`failed N/T` counts the named library's failures; `Sci failed N/T` in Cases
+counts Sci failures. An unavailable library has no compatible evaluation for
+that input, and a dash indicates no numerical comparisons. The per-function
 CSV preserves every reference, result, warning and exception.
 
 | Module | Recipe names | Cases |
@@ -800,13 +815,15 @@ Error-policy APIs execute every call. These samples do not establish domain-wide
 accuracy bounds. Ordinary Sci API tests retain invalid-input, NaN, infinity,
 signed-zero and work-limit contracts.
 
-Tables use the measured binary64 output from the corresponding **Sci-* crate**
-as their reference. Agreement with Sci does not establish numerical accuracy.
-Independent accuracy references remain in the raw CSV `reference` field: original
+Tables use the saved raw CSV `reference` field as the common numerical target.
+The trustworthiness of numerical accuracy claims depends on each reference's
+documented source and precision. Original
 module recipes use mpmath at 100 and 160 decimal digits, while complex facade
 operations use 200/320 digits (with higher precision around subnormal branch
 points); additional recipes use pinned public SciPy APIs, independent identities and quadrature. These
-references are independent of the table baseline. Public Sci APIs are
+reference values are used directly in all table columns. Structural and
+statistical outputs follow the chosen documented fixture conventions, which
+can differ across implementations even when each is valid. Public Sci APIs are
 called through typed Rust registrations and the pinned Sci fixture dispatchers;
 no Sci or private-backend result generates an expected value.
 
@@ -824,7 +841,7 @@ intermediate range limitations. Versions and compiler flags are recorded in
 
 ## Comparison metric
 
-For finite nonzero library output v and measured Sci output r,
+For finite nonzero library output v and saved reference r,
 
 \[
 E(v,r)=\frac{|v-r|}{\min(|v|,|r|)},\qquad E_\varepsilon=E/\varepsilon,
@@ -888,7 +905,9 @@ All reports and data belong to this repository; Sci links to them externally.
 
 """
     index+=f'- Sci commit: `{meta["sci_commit"]}`.\n- Harness source SHA-256: `{meta["testing_sources_sha256"]}`.\n- Input SHA-256: `{meta["cases_sha256"]}`.\n- {len(cases)} saved cases covering {len(sampled_apis)} recipe API names; {canonical} mapped canonical public functions in the inventory.\n- Native versions: {meta.get("native_libraries",{})}.\n- Independent Rust numerical providers: {meta.get("rust_oracle_libraries",{})}.\n'
-    if 'reference_environment' in meta:
+    if 'reference_refreshes' in meta:
+        index+='\nSelected primary references were regenerated from the documented mathematical providers. See `results/reference-provenance.json` for the source, exact expression and precision by API; other historical references remain as saved. The original library outputs are retained.\n'
+    elif 'reference_environment' in meta:
         index+='\nSci-only refresh: independent references and other library outputs are retained from the saved snapshot. See `reference_environment` in `results/environment.json` for their original provenance.\n'
     if 'sci_measurement_commits' in meta:
         index+='\nPer-function Sci revisions for partial refreshes are recorded under `sci_measurement_commits` in `results/environment.json`.\n'
@@ -1139,6 +1158,9 @@ def check_generated(cases, output, *, root=None, cached=False, exhaustive=False,
     meta,records=load_snapshot(cases,root=root,cached=cached)
     if meta['testing_sources_sha256'] != digest_sources():
         raise ValueError('Testing sources changed; rerun python -m sci_testing.report')
+    if 'reference_provenance_sha256' in meta:
+        from .reference_integrity import verify_provenance
+        verify_provenance(cases, records, meta, root)
     if 'coverage_sha256' in meta:
         saved=(root/'results/coverage.csv').read_text()
         if hashlib.sha256(saved.encode()).hexdigest()!=meta['coverage_sha256']:
@@ -1177,7 +1199,6 @@ def measure_sci(cases, executable):
     unique={};keys=[]
     for case in cases:
         key=json.dumps([case['api'],case['args']],sort_keys=True,separators=(',',':'))
-        if case['api'] in ['special.geterr','special.seterr']:key=case['id']
         keys.append(key)
         unique.setdefault(key,case)
     run=subprocess.run([str(executable)],input=''.join(json.dumps(c)+'\n' for c in unique.values()),
@@ -1228,6 +1249,44 @@ def refresh_sci(cases, records, executable, destination, apis):
             (destination/(name+'.gz')).unlink(missing_ok=True)
         changed.update(write_measurements(destination,files))
     return changed
+
+
+def stage_rebound_provenance(cases, records, previous, meta, stage, changed_apis):
+    """Stage a manifest rebinding, never changing primary reference hashes.
+
+    Sci/comparator refreshes modify only library results; unchanged measurement
+    files remain hardlinked to the verified original. Verify reference hashes
+    for rewritten APIs before updating the manifest's snapshot digest.
+    """
+    from .reference_integrity import (
+        MANIFEST,
+        load_prior_provenance,
+        reference_hashes,
+        serialize_provenance,
+    )
+
+    prior = load_prior_provenance(previous, ROOT/'results'/MANIFEST)
+    if prior is None:
+        return None
+    if prior['measurements_sha256'] != previous['measurements_sha256']:
+        raise ValueError('Saved reference provenance measurement digest mismatch')
+    if (prior['cases_sha256'] != meta['cases_sha256']
+            or set(prior['apis']) != set(cases.apis)
+            or set(prior['reference_sha256']) != set(cases.apis)):
+        raise ValueError('Saved reference provenance API or case identity mismatch')
+    current = reference_hashes(cases, records, apis=sorted(changed_apis))
+    if any(prior['reference_sha256'][api] != digest for api, digest in current.items()):
+        raise ValueError('Refresh changed saved primary reference values')
+    if previous['measurements_sha256'] == meta['measurements_sha256']:
+        return None
+    content = serialize_provenance(
+        prior['apis'], inputs_sha256=prior['cases_sha256'],
+        measurements_sha256=meta['measurements_sha256'],
+        hashes=prior['reference_sha256'])
+    meta['reference_provenance_sha256'] = hashlib.sha256(content).hexdigest()
+    staged_path = stage/MANIFEST
+    staged_path.write_bytes(content)
+    return staged_path
 
 
 def refresh_comparators(cases, records, destination, apis, *, native=None,
@@ -1564,6 +1623,8 @@ def main():
             staged_records=MeasurementStore(staged)
             coverage=preserved_coverage(previous,cases=cases,records=staged_records)
             meta['measurements_sha256']=directory_digest(staged)
+            staged_provenance=stage_rebound_provenance(
+                cases,staged_records,previous,meta,workspace,selected)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             for module,names in libraries.items():
                 meta['module_libraries'][module]=sorted(set(meta['module_libraries'][module])|names)
@@ -1576,6 +1637,8 @@ def main():
                 render_cached(cases,staged_records,meta,pages,
                        modules=selective_render_modules(args.output.resolve(),
                                                         {api.split('.')[0] for api in selected}))
+            staged_environment=workspace/'environment.json'
+            staged_environment.write_text(json.dumps(meta,indent=2)+'\n')
             for name in sorted(changed):
                 src=staged/name;dest=ROOT/'results/measurements'/name
                 dest.parent.mkdir(parents=True,exist_ok=True)
@@ -1584,7 +1647,9 @@ def main():
                 alternate.unlink(missing_ok=True)
             (ROOT/'results/coverage.csv').write_text(coverage)
             publish_summary(pages)
-            (ROOT/'results/environment.json').write_text(json.dumps(meta,indent=2)+'\n')
+            if staged_provenance is not None:
+                staged_provenance.replace(ROOT/'results/reference-provenance.json')
+            staged_environment.replace(ROOT/'results/environment.json')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):page.replace(args.output.resolve()/page.name)
         print(f'Backfilled {len(selected)} APIs from saved inputs and references')
@@ -1595,6 +1660,8 @@ def main():
     meta=environment(SCI)
     if not args.full:
         meta['reference_environment']=previous.get('reference_environment',previous)
+        if not args.extend and 'reference_provenance_sha256' in previous:
+            meta['reference_provenance_sha256']=previous['reference_provenance_sha256']
         # Append-only reference extensions document independently evaluated
         # new APIs. A Sci-only refresh must not erase that provenance.
         if 'reference_extensions' in previous:
@@ -1603,6 +1670,8 @@ def main():
             meta['comparison_refreshes']=previous['comparison_refreshes']
         if 'reference_refreshes' in previous:
             meta['reference_refreshes']=previous['reference_refreshes']
+        if 'prune_history' in previous:
+            meta['prune_history']=previous['prune_history']
         if args.module or args.extend:
             commits=previous.get('sci_measurement_commits',{api:previous['sci_commit'] for api in cases.apis}).copy()
             if args.extend:
@@ -1698,9 +1767,13 @@ def main():
             staged_records=MeasurementStore(staged)
             coverage=audit(cases,staged_records)
             meta['measurements_sha256']=directory_digest(staged)
+            staged_provenance=stage_rebound_provenance(
+                cases,staged_records,previous,meta,Path(directory),selected)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=Path(directory)/'pages'
             with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,staged_records,meta,pages)
+            staged_environment=Path(directory)/'environment.json'
+            staged_environment.write_text(json.dumps(meta,indent=2)+'\n')
             # Finish all audits and page generation before publishing changes.
             for name in sorted(changed):
                 path=staged/name
@@ -1711,7 +1784,9 @@ def main():
                 alternate.unlink(missing_ok=True)
             (results/'coverage.csv').write_text(coverage)
             publish_summary(pages)
-            (results/'environment.json').write_text(json.dumps(meta,indent=2)+'\n')
+            if staged_provenance is not None:
+                staged_provenance.replace(results/'reference-provenance.json')
+            staged_environment.replace(results/'environment.json')
             args.output.resolve().mkdir(parents=True,exist_ok=True)
             for page in pages.glob('*.md'):
                 page.replace(args.output.resolve()/page.name)

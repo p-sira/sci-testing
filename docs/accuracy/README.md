@@ -1,23 +1,22 @@
 # Sci library comparisons
 
-Historical and newly measured comparisons use each Sci module as the reference on
-the same saved inputs. The compiler inventory lists 1142 mapped canonical
-names across 17 modules and 2115 exported names; these are not
+Historical and newly measured comparisons use saved per-case references for
+every implementation on the same inputs. The compiler inventory lists 1142 mapped canonical
+names across 17 modules and 2102 exported names; these are not
 all independently verified against Sci 0.3. There are 0 currently
 unmeasured new API names, 0 other untested exports and
-53 unresolved legacy mappings.
+0 unresolved legacy mappings.
 The [coverage audit](../../results/coverage.csv) explicitly marks pending names
 alongside measured sample counts, unique inputs, successes and failures.
 
 Tables are grouped by Sci 0.3 public submodule (including historical aliases)
-and list **Function**, **Cases**, **Sci vs reference**, then relevant libraries
-(SciPy, Boost.Math, GSL and others). The reference column compares Sci with
-the saved independent mathematical oracle; library columns compare each
-competitor with Sci. Each cell is **maximum / mean symmetric relative
-difference in machine epsilon**, over cases where both evaluations
-succeed. `failed N/T` counts that library's failures; `Sci failed N/T` in Cases
-counts baseline failures, and `Sci unavailable N/T` marks otherwise successful
-evaluations excluded from comparison. Unavailable comparisons use a dash. The per-function
+and list **Function**, **Cases**, **Sci**, then relevant libraries
+(mpmath, SciPy, Boost.Math, GSL and others). Every implementation column uses
+the same saved reference, with **maximum / mean symmetric relative
+difference in machine epsilon** over successful evaluations.
+`failed N/T` counts the named library's failures; `Sci failed N/T` in Cases
+counts Sci failures. An unavailable library has no compatible evaluation for
+that input, and a dash indicates no numerical comparisons. The per-function
 CSV preserves every reference, result, warning and exception.
 
 | Module | Recipe names | Cases |
@@ -32,13 +31,13 @@ CSV preserves every reference, result, warning and exception.
 | [integrate](integrate.md) | 7 | 14135 |
 | [interpolate](interpolate.md) | 25 | 50224 |
 | [io](io.md) | 10 | 413 |
-| [linalg](linalg.md) | 109 | 218680 |
+| [linalg](linalg.md) | 106 | 212669 |
 | [optimize](optimize.md) | 10 | 20152 |
-| [signal](signal.md) | 179 | 358507 |
-| [sparse](sparse.md) | 100 | 198293 |
+| [signal](signal.md) | 176 | 352489 |
+| [sparse](sparse.md) | 95 | 188283 |
 | [spatial](spatial.md) | 33 | 66272 |
-| [special](special.md) | 405 | 811236 |
-| [stats](stats.md) | 169 | 342414 |
+| [special](special.md) | 397 | 795229 |
+| [stats](stats.md) | 166 | 336398 |
 
 
 ## Inputs and references
@@ -57,13 +56,15 @@ Error-policy APIs execute every call. These samples do not establish domain-wide
 accuracy bounds. Ordinary Sci API tests retain invalid-input, NaN, infinity,
 signed-zero and work-limit contracts.
 
-Tables use the measured binary64 output from the corresponding **Sci-* crate**
-as their reference. Agreement with Sci does not establish numerical accuracy.
-Independent accuracy references remain in the raw CSV `reference` field: original
+Tables use the saved raw CSV `reference` field as the common numerical target.
+The trustworthiness of numerical accuracy claims depends on each reference's
+documented source and precision. Original
 module recipes use mpmath at 100 and 160 decimal digits, while complex facade
 operations use 200/320 digits (with higher precision around subnormal branch
 points); additional recipes use pinned public SciPy APIs, independent identities and quadrature. These
-references are independent of the table baseline. Public Sci APIs are
+reference values are used directly in all table columns. Structural and
+statistical outputs follow the chosen documented fixture conventions, which
+can differ across implementations even when each is valid. Public Sci APIs are
 called through typed Rust registrations and the pinned Sci fixture dispatchers;
 no Sci or private-backend result generates an expected value.
 
@@ -81,7 +82,7 @@ intermediate range limitations. Versions and compiler flags are recorded in
 
 ## Comparison metric
 
-For finite nonzero library output v and measured Sci output r,
+For finite nonzero library output v and saved reference r,
 
 \[
 E(v,r)=\frac{|v-r|}{\min(|v|,|r|)},\qquad E_\varepsilon=E/\varepsilon,
@@ -143,14 +144,14 @@ All reports and data belong to this repository; Sci links to them externally.
 
 ## Snapshot
 
-- Sci commit: `c781e8259b175ebeb3c7d27a522ef3f3a7e24998`.
-- Harness source SHA-256: `b57a5dd7080a5bafd93ce5eceabeecad5d7a4044a0a05169e780776baa669143`.
-- Input SHA-256: `f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854`.
-- 2349606 saved cases covering 1181 recipe API names; 1142 mapped canonical public functions in the inventory.
-- Native versions: {'Boost.Math': '1_92', 'Boost.Multiprecision': '1_92', 'Boost.Numeric.uBLAS': '1_92', 'Boost.Graph': '1_92', 'Boost.Units': '1_92', 'GSL': '2.8'}.
+- Sci commit: `ddf4b06e7533a33079c8bf9d75650a5bf8df33bd`.
+- Harness source SHA-256: `1c94f3e62adf93ee5aff55d6c1e09d287764132787f9621dcc8451c4a32db222`.
+- Input SHA-256: `096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533`.
+- 2305544 saved cases covering 1159 recipe API names; 1142 mapped canonical public functions in the inventory.
+- Native versions: {'Boost.Graph': '1_92', 'Boost.Math': '1_92', 'Boost.Multiprecision': '1_92', 'Boost.Numeric.uBLAS': '1_92', 'Boost.Units': '1_92', 'GSL': '2.8'}.
 - Independent Rust numerical providers: {'RustFFT': '6.4.0', 'nalgebra': '0.35.0', 'statrs': '0.19.1'}.
 
-Sci-only refresh: independent references and other library outputs are retained from the saved snapshot. See `reference_environment` in `results/environment.json` for their original provenance.
+Selected primary references were regenerated from the documented mathematical providers. See `results/reference-provenance.json` for the source, exact expression and precision by API; other historical references remain as saved. The original library outputs are retained.
 
 Per-function Sci revisions for partial refreshes are recorded under `sci_measurement_commits` in `results/environment.json`.
 

@@ -1,0 +1,425 @@
+{
+  "approvals": [
+    {
+      "api": "cluster.hierarchy.maxRstat",
+      "approved": false,
+      "cases": 2007,
+      "input_sha256": "15eb2ad8f8628264e804e12b6041a12ddaf46b54174b51f923b50da65b4a3e5d",
+      "measurement_sha256": "11d5af0cd675f34e57db1df21f474b82ab29baf28b22cb7f06f34c3d4f2540f8",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "interpolate.splprep",
+      "approved": false,
+      "cases": 2007,
+      "input_sha256": "7d874e379891e35e204aa6ae79a4bd90c2ea02d86a6dbddd639632c35bfc10b9",
+      "measurement_sha256": "db8ceee6e02aa6e84f5dbf9b2f405d93ac5f67acd8e0aa25af235d0fe3819996",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "interpolate.splrep",
+      "approved": false,
+      "cases": 2005,
+      "input_sha256": "4e70226b7e55ce90801db4276f60c236fceb2e811ab7c7027723ddf02e547750",
+      "measurement_sha256": "433aff71281e042b67835c6881a6fca57c1c7673d6829161e7d573e360c54f1d",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "linalg.find_best_blas_type",
+      "approved": true,
+      "cases": 2002,
+      "input_sha256": "f73c169aed96ced1d4875b6726fcd8514e012d582991486b8e1321c34b71ba93",
+      "measurement_sha256": "c90fa693d5335c4c1530a04bdda54973ba55302ff03311c5db498e69d9d5b461",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "linalg.get_blas_funcs",
+      "approved": true,
+      "cases": 2005,
+      "input_sha256": "89fcddf89b273fb5d6ca04dd7444a8ab8e4e956d49f186479aa75df0eaac2d59",
+      "measurement_sha256": "3e07aa982c4c8c97b198d88668529b6adcf087394db4b1df44c771560b3e865f",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "linalg.get_lapack_funcs",
+      "approved": true,
+      "cases": 2004,
+      "input_sha256": "7e089017ee256e6f9f8683e71ea4b9055a9909ec55d7cc593e28a3233f0bd004",
+      "measurement_sha256": "da33fb7b2b190f7615e1cd8d38feb7767014062a959870815524236020723a9f",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "linalg.solve_lyapunov",
+      "approved": false,
+      "cases": 2002,
+      "input_sha256": "7311bc04010cffa3f7684b5e1b29d3b407f57e2679782bf56c0d2f11ce8ff8bb",
+      "measurement_sha256": "8ade8356ff1a84972ac11fea34eb67cef36335f2c0a70ba57fa393713a62308b",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "signal.check_COLA",
+      "approved": false,
+      "cases": 2009,
+      "input_sha256": "691881cb061d7d5f587b5e2093b79f191c748eb3f006837e9ddc108671280f31",
+      "measurement_sha256": "6fd3d42876c7a655f2dcfac5375b59b793b5c013d6b8abb97c8311939ce0e160",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "signal.check_NOLA",
+      "approved": false,
+      "cases": 2009,
+      "input_sha256": "9f20d769a15dcd47f8219921378c99c9277e1bfa3274514b0ce1d42bf7004ace",
+      "measurement_sha256": "659567ce3af9088cbcccb4e2a406498c4a21d0a38398654e66948bf28766b471",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "signal.choose_conv_method",
+      "approved": true,
+      "cases": 2012,
+      "input_sha256": "9b37e1b16470a77a5d8107c86e964a1138aadc85a2a6228b1f5b43d441f69c2e",
+      "measurement_sha256": "c0d6aafda347f2797567fa30d80f7849c541de4b0eef8343968f9e549f6b1d08",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "signal.closest_STFT_dual_window",
+      "approved": false,
+      "cases": 2008,
+      "input_sha256": "631fa5aa9de51e0f0dd8463bbe57c3c8bce16b329b3acee6f588651897f94a99",
+      "measurement_sha256": "01ec858d0b5cd2c08c46c734ede7ccfdf4c478041d4bed74dc965f98cd169999",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "signal.dfreqresp",
+      "approved": true,
+      "cases": 2003,
+      "input_sha256": "d26f06d89f08eb9097266ff80a4e23ec1b27252e05d1bb71a88e4d7136aeb355",
+      "measurement_sha256": "7636710863781d46da8b392a856082274f78841b09825a31820e9e4318a3a2aa",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "signal.freqresp",
+      "approved": true,
+      "cases": 2003,
+      "input_sha256": "e3b4088805b4da1e08b4bf718fe71e78726405f8807dabea7f94c8cf9e82fbea",
+      "measurement_sha256": "8a8b99f13984677be73d3b89ef3b707d231dde777fe1c27778d03e5ca334989b",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "signal.sosfreqz",
+      "approved": false,
+      "cases": 2002,
+      "input_sha256": "95658759a07fdcb9f38e1f714ded59979110b000f9df9edab745f234c99af935",
+      "measurement_sha256": "c6803ac20d8f3c6f8b1b4f0ad2512175d602f24a2e73a13ca20180b6a763eb3c",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "sparse.bmat",
+      "approved": false,
+      "cases": 2002,
+      "input_sha256": "8cdee9db03f0ff50d24d542e9f6699b156fbe26827bdef57452ba0adb6b348e6",
+      "measurement_sha256": "94e559c8c8b2dd50dd5235c32d21a70efefe61cb32d8eec9166df9dd620b18f6",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "sparse.diags_array",
+      "approved": false,
+      "cases": 2002,
+      "input_sha256": "f5bcc6ce603e0affd1121553d49ff6b79a34d85e80bcf36b2a0ad1dbfb8210f8",
+      "measurement_sha256": "bce1d4b9776d2cd94d7d2973fb1b42e07ae078c9f395d2fc84baf4deac65f9dc",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "sparse.eye_array",
+      "approved": false,
+      "cases": 2005,
+      "input_sha256": "2b67ca336d02aee860f17d87da68bea259877f6f388c9f289d4d229e5b780442",
+      "measurement_sha256": "e250386da4e910e82cb0433d56bdc29894fd53e825e40be41d94f5be1ede791f",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "sparse.get_index_dtype",
+      "approved": true,
+      "cases": 2002,
+      "input_sha256": "6cfaa3859d671dba6f6627140de12f66017bfbb68c18310daf6e3d5c22be4727",
+      "measurement_sha256": "20ece5ded357c7fdf7ece98caa372540b3ba13e795ebeaa5472eb97a9488d60c",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "sparse.issparse",
+      "approved": true,
+      "cases": 2002,
+      "input_sha256": "149f916807c26c79cc9067e6a4ae398cb4d64196d4444375d5b50b7b7a23bd0b",
+      "measurement_sha256": "10e13b8fa33dd2542ec018353e905db5b7e32518d398af16d361d7801ded79da",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "sparse.linalg.aslinearoperator",
+      "approved": true,
+      "cases": 2002,
+      "input_sha256": "53ab0a1d01d519ad8690eb14f32dec456446e501688240ffd12b920295ae0f2b",
+      "measurement_sha256": "79f76fecfe2d919bb10ebdb19f81d47ceb47e7d4af71cf05909be6c62cad964c",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "sparse.linalg.factorized",
+      "approved": true,
+      "cases": 2002,
+      "input_sha256": "b7ac00cb47f236fa1ddbd974bbfd56a46138d61ace0addc7c759c7c68492a5b7",
+      "measurement_sha256": "254c134b5ea05204729ae37220a4abe21eb5a9a5f652e8bb3eb0cf95de479b4e",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "sparse.matrix_transpose",
+      "approved": false,
+      "cases": 2002,
+      "input_sha256": "1a6ef8c095f99a3fb12d0f6de31fd7a5ea34a8a65b5814bdb31a08c09348fae3",
+      "measurement_sha256": "7cb1cb5b4d99b871a4cc84cb3d9ebdd645a256eead1c8979e8cae5e22b199e98",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "sparse.safely_cast_index_arrays",
+      "approved": true,
+      "cases": 2002,
+      "input_sha256": "8cca658b1233194efeecdc7d584b3f6cd11e17a5f39d47351071eb97b3c6e775",
+      "measurement_sha256": "f545284bd622df3e6e9cf1322675c19b82d2b40ca6a319c1908a43e095b15860",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.assoc_laguerre",
+      "approved": false,
+      "cases": 2001,
+      "input_sha256": "e9b3e7311d658f4c51913e7f774ec31b123bce626266073a7afaace094c27ac0",
+      "measurement_sha256": "d7685d58981a138268533f8c5bfa7147d30017f71a4c8e196ede279f3427ad35",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "special.cbrt",
+      "approved": true,
+      "cases": 2001,
+      "input_sha256": "b8cfeef5f6c227079d9bdde859d039c402a7dad8da2c6b245987f223e8242413",
+      "measurement_sha256": "ac85fe221e477328564cb7380334b7f632426f014c96a7c3dcbc6a446a652b65",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.exp10",
+      "approved": true,
+      "cases": 2001,
+      "input_sha256": "4492e494112f8b7d18db4296c681a41b219c0ca6ee7a1ec641e08d17b4453260",
+      "measurement_sha256": "9b588897473500a22b6a99fb13c966803d028f05f8f489d3a8c70741ccf4d607",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.exp2",
+      "approved": true,
+      "cases": 2001,
+      "input_sha256": "903f8960f0b6ec2b58eb7e6ac39bd5a321baa55c9614a7f8304a6886abf87f68",
+      "measurement_sha256": "da835cb62de2855491463111f0b119bae909a26d0e8904e33b59bc86f189994a",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.expm1",
+      "approved": true,
+      "cases": 2001,
+      "input_sha256": "ed788b8503f4bfb8c5bcaedcb74d5b5e0b5dd0e8fa7957737cc9922d748cd129",
+      "measurement_sha256": "d0b9cdb77a13f5828d4886ab17d5f4b39483237da978da04ac7a31f410114fc6",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.geterr",
+      "approved": true,
+      "cases": 2000,
+      "input_sha256": "15afcb2df47be87a27647bd5dad6d1abdfa29d8d73b5d71beeaec8c4c7673d38",
+      "measurement_sha256": "0d58b765170444675a5f25093fee44d5d37cfffed609cab9d173dcdc418e0f62",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.log1p",
+      "approved": true,
+      "cases": 2001,
+      "input_sha256": "aeae32bbfd4c3bd6f13591cf836095693853763619bb0d3d5579eba7a77a2241",
+      "measurement_sha256": "b6ae0a8b341fc6cef2de9867a734b7d349f0895ad5e5985376218eec89ea7913",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.psi",
+      "approved": false,
+      "cases": 2001,
+      "input_sha256": "ae47882ae3d8211b6d868a2ca8a54a160b549b7b3aa6eede1f2b6390232eab91",
+      "measurement_sha256": "cae1c85b6dc6cba96862fbe6dad7ece6bae75c7ab02ff9ca7401c6296f4d33d6",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "special.round",
+      "approved": true,
+      "cases": 2001,
+      "input_sha256": "854efb38e370da50f5680b257b2a08d76d8776ebcd29c3f9f18f203b68439c36",
+      "measurement_sha256": "757b8e9ace0dd995507dcfc9e7b28e8217be1c550218318f25bee63f564389fb",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "special.seterr",
+      "approved": true,
+      "cases": 2001,
+      "input_sha256": "414f0cbed930bd75d04a1687035c4f9ac60622b75213df11e341559745cc428b",
+      "measurement_sha256": "ecbe0b8fb75b4a00d51321007b6092f5fd0ec4f44d4e26d167330c77b1285627",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "stats.abs",
+      "approved": true,
+      "cases": 2006,
+      "input_sha256": "ed55ee070b0b9481fa96fff4b6654cbdaf971b734a9c1d9608a2db5d12e63095",
+      "measurement_sha256": "d44a1af209f1620f51a437b592ae15b88d93af41a9c6d22817b03aa53d8af1eb",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "stats.exp",
+      "approved": true,
+      "cases": 2007,
+      "input_sha256": "e31b8e1301108a332ab72505c7a45499787e786c0922d120f4930ee3264f1d0b",
+      "measurement_sha256": "5998f64b703832043b8584956088eccf7273540f28059d949fd8d035645aad07",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    },
+    {
+      "api": "stats.kstest",
+      "approved": false,
+      "cases": 2012,
+      "input_sha256": "413b0935625d7625fd60b98f7f5cc63ebc41a36cfce2f35a6f147e86dd035c32",
+      "measurement_sha256": "851d066c16faf6a9dfc9b64f87349d8730769b8b58ab9aa1b443029d704a39e2",
+      "possible_exports_reviewed": false,
+      "reason": ""
+    },
+    {
+      "api": "stats.log",
+      "approved": true,
+      "cases": 2003,
+      "input_sha256": "b11302e98c2f61fc5733bfde1429f877f7ff1abda0fcd543569296fa7cd2a263",
+      "measurement_sha256": "977fd6528351b1b886a3ca71db5b5f5b5a957b5f6bf2b0e4ae5e0565627fab3a",
+      "possible_exports_reviewed": true,
+      "reason": "Reviewed against the Sci 0.3 public export inventory: no equivalent callable with this API and signature; older snapshot remains in Git."
+    }
+  ],
+  "inventory_only_approvals": [
+    {
+      "api": "cluster.vq.py_vq",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.c_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.cg_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.h_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.he_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.j_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.js_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.l_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.la_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.p_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.ps_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.s_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.t_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.ts_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.u_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    },
+    {
+      "api": "special.us_roots",
+      "approved": true,
+      "reason": "No active cases or equivalent current Sci 0.3 public export; historical inventory is preserved by Git."
+    }
+  ],
+  "schema": 1,
+  "snapshot": {
+    "cache_sha256": "ef097bb4fd928986827d33bf5fb41c6483137a0a5720d5b08cd147f49ed50301",
+    "environment_sha256": "61e1a0b1797ba22bc5e03317d5fa6c4615615851932ab6438661814ac023239a",
+    "inventory_sha256": "b8efef0f9838c2c94e75a222f720477f738e6aa168b739bb184c14d163db3f33"
+  }
+}
