@@ -104,14 +104,14 @@ class AccuracyTests(unittest.TestCase):
                 if raw['api']=='maximum_flow':
                     self.assertTrue(all(v>=0 and int(v)==v for row in raw['a'] for v in row))
 
-    def test_binary64_equality_shortcut_keeps_high_precision_differences(self):
+    def test_all_reference_comparisons_keep_high_precision_differences(self):
         with mp.workdps(160):
             exact=mp.nstr(mp.mpf(.1),165)
             for actual in [.1,.10000000000000002,-.1,0.]:
-                self.assertEqual(report.component_error(actual,exact,binary64=True),
+                self.assertEqual(report.component_error(actual,exact),
                                  report.symmetric_error(actual,mp.mpf(exact)))
-            self.assertGreater(report.component_error(.1,'0.1',binary64=False),0)
-            with self.assertRaises(ValueError):report.component_error(float('inf'),'inf',binary64=True)
+            self.assertGreater(report.component_error(.1,'0.1'),0)
+            with self.assertRaises(ValueError):report.component_error(float('inf'),'inf')
 
     def test_large_measurements_use_deterministic_lossless_gzip(self):
         import gzip
@@ -141,7 +141,7 @@ class AccuracyTests(unittest.TestCase):
         for c in expanded_registered(1000,SEED,{'stats.pdf','stats.logpdf'}):
             self.assertTrue(all(math.isfinite(x) for x in reference(c)),c['id'])
 
-    def test_duplicate_inputs_preserve_case_ids_signed_zero_and_policy_calls(self):
+    def test_duplicate_inputs_preserve_case_ids_and_signed_zero(self):
         from types import SimpleNamespace
         sent=[]
         def run(command,**kwargs):
@@ -154,10 +154,6 @@ class AccuracyTests(unittest.TestCase):
             self.assertEqual(len(sent),3)
             self.assertEqual([r['id'] for r in rows],[c['id'] for c in cases])
             self.assertEqual([json.dumps(r['values']) for r in rows],['[1.0]','[1.0]','[-0.0]','[0.0]'])
-            sent.clear()
-            for c in cases[:2]:c['api']='special.seterr'
-            report.measure_sci(cases[:2],Path('runner'))
-            self.assertEqual(len(sent),2)
 
     def test_large_flattened_reference_csv_cells(self):
         case={'id':'signal.qspline2d/large','api':'signal.qspline2d','args':{}}
@@ -294,16 +290,16 @@ class AccuracyTests(unittest.TestCase):
         aliases={r['api']:r['canonical'] for r in rows}
         apis=set(report.build_cases().apis)
         self.assertFalse(apis-set(aliases))
-        # All genuinely new Sci 0.3 API names must now have independently
-        # specified cases. Remaining inventory exports are explicitly pending
-        # historical aliases or unresolved mappings and cannot count as tested.
+        # All genuinely new Sci 0.3 API names have independently specified
+        # cases. The retained legacy recipes are mapped to current public
+        # exports, but their recipe migration remains explicitly pending.
         self.assertFalse({r['api'] for r in rows if r['status']=='new_api_untested'}-apis)
         missing_canonical={r['canonical'] for r in rows if r['canonical']}-{
             aliases[api] for api in apis if aliases[api]}
         for row in rows:
             if row['canonical'] in missing_canonical:
                 self.assertIn(row['status'],{'untested','legacy_recipe_pending'},row['api'])
-        self.assertTrue(any(r['status']=='unresolved_legacy' for r in rows))
+        self.assertFalse([r['api'] for r in rows if r['status']=='unresolved_legacy'])
         self.assertTrue(all(not aliases[api] or aliases[api] in {r['canonical'] for r in rows}
                             for api in apis))
 
@@ -347,7 +343,7 @@ class AccuracyTests(unittest.TestCase):
             self.assertIn('0.0 / 0.0; failed 1/2',row)
             self.assertEqual(row.count('failed'),1)
 
-    def test_tables_compare_libraries_with_sci_and_report_missing_baselines(self):
+    def test_tables_compare_every_library_to_the_saved_reference(self):
         cases=[dict(id=f'special.erf/{i}',api='special.erf',group='sample',args={'x':.5}) for i in range(4)]
         records={c['id']:dict(reference=['2.0'],libraries={
             'Sci':{'values':[1.]},'SciPy':{'values':[1.+2**-52]},
@@ -367,11 +363,54 @@ class AccuracyTests(unittest.TestCase):
                 text=(Path(directory)/'special.md').read_text()
                 self.assertIn('### `sci::special::elementary`\n\n1 function · 4 cases',text)
                 self.assertIn('covers 4 cases and 1 public API names;',text)
-                self.assertIn('| Function | Cases | Sci vs reference | SciPy | Boost.Math |',text)
-                self.assertIn('| `erf` | 4; Sci failed 2/4 | 4.5036e+15 / 4.5036e+15 | 1.0 / 1.0; failed 2/4; Sci unavailable 1/4 | 0.0 / 0.0; Sci unavailable 2/4 |',text)
-                self.assertIn('**Sci-special as the reference**',text)
+                self.assertIn('| Function | Cases | Sci | SciPy | Boost.Math |',text)
+                row=next(line for line in text.splitlines() if line.startswith('| `erf`'))
+                cells=[cell.strip() for cell in row.strip('|').split('|')]
+                self.assertEqual(cells[1],'4; Sci failed 2/4')
+                self.assertEqual(cells[2],'4.5036e+15 / 4.5036e+15')
+                self.assertEqual(cells[3],'4.5036e+15 / 4.5036e+15; failed 2/4')
+                self.assertEqual(cells[4],cells[2])
+                self.assertNotIn('Sci unavailable',row)
+                self.assertIn('**saved per-case reference**',text)
                 self.assertIn('(Sci): 2 failed; baseline error',text)
                 self.assertIn('(SciPy): 2 failed; competitor error',text)
+
+    def test_decimal_reference_precision_and_sci_failure_do_not_bias_competitors(self):
+        with mp.workdps(160):
+            reference=mp.nstr(1+report.EPS/4,80)
+        cases=[{'id':f'special.erf/{i}','api':'special.erf','args':{'x':.5}}
+               for i in range(2)]
+        records={case['id']:{'reference':[reference],'libraries':{
+            'Sci':{'values':[1.]},'mpmath':{'values':[1.]},
+            'SciPy':{'values':[1.+2**-52] if i==0 else [1.]}}}
+                 for i,case in enumerate(cases)}
+        records[cases[1]['id']]['libraries']['Sci']={'error':'sci failure'}
+        failed={}
+        row=report.summarize_api('special.erf',cases,records,['mpmath','SciPy'],failed)
+        cells=[cell.strip() for cell in row.strip('|').split('|')]
+        self.assertEqual(cells[1],'2; Sci failed 1/2')
+        self.assertEqual(cells[2],'0.25 / 0.25')
+        self.assertEqual(cells[3],'0.25 / 0.25')
+        self.assertEqual(cells[4],'0.75 / 0.5')
+        self.assertEqual(failed[('special.erf','Sci')][0],1)
+
+    def test_vq_indices_are_excluded_from_every_accuracy_column(self):
+        case={'id':'cluster.vq.vq/0','api':'cluster.vq.vq','args':{'obs':[1.]}}
+        record={'reference':['1','0.5'],'libraries':{
+            'Sci':{'values':[0,0.5]},'SciPy':{'values':[10,0.5]}}}
+        row=report.summarize_api(case['api'],[case],{case['id']:record},['SciPy'],{})
+        self.assertIn('| 0.0 / 0.0 | 0.0 / 0.0 |',row)
+
+    def test_unavailable_evaluations_are_separate_from_failures(self):
+        cases=[{'id':f'special.erf/{i}','api':'special.erf','args':{'x':.5}}
+               for i in range(2)]
+        records={case['id']:{'reference':['1.0'],'libraries':{
+            'Sci':{'values':[1.]},'SciPy':{'values':[1.]}}} for case in cases}
+        records[cases[0]['id']]['libraries'].pop('SciPy')
+        records[cases[1]['id']]['libraries'].pop('Sci')
+        row=report.summarize_api(cases[0]['api'],cases,records,['SciPy','GSL'],{})
+        self.assertIn('2; Sci unavailable 1/2',row)
+        self.assertIn('| 0.0 / 0.0 | 0.0 / 0.0; unavailable 1/2 | —; unavailable 2/2 |',row)
 
     def test_complex_special_without_competitors_still_reports_accuracy(self):
         cases=[dict(id='special.complex.hankel1/edge-0',api='special.complex.hankel1',
@@ -386,7 +425,7 @@ class AccuracyTests(unittest.TestCase):
             text=(Path(directory)/'special.md').read_text()
         self.assertIn('### `sci::special::complex`\n\n1 function · 1 case',text)
         self.assertIn('| `complex.hankel1` | 1 | 1.0 / 0.5 |',text)
-        self.assertIn('independent mathematical reference',text)
+        self.assertIn('saved per-case reference',text)
 
     def test_namespace_heading_does_not_change_when_counts_change(self):
         cases=[dict(id=f'special.{name}/0',api=f'special.{name}',group='sample',
@@ -463,7 +502,6 @@ class AccuracyTests(unittest.TestCase):
         for case in cases:
             with self.subTest(case=case['id']):
                 results=report.competitors(case)
-                if case['api'] in ['special.seterr','special.geterr']:continue
                 self.assertTrue(results)
                 for result in results.values():
                     self.assertTrue('error' in result or 'values' in result)
@@ -530,11 +568,13 @@ class AccuracyTests(unittest.TestCase):
             report.render(cases,records,meta,Path(d))
             page=(Path(d)/'stats.md').read_text()
             self.assertIn('1; Sci failed 1/1',page)
-            self.assertIn('—; Sci unavailable 1/1',page)
+            self.assertIn('| `variance` | 1; Sci failed 1/1 | — | 0.0 / 0.0 | 0.0 / 0.0 |',page)
             self.assertIn('## Evaluation failures',page)
             self.assertIn('`stats.variance` (Sci): 1 failed;',page)
             self.assertIn('Example: `a`.',page)
-            self.assertNotIn('0.0 / 0.0',page)
+            self.assertIn('0.0 / 0.0',page)
+            self.assertNotIn('Sci unavailable',next(
+                row for row in page.splitlines() if row.startswith('| `variance`')))
             self.assertIn('| Additional library |',page)
             rows=[row for row in page.splitlines() if row.startswith('|')]
             self.assertEqual(len({len(row.split('|')) for row in rows}),1)

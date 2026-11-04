@@ -13,6 +13,7 @@ from sci_testing.case_csv import decode
 from sci_testing.mpmath_general import MpmathGeneralComparisons, evaluate
 from sci_testing.registered_cases import reference
 from sci_testing.report import high_precision
+from tests.pruned_fixtures import removed_apis
 
 ROOT = Path(__file__).resolve().parents[1] / "cases" / "generated"
 GROUPS = (
@@ -80,8 +81,14 @@ class MpmathGeneralTests(unittest.TestCase):
         for group in GROUPS:
             self.assertTrue(any(api.startswith(group + ".") for api in supported),
                             group)
-        self.assertGreaterEqual(len(supported), 156)
-        self.assertGreaterEqual(measured, 1397)
+        # These three scalar stats fixtures were explicitly removed from the
+        # published snapshot; each previously counted toward this baseline.
+        retired_scalar_stats = {"stats.abs", "stats.exp", "stats.log"}
+        removed_scalar_stats = retired_scalar_stats & removed_apis()
+        self.assertGreaterEqual(len(supported), 156 - len(removed_scalar_stats))
+        # Each removed scalar stats API contributed nine sampled fixtures.
+        self.assertGreaterEqual(
+            measured, 1397 - len(removed_scalar_stats) * len(INDICES))
 
     def test_shape_and_branch_regressions(self):
         with mp.workdps(80):
