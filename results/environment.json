@@ -1,7 +1,7 @@
 {
-  "sci_commit": "c497234b52934c30c9dac626dd614a2568ad9664",
+  "sci_commit": "cbb4eccd9c3e8b5cdeb612e86ea3fc21bb731aed",
   "sci_source_dirty": false,
-  "testing_sources_sha256": "b8dea5a459c0785e972c24173004262f359ac05acb844a471c591aa13891255f",
+  "testing_sources_sha256": "789fccb13230822417775470ae62ed643c7d616f651ddff69b5d3ed7dc712269",
   "cases_sha256": "096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533",
   "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: x86_64-unknown-linux-gnu\nrelease: 1.99.1\nLLVM version: 23.1.1",
   "cargo": "cargo 1.99.1 (5f94df478 2026-08-27)",
@@ -130,7 +130,7 @@
     "scipy": "1.18.1",
     "testing_sources_sha256": "a1dbbae1205dbebed9bfb371b138d8f9a215cfec01568c6e3de356becdf58cd9"
   },
-  "reference_provenance_sha256": "d141269564fb20e5a1c170acdef7085b4b8d8b7fbfb4aad4ef4e4c8eac0c0921",
+  "reference_provenance_sha256": "9dccff5ee9f8448812e26d44db4e20573dad234c7fa711f6c762102578f27380",
   "reference_extensions": [
     {
       "apis": [
@@ -2390,7 +2390,7 @@
       "statrs"
     ]
   },
-  "measurements_sha256": "74e615f66752d79df78505ae3010e2310f75ad1a769eda5944591ec039f91db7",
+  "measurements_sha256": "59cb24c748bdfecb575ee182fc09d846a07ee1cd1122f9ed259f593a6a269123",
   "coverage_sha256": "796e82f0a077c589225987a586a4b15482ff4f4ccf72cba337c4cbc5cdabae2a",
-  "accuracy_summaries_sha256": "26300bfc98eeda54636119b18de69b2e0f41f1ca0a729e5f08c3d2d7fdea4faf"
+  "accuracy_summaries_sha256": "fc4d8cc978acf0377d5e5922ccad2971d87bc0b3fa6ceca56a05c0ded6cb0f8a"
 }

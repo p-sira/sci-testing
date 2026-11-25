@@ -153,17 +153,17 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL | NumPy | statrs |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
-| `cdf` | 2379 | 4.2666e+5 / 8782.6 | 2031.9 / 1.2188 | 0.0 / 0.0 | 1499.9 / 1.2083; unavailable 290/2379 | 1392.5 / 2.9578; unavailable 363/2379 | —; unavailable 2379/2379 | 2.2078e+5 / 3346.8; unavailable 587/2379 |
+| `cdf` | 2379 | 2.0024e+5 / 805.52 | 2031.9 / 1.2188 | 0.0 / 0.0 | 1499.9 / 1.2083; unavailable 290/2379 | 1392.5 / 2.9578; unavailable 363/2379 | —; unavailable 2379/2379 | 2.2078e+5 / 3346.8; unavailable 587/2379 |
 | `fit` | 2036 | 2.8955 / 1.3433e-3 | —; unavailable 2036/2036 | 0.0 / 0.0 | —; unavailable 2036/2036 | —; unavailable 2036/2036 | —; unavailable 2036/2036 | —; unavailable 2036/2036 |
 | `logpdf` | 2163 | 832.64 / 10.889 | 76.599 / 1.1185; unavailable 7/2163 | 0.0 / 0.0 | 73.615 / 1.1669; unavailable 336/2163 | 82.601 / 3.1892; unavailable 387/2163 | —; unavailable 2163/2163 | 832.64 / 11.352; unavailable 374/2163 |
 | `make_distribution` | 2015 | 5.6207 / 0.35452 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
-| `normal_cdf` | 2111 | 940.89 / 110.9 | 0.49075 / 0.15686 | 940.89 / 110.9 | 844.83 / 109.78 | 3.1714 / 0.39997 | —; unavailable 2111/2111 | 4.6178e+5 / 1.3474e+5 |
+| `normal_cdf` | 2111 | 913.95 / 107.55 | 0.49075 / 0.15686 | 940.89 / 110.9 | 844.83 / 109.78 | 3.1714 / 0.39997 | —; unavailable 2111/2111 | 4.6178e+5 / 1.3474e+5 |
 | `normal_pdf` | 2000 | 1.5723 / 0.78551 | 8.4529 / 1.8876 | 0.0 / 0.0 | 0.0 / 0.0 | 0.99061 / 0.15999 | 0.0 / 0.0 | 1.5723 / 0.78551 |
 | `normal_ppf` | 2000 | 0.0 / 0.0 | 2.785 / 0.41242 | 0.0 / 0.0 | 2.785 / 0.39778 | 3.7134 / 0.67276 | —; unavailable 2000/2000 | 3.7134 / 0.52153 |
 | `order_statistic` | 2160 | 2107.7 / 2.8319 | —; unavailable 2160/2160 | 0.0 / 0.0 | —; unavailable 2160/2160 | —; unavailable 2160/2160 | —; unavailable 2160/2160 | —; unavailable 2160/2160 |
 | `pdf` | 2377 | 490.26 / 9.7963 | 17.636 / 0.63913 | 0.0 / 0.0 | 18.616 / 0.62024; unavailable 291/2377 | 84.153 / 3.9631; unavailable 360/2377 | —; unavailable 2377/2377 | 490.26 / 9.274; unavailable 530/2377 |
 | `ppf` | 2300 | 83249.0 / 997.24 | 2.9826e+7 / 13051.0; unavailable 14/2300 | 0.0 / 0.0 | 2464.5 / 3.9201; unavailable 448/2300 | 1.5289e+9 / 1.7337e+6; failed 1/2300; unavailable 1065/2300 | —; unavailable 2300/2300 | 8.1955e+14 / 2.6974e+12; unavailable 477/2300 |
-| `sf` | 2379 | 2.9859e+5 / 4113.8 | 33.012 / 0.38789 | 0.0 / 0.0 | 20.88 / 0.35776; unavailable 289/2379 | 69.361 / 1.7378; unavailable 357/2379 | —; unavailable 2379/2379 | 3.639e+5 / 5135.7; unavailable 598/2379 |
+| `sf` | 2379 | 1.9413e+5 / 1500.5 | 33.012 / 0.38789 | 0.0 / 0.0 | 20.88 / 0.35776; unavailable 289/2379 | 69.361 / 1.7378; unavailable 357/2379 | —; unavailable 2379/2379 | 3.639e+5 / 5135.7; unavailable 598/2379 |
 | `truncate` | 2075 | 4.5036e+15 / 2.6045e+12 | —; unavailable 2075/2075 | 0.0 / 0.0 | —; unavailable 2075/2075 | —; unavailable 2075/2075 | —; unavailable 2075/2075 | —; unavailable 2075/2075 |
 
 ### `sci::stats::estimation`
@@ -218,7 +218,7 @@ current public namespace, with their measured recipe names preserved.
 | `poisson_means_test` | 2030 | 3.9349e+5 / 6892.3 | —; unavailable 2030/2030 | 0.0 / 0.0 | —; unavailable 2030/2030 | —; unavailable 2030/2030 | —; unavailable 2030/2030 | —; unavailable 2030/2030 |
 | `power` | 2020 | 14.694 / 7.1974 | —; unavailable 2020/2020 | 0.0 / 0.0 | —; unavailable 2020/2020 | —; unavailable 2020/2020 | —; unavailable 2020/2020 | —; unavailable 2020/2020 |
 | `quantile_test` | 2108 | 42.896 / 0.23919 | —; unavailable 2108/2108 | 0.0 / 0.0 | —; unavailable 2108/2108 | —; unavailable 2108/2108 | —; unavailable 2108/2108 | —; unavailable 2108/2108 |
-| `ranksums` | 2015 | 4.1473e+5 / 1.0352e+5 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
+| `ranksums` | 2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
 | `ttest_1samp` | 2012 | 17.687 / 3.3458 | —; unavailable 2012/2012 | 0.0 / 0.0 | 7.5744 / 0.80021 | 14.648 / 2.3606 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
 | `ttest_ind` | 2030 | 63.924 / 5.5843 | —; unavailable 2030/2030 | 0.0 / 0.0 | 6.0414 / 0.50132 | 20.152 / 2.0879 | —; unavailable 2030/2030 | —; unavailable 2030/2030 |
 | `ttest_ind_from_stats` | 2002 | 554.04 / 50.071 | —; unavailable 2002/2002 | 0.0 / 0.0 | 9.0391 / 0.68986 | 35.094 / 2.8201 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |

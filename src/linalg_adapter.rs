@@ -574,10 +574,11 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             let lower = boolean(c[3]);
             let f = l::decompositions::ldl(&convert_matrix(&a()), lower).unwrap();
             mm(mul(&mul(&f.outer, &f.d), &trans(&f.outer)));
-            for i in 0..f.outer.len() {
-                finite_close!(f.outer[f.permutation[i]][i], 1., 3e-11, 3e-11);
-                let row = &f.outer[f.permutation[i]];
+            assert_eq!(f.permutation.len(), f.outer.len());
+            for (i, &index) in f.permutation.iter().enumerate() {
+                let row = &f.outer[index];
                 assert_eq!(row.len(), f.outer.len());
+                finite_close!(row[i], 1., 3e-11, 3e-11);
                 for (j, &value) in row.iter().enumerate() {
                     if (lower && j > i) || (!lower && j < i) {
                         finite_close!(value, 0., 3e-11, 3e-11);

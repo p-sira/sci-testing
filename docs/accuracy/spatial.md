@@ -37,11 +37,11 @@ current public namespace, with their measured recipe names preserved.
 | --- | ---: | --- | --- | --- | --- | --- | --- |
 | `braycurtis` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | 0.0 / 0.0 |
 | `canberra` | 2004 | 1.7148 / 0.19462 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | 0.0 / 0.0 |
-| `cdist` | 2019 | 4.5036e+15 / 3.7177e+11 | —; unavailable 2019/2019 | 0.0 / 0.0 | 0.8 / 1.7725e-4; failed 13/2019 | —; unavailable 2019/2019 | 117.1 / 9.8548e-3; unavailable 15/2019 |
+| `cdist` | 2019 | 1.6226e+32 / 1.3394e+28 | —; unavailable 2019/2019 | 0.0 / 0.0 | 0.8 / 1.7725e-4; failed 13/2019 | —; unavailable 2019/2019 | 117.1 / 9.8548e-3; unavailable 15/2019 |
 | `chebyshev` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 |
 | `cityblock` | 2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 | 0.0 / 0.0 |
 | `correlation` | 2003 | 3.9271 / 0.092261 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 3.0868e+16 / 1.5411e+13 | 1.9635 / 1.3855e-3 |
-| `cosine` | 2064 | 2.0455e+18 / 1.0604e+15 | 4.5036e+15 / 6.5459e+12 | 4.5036e+15 / 9.9237e+12 | —; unavailable 2064/2064 | 4.5036e+15 / 9.9237e+12 | 4.5036e+15 / 9.9237e+12 |
+| `cosine` | 2064 | 7.3493e+7 / 95819.0 | 4.5036e+15 / 6.5459e+12 | 4.5036e+15 / 9.9237e+12 | —; unavailable 2064/2064 | 4.5036e+15 / 9.9237e+12 | 4.5036e+15 / 9.9237e+12 |
 | `dice` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
 | `directed_hausdorff` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
 | `distance_matrix` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 |

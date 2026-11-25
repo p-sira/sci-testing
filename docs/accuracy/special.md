@@ -436,7 +436,7 @@ current public namespace, with their measured recipe names preserved.
 | `ncfdtridfd` | 2001 | 1.9925e+11 / 1.9815e+11 | —; unavailable 2001/2001 | 0.0 / 0.0 | 1.9925e+11 / 1.9815e+11 | —; unavailable 2001/2001 |
 | `ncfdtridfn` | 2001 | 1.524e+10 / 1.5088e+10 | —; unavailable 2001/2001 | 0.0 / 0.0 | 1.524e+10 / 1.5088e+10 | —; unavailable 2001/2001 |
 | `ncfdtrinc` | 2001 | 4.6295e+10 / 4.562e+10 | —; unavailable 2001/2001 | 0.0 / 0.0 | 4.6295e+10 / 4.562e+10 | —; unavailable 2001/2001 |
-| `nctdtr` | 2037 | 4.2427e+10 / 2.1083e+7 | —; unavailable 2037/2037 | 0.0 / 0.0 | 6.3659e+7 / 42810.0 | —; unavailable 2037/2037 |
+| `nctdtr` | 2037 | 6.3632e+7 / 42698.0 | —; unavailable 2037/2037 | 0.0 / 0.0 | 6.3659e+7 / 42810.0 | —; unavailable 2037/2037 |
 | `nctdtridf` | 2001 | 2.7026e+7 / 2.6696e+7 | —; unavailable 2001/2001 | 0.0 / 0.0 | 2.7026e+7 / 2.6696e+7 | —; unavailable 2001/2001 |
 | `nctdtrinc` | 2001 | 1.2499e+6 / 1.2391e+6 | —; unavailable 2001/2001 | 0.0 / 0.0 | 1.2499e+6 / 1.2391e+6 | —; unavailable 2001/2001 |
 | `nctdtrit` | 2001 | 43.793 / 11.239 | —; unavailable 2001/2001 | 0.0 / 0.0 | 23.993 / 9.3925 | —; unavailable 2001/2001 |
