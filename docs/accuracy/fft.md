@@ -48,9 +48,9 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | GSL | NumPy | RustFFT |
 | --- | ---: | --- | --- | --- | --- | --- | --- |
-| `fht` | 2006 | 619.05 / 0.53128 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
+| `fht` | 2006 | 653.29 / 0.57963 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
 | `fhtoffset` | 2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
-| `ifht` | 2006 | 612.77 / 0.27612 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
+| `ifht` | 2006 | 466.76 / 0.29103 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
 
 ### `sci::fft::real`
 
@@ -70,14 +70,14 @@ current public namespace, with their measured recipe names preserved.
 | `idst` | 2008 | 4.954e+16 / 7.2675e+12 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `idstn` | 2008 | 6.5869e+30 / 2.7282e+26 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `ihfft` | 2007 | 3.0 / 4.8078e-3 | —; unavailable 2007/2007 | 0.0 / 0.0 | —; unavailable 2007/2007 | 0.0 / 0.0 | —; unavailable 2007/2007 |
-| `ihfft2` | 2004 | 2.8523e+16 / 2.0101e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `ihfftn` | 2004 | 2.8523e+16 / 2.0549e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `ihfft2` | 2004 | 2.8523e+16 / 1.7807e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `ihfftn` | 2004 | 2.8523e+16 / 1.8029e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `irfft` | 2005 | 2.435 / 9.1757e-4 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | 2.435 / 7.6906e-4 |
 | `irfft2` | 2004 | 7.5616 / 0.56249 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | 7.2188 / 3.0006e-4 | 4.5036e+15 / 3.744e+11 |
 | `irfftn` | 2004 | 17.908 / 0.56237 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | 0.0 / 0.0 | 17.908 / 0.50638 |
 | `rfft` | 2005 | 3.1474 / 4.3585e-3 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | 3.1474 / 4.1725e-3 |
-| `rfft2` | 2004 | 4.0532e+16 / 2.5891e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | 0.0 / 0.0 | 4.0532e+16 / 2.5891e+15 |
-| `rfftn` | 2004 | 4.0532e+16 / 2.6188e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | 0.0 / 0.0 | 4.0532e+16 / 2.6188e+15 |
+| `rfft2` | 2004 | 3.6029e+16 / 2.2419e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | 0.0 / 0.0 | 4.0532e+16 / 2.5891e+15 |
+| `rfftn` | 2004 | 3.6029e+16 / 2.2717e+15 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | 0.0 / 0.0 | 4.0532e+16 / 2.6188e+15 |
 
 ### `sci::fft::utilities`
 
@@ -85,22 +85,22 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | GSL | NumPy | RustFFT |
 | --- | ---: | --- | --- | --- | --- | --- | --- |
-| `cc_diff` | 2004 | 8.7137 / 0.015853 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `cs_diff` | 2004 | 7.3222 / 0.040276 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `cc_diff` | 2004 | 8.7137 / 0.016529 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `cs_diff` | 2004 | 10.65 / 0.040869 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `diff` | 2012 | 3.1833e+16 / 3.6827e+13 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
 | `fftfreq` | 2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 |
 | `fftshift` | 2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 |
-| `hilbert` | 2004 | 28.745 / 0.04542 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `hilbert` | 2004 | 28.745 / 0.047706 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `ifftshift` | 2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 |
-| `ihilbert` | 2004 | 28.745 / 0.04542 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `itilbert` | 2004 | 86.898 / 0.09966 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `next_fast_len` | 2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 |
-| `prev_fast_len` | 2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 |
+| `ihilbert` | 2004 | 28.745 / 0.047706 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `itilbert` | 2004 | 86.898 / 0.10137 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `next_fast_len` | 2016 | 6.4337e+14 / 2.8395e+13 | —; unavailable 2016/2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 |
+| `prev_fast_len` | 2016 | 7.506e+14 / 2.6146e+13 | —; unavailable 2016/2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 |
 | `rfftfreq` | 2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 |
-| `sc_diff` | 2005 | 407.7 / 0.2497 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
-| `shift` | 2004 | 5.4813 / 0.016628 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `ss_diff` | 2005 | 18.388 / 0.03237 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
-| `tilbert` | 2004 | 9.6962 / 0.029734 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `sc_diff` | 2005 | 407.7 / 0.25077 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
+| `shift` | 2004 | 5.4813 / 0.016441 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `ss_diff` | 2005 | 18.388 / 0.034599 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
+| `tilbert` | 2004 | 12.282 / 0.029452 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 
 
 ## Conventions and limitations

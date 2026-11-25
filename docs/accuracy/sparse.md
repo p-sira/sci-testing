@@ -125,16 +125,16 @@ current public namespace, with their measured recipe names preserved.
 | `linalg.expm` | 2002 | 40.587 / 2.8384 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `linalg.expm_multiply` | 2002 | 36.57 / 4.502 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `linalg.funm_multiply_krylov` | 2002 | 179.2 / 35.401 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
-| `linalg.gcrotmk` | 2004 | 3.1525e+16 / 1.9457e+15 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `linalg.gmres` | 2006; Sci failed 1/2006 | 3.1525e+16 / 1.6664e+15 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
+| `linalg.gcrotmk` | 2004 | 3.1525e+16 / 1.4575e+15 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `linalg.gmres` | 2006 | 2.7022e+16 / 1.1779e+15 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
 | `linalg.inv` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `linalg.is_sptriangular` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
-| `linalg.lgmres` | 2004 | 3.6029e+16 / 2.1864e+15 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
+| `linalg.lgmres` | 2004 | 3.6029e+16 / 1.6469e+15 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `linalg.lobpcg` | 2002 | 3.3846 / 0.58839 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `linalg.lsmr` | 2004 | 6.5625 / 0.74906 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `linalg.lsqr` | 2004 | 9.375 / 0.64381 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `linalg.matrix_power` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
-| `linalg.minres` | 2002 | 5.8547e+16 / 2.0425e+15 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
+| `linalg.minres` | 2002 | 4.954e+16 / 1.2802e+15 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `linalg.norm` | 2014 | 2.5383 / 0.34634 | 0.0 / 0.0 | —; unavailable 2014/2014 | —; unavailable 2014/2014 | —; unavailable 2014/2014 |
 | `linalg.norm_axis` | 2002 | 1.5015 / 0.16459 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `linalg.onenormest` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
@@ -165,10 +165,6 @@ current public namespace, with their measured recipe names preserved.
 | `tril` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
 | `triu` | 2005 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
 | `validate` | 2002 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
-
-## Evaluation failures
-
-- `sparse.linalg.gmres` (Sci): 1 failed; gmres_scale_1e-20 residual 0.0000000000000000000013153341044116428. Example: `sparse.linalg.gmres/review-scale-1e-20`.
 
 
 ## Conventions and limitations

@@ -40,10 +40,10 @@ current public namespace, with their measured recipe names preserved.
 | `make_interp_spline` | 2005 | 10.495 / 0.12661 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
 | `make_lsq_spline` | 2002 | 151.94 / 3.2348 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `make_smoothing_spline` | 2004 | 4.5036e+15 / 1.0215e+11 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `make_splprep` | 2007 | 2.674e+16 / 3.004e+14 | 0.0 / 0.0 | —; unavailable 2007/2007 | —; unavailable 2007/2007 |
-| `make_splrep` | 2005 | 4.5036e+15 / 1.2476e+11 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
-| `splprep` | 2007 | 3.1662e+19 / 1.7246e+17 | 0.0 / 0.0 | —; unavailable 2007/2007 | —; unavailable 2007/2007 |
-| `splrep` | 2005 | 1.993e+16 / 5.5211e+11 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
+| `make_splprep` | 2007 | 2.674e+16 / 8.7805e+11 | 0.0 / 0.0 | —; unavailable 2007/2007 | —; unavailable 2007/2007 |
+| `make_splrep` | 2005 | 49.944 / 0.13087 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
+| `splprep` | 2007 | 4.5036e+15 / 2.9115e+14 | 0.0 / 0.0 | —; unavailable 2007/2007 | —; unavailable 2007/2007 |
+| `splrep` | 2005 | 4.5036e+15 / 1.2476e+11 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
 
 ### `sci::interpolate::multidimensional`
 
@@ -52,7 +52,7 @@ current public namespace, with their measured recipe names preserved.
 | Function | Cases | Sci | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- |
 | `bisplev` | 2003 | 3.125 / 0.049255 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
-| `griddata` | 2007 | 11.871 / 0.4387 | 0.0 / 0.0 | —; unavailable 2007/2007 | —; unavailable 2007/2007 |
+| `griddata` | 2007 | 1.8769 / 0.43634 | 0.0 / 0.0 | —; unavailable 2007/2007 | —; unavailable 2007/2007 |
 | `interpn` | 2014 | 0.57199 / 0.024425 | 0.0 / 0.0 | —; unavailable 2014/2014 | 0.57199 / 0.024425 |
 
 ### `sci::interpolate::polynomial`

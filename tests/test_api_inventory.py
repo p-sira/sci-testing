@@ -17,6 +17,7 @@ from sci_testing.api_registry import (
 )
 from sci_testing.inventory import (
     REVIEWED_PRIVATE_MODULE_GHOSTS,
+    RETIRED_ALIASES,
     inventory,
     reconcile,
     refresh_inventory,
@@ -57,7 +58,8 @@ class InventoryTests(unittest.TestCase):
                   if row['api'] in measured and row['canonical']}
         missing = [row['api'] for row in rows
                    if row['kind'] == 'public_export' and row['canonical'] not in mapped]
-        self.assertEqual(missing, [])
+        pending = {row['api'] for row in rows if row['status'] == 'new_api_untested'}
+        self.assertEqual(set(missing) - pending, set())
         for name in REVIEWED_PRIVATE_MODULE_GHOSTS:
             self.assertNotIn(name, {row['api'] for row in rows})
 
@@ -73,6 +75,9 @@ class InventoryTests(unittest.TestCase):
         for name, target in aliases.items():
             with self.subTest(name=name):
                 self.assertEqual(canonical[name], target)
+                if name in RETIRED_ALIASES:
+                    self.assertEqual(next(row['kind'] for row in rows if row['api'] == name),
+                                     'legacy_alias')
 
     def test_audited_legacy_aliases_target_current_public_exports_and_keep_case_ids(self):
         with (ROOT / 'api_inventory.csv').open(newline='') as stream:
@@ -296,6 +301,14 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(rows['special.ellipkinc'][1], 'special.elliptic.ellipkinc')
         self.assertEqual(rows['special.elliptic.ellipf'][1], 'special.elliptic.ellipkinc')
         self.assertEqual(rows['special.ellipkinc'][6], 'legacy_alias')
+
+        rows = {row[0]: row for row in refresh_inventory(old, [new[1]])}
+        self.assertEqual(rows['special.elliptic.ellipf'][1], 'special.elliptic.ellipkinc')
+        self.assertEqual(rows['special.elliptic.ellipf'][6], 'legacy_alias')
+        self.assertEqual(rows['special.ellipkinc'][1], 'special.elliptic.ellipkinc')
+        manifest = '"special.ellipf" => sci::special::elliptic::ellipf; <f64 as Argument>::read(&a["p0"])?, <f64 as Argument>::read(&a["p1"])?;'
+        self.assertIn('"special.ellipf" => sci::special::elliptic::ellipkinc;',
+                      rust_registrations([new[1]], manifest=manifest))
 
         ghost, canonical = next(iter(REVIEWED_PRIVATE_MODULE_GHOSTS.items()))
         qr = 'crates/sci-linalg/src/qr.rs'

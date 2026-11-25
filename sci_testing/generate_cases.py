@@ -30,6 +30,7 @@ def case_signature():
         'sci_testing/case_set.py', 'sci_testing/explicit_cases.py',
         'sci_testing/fixture_program.py', 'sci_testing/generate_cases.py',
         'sci_testing/registered_cases.py', 'sci_testing/sparse_cases.py',
+        'sci_testing/tail_regressions.py',
     ]
     for provider in ADDED_CASE_PROVIDERS:
         if (ROOT/f'sci_testing/{provider}.py').is_file():
@@ -219,6 +220,8 @@ def build_cases():
     # The Sci 0.3 additions each supply deterministic, independently sourced
     # fixtures. Only this explicit list is generated for historical extension.
     cases.extend(added_api_cases())
+    from .tail_regressions import cases as tail_cases
+    cases.extend(tail_cases())
     from .case_set import CaseSet
     return CaseSet(cases,CASES_PER_METHOD,SEED)
 

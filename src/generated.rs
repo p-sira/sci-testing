@@ -94,7 +94,7 @@ pub fn evaluate(api: &str, a: &Value) -> Result<Vec<f64>> {
         "special.ellipe" => sci::special::elliptic::ellipe; <f64 as Argument>::read(&a["p0"])?;
         "special.ellippi" => sci::special::elliptic::ellippi; <f64 as Argument>::read(&a["p0"])?, <f64 as Argument>::read(&a["p1"])?;
         "special.ellipd" => sci::special::elliptic::ellipd; <f64 as Argument>::read(&a["p0"])?;
-        "special.ellipf" => sci::special::elliptic::ellipf; <f64 as Argument>::read(&a["p0"])?, <f64 as Argument>::read(&a["p1"])?;
+        "special.ellipf" => sci::special::elliptic::ellipkinc; <f64 as Argument>::read(&a["p0"])?, <f64 as Argument>::read(&a["p1"])?;
         "special.ellipeinc" => sci::special::elliptic::ellipeinc; <f64 as Argument>::read(&a["p0"])?, <f64 as Argument>::read(&a["p1"])?;
         "special.ellippiinc" => sci::special::elliptic::ellippiinc; <f64 as Argument>::read(&a["p0"])?, <f64 as Argument>::read(&a["p1"])?, <f64 as Argument>::read(&a["p2"])?;
         "special.ellipdinc" => sci::special::elliptic::ellipdinc; <f64 as Argument>::read(&a["p0"])?, <f64 as Argument>::read(&a["p1"])?;

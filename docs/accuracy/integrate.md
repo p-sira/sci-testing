@@ -35,8 +35,8 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- | --- |
-| `fixed_quad` | 2068 | 21.656 / 2.9595 | 0.49047 / 0.18336 | 42.606 / 5.0552 | 4.2838 / 0.6596 | 4.2838 / 0.65351 | 8.0788 / 1.4399 |
-| `newton_cotes` | 2000 | 1.1988e+7 / 8920.3 | —; unavailable 2000/2000 | 0.0 / 0.0 | —; unavailable 2000/2000 | —; unavailable 2000/2000 | —; unavailable 2000/2000 |
+| `fixed_quad` | 2068 | 4.6276 / 0.54406 | 0.49047 / 0.18336 | 42.606 / 5.0552 | 4.2838 / 0.6596 | 4.2838 / 0.65351 | 8.0788 / 1.4399 |
+| `newton_cotes` | 2000 | 1.1988e+7 / 5563.6 | —; unavailable 2000/2000 | 0.0 / 0.0 | —; unavailable 2000/2000 | —; unavailable 2000/2000 | —; unavailable 2000/2000 |
 
 ### `sci::integrate::sampled`
 

@@ -574,11 +574,14 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             let lower = boolean(c[3]);
             let f = l::decompositions::ldl(&convert_matrix(&a()), lower).unwrap();
             mm(mul(&mul(&f.outer, &f.d), &trans(&f.outer)));
-            for i in 0..f.outer.len() {
-                finite_close!(f.outer[f.permutation[i]][i], 1., 3e-11, 3e-11);
-                for j in 0..f.outer.len() {
+            assert_eq!(f.permutation.len(), f.outer.len());
+            for (i, &index) in f.permutation.iter().enumerate() {
+                let row = &f.outer[index];
+                assert_eq!(row.len(), f.outer.len());
+                finite_close!(row[i], 1., 3e-11, 3e-11);
+                for (j, &value) in row.iter().enumerate() {
                     if (lower && j > i) || (!lower && j < i) {
-                        finite_close!(f.outer[f.permutation[i]][j], 0., 3e-11, 3e-11);
+                        finite_close!(value, 0., 3e-11, 3e-11);
                     }
                 }
             }
@@ -751,13 +754,20 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             vm(f.theta);
             // Each central block is a permuted diagonal of cosines,
             // sines, or identities, rather than an arbitrary factor.
+            let cs_transposed = trans(&f.cs);
             for (start, end) in [(0, p), (p, f.cs.len())] {
                 for (left, right) in [(0, q), (q, f.cs.len())] {
                     for row in &f.cs[start..end] {
                         assert!(row[left..right].iter().filter(|v| v.abs() > 1e-10).count() <= 1);
                     }
-                    for j in left..right {
-                        assert!((start..end).filter(|&i| f.cs[i][j].abs() > 1e-10).count() <= 1);
+                    for column in &cs_transposed[left..right] {
+                        assert!(
+                            column[start..end]
+                                .iter()
+                                .filter(|v| v.abs() > 1e-10)
+                                .count()
+                                <= 1
+                        );
                     }
                 }
             }
@@ -991,12 +1001,8 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             let (lo, hi) = l::basic::bandwidth(&convert_matrix(&a())).unwrap();
             assert_eq!((lo, hi), (e[1].parse().unwrap(), e[2].parse().unwrap()));
         }
-        "issymmetric" => assert_eq!(
+        "issymmetric" | "ishermitian" => assert_eq!(
             l::basic::issymmetric(&convert_matrix(&a()), optional(c[3]), optional(c[4])).unwrap(),
-            boolean(e[1])
-        ),
-        "ishermitian" => assert_eq!(
-            l::basic::ishermitian(&a(), optional(c[3]), optional(c[4])).unwrap(),
             boolean(e[1])
         ),
         _ => panic!("missing dispatcher {}", c[1]),

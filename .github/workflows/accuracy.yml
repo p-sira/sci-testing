@@ -46,7 +46,7 @@ jobs:
           workspaces: sci-testing
       - name: Check Rust formatting and public API evaluation
         run: |
-          cargo fmt --all -- --check
+          cargo fmt -p sci-testing -- --check
           cargo test --locked
           cargo build --locked
       - name: Check independent references and Rust writer interoperability

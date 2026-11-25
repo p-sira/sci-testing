@@ -2000,3 +2000,14 @@ special.ndtr/random-0997,"random, local fixture sweep; binary64 SciPy reference"
 special.ndtr/random-0998,"random, local fixture sweep; binary64 SciPy reference",s:0.49966952005017384
 special.ndtr/random-0999,"random, local fixture sweep; binary64 SciPy reference",s:0.4997817068081502
 special.ndtr/recipe-0000,reference recipe; binary64 reference,s:0.5
+special.ndtr/tail-regression-000,high-precision tail regression,s:-37.0
+special.ndtr/tail-regression-001,high-precision tail regression,s:-37.00000000000001
+special.ndtr/tail-regression-002,high-precision tail regression,s:-37.6
+special.ndtr/tail-regression-003,high-precision tail regression,s:-37.6996996996997
+special.ndtr/tail-regression-004,high-precision tail regression,s:-37.7
+special.ndtr/tail-regression-005,high-precision tail regression,s:-38.0
+special.ndtr/tail-regression-006,high-precision tail regression,s:-38.4
+special.ndtr/tail-regression-007,high-precision tail regression,s:-38.48
+special.ndtr/tail-regression-008,high-precision tail regression,s:-38.49
+special.ndtr/tail-regression-009,high-precision tail regression,s:-38.5
+special.ndtr/tail-regression-010,high-precision tail regression,s:-38.51
