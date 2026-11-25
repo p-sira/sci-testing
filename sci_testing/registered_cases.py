@@ -13,7 +13,7 @@ import mpmath as mp
 import numpy as np
 from scipy import special
 
-from .api_registry import SCI, Function, typed_functions
+from .api_registry import SCI, typed_functions
 from .case_csv import read_cases
 
 from . import ROOT
@@ -38,13 +38,7 @@ def special_reference(case):
     args = [case['args'][f'p{i}'] for i in range(len(case['args']))]
     function = specs().get(case['api'])
     if function is None:
-        # Historical snapshots still include these six Sci 0.1 scalar APIs.
-        # Sci 0.3 no longer exports them. Their independent SciPy oracle can
-        # still be evaluated without claiming the APIs exist in Sci 0.3.
-        removed = {'cbrt','exp10','exp2','expm1','log1p','round'}
-        if name not in removed or list(case['args']) != ['p0']:
-            raise KeyError(case['api'])
-        function = Function(case['api'], (('p0','f64'),), 'f64', 'legacy reference only')
+        raise KeyError(case['api'])
     # The historical SciPy assoc_laguerre(x, n, k) fixture order differs from
     # Sci's eval_genlaguerre(n, k, x) signature.  The Rust runner adapts the
     # argument order explicitly; casting p0 using the typed Sci signature
@@ -57,7 +51,6 @@ def special_reference(case):
     elif name == 'gen_harmonic': value = math.fsum(j**(-args[1]) for j in range(1,args[0]+1))
     elif name == 'ln_factorial': value = special.gammaln(args[0]+1)
     elif name == 'ln_binomial': value = special.gammaln(args[0]+1)-special.gammaln(args[1]+1)-special.gammaln(args[0]-args[1]+1)
-    elif name == 'seterr': value = args[0]
     elif name in ['multinomial','ln_multinomial']:
         n,counts=args
         value=special.gammaln(n+1)-math.fsum(special.gammaln(c+1) for c in counts)

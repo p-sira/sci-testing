@@ -4,7 +4,7 @@ import random
 import numpy as np
 from scipy import constants, integrate, interpolate, stats, cluster
 
-APIS='''linalg.dot linalg.matvec linalg.matmul linalg.transpose special.geterr stats.normal_pdf stats.normal_ppf constants.value constants.unit
+APIS='''linalg.dot linalg.matvec linalg.matmul linalg.transpose stats.normal_pdf stats.normal_ppf constants.value constants.unit
 constants.precision constants.find constants.convert_temperature differentiate.jacobian
 differentiate.hessian integrate.simpson integrate.cumulative_trapezoid
 integrate.cumulative_simpson integrate.romb integrate.newton_cotes
@@ -47,7 +47,6 @@ def reference(case):
         name=api.rsplit('.',1)[1]
         value=np.dot(a['u'],a['v']) if name=='dot' else np.asarray(a['a'])@a['u'] if name=='matvec' else np.asarray(a['a'])@a['b'] if name=='matmul' else np.asarray(a['a']).T
         return np.asarray(value).ravel().tolist()
-    if api=='special.geterr':return [0.]
     if api=='stats.normal_pdf':return [stats.norm.pdf(a['x'])]
     if api=='stats.normal_ppf':return [stats.norm.ppf(a['x'])]
     if api=='constants.value':return [constants.value(a['key'])]

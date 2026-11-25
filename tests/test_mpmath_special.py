@@ -208,8 +208,6 @@ class MpmathSpecialTests(unittest.TestCase):
                                [math.gamma(2.5)])
         self.assertVectorClose(values({'api':'special.erf','args':{'x':-.1}}),
                                [math.erf(-.1)])
-        self.assertEqual(adapter.evaluate({'api':'special.geterr',
-                                           'args':{'explicit':True}}),{})
         self.assertEqual(adapter.evaluate({'api':'special.gamma',
                                            'args':{'x':2.5,'p0':2.5}}),{})
 

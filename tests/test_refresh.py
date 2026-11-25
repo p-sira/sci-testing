@@ -1,17 +1,31 @@
 """Sci refreshes retain the saved comparison snapshot and support namespaces."""
-from contextlib import ExitStack, redirect_stdout
+import hashlib
 import io
 import json
 import os
-from pathlib import Path
 import shutil
 import tempfile
 import unittest
+from contextlib import ExitStack, redirect_stdout
+from pathlib import Path
+from typing import cast
 from unittest.mock import patch
 
 from sci_testing import report
-from sci_testing.case_csv import (directory_digest, measurement_files,
-                                 read_measurements, write_cases, write_measurements)
+from sci_testing.case_csv import (
+    directory_digest,
+    measurement_files,
+    read_measurements,
+    write_cases,
+    write_measurements,
+)
+from sci_testing.reference_integrity import (
+    ProvenanceEntry,
+    ReferenceCases,
+    ReferenceRecords,
+    reference_hashes,
+    serialize_provenance,
+)
 
 
 class Cases(list):
@@ -75,6 +89,37 @@ class RefreshTests(unittest.TestCase):
     def run_report(self, *arguments):
         with patch.object(report.sys,'argv',['report','--output',str(self.output),*arguments]), redirect_stdout(io.StringIO()):
             report.main()
+
+    def install_reference_provenance(self) -> dict[str, object]:
+        hashes=reference_hashes(cast(ReferenceCases,self.cases),
+                                cast(ReferenceRecords,cast(object,self.records)))
+        entries: dict[str, list[ProvenanceEntry]] = {
+            api:[{'provider':'fixture','recipe':'fixed','precision':'exact',
+                  'status':'historical','cases':len(self.cases.function(api))}]
+            for api in cast(list[str],self.cases.apis)}
+        meta=cast(dict[str,object],self.meta)
+        content=serialize_provenance(entries,inputs_sha256=cast(str,meta['cases_sha256']),
+                                     measurements_sha256=cast(str,meta['measurements_sha256']),
+                                     hashes=hashes)
+        (self.root/'results/reference-provenance.json').write_bytes(content)
+        meta['reference_provenance_sha256']=hashlib.sha256(content).hexdigest()
+        meta['prune_history']={'kind':'reviewed_legacy_prune','removed_apis':['obsolete.old']}
+        (self.root/'results/environment.json').write_text(json.dumps(self.meta))
+        return cast(dict[str, object],json.loads(content))
+
+    def assert_rebound_provenance(self, original: dict[str, object]) -> None:
+        meta=json.loads((self.root/'results/environment.json').read_text())
+        content=(self.root/'results/reference-provenance.json').read_bytes()
+        updated=json.loads(content)
+        self.assertEqual(updated['apis'],original['apis'])
+        self.assertEqual(updated['reference_sha256'],original['reference_sha256'])
+        self.assertEqual(updated['cases_sha256'],original['cases_sha256'])
+        self.assertEqual(updated['measurements_sha256'],meta['measurements_sha256'])
+        self.assertEqual(updated['measurements_sha256'],
+                         directory_digest(self.root/'results/measurements'))
+        self.assertNotEqual(updated['measurements_sha256'],original['measurements_sha256'])
+        self.assertEqual(meta['reference_provenance_sha256'],hashlib.sha256(content).hexdigest())
+        self.assertEqual(meta['prune_history'],self.meta['prune_history'])
 
     def assert_preserved(self, selected):
         actual=read_measurements(self.root/'results/measurements')
@@ -148,6 +193,39 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(meta['reference_environment'],self.meta)
         self.assertEqual(set(meta['sci_measurement_commits'].values()),{'new'})
 
+    def test_sci_only_rebinds_authenticated_reference_provenance(self):
+        original=self.install_reference_provenance()
+        untouched=self.root/'results/measurements/sparse.linalg/norm.csv.gz'
+        before=untouched.read_bytes()
+        self.run_report('--module','special.erf')
+        self.assertEqual(untouched.read_bytes(),before)
+        self.assert_rebound_provenance(original)
+        self.assert_preserved({'special.erf'})
+        self.run_report('--check')
+
+    def test_sci_only_rejects_stale_authenticated_manifest_before_publishing(self):
+        original=self.install_reference_provenance()
+        manifest=self.root/'results/reference-provenance.json'
+        tampered={**original,'measurements_sha256':'0'*64}
+        data=(json.dumps(tampered,sort_keys=True,indent=2)+'\n').encode()
+        manifest.write_bytes(data)
+        self.meta['reference_provenance_sha256']=hashlib.sha256(data).hexdigest()
+        (self.root/'results/environment.json').write_text(json.dumps(self.meta))
+        before={p:p.read_bytes() for p in (self.root/'results').rglob('*') if p.is_file()}
+        with self.assertRaisesRegex(ValueError,'measurement digest mismatch'):
+            self.run_report('--module','special.erf')
+        self.assertEqual(before,{p:p.read_bytes() for p in before})
+
+    def test_rebind_rejects_a_changed_primary_reference(self):
+        self.install_reference_provenance()
+        chosen=next(case['id'] for case in self.cases if case['api']=='special.erf')
+        changed={**self.records, chosen:{**self.records[chosen], 'reference':['9.0']}}
+        new_meta={**self.meta,'measurements_sha256':'new-measurements'}
+        with self.assertRaisesRegex(ValueError,'changed saved primary reference values'):
+            report.stage_rebound_provenance(
+                self.cases,changed,self.meta,new_meta,self.root/'stage',{'special.erf'})
+        self.assertFalse((self.root/'stage').exists())
+
     def test_exact_api_refresh_preserves_other_api_measurements(self):
         untouched=self.root/'results/measurements/sparse.linalg/norm.csv.gz'
         before=untouched.read_bytes()
@@ -199,6 +277,22 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(meta['reference_environment'],self.meta)
         self.assertEqual(meta['comparison_refreshes'][-1]['apis'],['special.erf'])
         self.assertIn('Boost.Math',meta['module_libraries']['special'])
+        self.run_report('--check')
+
+    def test_comparator_only_rebinds_authenticated_reference_provenance(self):
+        original=self.install_reference_provenance()
+        untouched=self.root/'results/measurements/sparse.linalg/norm.csv.gz'
+        before=untouched.read_bytes()
+        self.native.side_effect=None
+        self.native.return_value.versions={'Boost.Math':'test','GSL':'test'}
+        self.native.return_value.evaluate.return_value={'Boost.Math':{'values':[.5]}}
+        self.competitors.side_effect=None
+        self.competitors.return_value={'SciPy':{'values':[.5]}}
+        self.run_report('--comparators-only','--module','special.erf')
+        self.assertEqual(untouched.read_bytes(),before)
+        self.assert_rebound_provenance(original)
+        self.measure.assert_not_called()
+        self.reference.assert_not_called()
         self.run_report('--check')
 
     def test_partial_native_support_is_reported_as_unavailable(self):
@@ -379,8 +473,8 @@ class RefreshTests(unittest.TestCase):
             self.assertEqual(updated[self.cases[0]['id']]['reference'],self.records[self.cases[0]['id']]['reference'])
 
     def test_verified_cached_inputs_skip_regeneration_even_when_compressed(self):
-        from sci_testing.generate_cases import case_signature
         from sci_testing.case_csv import case_directory_digest
+        from sci_testing.generate_cases import case_signature
         inputs=self.root/'cases/generated'
         write_cases(inputs,self.cases,compress_above=0,signature=case_signature())
         self.assertTrue((inputs/'special/erf.csv.gz').exists())

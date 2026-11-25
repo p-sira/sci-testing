@@ -165,13 +165,24 @@ uv run --frozen python -m sci_testing.generate_sparse_adapter
 `sci_testing/inventory.py` records compiler-resolved exports, including macro
 expansions and aliases. Ordinary runs read its checked-in CSV and require stable
 Rust only.
+After a Sci API change, generate Rustdoc JSON for every crate in the pinned
+submodule with nightly Rust (`RUSTDOCFLAGS='-Z unstable-options --output-format json'
+cargo +nightly doc --workspace --no-deps` from `sci/`), then run
+`uv run --frozen python -m sci_testing.inventory --refresh` with `--doc-root`
+pointing to Cargo's `target/doc` directory if necessary. This preserves
+historical case IDs while updating the compiler-resolved public exports.
+The Sci `dev` graph extraction moves `sparse.csgraph` APIs into `sci::graph`;
+their existing `sparse.csgraph/` input and measurement files remain in place.
 
 ## References and failures
 
 Original module recipes use independent mpmath references at 100 and 160 decimal
 digits; complex arithmetic uses 200/320 digits, escalating when necessary for
 subnormal branch points. Added recipes use pinned public SciPy calls, independent identities
-or quadrature; binary64 references measure agreement with that reference library.
+or quadrature. **Many historical saved references are binary64 evaluations:** storing
+their decimal expansions at higher precision does not improve their accuracy.
+Reference provenance distinguishes high-precision mathematical recipes from
+binary64 fixture values and explicitly records subsequent WolframEngine regeneration.
 When mpmath is also measured as a named comparison provider, some rows share
 the mpmath backend used to construct their independent mathematical reference;
 that agreement is not a second independent confirmation of the mathematics.
@@ -243,16 +254,17 @@ independent references have been renamed or regenerated for this extension.
 
 Tables are split by canonical **Sci 0.3 submodule**, including historical recipes
 whose old names map to the new namespaces. They contain **Function**, **Cases**,
-**Sci vs reference**, and the relevant libraries (SciPy, Boost.Math, GSL and
-others). Cells show maximum / mean symmetric relative difference in epsilon.
-The reference column measures Sci against the saved independent reference;
-competitor columns measure agreement with Sci. All full-precision independent
-references remain in the raw CSV `reference` field. `failed N/T` counts each
-library’s own failures.
-`Sci failed N/T` in Cases counts baseline failures; `Sci unavailable N/T` counts
-successful library evaluations excluded because Sci failed. Full errors and outputs
-remain in CSV. Metadata and discrete ordering are also covered by the underlying
-Sci fixture assertions. These samples do not establish whole-domain accuracy.
+**Sci**, and the relevant libraries (SciPy, Boost.Math, GSL and others).
+All implementation columns compare to the **same saved per-case reference** using
+maximum / mean symmetric relative difference in machine epsilon. This baseline
+is a documented numerical dataset, not an assertion that any generator is
+infallible. References, library outputs, errors and warnings remain in raw CSV
+files; `failed N/T` counts each library's failures. `Sci failed N/T` in Cases
+counts Sci failures but does not exclude other libraries' successful cases.
+Some references are binary64 and some high-precision; check the recorded source
+before drawing accuracy conclusions. Metadata and discrete ordering are also
+covered by the underlying Sci fixture assertions. These samples do not establish
+whole-domain accuracy.
 
 `python -m sci_testing.report --check` verifies inputs, source and result digests,
 all saved input/measurement identities, hashed coverage and accuracy summaries,
@@ -266,15 +278,33 @@ force recalculation of millions of high-precision samples; changed measurement
 files still invalidate their own per-API summaries. The whole-source SHA-256
 continues to authenticate both code and documentation. A selective `--render
 --module special.agm` normally reuses all unchanged numerical summaries.
-Replacing the high-precision `Sci vs reference` calculation with binary64 is
-not equivalent: the stored oracle strings often carry more than 100 digits.
+Replacing high-precision comparisons against stored mpmath references with
+binary64 is not equivalent: some stored reference strings carry over 100 genuine
+digits, whereas other reference strings merely expand a binary64 value.
 Moving or editing harness sources invalidates the recorded source digest; rerun
 the report against the pinned Sci checkout to update the snapshot. Use `--render`
 to regenerate only the report from verified saved measurements; `--comparators-only
 --module special.airy --module special.airye --module special.complex` backfills
 those comparison libraries while preserving saved Sci measurements and independent
-references. Use `--full` when changing reference recipes; the default refreshes
-Sci measurements while retaining the stored reference snapshot.
+references. Use `--full` when changing case recipes; the default refreshes
+Sci measurements while retaining the stored reference snapshot. Reference-only
+regeneration on unchanged cases is available without recompiling Sci:
+
+```sh
+uv run --frozen python -m sci_testing.reference_generation --source wolfram --module special.ellipk --dry-run
+uv run --frozen python -m sci_testing.reference_generation --source wolfram --module special.ellipk --jobs 4
+uv run --frozen python -m sci_testing.reference_generation --source recipe --module complex.sqrt --jobs 4
+```
+
+Only explicitly supported functions may use WolframEngine. It evaluates the
+mathematical function at high precision using exact binary64 inputs; unsupported
+functions fail rather than silently falling back to another library. The `recipe`
+source uses the existing per-case generator and precision-stability policy.
+The optional WolframEngine adapter records version and function mapping in
+`results/reference-provenance.json` and `results/environment.json`. Historical
+provenance marked `historical_source_path_inferred` identifies the existing code
+path without claiming that old values have been independently revalidated.
+FLINT/Arb and independent cross-checks are reserved for a separate phase.
 Sources, manifests, lockfiles, recipes and generated inputs are hashed; derived
 results and reports are excluded from the source digest. Each run records its
 own platform. Repeated runs on the same platform reproduce the snapshot without
