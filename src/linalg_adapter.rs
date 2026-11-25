@@ -576,9 +576,11 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             mm(mul(&mul(&f.outer, &f.d), &trans(&f.outer)));
             for i in 0..f.outer.len() {
                 finite_close!(f.outer[f.permutation[i]][i], 1., 3e-11, 3e-11);
-                for j in 0..f.outer.len() {
+                let row = &f.outer[f.permutation[i]];
+                assert_eq!(row.len(), f.outer.len());
+                for (j, &value) in row.iter().enumerate() {
                     if (lower && j > i) || (!lower && j < i) {
-                        finite_close!(f.outer[f.permutation[i]][j], 0., 3e-11, 3e-11);
+                        finite_close!(value, 0., 3e-11, 3e-11);
                     }
                 }
             }
@@ -751,13 +753,20 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             vm(f.theta);
             // Each central block is a permuted diagonal of cosines,
             // sines, or identities, rather than an arbitrary factor.
+            let cs_transposed = trans(&f.cs);
             for (start, end) in [(0, p), (p, f.cs.len())] {
                 for (left, right) in [(0, q), (q, f.cs.len())] {
                     for row in &f.cs[start..end] {
                         assert!(row[left..right].iter().filter(|v| v.abs() > 1e-10).count() <= 1);
                     }
-                    for j in left..right {
-                        assert!((start..end).filter(|&i| f.cs[i][j].abs() > 1e-10).count() <= 1);
+                    for column in &cs_transposed[left..right] {
+                        assert!(
+                            column[start..end]
+                                .iter()
+                                .filter(|v| v.abs() > 1e-10)
+                                .count()
+                                <= 1
+                        );
                     }
                 }
             }

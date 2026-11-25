@@ -35,6 +35,17 @@ def generated(source=None):
 '''+body[last:]
     body=body.replace('assert_eq!(t.prefix.to_string(), e[1]);','assert_eq!(t.prefix.to_string(), e[1].to_string());')
     body=body.replace('assert_eq!(t.dtype, "f64");','emit(t.dtype.to_string());')
+    # Normalize legacy dispatch loops for newer Clippy while retaining the
+    # pinned Sci decomposition checks and measurement expressions.
+    body=body.replace('for j in 0..f.outer.len() {',
+                      'let row = &f.outer[f.permutation[i]];\n                    assert_eq!(row.len(), f.outer.len());\n                    for (j, &value) in row.iter().enumerate() {')
+    body=body.replace('finite_close(f.outer[f.permutation[i]][j], 0., 3e-11, 3e-11);',
+                      'finite_close(value, 0., 3e-11, 3e-11);')
+    if 'for j in left..right {' in body:
+        body=body.replace('for (start, end) in [(0, p), (p, f.cs.len())] {',
+                          'let cs_transposed = trans(&f.cs);\n                for (start, end) in [(0, p), (p, f.cs.len())] {')
+        body=body.replace('for j in left..right {\n                            assert!(\n                                (start..end).filter(|&i| f.cs[i][j].abs() > 1e-10).count() <= 1\n                            );',
+                          'for column in &cs_transposed[left..right] {\n                            assert!(column[start..end].iter().filter(|v| v.abs() > 1e-10).count() <= 1);')
     if Path(source).resolve()==sci_target().resolve():
         # Retain real-valued historical Hermitian-symmetry cases after Sci
         # removed that alias; the original API was the same real predicate.
