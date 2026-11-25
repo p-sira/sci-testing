@@ -475,6 +475,14 @@ class AccuracyTests(unittest.TestCase):
                           'args':{'p0':0.3,'p1':3,'p2':0.5}})
         self.assertAlmostEqual(result[0],1.028,places=12)
 
+    def test_historical_ellipf_reference_uses_canonical_scipy_name(self):
+        from scipy.special import ellipkinc
+        from sci_testing.registered_cases import reference
+        for phi,m in [(0.4,0.2),(-0.7,-0.5)]:
+            self.assertEqual(reference({'api':'special.ellipf',
+                                        'args':{'p0':phi,'p1':m}}),
+                             [ellipkinc(phi,m)])
+
     def test_independent_dft_normalization_and_order(self):
         case={'api':'fft.fft','args':{'z':[[1.,0.],[0.,0.],[0.,0.],[0.,0.]]}}
         self.assertEqual(report.high_precision(case),[1,0,1,0,1,0,1,0])

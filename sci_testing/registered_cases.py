@@ -58,7 +58,7 @@ def special_reference(case):
     elif name in ['softmax','log_softmax','logsumexp']:
         from scipy import special as sp
         value=getattr(sp,name)(args[0])
-    else: value = scipy_special_reference().reference(name, args)
+    else: value = scipy_special_reference().reference('ellipkinc' if name == 'ellipf' else name, args)
     if hasattr(value, 'coeffs'): value = value.coeffs
     value = scipy_special_reference().flatten(value)
     if 'Complex' in function.returns:
