@@ -40,6 +40,15 @@ PREFERRED_CANONICAL_EXPORTS = frozenset({
     'special.elliptic.ellipkinc',
 })
 
+# Sci 0.3 removed these redundant aliases. Historical recipes retain their
+# original identifiers and call the mathematically identical public API.
+RETIRED_ALIASES = {
+    'linalg.basic.ishermitian': 'linalg.basic.issymmetric',
+    'linalg.ishermitian': 'linalg.basic.issymmetric',
+    'special.elliptic.ellipf': 'special.elliptic.ellipkinc',
+    'special.ellipf': 'special.elliptic.ellipkinc',
+}
+
 # Rustdoc 1.99 also traversed a private `qr` module behind the public `qr`
 # *function* reexport. The six nested paths fail to compile (E0603); they are
 # not historical fixtures and must not become synthetic legacy aliases.
@@ -136,6 +145,9 @@ def resolve_legacy_api(api, current_rows, old_source=''):
     candidates = [row for row in current_rows if row[0] == api]
     if len(candidates) == 1:
         return candidates[0]
+    if api in RETIRED_ALIASES:
+        return next((row for row in current_rows
+                     if row[0] == RETIRED_ALIASES[api]), None)
     suffix = '.' + name
     candidates = [row for row in current_rows if row[0].startswith(root + '.')
                   and (row[0].endswith(suffix) or row[0].rsplit('.', 1)[-1] == name.rsplit('.', 1)[-1])]
@@ -221,6 +233,9 @@ def refresh_inventory(previous_rows, current_rows):
              if name.startswith('sparse.csgraph.')}
     if any(destination not in current for destination in moved.values()):
         raise ValueError('graph extraction has unresolved public exports')
+    retired = {name for name in previous_exports - current.keys()
+               if name in RETIRED_ALIASES and RETIRED_ALIASES[name] in current
+               and previous[name]['canonical'] in {name, RETIRED_ALIASES[name]}}
     # Do not turn confirmed non-callable Rustdoc traversal artifacts into
     # historical aliases. Require their actual public compiler item to survive.
     ghosts = {name for name, canonical in REVIEWED_PRIVATE_MODULE_GHOSTS.items()
@@ -228,7 +243,7 @@ def refresh_inventory(previous_rows, current_rows):
               and previous[name]['canonical'] == canonical
               and previous[name]['source'] == 'crates/sci-linalg/src/qr.rs'
               and canonical in current}
-    missing: set[str] = previous_exports - current.keys() - moved.keys() - ghosts
+    missing: set[str] = previous_exports - current.keys() - moved.keys() - ghosts - retired
     if missing:
         raise ValueError(f'public exports disappeared without reviewed mapping: {sorted(missing)}')
     reverse_moved = {new: old for old, new in moved.items()}
@@ -249,6 +264,8 @@ def refresh_inventory(previous_rows, current_rows):
         if name in current or name in ghosts:
             continue
         canonical = moved.get(prior['canonical'], prior['canonical'])
+        if canonical not in current:
+            canonical = RETIRED_ALIASES.get(canonical, canonical)
         if name in moved:
             canonical = current[moved[name]][1]
         if canonical and canonical not in current:

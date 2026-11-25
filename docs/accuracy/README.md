@@ -1,12 +1,12 @@
 # Sci library comparisons
 
 Historical and newly measured comparisons use saved per-case references for
-every implementation on the same inputs. The compiler inventory lists 1142 mapped canonical
-names across 17 modules and 1144 callable exported names.
-Of these, 1144 exported names have a saved reference through their
-canonical implementation and 0 lack one. Public aliases share
+every implementation on the same inputs. The compiler inventory lists 1146 mapped canonical
+names across 17 modules and 1146 callable exported names.
+Of these, 1142 exported names have a saved reference through their
+canonical implementation and 4 lack one. Public aliases share
 the original case/reference data; they are not counted as independent numerical
-measurements or independently verified against Sci 0.3. There are 0 currently
+measurements or independently verified against Sci 0.3. There are 4 currently
 unmeasured new API names, 0 other untested exports and
 0 unresolved legacy mappings.
 The [coverage audit](../../results/coverage.csv) explicitly marks pending names
@@ -147,15 +147,13 @@ All reports and data belong to this repository; Sci links to them externally.
 
 ## Snapshot
 
-- Sci commit: `ddf4b06e7533a33079c8bf9d75650a5bf8df33bd`.
-- Harness source SHA-256: `85657f37167b5eef404a33cd9715f1be01e400023e2a73ad1f4e8305dc8e8d67`.
+- Sci commit: `c497234b52934c30c9dac626dd614a2568ad9664`.
+- Harness source SHA-256: `b1d3a461bc2f36c8254eccff9639e2dd252669884128f872eacce2e8229860be`.
 - Input SHA-256: `096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533`.
-- 2305544 saved cases covering 1159 recipe API names; 1142 mapped canonical public functions in the inventory.
+- 2305544 saved cases covering 1159 recipe API names; 1146 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Graph': '1_92', 'Boost.Math': '1_92', 'Boost.Multiprecision': '1_92', 'Boost.Numeric.uBLAS': '1_92', 'Boost.Units': '1_92', 'GSL': '2.8'}.
 - Independent Rust numerical providers: {'RustFFT': '6.4.0', 'nalgebra': '0.35.0', 'statrs': '0.19.1'}.
 
 Selected primary references were regenerated from the documented mathematical providers. See `results/reference-provenance.json` for the source, exact expression and precision by API; other historical references remain as saved. The original library outputs are retained.
-
-Per-function Sci revisions for partial refreshes are recorded under `sci_measurement_commits` in `results/environment.json`.
 
 New API references were evaluated separately from the historical snapshot. Their provenance is recorded in `reference_extensions` in `results/environment.json`.

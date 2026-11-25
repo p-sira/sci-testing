@@ -524,7 +524,7 @@ sparse.linalg.expm,sparse.linalg.expm,2002,1000,1000,2002,0,0,2002,0,legacy_reci
 sparse.linalg.expm_multiply,sparse.linalg.expm_multiply,2002,1000,1000,2002,0,0,2002,0,legacy_recipe_pending
 sparse.linalg.funm_multiply_krylov,sparse.linalg.funm_multiply_krylov,2002,1000,1000,2002,0,0,2002,0,legacy_recipe_pending
 sparse.linalg.gcrotmk,sparse.linalg.gcrotmk,2004,1000,1000,2004,0,0,2004,0,legacy_recipe_pending
-sparse.linalg.gmres,sparse.linalg.gmres,2006,1000,1000,2006,0,0,2005,1,legacy_recipe_pending
+sparse.linalg.gmres,sparse.linalg.gmres,2006,1000,1000,2006,0,0,2006,0,legacy_recipe_pending
 sparse.linalg.inv,sparse.linalg.inv,2002,1000,1000,2002,0,0,2002,0,legacy_recipe_pending
 sparse.linalg.is_sptriangular,sparse.linalg.is_sptriangular,2002,1000,1000,2002,0,0,2002,0,legacy_recipe_pending
 sparse.linalg.lgmres,sparse.linalg.lgmres,2004,1000,1000,2004,0,0,2004,0,legacy_recipe_pending
@@ -1158,3 +1158,7 @@ stats.yeojohnson_normmax,stats.diagnostics.yeojohnson_normmax,2008,1000,1000,200
 stats.yeojohnson_normplot,stats.diagnostics.yeojohnson_normplot,2009,1000,1000,2009,0,0,2009,0,legacy_recipe_pending
 stats.zmap,stats.descriptive.zmap,2005,1000,1000,2005,0,0,2005,0,legacy_recipe_pending
 stats.zscore,stats.descriptive.zscore,2004,1000,1000,2004,0,0,2004,0,legacy_recipe_pending
+optimize.least_squares.dogbox,optimize.least_squares.dogbox,0,0,0,0,0,0,0,0,pending_new_api_untested
+optimize.least_squares.dogbox_with_jacobian,optimize.least_squares.dogbox_with_jacobian,0,0,0,0,0,0,0,0,pending_new_api_untested
+optimize.least_squares.try_dogbox,optimize.least_squares.try_dogbox,0,0,0,0,0,0,0,0,pending_new_api_untested
+optimize.least_squares.try_dogbox_with_jacobian,optimize.least_squares.try_dogbox_with_jacobian,0,0,0,0,0,0,0,0,pending_new_api_untested

@@ -1230,8 +1230,17 @@ def validate_result(case, result, reference):
             result['error']='incorrect code assignment'
 
 
-def refresh_sci(cases, records, executable, destination, apis):
+def refresh_sci(cases, records, executable, destination, apis, *, jobs=1):
     """Replace only Sci evaluations; retain saved oracles and competitor results."""
+    if jobs > 1:
+        if not hasattr(cases, 'function'):
+            raise ValueError('Parallel Sci refresh requires indexed cases')
+        changed=set()
+        for updated in parallel_api_jobs(cases, apis, jobs, refresh_sci_api_job,
+                                         'Sci', str(records.directory),
+                                         str(executable), str(destination)):
+            changed.update(updated)
+        return changed
     from itertools import groupby
     changed=set()
     for api,iterator in groupby(cases,key=lambda c:c['api']):
@@ -1260,6 +1269,12 @@ def refresh_sci(cases, records, executable, destination, apis):
             (destination/(name+'.gz')).unlink(missing_ok=True)
         changed.update(write_measurements(destination,files))
     return changed
+
+
+def refresh_sci_api_job(api, batch, source_directory, executable, destination):
+    """Refresh a disjoint staged API file from the read-only source snapshot."""
+    return refresh_sci(batch, MeasurementStore(Path(source_directory)),
+                       Path(executable), Path(destination), {api})
 
 
 def stage_rebound_provenance(cases, records, previous, meta, stage, changed_apis):
@@ -1361,10 +1376,8 @@ def refresh_additional_api_job(api, batch, source_directory, destination):
                                additional_only=True)
 
 
-def parallel_refresh_comparators(cases, source_directory, destination, apis, jobs):
+def parallel_api_jobs(cases, apis, jobs, worker, description, *arguments):
     """Bound queued batches to two per worker to retain streaming memory use."""
-    changed = set()
-    libraries = defaultdict(set)
     remaining = iter(sorted(apis))
     with ProcessPoolExecutor(max_workers=jobs,
                              mp_context=multiprocessing.get_context('spawn')) as pool:
@@ -1375,8 +1388,7 @@ def parallel_refresh_comparators(cases, source_directory, destination, apis, job
                 api = next(remaining)
             except StopIteration:
                 return False
-            future = pool.submit(refresh_additional_api_job, api, cases.function(api),
-                                 str(source_directory), str(destination))
+            future = pool.submit(worker, api, cases.function(api), *arguments)
             pending[future] = api
             return True
 
@@ -1387,16 +1399,25 @@ def parallel_refresh_comparators(cases, source_directory, destination, apis, job
             for future in as_completed(pending):
                 api = pending.pop(future)
                 try:
-                    updated, providers = future.result()
+                    result = future.result()
                 except Exception as error:
                     for waiting in pending:
                         waiting.cancel()
-                    raise RuntimeError(f'Additional comparator refresh failed for {api}') from error
-                changed.update(updated)
-                for module, names in providers.items():
-                    libraries[module].update(names)
+                    raise RuntimeError(f'{description} refresh failed for {api}') from error
+                yield result
                 submit_next()
                 break
+
+
+def parallel_refresh_comparators(cases, source_directory, destination, apis, jobs):
+    changed = set()
+    libraries = defaultdict(set)
+    for updated, providers in parallel_api_jobs(
+            cases, apis, jobs, refresh_additional_api_job, 'Additional comparator',
+            str(source_directory), str(destination)):
+        changed.update(updated)
+        for module, names in providers.items():
+            libraries[module].update(names)
     return changed, libraries
 
 
@@ -1464,7 +1485,7 @@ def main():
     parser.add_argument('--additional-only',action='store_true',
                         help='with --comparators-only, add new independent adapter measurements without rerunning previous providers')
     parser.add_argument('--jobs',type=int,default=1,metavar='N',
-                        help='workers for --render, --check --exhaustive, or --comparators-only --additional-only (default: 1)')
+                        help='workers for Sci-only refresh, --render, --check --exhaustive, or --comparators-only --additional-only (default: 1)')
     mode.add_argument('--upgrade-scientific-comparisons',action='store_true',
                       help='replace cmath complex references with mpmath/NumPy and remove all stdlib comparisons, preserving Sci outputs')
     parser.add_argument('--module',action='append',default=[],metavar='NAMESPACE',help='refresh Sci only for this module or nested namespace; repeat to select several')
@@ -1477,10 +1498,12 @@ def main():
         parser.error('--comparators-only requires explicit --module selection')
     if args.additional_only and not args.comparators_only:
         parser.error('--additional-only requires --comparators-only')
-    if args.jobs < 1 or (args.jobs > 1 and not (args.render or
+    sci_only = not (args.full or args.extend or args.check or args.render or
+                    args.comparators_only or args.upgrade_scientific_comparisons)
+    if args.jobs < 1 or (args.jobs > 1 and not (sci_only or args.render or
                                                 (args.check and args.exhaustive) or
                                                 (args.comparators_only and args.additional_only))):
-        parser.error('--jobs requires a positive integer and --render, --check --exhaustive, or --comparators-only --additional-only')
+        parser.error('--jobs requires a positive integer and Sci-only refresh, --render, --check --exhaustive, or --comparators-only --additional-only')
     if args.render and args.jobs > 1 and args.module:
         parser.error('parallel --render requires the full module set')
     if (np.__version__,scipy.__version__,mp.__version__,filterpy.__version__) != ('2.5.4','1.18.1','1.3.0','1.4.5'):
@@ -1774,7 +1797,8 @@ def main():
             # before writing. Reusing unchanged files avoids copying the whole
             # (potentially multi-gigabyte) reference snapshot on each refresh.
             shutil.copytree(results/'measurements',staged,copy_function=os.link)
-            changed=refresh_sci(cases,records,target/'debug/sci-testing',staged,selected)
+            changed=refresh_sci(cases,records,target/'debug/sci-testing',staged,selected,
+                                jobs=args.jobs)
             staged_records=MeasurementStore(staged)
             coverage=audit(cases,staged_records)
             meta['measurements_sha256']=directory_digest(staged)
@@ -1782,7 +1806,10 @@ def main():
                 cases,staged_records,previous,meta,Path(directory),selected)
             meta['coverage_sha256']=hashlib.sha256(coverage.encode()).hexdigest()
             pages=Path(directory)/'pages'
-            with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,staged_records,meta,pages)
+            if args.jobs > 1:
+                render_cached_parallel(cases,staged_records,meta,pages,jobs=args.jobs)
+            else:
+                with mp.workdps(METRIC_PRECISION_DPS):render_cached(cases,staged_records,meta,pages)
             staged_environment=Path(directory)/'environment.json'
             staged_environment.write_text(json.dumps(meta,indent=2)+'\n')
             # Finish all audits and page generation before publishing changes.

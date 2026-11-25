@@ -121,9 +121,9 @@ current public namespace, with their measured recipe names preserved.
 | `expm` | 2005 | 4286.1 / 8.4365 | 4295.0 / 7.9752 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
 | `expm_cond` | 2004 | 21.521 / 3.9973 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `expm_frechet` | 2003 | 5.5524 / 2.5624 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
-| `fractional_matrix_power` | 2027 | 3.4751e+16 / 6.8747e+12 | 8.5718e+92 / 9.978e+88 | 0.0 / 0.0 | —; unavailable 2027/2027 | —; unavailable 2027/2027 | —; unavailable 2027/2027 | —; unavailable 2027/2027 |
+| `fractional_matrix_power` | 2027 | 3.9754e+16 / 4.5027e+12 | 8.5718e+92 / 9.978e+88 | 0.0 / 0.0 | —; unavailable 2027/2027 | —; unavailable 2027/2027 | —; unavailable 2027/2027 | —; unavailable 2027/2027 |
 | `funm` | 2009 | 4.5036e+15 / 1.6761e+12 | 2.3768 / 0.046284; unavailable 3/2009 | 0.0 / 0.0 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 |
-| `logm` | 2009 | 4.5036e+15 / 4.9661e+12 | 1.5388e+92 / 9.5425e+87 | 0.0 / 0.0 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 |
+| `logm` | 2009 | 4.5036e+15 / 4.7802e+12 | 1.5388e+92 / 9.5425e+87 | 0.0 / 0.0 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 |
 | `signm` | 2007 | 1.8495e+16 / 1.7097e+12 | —; unavailable 2007/2007 | 0.0 / 0.0 | —; unavailable 2007/2007 | —; unavailable 2007/2007 | —; unavailable 2007/2007 | —; unavailable 2007/2007 |
 | `sinhm` | 2004 | 29.297 / 0.6562 | 28.32 / 0.46695 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `sinm` | 2004 | 4.2546 / 0.68412 | 2.5524 / 0.38377 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
@@ -141,17 +141,17 @@ current public namespace, with their measured recipe names preserved.
 | `cho_solve_banded` | 2004 | 10.688 / 0.7667 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `lstsq` | 2012 | 4.5036e+15 / 1.1172e+12 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | 3.0 / 7.6912e-3 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
 | `lu_solve` | 2006 | 1.6842 / 1.8257e-3 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
-| `solve` | 2058 | 4.6362e+8 / 2.6474e+5 | 0.5 / 0.17901 | 3.8957e+8 / 2.1752e+5 | 4.9228e+7 / 31689.0 | 3.1988e+8 / 1.7663e+5 | 37637.0 / 22.162 | 4.9228e+7 / 31689.0 |
-| `solve_banded` | 2003 | 0.66733 / 0.069514 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
-| `solve_circulant` | 2002 | 2.625 / 1.3099e-3 | —; unavailable 2002/2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
+| `solve` | 2058 | 0.5 / 0.17901 | 0.5 / 0.17901 | 3.8957e+8 / 2.1752e+5 | 4.9228e+7 / 31689.0 | 3.1988e+8 / 1.7663e+5 | 37637.0 / 22.162 | 4.9228e+7 / 31689.0 |
+| `solve_banded` | 2003 | 0.59524 / 1.8573e-4 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
+| `solve_circulant` | 2002 | 2.625 / 0.21119 | —; unavailable 2002/2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `solve_continuous_are` | 2003 | 5.6569 / 0.55421 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
 | `solve_continuous_lyapunov` | 2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `solve_discrete_are` | 2003 | 4.5036e+15 / 4.4834e+12 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
 | `solve_discrete_lyapunov` | 2002 | 1.8601 / 0.20185 | —; unavailable 2002/2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `solve_lyapunov` | 2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
 | `solve_sylvester` | 2003 | 2.0 / 0.15424 | 1.0 / 0.19832 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
-| `solve_toeplitz` | 2002 | 3.4997 / 0.42147 | —; unavailable 2002/2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
-| `solve_triangular` | 2008 | 1.3321 / 0.031869 | 1.0358e+17 / 6.2914e+13 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
+| `solve_toeplitz` | 2002 | 3.5021 / 0.48709 | —; unavailable 2002/2002 | 0.0 / 0.0 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 | —; unavailable 2002/2002 |
+| `solve_triangular` | 2008 | 0.0 / 0.0 | 1.0358e+17 / 6.2914e+13 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `solveh_banded` | 2004 | 8.4375 / 0.77894 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 
 ### `sci::linalg::structured`

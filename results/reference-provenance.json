@@ -10503,7 +10503,7 @@
     ]
   },
   "cases_sha256": "096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533",
-  "measurements_sha256": "3f2ae498e8bcc4c5b62a8d31217173123235259776dc60bbc68a07f2c68175e7",
+  "measurements_sha256": "74e615f66752d79df78505ae3010e2310f75ad1a769eda5944591ec039f91db7",
   "reference_sha256": {
     "cluster.hierarchy.average": "b4d494e0356fa03d2832d58a47cfd91ba6b9df8af25095ac33541dddf5163929",
     "cluster.hierarchy.centroid": "0d06dae3a4007854eb75738ac1ec933dfc71c7b4b6a8963d0d3b50c3d5c0e296",

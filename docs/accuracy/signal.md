@@ -36,8 +36,8 @@ current public namespace, with their measured recipe names preserved.
 | Function | Cases | Sci | mpmath | SciPy | GSL | NumPy |
 | --- | ---: | --- | --- | --- | --- | --- |
 | `band_stop_obj` | 2008 | 318.36 / 83.42 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
-| `bessel` | 2024 | 5.5871 / 0.043311 | —; unavailable 2024/2024 | 0.0 / 0.0 | —; unavailable 2024/2024 | —; unavailable 2024/2024 |
-| `besselap` | 2039 | 137.88 / 3.1479 | —; unavailable 2039/2039 | 0.0 / 0.0 | —; unavailable 2039/2039 | —; unavailable 2039/2039 |
+| `bessel` | 2024 | 5.7584 / 0.045901 | —; unavailable 2024/2024 | 0.0 / 0.0 | —; unavailable 2024/2024 | —; unavailable 2024/2024 |
+| `besselap` | 2039 | 170.86 / 3.6123 | —; unavailable 2039/2039 | 0.0 / 0.0 | —; unavailable 2039/2039 | —; unavailable 2039/2039 |
 | `ellip` | 2024 | 4.954e+16 / 8.6359e+12 | —; unavailable 2024/2024 | 0.0 / 0.0 | —; unavailable 2024/2024 | —; unavailable 2024/2024 |
 | `ellipap` | 2012 | 29.688 / 2.4795 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
 | `ellipord` | 2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | 0.0 / 0.0 | —; unavailable 2005/2005 | —; unavailable 2005/2005 |
@@ -278,17 +278,17 @@ current public namespace, with their measured recipe names preserved.
 | `get_window` | 2006 | 10.577 / 0.98053 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
 | `windows.barthann` | 2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.bartlett` | 2008 | 3.875 / 0.10895 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 7.75 / 0.47198 |
-| `windows.blackman` | 2008 | 49.978 / 1.3382 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 45.112 / 1.6828 |
-| `windows.blackmanharris` | 2008 | 261.57 / 2.7067 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
+| `windows.blackman` | 2008 | 49.978 / 1.6644 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 45.112 / 1.6828 |
+| `windows.blackmanharris` | 2008 | 194.64 / 5.8357 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.bohman` | 2008 | 349.14 / 2.8582 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.boxcar` | 2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.chebwin` | 2008 | 176.17 / 5.6427 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.cosine` | 2008 | 39.487 / 0.99122 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.dpss` | 2006 | 4.1693e+17 / 7.1674e+14 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
 | `windows.exponential` | 2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
-| `windows.flattop` | 2008 | 283.86 / 3.2804 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
+| `windows.flattop` | 2008 | 315.13 / 7.7124 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.gaussian` | 2008 | 32.026 / 3.6175 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
-| `windows.general_cosine` | 2008 | 66.002 / 1.5512 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
+| `windows.general_cosine` | 2008 | 66.002 / 2.4307 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.general_gaussian` | 2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.general_hamming` | 2008 | 4.1065 / 0.30727 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.get_window` | 2006 | 10.577 / 0.96974 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
@@ -297,7 +297,7 @@ current public namespace, with their measured recipe names preserved.
 | `windows.kaiser` | 2011 | 8.1057 / 0.9771 | —; unavailable 2011/2011 | 0.0 / 0.0 | —; unavailable 2011/2011 | —; unavailable 2011/2011 |
 | `windows.kaiser_bessel_derived` | 2004 | 2.7043 / 0.22147 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
 | `windows.lanczos` | 2008 | 9.3543 / 0.32059 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
-| `windows.nuttall` | 2008 | 110.28 / 1.8934 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
+| `windows.nuttall` | 2008 | 87.514 / 4.2181 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.parzen` | 2008 | 5.2204 / 0.23339 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.taylor` | 2008 | 0.98472 / 0.11782 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `windows.triang` | 2008 | 4.125 / 0.39496 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |

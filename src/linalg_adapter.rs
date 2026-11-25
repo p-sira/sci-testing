@@ -991,12 +991,8 @@ pub fn run(c: &[&str]) -> Vec<f64> {
             let (lo, hi) = l::basic::bandwidth(&convert_matrix(&a())).unwrap();
             assert_eq!((lo, hi), (e[1].parse().unwrap(), e[2].parse().unwrap()));
         }
-        "issymmetric" => assert_eq!(
+        "issymmetric" | "ishermitian" => assert_eq!(
             l::basic::issymmetric(&convert_matrix(&a()), optional(c[3]), optional(c[4])).unwrap(),
-            boolean(e[1])
-        ),
-        "ishermitian" => assert_eq!(
-            l::basic::ishermitian(&a(), optional(c[3]), optional(c[4])).unwrap(),
             boolean(e[1])
         ),
         _ => panic!("missing dispatcher {}", c[1]),

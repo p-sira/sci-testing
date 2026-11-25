@@ -129,12 +129,12 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL | NumPy | statrs |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
-| `boxcox_normmax` | 2016 | 5.0407e+23 / 2.0359e+21 | —; unavailable 2016/2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 |
+| `boxcox_normmax` | 2016 | 1.6274e+24 / 1.2385e+23 | —; unavailable 2016/2016 | 0.0 / 0.0 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 | —; unavailable 2016/2016 |
 | `boxcox_normplot` | 2006 | 2.2429 / 0.24871 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
-| `ppcc_max` | 2015 | 1.786e+9 / 4.311e+8 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
-| `ppcc_plot` | 2015 | 13.208 / 0.29083 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
+| `ppcc_max` | 2015 | 1.9734e+9 / 3.7186e+8 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
+| `ppcc_plot` | 2015 | 13.208 / 0.37823 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
 | `probplot` | 2003 | 1.2205 / 6.0934e-5 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
-| `yeojohnson_normmax` | 2008 | 2.2946e+8 / 4.7734e+7 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
+| `yeojohnson_normmax` | 2008 | 1.207e+9 / 4.4912e+7 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | —; unavailable 2008/2008 |
 | `yeojohnson_normplot` | 2009 | 2.6227 / 0.22653 | —; unavailable 2009/2009 | 0.0 / 0.0 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 |
 
 ### `sci::stats::distances`
@@ -153,17 +153,17 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL | NumPy | statrs |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
-| `cdf` | 2379 | 4.2666e+5 / 8782.7 | 2031.9 / 1.2188 | 0.0 / 0.0 | 1499.9 / 1.2083; unavailable 290/2379 | 1392.5 / 2.9578; unavailable 363/2379 | —; unavailable 2379/2379 | 2.2078e+5 / 3346.8; unavailable 587/2379 |
-| `fit` | 2036 | 2.8955 / 2.0096e-3 | —; unavailable 2036/2036 | 0.0 / 0.0 | —; unavailable 2036/2036 | —; unavailable 2036/2036 | —; unavailable 2036/2036 | —; unavailable 2036/2036 |
+| `cdf` | 2379 | 4.2666e+5 / 8782.6 | 2031.9 / 1.2188 | 0.0 / 0.0 | 1499.9 / 1.2083; unavailable 290/2379 | 1392.5 / 2.9578; unavailable 363/2379 | —; unavailable 2379/2379 | 2.2078e+5 / 3346.8; unavailable 587/2379 |
+| `fit` | 2036 | 2.8955 / 1.3433e-3 | —; unavailable 2036/2036 | 0.0 / 0.0 | —; unavailable 2036/2036 | —; unavailable 2036/2036 | —; unavailable 2036/2036 | —; unavailable 2036/2036 |
 | `logpdf` | 2163 | 832.64 / 10.889 | 76.599 / 1.1185; unavailable 7/2163 | 0.0 / 0.0 | 73.615 / 1.1669; unavailable 336/2163 | 82.601 / 3.1892; unavailable 387/2163 | —; unavailable 2163/2163 | 832.64 / 11.352; unavailable 374/2163 |
 | `make_distribution` | 2015 | 5.6207 / 0.35452 | —; unavailable 2015/2015 | 0.0 / 0.0 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 | —; unavailable 2015/2015 |
 | `normal_cdf` | 2111 | 940.89 / 110.9 | 0.49075 / 0.15686 | 940.89 / 110.9 | 844.83 / 109.78 | 3.1714 / 0.39997 | —; unavailable 2111/2111 | 4.6178e+5 / 1.3474e+5 |
 | `normal_pdf` | 2000 | 1.5723 / 0.78551 | 8.4529 / 1.8876 | 0.0 / 0.0 | 0.0 / 0.0 | 0.99061 / 0.15999 | 0.0 / 0.0 | 1.5723 / 0.78551 |
 | `normal_ppf` | 2000 | 0.0 / 0.0 | 2.785 / 0.41242 | 0.0 / 0.0 | 2.785 / 0.39778 | 3.7134 / 0.67276 | —; unavailable 2000/2000 | 3.7134 / 0.52153 |
-| `order_statistic` | 2160 | 2107.7 / 3.1201 | —; unavailable 2160/2160 | 0.0 / 0.0 | —; unavailable 2160/2160 | —; unavailable 2160/2160 | —; unavailable 2160/2160 | —; unavailable 2160/2160 |
+| `order_statistic` | 2160 | 2107.7 / 2.8319 | —; unavailable 2160/2160 | 0.0 / 0.0 | —; unavailable 2160/2160 | —; unavailable 2160/2160 | —; unavailable 2160/2160 | —; unavailable 2160/2160 |
 | `pdf` | 2377 | 490.26 / 9.7963 | 17.636 / 0.63913 | 0.0 / 0.0 | 18.616 / 0.62024; unavailable 291/2377 | 84.153 / 3.9631; unavailable 360/2377 | —; unavailable 2377/2377 | 490.26 / 9.274; unavailable 530/2377 |
-| `ppf` | 2300 | 4.6057e+6 / 6617.6 | 2.9826e+7 / 13051.0; unavailable 14/2300 | 0.0 / 0.0 | 2464.5 / 3.9201; unavailable 448/2300 | 1.5289e+9 / 1.7337e+6; failed 1/2300; unavailable 1065/2300 | —; unavailable 2300/2300 | 8.1955e+14 / 2.6974e+12; unavailable 477/2300 |
-| `sf` | 2379 | 2.9859e+5 / 4114.0 | 33.012 / 0.38789 | 0.0 / 0.0 | 20.88 / 0.35776; unavailable 289/2379 | 69.361 / 1.7378; unavailable 357/2379 | —; unavailable 2379/2379 | 3.639e+5 / 5135.7; unavailable 598/2379 |
+| `ppf` | 2300 | 83249.0 / 997.24 | 2.9826e+7 / 13051.0; unavailable 14/2300 | 0.0 / 0.0 | 2464.5 / 3.9201; unavailable 448/2300 | 1.5289e+9 / 1.7337e+6; failed 1/2300; unavailable 1065/2300 | —; unavailable 2300/2300 | 8.1955e+14 / 2.6974e+12; unavailable 477/2300 |
+| `sf` | 2379 | 2.9859e+5 / 4113.8 | 33.012 / 0.38789 | 0.0 / 0.0 | 20.88 / 0.35776; unavailable 289/2379 | 69.361 / 1.7378; unavailable 357/2379 | —; unavailable 2379/2379 | 3.639e+5 / 5135.7; unavailable 598/2379 |
 | `truncate` | 2075 | 4.5036e+15 / 2.6045e+12 | —; unavailable 2075/2075 | 0.0 / 0.0 | —; unavailable 2075/2075 | —; unavailable 2075/2075 | —; unavailable 2075/2075 | —; unavailable 2075/2075 |
 
 ### `sci::stats::estimation`
@@ -173,7 +173,7 @@ current public namespace, with their measured recipe names preserved.
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL | NumPy | statrs |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 | `bayes_mvs` | 2012 | 83.096 / 3.6539 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
-| `mvsdist` | 2018 | 516.22 / 1.083 | —; unavailable 2018/2018 | 0.0 / 0.0 | —; unavailable 2018/2018 | —; unavailable 2018/2018 | —; unavailable 2018/2018 | —; unavailable 2018/2018 |
+| `mvsdist` | 2018 | 516.22 / 1.0824 | —; unavailable 2018/2018 | 0.0 / 0.0 | —; unavailable 2018/2018 | —; unavailable 2018/2018 | —; unavailable 2018/2018 | —; unavailable 2018/2018 |
 
 ### `sci::stats::goodness`
 
@@ -181,13 +181,13 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL | NumPy | statrs |
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
-| `anderson` | 2011 | 99.687 / 0.4487 | —; unavailable 2011/2011 | 0.0 / 0.0 | —; unavailable 2011/2011 | —; unavailable 2011/2011 | —; unavailable 2011/2011 | —; unavailable 2011/2011 |
+| `anderson` | 2011 | 55.713 / 0.44508 | —; unavailable 2011/2011 | 0.0 / 0.0 | —; unavailable 2011/2011 | —; unavailable 2011/2011 | —; unavailable 2011/2011 | —; unavailable 2011/2011 |
 | `anderson_ksamp` | 2014 | 6.1166 / 2.0784 | —; unavailable 2014/2014 | 0.0 / 0.0 | —; unavailable 2014/2014 | —; unavailable 2014/2014 | —; unavailable 2014/2014 | —; unavailable 2014/2014 |
 | `chisquare` | 2006 | 5.2329 / 1.0128 | —; unavailable 2006/2006 | 0.0 / 0.0 | 3.4945 / 0.38534 | 4.9907 / 0.15494 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
-| `cramervonmises` | 2014 | 2.6969e+5 / 67.074 | —; unavailable 2014/2014 | 0.0 / 0.0 | —; unavailable 2014/2014 | —; unavailable 2014/2014 | —; unavailable 2014/2014 | —; unavailable 2014/2014 |
+| `cramervonmises` | 2014 | 8.0906e+5 / 205.98 | —; unavailable 2014/2014 | 0.0 / 0.0 | —; unavailable 2014/2014 | —; unavailable 2014/2014 | —; unavailable 2014/2014 | —; unavailable 2014/2014 |
 | `cramervonmises_2samp` | 2013 | 1.2769e+5 / 31.818 | —; unavailable 2013/2013 | 0.0 / 0.0 | —; unavailable 2013/2013 | —; unavailable 2013/2013 | —; unavailable 2013/2013 | —; unavailable 2013/2013 |
 | `goodness_of_fit` | 2012 | 4.7452 / 0.14129 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
-| `ks_1samp` | 2009 | 0.0 / 0.0 | —; unavailable 2009/2009 | 0.0 / 0.0 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 |
+| `ks_1samp` | 2009 | 3.2841 / 1.0112e-3 | —; unavailable 2009/2009 | 0.0 / 0.0 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 | —; unavailable 2009/2009 |
 | `ks_2samp` | 2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
 | `kstest` | 2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 | —; unavailable 2012/2012 |
 | `power_divergence` | 2034 | 34.056 / 0.81664 | —; unavailable 2034/2034 | 0.0 / 0.0 | 10.586 / 0.56997 | —; unavailable 2034/2034 | —; unavailable 2034/2034 | —; unavailable 2034/2034 |
@@ -254,7 +254,7 @@ current public namespace, with their measured recipe names preserved.
 | `kurtosistest` | 2021 | 576.73 / 2.4259 | —; unavailable 2021/2021 | 0.0 / 0.0 | —; unavailable 2021/2021 | —; unavailable 2021/2021 | —; unavailable 2021/2021 | —; unavailable 2021/2021 |
 | `normaltest` | 2006 | 6.78e+15 / 1.2996e+15 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 | —; unavailable 2006/2006 |
 | `obrientransform` | 2004 | 21.538 / 0.72203 | —; unavailable 2004/2004 | 0.0 / 0.0 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 | —; unavailable 2004/2004 |
-| `shapiro` | 2021 | 6.0048e+15 / 1.4856e+12 | —; unavailable 2021/2021 | 0.0 / 0.0 | —; unavailable 2021/2021 | —; unavailable 2021/2021 | —; unavailable 2021/2021 | —; unavailable 2021/2021 |
+| `shapiro` | 2021 | 4.5036e+15 / 1.1142e+12 | —; unavailable 2021/2021 | 0.0 / 0.0 | —; unavailable 2021/2021 | —; unavailable 2021/2021 | —; unavailable 2021/2021 | —; unavailable 2021/2021 |
 | `skewtest` | 2018 | 2.7302e+31 / 3.5875e+30 | —; unavailable 2018/2018 | 0.0 / 0.0 | —; unavailable 2018/2018 | —; unavailable 2018/2018 | —; unavailable 2018/2018 | —; unavailable 2018/2018 |
 
 ### `sci::stats::qmc`

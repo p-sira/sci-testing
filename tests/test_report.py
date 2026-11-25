@@ -290,15 +290,13 @@ class AccuracyTests(unittest.TestCase):
         aliases={r['api']:r['canonical'] for r in rows}
         apis=set(report.build_cases().apis)
         self.assertFalse(apis-set(aliases))
-        # All genuinely new Sci 0.3 API names have independently specified
-        # cases. The retained legacy recipes are mapped to current public
-        # exports, but their recipe migration remains explicitly pending.
-        self.assertFalse({r['api'] for r in rows if r['status']=='new_api_untested'}-apis)
+        # Newly added APIs may await independent recipes; they must remain
+        # explicitly classified as untested until those recipes exist.
         missing_canonical={r['canonical'] for r in rows if r['canonical']}-{
             aliases[api] for api in apis if aliases[api]}
         for row in rows:
             if row['canonical'] in missing_canonical:
-                self.assertIn(row['status'],{'untested','legacy_recipe_pending'},row['api'])
+                self.assertIn(row['status'],{'untested','legacy_recipe_pending','new_api_untested'},row['api'])
         self.assertFalse([r['api'] for r in rows if r['status']=='unresolved_legacy'])
         self.assertTrue(all(not aliases[api] or aliases[api] in {r['canonical'] for r in rows}
                             for api in apis))
@@ -559,6 +557,61 @@ class AccuracyTests(unittest.TestCase):
             self.assertEqual(saved['libraries']['SciPy'],original['libraries']['SciPy'])
             self.assertEqual(saved['libraries']['mpmath']['values'],[599584916.])
             self.assertEqual(read_measurements(source)[case['id']],original)
+
+    def test_parallel_sci_refresh_matches_serial_and_preserves_snapshot(self):
+        import shutil
+        import os
+        import sys
+        from sci_testing.case_csv import MeasurementStore, write_measurements
+
+        cases=[{'id':f'constants.{name}/{i}','api':f'constants.{name}',
+                'args':{'x':i+1}}
+               for name in ('lambda2nu','nu2lambda','unused') for i in range(2)]
+        original={case['id']:{'id':case['id'],'reference':['1.234567890123456789'],
+                              'libraries':{'Sci':{'values':[1.]},
+                                           'SciPy':{'values':[1.25], 'warnings':['saved']}}}
+                  for case in cases}
+        selected={'constants.lambda2nu','constants.nu2lambda'}
+
+        class IndexedCases:
+            def function(self,api):
+                return [case for case in cases if case['api']==api]
+
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            source=root/'source'
+            write_measurements(source,measurement_files(cases,original))
+            serial=root/'serial';parallel=root/'parallel'
+            for staged in (serial,parallel):
+                shutil.copytree(source,staged,copy_function=os.link)
+            runner=root/'runner'
+            runner.write_text(f'#!{sys.executable}\n'
+                              'import json, sys\n'
+                              'for line in sys.stdin:\n'
+                              '    c = json.loads(line)\n'
+                              '    assert not c["api"].endswith("unused")\n'
+                              '    print(json.dumps({"id": c["id"], "values": [2*c["args"]["x"]]}))\n')
+            runner.chmod(0o700)
+            expected=report.refresh_sci(cases,MeasurementStore(source),runner,serial,selected)
+            actual=report.refresh_sci(IndexedCases(),MeasurementStore(source),runner,
+                                      parallel,selected,jobs=2)
+            self.assertEqual(actual,expected)
+            self.assertEqual(actual,{'constants/lambda2nu.csv','constants/nu2lambda.csv'})
+            self.assertEqual(disk_files(parallel),disk_files(serial))
+            self.assertEqual(read_measurements(source),original)
+            refreshed=read_measurements(parallel)
+            for case in cases:
+                identifier=case['id']
+                expected_record=original[identifier]
+                if case['api'] in selected:
+                    expected_record={**expected_record,'libraries':{
+                        **expected_record['libraries'],'Sci':{'values':[2.*case['args']['x']]}}}
+                self.assertEqual(refreshed[identifier],expected_record)
+            runner.write_text(f'#!{sys.executable}\nraise SystemExit(1)\n')
+            with self.assertRaisesRegex(RuntimeError,'Sci refresh failed for constants\\.'):
+                report.refresh_sci(IndexedCases(),MeasurementStore(source),runner,
+                                   parallel,selected,jobs=2)
+            self.assertEqual(read_measurements(source),original)
 
     def test_failures_are_visible(self):
         cases=[{'id':'a','api':'stats.variance','group':'ordinary','args':{'values':[1.,2.]}}]

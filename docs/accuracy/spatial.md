@@ -44,7 +44,7 @@ current public namespace, with their measured recipe names preserved.
 | `cosine` | 2064 | 2.0455e+18 / 1.0604e+15 | 4.5036e+15 / 6.5459e+12 | 4.5036e+15 / 9.9237e+12 | —; unavailable 2064/2064 | 4.5036e+15 / 9.9237e+12 | 4.5036e+15 / 9.9237e+12 |
 | `dice` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
 | `directed_hausdorff` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | —; unavailable 2003/2003 | —; unavailable 2003/2003 |
-| `distance_matrix` | 2003 | 0.8165 / 1.1598e-4 | —; unavailable 2003/2003 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 |
+| `distance_matrix` | 2003 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2003/2003 | 0.0 / 0.0 |
 | `euclidean` | 2064 | 1.5729 / 0.2364 | 0.47748 / 0.17168 | 1.0718 / 0.23593 | 1.2822 / 0.23568 | 1.2822 / 0.23568 | 1.0718 / 0.23593 |
 | `hamming` | 2003 | 0.5 / 0.17374 | —; unavailable 2003/2003 | 0.0 / 0.0 | 0.5 / 0.17374 | —; unavailable 2003/2003 | 0.5 / 0.17374 |
 | `is_valid_dm` | 2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 | —; unavailable 2008/2008 | 0.0 / 0.0 |

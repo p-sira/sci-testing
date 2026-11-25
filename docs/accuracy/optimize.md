@@ -35,10 +35,10 @@ current public namespace, with their measured recipe names preserved.
 
 | Function | Cases | Sci | mpmath | SciPy | GSL |
 | --- | ---: | --- | --- | --- | --- |
-| `approx_fprime` | 2012 | 32000.0 / 2851.2 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 |
-| `check_grad` | 2008 | 6.0541e+6 / 1.3246e+6 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 |
-| `rosen` | 2060 | 3.7821e+7 / 47584.0 | 0.49473 / 0.18029 | 3.7821e+7 / 47584.0 | —; unavailable 2060/2060 |
-| `rosen_der` | 2060 | 4.5036e+15 / 8.5513e+11 | 0.49023 / 0.18134 | 4.5036e+15 / 8.5513e+11 | —; unavailable 2060/2060 |
+| `approx_fprime` | 2012 | 32000.0 / 2851.8 | —; unavailable 2012/2012 | 0.0 / 0.0 | —; unavailable 2012/2012 |
+| `check_grad` | 2008 | 6.0541e+6 / 1.3248e+6 | —; unavailable 2008/2008 | 0.0 / 0.0 | —; unavailable 2008/2008 |
+| `rosen` | 2060 | 2.2786 / 0.48207 | 0.49473 / 0.18029 | 3.7821e+7 / 47584.0 | —; unavailable 2060/2060 |
+| `rosen_der` | 2060 | 7.822e+6 / 816.7 | 0.49023 / 0.18134 | 4.5036e+15 / 8.5513e+11 | —; unavailable 2060/2060 |
 | `rosen_hess` | 2006 | 1.28 / 0.098842 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 |
 | `rosen_hess_prod` | 2006 | 1.2806 / 0.097823 | —; unavailable 2006/2006 | 0.0 / 0.0 | —; unavailable 2006/2006 |
 

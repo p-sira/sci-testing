@@ -36,6 +36,9 @@ def generated(source=None):
     body=body.replace('assert_eq!(t.prefix.to_string(), e[1]);','assert_eq!(t.prefix.to_string(), e[1].to_string());')
     body=body.replace('assert_eq!(t.dtype, "f64");','emit(t.dtype.to_string());')
     if Path(source).resolve()==sci_target().resolve():
+        # Retain real-valued historical Hermitian-symmetry cases after Sci
+        # removed that alias; the original API was the same real predicate.
+        body=body.replace('"issymmetric" =>', '"issymmetric" | "ishermitian" =>')
         first=body.index('            "solve_lyapunov" | "solve_continuous_lyapunov" => {')
         last=body.index('            "solve_discrete_lyapunov"',first)
         body=body[:first]+'''            "solve_continuous_lyapunov" => mm(l::solvers::solve_continuous_lyapunov(
