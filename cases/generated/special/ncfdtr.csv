@@ -2000,3 +2000,5 @@ special.ncfdtr/random-0997,"random, local fixture sweep; binary64 SciPy referenc
 special.ncfdtr/random-0998,"random, local fixture sweep; binary64 SciPy reference",s:3.0,s:5.0,s:0.5,s:2.5024582968763758
 special.ncfdtr/random-0999,"random, local fixture sweep; binary64 SciPy reference",s:3.0,s:5.0,s:0.5,s:2.50050431385243
 special.ncfdtr/recipe-0000,reference recipe; binary64 reference,s:3.0,s:5.0,s:0.5,s:2.5
+special.ncfdtr/tail-regression-000,high-precision tail regression,s:5.0,s:30.0,s:400.0,s:0.5
+special.ncfdtr/tail-regression-001,high-precision tail regression,s:5.0,s:30.0,s:400.0,s:2.0

@@ -5,7 +5,7 @@
 Measured binary64 (`f64`) results compared against the **saved per-case reference**.
 Each implementation, including Sci-special, is evaluated against the same
 reference values stored in the raw CSVs. This page
-covers 795229 cases and 397 public API names;
+covers 795263 cases and 397 public API names;
 coverage is limited to the operations and inputs below.
 
 ## Differences from saved references
@@ -194,7 +194,7 @@ current public namespace, with their measured recipe names preserved.
 
 ### `sci::special::elementary`
 
-38 functions · 76189 cases
+38 functions · 76195 cases
 
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -208,7 +208,7 @@ current public namespace, with their measured recipe names preserved.
 | `entr` | 2001 | 0.0 / 0.0 | 0.69227 / 0.2065 | 0.0 / 0.0 | —; unavailable 2001/2001 | 0.0 / 0.0 |
 | `erf` | 2143 | 1.4117 / 0.13038 | 0.43569 / 0.10297 | 1.4117 / 0.13038 | 0.79621 / 0.10642 | 2.3093 / 0.19875 |
 | `erf_zeros` | 2001 | 27.467 / 8.5308 | —; unavailable 2001/2001 | 0.0 / 0.0 | —; unavailable 2001/2001 | —; unavailable 2001/2001 |
-| `erfc` | 2001 | 1.5135 / 0.40374 | 0.26062 / 0.13166 | 1.5135 / 0.40374 | 0.79434 / 0.31202 | 0.68266 / 0.36113 |
+| `erfc` | 2007 | 1.5135 / 0.40256 | 0.26062 / 0.13129 | 1.5135 / 0.40256 | 0.79434 / 0.31111 | 0.68266 / 0.36008 |
 | `erfcinv` | 2001 | 0.0 / 0.0 | —; unavailable 2001/2001 | 0.0 / 0.0 | 2.73 / 0.66078 | 3.4119 / 0.81079 |
 | `erfcx` | 2001 | 1.9733 / 0.48143 | 0.40515 / 0.20368 | 3.3682 / 1.0255 | —; unavailable 2001/2001 | 1.3376 / 0.40845 |
 | `erfi` | 2001 | 3.2548 / 0.8728 | 2.4408 / 0.64647 | 0.0 / 0.0 | —; unavailable 2001/2001 | 2.4416 / 0.68913 |
@@ -391,7 +391,7 @@ current public namespace, with their measured recipe names preserved.
 
 ### `sci::special::probability`
 
-62 functions · 124098 cases
+62 functions · 124126 cases
 
 | Function | Cases | Sci | mpmath | SciPy | Boost.Math | GSL |
 | --- | ---: | --- | --- | --- | --- | --- |
@@ -408,7 +408,7 @@ current public namespace, with their measured recipe names preserved.
 | `chdtrc` | 2001 | 0.0 / 0.0 | 4.7384 / 1.0862 | 0.0 / 0.0 | 4.7384 / 1.0865 | 7.3709 / 5.0512 |
 | `chdtri` | 2001 | 40.388 / 7.4639 | —; unavailable 2001/2001 | 0.0 / 0.0 | 24.56 / 5.263 | 31.094 / 6.2383 |
 | `chdtriv` | 2001 | 2.738 / 0.58832 | —; unavailable 2001/2001 | 0.0 / 0.0 | 2.7381 / 0.62846 | —; unavailable 2001/2001 |
-| `chndtr` | 2001 | 2.7537 / 0.56996 | —; unavailable 2001/2001 | 0.0 / 0.0 | 2.7534 / 1.0761 | —; unavailable 2001/2001 |
+| `chndtr` | 2003 | 7.0862 / 0.57411 | —; unavailable 2003/2003 | 4.5036e+15 / 2.2484e+12 | 2.7534 / 1.0752 | —; unavailable 2003/2003 |
 | `chndtridf` | 2001 | 4.9688 / 1.0872 | —; unavailable 2001/2001 | 0.0 / 0.0 | 3.9756 / 0.8751 | —; unavailable 2001/2001 |
 | `chndtrinc` | 2001 | 8.462 / 1.9408 | —; unavailable 2001/2001 | 0.0 / 0.0 | 6.3616 / 2.4472 | —; unavailable 2001/2001 |
 | `chndtrix` | 2001 | 5.9712 / 1.2986 | —; unavailable 2001/2001 | 0.0 / 0.0 | 4.1793 / 0.89041 | —; unavailable 2001/2001 |
@@ -431,16 +431,16 @@ current public namespace, with their measured recipe names preserved.
 | `nbdtri` | 2001 | 2.7706 / 0.53488 | —; unavailable 2001/2001 | 0.0 / 0.0 | 1.8474 / 0.41535 | 7.3896 / 4.4027 |
 | `nbdtrik` | 2001 | 14.159 / 3.3963 | —; unavailable 2001/2001 | 0.0 / 0.0 | 6.2925 / 1.5284 | —; unavailable 2001/2001 |
 | `nbdtrin` | 2001 | 5.5283 / 1.1557 | —; unavailable 2001/2001 | 0.0 / 0.0 | 3.692 / 0.82931 | —; unavailable 2001/2001 |
-| `ncfdtr` | 2001 | 3.8155 / 0.79819 | —; unavailable 2001/2001 | 0.0 / 0.0 | 2.5436 / 0.55288 | —; unavailable 2001/2001 |
+| `ncfdtr` | 2003 | 26.095 / 0.81615 | —; unavailable 2003/2003 | 135.4 / 0.10931 | 6.3216 / 0.55557 | —; unavailable 2003/2003 |
 | `ncfdtri` | 2001 | 5.9835 / 1.274 | —; unavailable 2001/2001 | 0.0 / 0.0 | 5.9875 / 1.0513 | —; unavailable 2001/2001 |
 | `ncfdtridfd` | 2001 | 1.9925e+11 / 1.9815e+11 | —; unavailable 2001/2001 | 0.0 / 0.0 | 1.9925e+11 / 1.9815e+11 | —; unavailable 2001/2001 |
 | `ncfdtridfn` | 2001 | 1.524e+10 / 1.5088e+10 | —; unavailable 2001/2001 | 0.0 / 0.0 | 1.524e+10 / 1.5088e+10 | —; unavailable 2001/2001 |
 | `ncfdtrinc` | 2001 | 4.6295e+10 / 4.562e+10 | —; unavailable 2001/2001 | 0.0 / 0.0 | 4.6295e+10 / 4.562e+10 | —; unavailable 2001/2001 |
-| `nctdtr` | 2037 | 6.3632e+7 / 42698.0 | —; unavailable 2037/2037 | 0.0 / 0.0 | 6.3659e+7 / 42810.0 | —; unavailable 2037/2037 |
+| `nctdtr` | 2050 | 6.3632e+7 / 42510.0 | —; unavailable 2050/2050 | 6.7083e+17 / 3.2981e+14; failed 2/2050 | 4.743e+50 / 2.3137e+47 | —; unavailable 2050/2050 |
 | `nctdtridf` | 2001 | 2.7026e+7 / 2.6696e+7 | —; unavailable 2001/2001 | 0.0 / 0.0 | 2.7026e+7 / 2.6696e+7 | —; unavailable 2001/2001 |
 | `nctdtrinc` | 2001 | 1.2499e+6 / 1.2391e+6 | —; unavailable 2001/2001 | 0.0 / 0.0 | 1.2499e+6 / 1.2391e+6 | —; unavailable 2001/2001 |
 | `nctdtrit` | 2001 | 43.793 / 11.239 | —; unavailable 2001/2001 | 0.0 / 0.0 | 23.993 / 9.3925 | —; unavailable 2001/2001 |
-| `ndtr` | 2001 | 0.0 / 0.0 | 0.72329 / 0.10769 | 0.0 / 0.0 | 0.72329 / 0.12901 | 0.72329 / 0.14563 |
+| `ndtr` | 2012 | 511.47 / 0.25447 | 0.72329 / 0.10722 | 511.47 / 0.3338 | 789.19 / 0.74024 | 0.72329 / 0.14496 |
 | `ndtri` | 2001 | 0.0 / 0.0 | 0.95504 / 0.28781 | 0.0 / 0.0 | 0.95504 / 0.20538 | 2.8646 / 0.63899 |
 | `ndtri_exp` | 2001 | 1.7288 / 0.24411 | 0.57631 / 0.19258 | 0.0 / 0.0 | 1.1526 / 0.37394 | —; unavailable 2001/2001 |
 | `nrdtrimn` | 2001 | 0.0 / 0.0 | —; unavailable 2001/2001 | 0.0 / 0.0 | 0.0 / 0.0 | —; unavailable 2001/2001 |
@@ -521,6 +521,7 @@ current public namespace, with their measured recipe names preserved.
 
 - `special.gamma` (GSL): 1 failed; overflow. Example: `special.gamma/expanded-0076`.
 - `special.gen_harmonic` (GSL): 5 failed; GSL Hurwitz zeta representation requires exponent s > 1. Example: `special.gen_harmonic/recipe-0001`.
+- `special.nctdtr` (SciPy): 2 failed; ValueError: nonfinite output. Example: `special.nctdtr/tail-regression-006`.
 - `special.rgamma` (Boost.Math): 1 failed; Error in function boost::math::tgamma<long double>(long double): Evaluation of tgamma at a negative integer -2.. Example: `special.rgamma/recipe-0000`.
 
 

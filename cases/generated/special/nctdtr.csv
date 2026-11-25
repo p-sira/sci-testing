@@ -2036,3 +2036,16 @@ special.nctdtr/recipe-0033,reference recipe; binary64 reference,s:5.0,s:5.0,s:3.
 special.nctdtr/recipe-0034,reference recipe; binary64 reference,s:30.0,s:5.0,s:-2.0
 special.nctdtr/recipe-0035,reference recipe; binary64 reference,s:30.0,s:5.0,s:0.0
 special.nctdtr/recipe-0036,reference recipe; binary64 reference,s:30.0,s:5.0,s:3.0
+special.nctdtr/tail-regression-000,high-precision tail regression,s:30.0,s:20.0,s:0.5
+special.nctdtr/tail-regression-001,high-precision tail regression,s:30.0,s:20.0,s:2.0
+special.nctdtr/tail-regression-002,high-precision tail regression,s:10000.0,s:30.0,s:2.0
+special.nctdtr/tail-regression-003,high-precision tail regression,s:30.0,s:5.0,s:-2.0
+special.nctdtr/tail-regression-004,high-precision tail regression,s:30.0,s:5.0,s:-4.0
+special.nctdtr/tail-regression-005,high-precision tail regression,s:30.0,s:10.0,s:-2.0
+special.nctdtr/tail-regression-006,high-precision tail regression,s:30.0,s:20.0,s:-2.0
+special.nctdtr/tail-regression-007,high-precision tail regression,s:10000.0,s:30.0,s:-2.0
+special.nctdtr/tail-regression-008,high-precision tail regression,s:0.01,s:5.0,s:-1e+100
+special.nctdtr/tail-regression-009,high-precision tail regression,s:3.0,s:-5.0,s:-1000.0
+special.nctdtr/tail-regression-010,high-precision tail regression,s:0.01,s:40.0,s:-2.0
+special.nctdtr/tail-regression-011,high-precision tail regression,s:30.0,s:0.5,s:-5.141358682658483
+special.nctdtr/tail-regression-012,high-precision tail regression,s:30.0,s:0.5,s:-5.148029306436635

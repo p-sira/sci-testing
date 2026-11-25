@@ -5816,6 +5816,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 2,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "special.chndtridf": [
@@ -6492,6 +6499,13 @@
         "precision": "160 decimal digits",
         "provider": "WolframEngine",
         "recipe": "sci_testing.wolfram_reference.references",
+        "status": "regenerated"
+      },
+      {
+        "cases": 6,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
         "status": "regenerated"
       }
     ],
@@ -7965,6 +7979,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 2,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "special.ncfdtri": [
@@ -8010,6 +8031,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 13,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "special.nctdtridf": [
@@ -8046,6 +8074,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 11,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "special.ndtri": [
@@ -9199,6 +9234,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 4,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "stats.chatterjeexi": [
@@ -9685,6 +9727,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 4,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "stats.logrank": [
@@ -9867,6 +9916,13 @@
         "provider": "WolframEngine",
         "recipe": "sci_testing.wolfram_reference.references",
         "status": "regenerated"
+      },
+      {
+        "cases": 11,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "stats.normal_pdf": [
@@ -9930,6 +9986,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 4,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "stats.pearsonr": [
@@ -10110,6 +10173,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 3,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "stats.relfreq": [
@@ -10146,6 +10216,13 @@
         "provider": "SciPy/NumPy plus independent fixture recipes",
         "recipe": "sci_testing.registered_cases.reference",
         "status": "historical_source_path_inferred"
+      },
+      {
+        "cases": 4,
+        "precision": "100/160 decimal digits; componentwise relative stability",
+        "provider": "mpmath",
+        "recipe": "sci_testing.tail_regressions.reference",
+        "status": "regenerated"
       }
     ],
     "stats.shapiro": [
@@ -10502,8 +10579,8 @@
       }
     ]
   },
-  "cases_sha256": "096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533",
-  "measurements_sha256": "59cb24c748bdfecb575ee182fc09d846a07ee1cd1122f9ed259f593a6a269123",
+  "cases_sha256": "4cfa263f75e052dbc8c12a89f36394bf3bd6d3719fdb6d53ddd0450008427b8b",
+  "measurements_sha256": "f42d1eab841fd6f369ede5616986615e646d52ff2b9c81ade54c75c4cf90dfac",
   "reference_sha256": {
     "cluster.hierarchy.average": "b4d494e0356fa03d2832d58a47cfd91ba6b9df8af25095ac33541dddf5163929",
     "cluster.hierarchy.centroid": "0d06dae3a4007854eb75738ac1ec933dfc71c7b4b6a8963d0d3b50c3d5c0e296",
@@ -11150,7 +11227,7 @@
     "special.chebys": "ae38492330ca36bb4821e54defaadd04460f6de24dcd7b1ba04d1412f260f2ab",
     "special.chebyt": "4079a65252bd9ba99d5d8a90eecdfc3dc028a34384aca4a4a95841e17f131c32",
     "special.chebyu": "62403a980845cfaf673b636d0073d869648db5edb3c6edb31bb409f2fa7f6944",
-    "special.chndtr": "ff4126755dcebdb3ace3a845c254ddf074425a1eb0b239440a8c93731614eef3",
+    "special.chndtr": "9ab0afd0ab7d41952675feba6f4be0c08dc405c0f1b61a30663ae65ef91679a9",
     "special.chndtridf": "38d45e00a49d9fbaf5a19aefcf6e153b0dbfd75015d99748061c39f9453a7105",
     "special.chndtrinc": "d40bfe0a02531b93ad8d4437b8d39615dbb1d1e463c7e04a1e251e0c348d9723",
     "special.chndtrix": "9336265e780d01666c5db4b2b7f142cc4097f5e5eb2ff3835df6a384806b9926",
@@ -11223,7 +11300,7 @@
     "special.entr": "827689c393013ef815d5c17ab8a17e2fd4446091db42830f88b509b10e21599d",
     "special.erf": "4c2096051ab1ab2eb678beb2aa1146dea46223347c528a0d2b904dd2521223e0",
     "special.erf_zeros": "17811d5c0f9cf957bed3e7adaaef64b43ca1b5ab2f2c8509ff990103af8d2a5a",
-    "special.erfc": "8c7dcb82b538fa24bf96835aec3df00d970226a38f7350b51c6d692f1d83dba1",
+    "special.erfc": "aa0c3f6443494d1250ef5f1b8268a53ca22b2255d3346241335f682346b925d8",
     "special.erfcinv": "16d02986b11bdd1f50534e96e13fadf8837b7ad8fb6d273dc028eca060c77a31",
     "special.erfcx": "4ae9a9587612c0502ed69236522c8f9776d6adb63acd443cedcc6dd7c000adda",
     "special.erfi": "b872c4a97aa5a675d2d384e181ad51ba24f9f25008ad400f827d15eb85394abd",
@@ -11383,16 +11460,16 @@
     "special.nbdtri": "f04ffef6b4eeff4ccac4546cc47dcfdd83d863119c27764c3cb1b6651223f732",
     "special.nbdtrik": "eef51721fc6f04be2f050459bfe69a6d99107f966c3d5e70881167e19a9cc8f5",
     "special.nbdtrin": "86edf2ed3fe3b91e9925f74aa4ae1d838ed95385eb2abc99f30dc733833bd165",
-    "special.ncfdtr": "9b1167f09d50b55e34139946238b84b05a36a910278528c16e51f5bdea457f6d",
+    "special.ncfdtr": "0dce409e0060c885a1fbf0ea1246e56fb9dcf0c94847bc5974d28fd95c163c62",
     "special.ncfdtri": "64292d2bd3dca728ed5a03597600ee73709c660536736a4967abb733e3f136a0",
     "special.ncfdtridfd": "56ca124244aebcae42d290ef020500d2f2dfa793ae612a10a6e49a396b0454e9",
     "special.ncfdtridfn": "9ee609ef8fa95c1c3937f93f07d2d2cbb91878ceb2111f67bce4af8607718cc7",
     "special.ncfdtrinc": "22d7b266f40ca6f232240cc4d819a5efeee52c84e4a43cfed0eea5f080f857b7",
-    "special.nctdtr": "538ef9bbb3f247f3d475063b420edec220bdd1eacf73e3054e2f505d8b917d53",
+    "special.nctdtr": "e22853976ebb5c24a6c310b6826b14e69562d7a4290d3ebfe9a6512efbcff69d",
     "special.nctdtridf": "2e13c21caca00fb42287d75bcb9f1d992e261b46b43eeb113653f2a1fe7a2d1d",
     "special.nctdtrinc": "5768d86c29fc1e90b8010e028d35c25dc39622b1407c0256b7a7d957814accbe",
     "special.nctdtrit": "f783ddc9ef2b564a44e9ee0ff08104b387790c7abad3b6ea97718d054fa111f0",
-    "special.ndtr": "757049dd36cdf4099ea5be20b2cfb03fa2208934e155549cbe80f1325621d651",
+    "special.ndtr": "fcb276796f6f6f841bebc5e409bdf1b53a52c16107c92a3396dc843158c4b28c",
     "special.ndtri": "a8c54d957e7857cdfad523a4368c9a1050eb6f2552a7f06583c4fc72143a364d",
     "special.ndtri_exp": "58c9fa60c4a5bfb2a5ead3fe3408c3a2ff43f0430823030513822104140850ea",
     "special.nrdtrimn": "3932e209877e80c7a598dd2d75c8528c879fb1f0d7749e5f45f13d40f8c4810c",
@@ -11519,7 +11596,7 @@
     "stats.bws_test": "ebc9e9f7b0beab9ccdc6cf8949fbe8ff9d215ca02f903c51fbc14e3c0277b2d7",
     "stats.categorical_cdf": "538ab7c62dbb41b6bd78377dfc5494b8947417c240113b63fbe329de2ec942fa",
     "stats.categorical_pmf": "c63b64a439cae51619ddd5efbb020738630f125ef0e050b46749e28f1b24062d",
-    "stats.cdf": "55a96c88a103c047c80b54e01d9e41f7b7746c86a7518eaa884b601490e5ff3f",
+    "stats.cdf": "bb9cf2ab47a85dab98b9fccdebc1d9e8f4dc12463b95d78fcffff787bec958af",
     "stats.chatterjeexi": "9b754b11eab13d768db0e006bcfdad1f666d456c9c0f53a93728536e0291c990",
     "stats.chi2_contingency": "253d6edc4f79d5e43d9407a765bc583a1a6c150e28b4c9b9fc7e2257e96fae50",
     "stats.chisquare": "7cfaf7571616fc9a64d64ce0f55b3f35e1e2f84ac0ca466bf74c4e56a69691e9",
@@ -11573,7 +11650,7 @@
     "stats.levene": "67b832a8b750dd9a064746532369c2e77f83c02be02c6030059bcb231e9cc511",
     "stats.linregress": "cda47d78f70ffcc08eea8ce9994123ac20df6ddf7e7b466b1e47bcb6460d80a7",
     "stats.lmoment": "da24b9c95b1e68910c77bff1f997cc6b599af5dd5481e0336f6317b096f9cc9a",
-    "stats.logpdf": "1f3a6616eca343ada880aa68a1340630ee55fb1a2be510c268ebae71f64b141c",
+    "stats.logpdf": "69d94a43a76d2a377185b5beb0c38d589a80a1924b1fa5e363431f20abf92762",
     "stats.logrank": "5ebcc79e2830059047aeb99b8930898012b8e28e549eaa415789c61050a86a28",
     "stats.make_distribution": "02880653365ef09c619a03b8fe3fba73f0b27f7291f0db05279a54f328f7a76d",
     "stats.mannwhitneyu": "f53ba372851dc12421f06c10148dbfdb732ef77717c66a8413f7924dab3e5009",
@@ -11593,14 +11670,14 @@
     "stats.multivariate_t_logpdf": "d613e6ed6fe042274ccb7e14f91fc42ad74f7dff2102eea8d672f1570e37d446",
     "stats.multivariate_t_pdf": "bfa374fd01b467324452fde1b0a03edfcb12f3f31ea09d098751e8835236cd78",
     "stats.mvsdist": "65a66d4716a7d73c6c910b9d9d4aa2b4c31301e66bc52139ab602e1458d3618b",
-    "stats.normal_cdf": "8c667bb44b1d3bda230a8b5593ab9d7599942cb703db1df10ca9cfa056deb848",
+    "stats.normal_cdf": "97eb337de0f71f1168684619b7d756557996ba4e55927dc8b5ae508c4ba51c26",
     "stats.normal_pdf": "576ac1408177387322ad41be7baa4c2cbe698000cdf35f50acdd45b55997d628",
     "stats.normal_ppf": "faff566f07c462e94a0f1387c41e1abe92b97367f70528588a15b41e6e7578e6",
     "stats.normaltest": "64d64552afc5e9f7f9da7fb542c5e06a2de37a5ce946bb5b1f9687db2347faa8",
     "stats.obrientransform": "423ffc0b14d46eaeb184da4408ab2e678509177871a4923f1745ee7fc684b7c2",
     "stats.order_statistic": "f27270be61c533bcf55968f466619145acb5ab802cc880c9c08b33fd7e9a481c",
     "stats.page_trend_test": "7cff444da887425bca278d8ae530169316b6342e78c5b0009184c483122bbd16",
-    "stats.pdf": "693003a7c5079cfaba1a0a65bf6ab60489fced0ca77bae622f855f339c4ab2a4",
+    "stats.pdf": "3c298fd93e427e2e0801536c9625e45876b1ae451be9034fc15c875a8a000af2",
     "stats.pearsonr": "0c4876252e727a587046d25d5a76b9ab3e1f71fcd52e1d224059ca31076d46a0",
     "stats.percentileofscore": "5c243e066fb57a7ed26472465a7932f0dd2b85478a04216ed320856f9547abf4",
     "stats.permutation_test": "af6eaacd18eb709a589ea24c8cd61409a8c23ea1da739b650ffad900983be382",
@@ -11620,11 +11697,11 @@
     "stats.quantile": "a7b94d958a3435181e17ffcff7aa4ccfc3994e4ac12b127853105d5a2a4caa90",
     "stats.quantile_test": "cd8288ad45521fb22a9835e2b8eb446b1988bf68b1d00d8af6845869c62dcbab",
     "stats.rankdata": "1c45dfdda9e57df96b281b923b9b5fa4bac5a420a08c5d520dcf78437c1d1163",
-    "stats.ranksums": "9d91528dc5535608cf823afff783bc542c584e8394614af7e449172e0685e0ae",
+    "stats.ranksums": "856dc15526458be10edae8793fa46e0887b366e84e1ca57bb63c20a53d956b5b",
     "stats.relfreq": "dcfbb0707489ef26a14b02da81a3db5e28614a424e52efd75150c48667cfd9e3",
     "stats.scoreatpercentile": "2565f0e784d769926711d7e0cb4173b4a31aafe26204103187ad613e1e2ff393",
     "stats.sem": "fa84de8088105751e993dc2842563b4e7cde7e7e479e0e9cdef886dc4c1d69f7",
-    "stats.sf": "3094d9de731794531f73f141051e18ec0e20e4d2c5ed59c4ebd3880fda6f1556",
+    "stats.sf": "6fe97d553be0de5aaec72abab0fe622b749ccfa6e536df20796390d7817dd753",
     "stats.shapiro": "9398dae7a51e24d59414870d238f162b8a76b50dec621dec5fb524a2679a5c96",
     "stats.siegelslopes": "6d97b51efaee34f3c63c5d65ad9d8125ff4c05faa0cdc0dabbb9a95fb78d8083",
     "stats.sigmaclip": "04f603c387122c503dc60b2b9bc279d173daf8e26bac33e5ecf85636b883de3f",

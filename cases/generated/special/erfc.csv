@@ -2000,3 +2000,9 @@ special.erfc/random-0997,"random, local fixture sweep; binary64 SciPy reference"
 special.erfc/random-0998,"random, local fixture sweep; binary64 SciPy reference",s:0.49973131714378927
 special.erfc/random-0999,"random, local fixture sweep; binary64 SciPy reference",s:0.5002097760501836
 special.erfc/recipe-0000,reference recipe; binary64 reference,s:0.5
+special.erfc/tail-regression-000,high-precision tail regression,s:26.5
+special.erfc/tail-regression-001,high-precision tail regression,s:26.7
+special.erfc/tail-regression-002,high-precision tail regression,s:27.0
+special.erfc/tail-regression-003,high-precision tail regression,s:27.2
+special.erfc/tail-regression-004,high-precision tail regression,s:27.22
+special.erfc/tail-regression-005,high-precision tail regression,s:27.23

@@ -2110,3 +2110,14 @@ stats.normal_cdf/random-0996,"random, 1000 cases",s:-16.132083540882853
 stats.normal_cdf/random-0997,"random, 1000 cases",s:8.142847172566654
 stats.normal_cdf/random-0998,"random, 1000 cases",s:-7.926435086580916
 stats.normal_cdf/random-0999,"random, 1000 cases",s:9.249540697471318
+stats.normal_cdf/tail-regression-000,high-precision tail regression,s:-37.0
+stats.normal_cdf/tail-regression-001,high-precision tail regression,s:-37.00000000000001
+stats.normal_cdf/tail-regression-002,high-precision tail regression,s:-37.6
+stats.normal_cdf/tail-regression-003,high-precision tail regression,s:-37.6996996996997
+stats.normal_cdf/tail-regression-004,high-precision tail regression,s:-37.7
+stats.normal_cdf/tail-regression-005,high-precision tail regression,s:-38.0
+stats.normal_cdf/tail-regression-006,high-precision tail regression,s:-38.4
+stats.normal_cdf/tail-regression-007,high-precision tail regression,s:-38.48
+stats.normal_cdf/tail-regression-008,high-precision tail regression,s:-38.49
+stats.normal_cdf/tail-regression-009,high-precision tail regression,s:-38.5
+stats.normal_cdf/tail-regression-010,high-precision tail regression,s:-38.51

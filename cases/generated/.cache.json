@@ -2733,8 +2733,8 @@
       "sha256": "d50cbfd03661812199a50426390a79420115f6128acdd0794312dbd53e9888be"
     },
     "special/chndtr.csv": {
-      "count": 2001,
-      "sha256": "a150c9feea392d6e7116dfad74978bd83e1e0e05393e969ade114fdb27432564"
+      "count": 2003,
+      "sha256": "2d28f2b2add1c6675d4fb2b73f1b80e6fb741408da064f5629c32174ea81e0fa"
     },
     "special/chndtridf.csv": {
       "count": 2001,
@@ -2885,8 +2885,8 @@
       "sha256": "19af418ff152191cb460690e20145e85e94bc2e8e44cb2971be5abd8dbf0e8d9"
     },
     "special/erfc.csv": {
-      "count": 2001,
-      "sha256": "40c2d9bd033792cc65ea938f27592c8fc0a95b456fb274e6adef536703164b8b"
+      "count": 2007,
+      "sha256": "36d380ecc1209c5e4d03c4e81677ab84e27f6a597cd9aad7b2aeab4b0dca4dba"
     },
     "special/erfcinv.csv": {
       "count": 2001,
@@ -3513,8 +3513,8 @@
       "sha256": "aff5bfe91cb6697630cebc4ec52cbfa5e32ce632bb8ed6240b533c192f7d7ac5"
     },
     "special/ncfdtr.csv": {
-      "count": 2001,
-      "sha256": "572d91923034c086c2ac12cd34f13dd9dc38fcceb0073aa2ef31142298ffa299"
+      "count": 2003,
+      "sha256": "4b62cef10cf3877313be5c4edb30e616bef44e127ae38e903e09a060628c97c4"
     },
     "special/ncfdtri.csv": {
       "count": 2001,
@@ -3533,8 +3533,8 @@
       "sha256": "9fd0741c499d6ec234b727128c3543243881716b61e3c779491b62a95f3c9e95"
     },
     "special/nctdtr.csv": {
-      "count": 2037,
-      "sha256": "f73640cd2d128700cff07966f79daaafc7e46828fbe5677f55e344e3237efe0c"
+      "count": 2050,
+      "sha256": "8453fe5f5aa994b7f9a3b9321388f6a2de2e0d098b31f53082ee834d7ce633c7"
     },
     "special/nctdtridf.csv": {
       "count": 2001,
@@ -3549,8 +3549,8 @@
       "sha256": "a6b85989e916cd524299a5ba0f0815a4aa6c6e535b397098d1ec0fe99e8abf14"
     },
     "special/ndtr.csv": {
-      "count": 2001,
-      "sha256": "6e82565909f21bcdd6fa813dc522d2df7098db0ceca5b617897c3171e9d9fddc"
+      "count": 2012,
+      "sha256": "bf268d273973abcbfd59b01c80b42c1c0eb9607daef7685a6af66c3f4cb55a67"
     },
     "special/ndtri.csv": {
       "count": 2001,
@@ -4097,8 +4097,8 @@
       "sha256": "6b506b223e8283fe6774abd40d79bedb6180e59259b7b3b973c1234274be6272"
     },
     "stats/cdf.csv": {
-      "count": 2379,
-      "sha256": "3448e796bd01b517a3a30375f1ba9cae8a9b1a352cb3f4362a7335f5fca26b9c"
+      "count": 2383,
+      "sha256": "801ac28194f5c14025fa11bb7ec720c1e7183f18a50986e2be2c5d682fb407e2"
     },
     "stats/chatterjeexi.csv": {
       "count": 2013,
@@ -4289,8 +4289,8 @@
       "sha256": "5b5a54c1d5c4713d5a396767a48fb4a8a60f4abfdaa88b16d7627eb6a209199c"
     },
     "stats/logpdf.csv": {
-      "count": 2163,
-      "sha256": "1810bf25968f0bcf1e2f43d24fb8fe268806c53fe23915230b39349378b1e089"
+      "count": 2167,
+      "sha256": "d525fb6efc08ce89f6eecf24dd9745b7295c0aa73de476cf24019af51960b479"
     },
     "stats/logrank.csv": {
       "count": 2024,
@@ -4369,8 +4369,8 @@
       "sha256": "b7793f696645d2a0f8059d74c75e36255ab549972b91452a80954bcd48d6c485"
     },
     "stats/normal_cdf.csv": {
-      "count": 2111,
-      "sha256": "c546fb4d0a47c7c46f4c0e8ec017e83fb81f4ff5466758d61952bc903e3063b4"
+      "count": 2122,
+      "sha256": "ca8611be92b2fd67bded2ea476292dd4eb184296386cd76910240542a72a1cd3"
     },
     "stats/normal_pdf.csv": {
       "count": 2000,
@@ -4397,8 +4397,8 @@
       "sha256": "54057341838ae7e593475633fd87768609e35dcbccdd6bb2239fbadefd5db22f"
     },
     "stats/pdf.csv": {
-      "count": 2377,
-      "sha256": "df05192f3c7260f4137146a2fc21535af07a6b897b4f15c89f5340ea587dcd5b"
+      "count": 2381,
+      "sha256": "86420bd57d9828df92ed9325064f53be60653b5d4c29d5b45659e62b06f5e379"
     },
     "stats/pearsonr.csv": {
       "count": 2012,
@@ -4461,8 +4461,8 @@
       "sha256": "d7a67a5cc319b2914862bffdf08593a0ea03fa73f1368f270ce93b8daedec1ec"
     },
     "stats/ranksums.csv": {
-      "count": 2015,
-      "sha256": "2fb3ee5ee67ce5c154e76186a82df6d41e6466d2c8942f6ffad20f582844384c"
+      "count": 2018,
+      "sha256": "118c3d2c74f39be2989a5b24fa38877111c3f7ee1e06da1943b952f34b3452df"
     },
     "stats/relfreq.csv": {
       "count": 2002,
@@ -4477,8 +4477,8 @@
       "sha256": "feaafc8e0d5dad05151d183fe967453ec06189398b5f29ff922acc112902fe75"
     },
     "stats/sf.csv": {
-      "count": 2379,
-      "sha256": "f7f3f6324d1ad397912755deb73eb85c27e387741f7f65b141705332eb174fe2"
+      "count": 2383,
+      "sha256": "be02ef82c156e181d857196a4d280732133469e60cc11d86abd372f25c48cb8c"
     },
     "stats/shapiro.csv": {
       "count": 2021,
@@ -4639,12 +4639,11 @@
   },
   "format": 2,
   "provenance": {
+    "added_cases": 64,
     "generator_equivalence_verified": false,
-    "historical_cases_sha256": "f85348e5bcc668c154cd406478d139513eb93340546e43deef2386fe52da7854",
-    "historical_file_count": 1181,
-    "historical_measurements_sha256": "273f2e3654b2f9f5728a89307d0a56266afe2810b5c66966eb42fa6544dc3070",
-    "kind": "reviewed_legacy_prune",
-    "removed_file_count": 22
+    "historical_cases_sha256": "096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533",
+    "historical_measurements_sha256": "59cb24c748bdfecb575ee182fc09d846a07ee1cd1122f9ed259f593a6a269123",
+    "kind": "historical_snapshot_case_append"
   },
-  "recipe_sha256": "54fb5976327d219e45c0c254c025a0982eb274909cfc3f3a8bee6be65d14d0e4"
+  "recipe_sha256": "abeb37d9864ee218a103e57bb7f3f6e339860f53141610fa728db882563c63d8"
 }

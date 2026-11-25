@@ -254,6 +254,9 @@ def binary64_reference(case):
 
 def high_precision(case):
     """References depend on mathematical definitions, never Sci or its backends."""
+    from . import tail_regressions
+    if tail_regressions.is_case(case):
+        return tail_regressions.reference(case)
     api, a = case['api'], case['args']
     if api.startswith('complex.'):
         from .complex_accuracy import reference
@@ -369,13 +372,18 @@ def reference_precisions(case):
 
 
 def stable_reference(case):
+    from .tail_regressions import is_case
+    tail = is_case(case)
     for low_dps,high_dps in reference_precisions(case):
         with mp.workdps(low_dps):low=high_precision(case)
         with mp.workdps(high_dps):
             high=high_precision(case)
             scale=max([TINY]+[abs(value) for value in high])
-            if len(low)==len(high) and all(abs(x-y)<=mp.mpf('1e-90')*scale
-                                           for x,y in zip(low,high)):
+            # Tail regressions require componentwise relative agreement even below
+            # the minimum normal binary64 number.
+            if len(low)==len(high) and all(mp.isfinite(y) and
+                    abs(x-y)<=mp.mpf('1e-90')*(abs(y) if tail else scale)
+                    for x,y in zip(low,high)):
                 return high
     raise ValueError(f'Unstable independent reference: {case["id"]}')
 
@@ -924,6 +932,8 @@ All reports and data belong to this repository; Sci links to them externally.
         index+='\nPer-function Sci revisions for partial refreshes are recorded under `sci_measurement_commits` in `results/environment.json`.\n'
     if 'reference_extensions' in meta:
         index+='\nNew API references were evaluated separately from the historical snapshot. Their provenance is recorded in `reference_extensions` in `results/environment.json`.\n'
+    if 'tail_regression_extensions' in meta:
+        index+='\nIndependent probability-tail regression cases were appended without replacing historical measurements. See `tail_regression_extensions` and `results/reference-provenance.json`. The main error metric treats subnormal values as effective zeros; inspect raw results against the correctly rounded reference for subnormal accuracy.\n'
     (output/'README.md').write_text(index)
 
 
@@ -1131,10 +1141,10 @@ def selective_render_modules(output, dirty_modules):
     return None if existing!=expected else sorted(dirty_modules)
 
 
-def extend_references(cases, added, executable, destination):
-    """Evaluate only new cases; preserve all older reference strings and results."""
-    native=NativeComparisons() if any(api.split('.',1)[0] in NATIVE_MODULES
-                                      for api in added) else None
+def extend_references(added, executable, destination, *, native=None):
+    """Evaluate only new cases into distinct files, without reading old results."""
+    if native is None and any(api.split('.',1)[0] in NATIVE_MODULES for api in added):
+        native=NativeComparisons()
     libraries={}
     for api,batch in added.items():
         print(f'Measuring new inputs: {api}: {len(batch)} cases',flush=True)
@@ -1155,10 +1165,9 @@ def extend_references(cases, added, executable, destination):
                 updated[case['id']]={'id':case['id'],'reference':[mp.nstr(x,165) for x in high],
                                      'libraries':libs}
                 libraries.setdefault(api.split('.')[0],set()).update(libs)
-        complete=cases.function(api)
         filename=f'{module}/{function}.csv'
         for path in [destination/filename,destination/(filename+'.gz')]:path.unlink(missing_ok=True)
-        write_measurements(destination,measurement_files(complete,updated))
+        write_measurements(destination,measurement_files(batch,updated))
     return libraries
 
 
@@ -1700,6 +1709,8 @@ def main():
         # new APIs. A Sci-only refresh must not erase that provenance.
         if 'reference_extensions' in previous:
             meta['reference_extensions']=previous['reference_extensions']
+        if 'tail_regression_extensions' in previous:
+            meta['tail_regression_extensions']=previous['tail_regression_extensions']
         if 'comparison_refreshes' in previous:
             meta['comparison_refreshes']=previous['comparison_refreshes']
         if 'reference_refreshes' in previous:
@@ -1740,7 +1751,7 @@ def main():
             stage_case_extension(historic,new_cases,staged_inputs)
             staged=workspace/'measurements'
             shutil.copytree(results/'measurements',staged,copy_function=os.link)
-            new_libraries=extend_references(cases,added,target/'debug/sci-testing',staged)
+            new_libraries=extend_references(added,target/'debug/sci-testing',staged)
             meta['module_libraries']={module:list(names) for module,names in previous['module_libraries'].items()}
             for module,names in new_libraries.items():
                 meta['module_libraries'].setdefault(module,[])

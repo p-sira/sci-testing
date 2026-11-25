@@ -39,8 +39,8 @@ CSV preserves every reference, result, warning and exception.
 | [signal](signal.md) | 176 | 352489 |
 | [sparse](sparse.md) | 95 | 188283 |
 | [spatial](spatial.md) | 33 | 66272 |
-| [special](special.md) | 397 | 795229 |
-| [stats](stats.md) | 166 | 336398 |
+| [special](special.md) | 397 | 795263 |
+| [stats](stats.md) | 166 | 336428 |
 
 
 ## Inputs and references
@@ -148,12 +148,14 @@ All reports and data belong to this repository; Sci links to them externally.
 ## Snapshot
 
 - Sci commit: `cbb4eccd9c3e8b5cdeb612e86ea3fc21bb731aed`.
-- Harness source SHA-256: `789fccb13230822417775470ae62ed643c7d616f651ddff69b5d3ed7dc712269`.
-- Input SHA-256: `096701a9cdc245d9d9cba371a4db704f49c5f5b7132da1e12d2c73f890f77533`.
-- 2305544 saved cases covering 1159 recipe API names; 1146 mapped canonical public functions in the inventory.
+- Harness source SHA-256: `afdf289db024633bb5b30c529d15b6cddb95c7f8430e93e6d8a005445b6d32a8`.
+- Input SHA-256: `4cfa263f75e052dbc8c12a89f36394bf3bd6d3719fdb6d53ddd0450008427b8b`.
+- 2305608 saved cases covering 1159 recipe API names; 1146 mapped canonical public functions in the inventory.
 - Native versions: {'Boost.Graph': '1_92', 'Boost.Math': '1_92', 'Boost.Multiprecision': '1_92', 'Boost.Numeric.uBLAS': '1_92', 'Boost.Units': '1_92', 'GSL': '2.8'}.
 - Independent Rust numerical providers: {'RustFFT': '6.4.0', 'nalgebra': '0.35.0', 'statrs': '0.19.1'}.
 
 Selected primary references were regenerated from the documented mathematical providers. See `results/reference-provenance.json` for the source, exact expression and precision by API; other historical references remain as saved. The original library outputs are retained.
 
 New API references were evaluated separately from the historical snapshot. Their provenance is recorded in `reference_extensions` in `results/environment.json`.
+
+Independent probability-tail regression cases were appended without replacing historical measurements. See `tail_regression_extensions` and `results/reference-provenance.json`. The main error metric treats subnormal values as effective zeros; inspect raw results against the correctly rounded reference for subnormal accuracy.

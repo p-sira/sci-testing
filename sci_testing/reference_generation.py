@@ -122,6 +122,10 @@ def _verified_reference_values(case: ReferenceCase, values: object) -> list[str]
 
 def recipe_source(case: ReferenceCase) -> tuple[str, str, str]:
     """Document the actual recipe dispatcher, without inferring its accuracy."""
+    from .tail_regressions import is_case
+    if is_case(case):
+        return ('mpmath', 'sci_testing.tail_regressions.reference',
+                '100/160 decimal digits; componentwise relative stability')
     api, args = case['api'], case['args']
     if api.startswith('complex.'):
         return ('mpmath', 'sci_testing.complex_accuracy.reference',

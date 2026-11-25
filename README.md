@@ -63,6 +63,15 @@ Use `--extend` when independent cases are added for new public APIs. It verifies
 the saved input and reference digests, calculates only the newly added
 references, then publishes the new inputs, measurements and tables together.
 Unchanged historical case bytes and independent measurements are retained.
+For the probability-tail regression fixtures on existing APIs, first refresh
+Sci at the pinned revision, then run
+`uv run --frozen python -m sci_testing.append_tail_regressions`. This appends
+only new case IDs, verifies the saved primary reference hashes, and retains
+every historical input and library result. Independent mpmath references
+use positive Poisson mixtures, conditional-normal quadrature and analytic
+probability formulas at 100/160 decimal digits. Subnormal accuracy requires
+inspection of the raw binary64 results because the main metric treats these
+values as effective zeros.
 
 Before measuring an updated Sci checkout, commit the updated `sci/` submodule
 pointer and `sci-revision.txt`, and refresh `Cargo.lock` if its dependencies changed.

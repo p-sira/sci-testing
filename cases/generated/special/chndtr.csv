@@ -2000,3 +2000,5 @@ special.chndtr/random-0997,"random, local fixture sweep; binary64 SciPy referenc
 special.chndtr/random-0998,"random, local fixture sweep; binary64 SciPy reference",s:2.5,s:3.0,s:0.5001280986199648
 special.chndtr/random-0999,"random, local fixture sweep; binary64 SciPy reference",s:2.5,s:3.0,s:0.5000848217997841
 special.chndtr/recipe-0000,reference recipe; binary64 reference,s:2.5,s:3.0,s:0.5
+special.chndtr/tail-regression-000,high-precision tail regression,s:2.0,s:5.0,s:400.0
+special.chndtr/tail-regression-001,high-precision tail regression,s:10.0,s:5.0,s:400.0
